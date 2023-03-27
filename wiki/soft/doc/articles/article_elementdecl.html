@@ -1,0 +1,83 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_elementdecl.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Elements declarations</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+The <a href="../javadoc/scriptingAPI/org/docgene/plugins/ElementHook.html#supportedElements--" class="apiLink" title="org.docgene.plugins.ElementHook.supportedElements()">ElementHook.supportedElements()</a> method allows to return the declarations for the elements which are supported by the  <code>ElementHook</code>. 
+<H2 id="naming">Naming</H2>
+ The declaration is the name of the XML element in the XML format, such as for example: <ul>
+<li>"title" for a  <a href="article_syntax.html#title">syntax</a> element</li>
+<li>"code" for a  <a href="article_syntax.html#code">syntax</a> element</li>
+<li>"pre" for a  <a href="article_syntax.html#pre">syntax</a> element</li>
+<li>etc...</li>
+</ul>
+ The method to get the declaration for an element is  <a href="../javadoc/scriptingAPI/org/docgene/model/StyledElement.html#getDeclaration--" class="apiLink" title="org.docgene.model.StyledElement.getDeclaration()">StyledElement.getDeclaration()</a>. Elements which have no declaration    return "none" as their declaration by default. </div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_scripts.html">Scripts</a>: This article explains how to use the Scripting Plugin</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_plugins.html">plugins</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

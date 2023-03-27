@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article desc="SVG driver" >
+   <meta desc="This article explains how to use the SVG driver" />
+   The SVG driver allows to serialize JavaFX content as a SVG file.
+     
+   <title title="dependencies" />
+   You should use the <code>jfxConverter-svg.jar</code> in addition to the <code>jfxConverter.jar</code>. Note that the 
+   PowerPoint driver uses the <wikipedia path="Batik_(software)" desc="Apache Batik" /> library.  
+   
+   <title title="SVGDriverUtils Utility class" />
+   The <code>SVGDriverUtils</code> encapsulate the usage of the converter. for example:
+   <pre syntax="java">
+      SVGDriverUtils svgUtils = new SVGDriverUtils();
+      svgUtils.convert(node, file);      
+   </pre>
+   
+   <title level="2" title="adding additional processing to Nodes" />
+   To <ref id="usage#Adding additional processing to Nodes" desc="add additional processing to Nodes"/>:   
+   <pre syntax="java">
+      SVGDriverUtils pptUtils = new SVGDriverUtils();
+      svgUtils.convert(node, file, true);      
+   </pre>   
+   
+   <title level="2" title="adding a title to the SVG document" />
+   A title will be added to the output SVG document by default, but it is possible to specify it by using:
+   <pre syntax="java">
+      SVGDriverUtils svgUtils = new SVGDriverUtils();
+      svgUtils.convert(node, title, file);      
+   </pre>   
+   or:   
+   <pre syntax="java">
+      SVGDriverUtils svgUtils = new SVGDriverUtils();
+      svgUtils.convert(node, title, file, true);      
+   </pre>      
+   
+   <title title="usage example" />
+   <pre syntax="java">
+      // create the Scene graph
+      JFXInvoker invoker = JFXInvoker.getInstance();
+      invoker.invokeBlocking(new Runnable() {
+      _ @Override
+      _ public void run() {
+      _   StackPane root = new StackPane();
+      _   Scene scene = new Scene(root, 300, 250);
+      _   Stage stage = new Stage();
+      _   stage.setScene(scene);
+      _   start(stage);
+      
+      _   Line line = new Line(0, 0, 200, 200);
+      _   line.setStroke(Color.RED);     
+         
+      _   root.getChildren().add(line);
+      _   primaryStage.show();
+      _ }
+      });
+      
+      // perform the conversion
+      SVGDriverUtils svgUtils = new SVGDriverUtils();
+      svgUtils.convert(node, file);
+   </pre>
+      
+   <cat id="drivers" />
+</article>

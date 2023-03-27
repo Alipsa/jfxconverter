@@ -1,0 +1,200 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_javadocs.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Javadocs APIs</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#built-in_available_java_apis">1&nbsp; Built-in available Java APIs</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#javadoc_property">2&nbsp; Javadoc property</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#apis_property">3&nbsp; APIs property</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example">3.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#association_with_the_checklinks_property">4&nbsp; Association with the checkLinks property</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#unresolved_apis">5&nbsp; Unresolved APIs</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#examples">6&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">7&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">8&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ The location of javadocs APIs (local or accessible through http) can be specified using one of the two following properties: <ul>
+<li>javadoc-&lt;api name&gt;: defines an API whose name is  <code>api name</code> which points to the directory or http URL defined by the value of the property</li>
+<li>APIs: the path to a  <a href="article_apis.html">an APIs XML file</a>. The associated XML file can point to javadocs APIs, but also other kinds of APIs</li>
+</ul>
+<br/>
+<br/>
+ Note that APIs paths can either be: <ul>
+<li>Absolute in an external http link</li>
+<li>Relative to the output wiki directory content</li>
+</ul>
+
+<H2 id="built-in_available_java_apis">Built-in available Java APIs</H2>
+ By default the following Java APIs are always available: <ul>
+<li> <code>JAVASE</code>: The Java 8 API</li>
+<li> <code>JAVASE7</code>: The Java 7 API</li>
+<li> <code>JAVASE8</code>: The Java 8 API</li>
+<li> <code>JAVASE9</code>: The Java 9 API</li>
+<li> <code>JAVASE10</code>: The Java 10 API</li>
+<li> <code>JAVAEE</code>: The JavaEE 7 API</li>
+<li> <code>JAVAFX</code>: The JavaFX 8 API</li>
+<li> <code>ANDROID</code>: The latest Android API</li>
+</ul>
+If the "checkHTTPLinks" property is false, but the "checkLinks" property is set to true, then for the  <code>JAVASE</code> and  <code>JAVAFX</code> APIS, the generator will look internally in the installed JDK to check the links validity (using reflection).
+<H2 id="javadoc_property">Javadoc property</H2>
+The "javadoc-&lt;api name&gt;" property defines an API whose name is  <code>api name</code> which points to the directory or http URL defined by the value of the property. Note that a relative directory declaration will point to the wiki output directory.
+<H2 id="apis_property">APIs property</H2>
+The "APIs" property specifes an XML file defining a list of APIs<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+See  <a href="resources/APIs.xsd">APIs.xsd</a> for the APIs Schema</div></span>
+. Thei file allows to specify a list of javadoc APIs links, and for each API: <ul>
+<li>Its URL. Note that a relative directory declaration will point to the wiki output directory</li>
+<li>Its ID</li>
+<li>Optionally, a list of local libraries (Jar files) which represent this API. These Jar files will be used to validate the  <a href="article_syntax.html#javadoc">javadoc</a> tags for the corresponding API if the API URL is an http link and the "checkHTTPLinks" property is set to false</li>
+</ul>
+Note that other kinds of APIs can be specified in this file, see  <a href="article_apis.html">APIs property</a> for more information.
+<H3 id="example">Example</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;APIs&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;javaAPIs&gt;</span>
+<span>          </span><span style="color:blue;font-weight:bold;">&lt;javaAPI</span><span style="color:#0d8200;font-weight:bold;"> url</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"http://junit.sourceforge.net/javadoc"</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"junit"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;javaAPILibrary</span><span style="color:#0d8200;font-weight:bold;"> jarFile</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"../junit5.jar"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>          </span><span style="color:blue;font-weight:bold;">&lt;/javaAPI&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/javaAPIs&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/APIs&gt;</span>
+
+</pre>
+ In this case, if we encounter the following tag and the "checkHTTPLinks" property is false: <br/>
+<br/>
+
+<pre>
+<span>      &lt;javadoc api="junit" path="org.junit.runner.result" /&gt;</span>
+</pre>
+ The library will look in the <i>junit5.jar</i> Jar file to check the validity of the API link.
+<H2 id="association_with_the_checklinks_property">Association with the checkLinks property</H2>
+The validity and existence of  <a href="article_syntax.html#javadoc">javadoc</a> tags will only be checked if the "checkLinks" property is set to true.<br/>
+<br/>
+ The "checkHTTPLinks" will also be used to look if javadoc tags will be checked: <ul>
+<li>APIs which are defined locally will be checked even if the "checkHTTPLinks" property is set to false</li>
+<li>"JAVASE" and "JAVAFX" JDK APIS will be checked even if the "checkHTTPLinks" property is set to false<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+In that case the local installation of THE JRE wil be used</div></span>
+</li>
+<li>"JAVASE7" and "JAVAEE" APIs will not be checked if the "checkHTTPLinks" property is set to false</li>
+<li>Other APIs will be checked if the "checkHTTPLinks" property is set to false if their associated library locations has been specified</li>
+</ul>
+
+<H2 id="unresolved_apis">Unresolved APIs</H2>
+If the property has no value, then the API will remain unresolved, and the generator will generate a  <code>code</code> String rather than an hyperlink. It can be useful in various use cases: <ul>
+<li>To be able to use the same wiki source for different generation types (for example one with links to an internal javadoc, and another one without an internal javadoc). It avoids to have errors in HTML when trying to go to local HTML pages which would not exist</li>
+<li>Using the API and the class declaration to generate the API classes, packages and methods</li>
+</ul>
+<br/>
+<br/>
+ For example: <br/>
+
+<pre>
+<span style="color:blue;font-weight:bold;">      javadoc-myAPI</span><span>=</span>
+
+</pre>
+
+<H2 id="examples">Examples</H2>
+
+<pre>
+<span style="color:blue;font-weight:bold;">      javadoc-myAPI</span><span>=D://the/path/to/theAPI</span>
+
+</pre>
+ Points to the absolute directory  <code>D://the/path/to/theAPI</code><br/>
+<br/>
+<br/>
+
+<pre>
+<span>      javadoc-myAPI=theAPI</span>
+</pre>
+ Points to the directory  <code>&lt;wiki output directory&gt;/theAPI</code></div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_javadocs.html#_note_1_1_" class="noteRefLink">^</a> See  <a href="resources/APIs.xsd">APIs.xsd</a> for the APIs Schema</li>
+<li id="_note_2"> <a href="article_javadocs.html#_note_2_1_" class="noteRefLink">^</a> In that case the local installation of THE JRE wil be used</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_apis.html">APIs property</a>: Configure how to access external APIs and wikis</li>
+<li> <a href="article_configFile.html">Configuration file</a>: It is possible to define an optional property / value configuration file when starting the application (using the graphical UI or the command line)</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a> |
+ <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

@@ -1,0 +1,18 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+  <HEAD>
+    <TITLE></TITLE>
+  </HEAD>
+  <BODY>
+     A package for managing JUnit Tests. This package allows to:
+     <UL>
+        <LI>Order Unit Tests methods runs (by default an beginning with Java 7 the order of runs of Unit tests methods
+           is not consistent with the order on which the methods are defined in the source file. This is because methods 
+           in the associated .class file can be reordered for performance reasons (keep in mind than the JVM specification never
+           specified that the order of methods in the source file should be kepyt in the .class file).
+           A {@link org.mdiutil.junit.Order} annotation on methods allows to run the methods on a specified order</LI>
+        <li>Categories Unit Tests classes, and allow to configure which categories will be run</LI>
+     </UL>
+  </BODY>
+</HTML>

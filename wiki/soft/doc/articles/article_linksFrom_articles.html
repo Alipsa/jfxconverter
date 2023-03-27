@@ -1,0 +1,86 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Pages that link to Articles</H1>
+
+<hr/>
+ <a href="article_categories.html">Categories</a> : This article explains the concept of categories<br/>
+ <a href="article_wikipedia.html">Comparison with wikipedia syntax</a> : This article compares the docJGenerator syntax to the wikipedia syntax<br/>
+ <a href="article_custommenus.html">Custom menus</a> : It is possible to add a custom content to the left menu, and also add a custom right menu to the index file<br/>
+ <a href="article_disambarticles.html">Disambiguation articles</a> : Disambiguation articles allow to specify an article which will point to several articles of approaching names<br/>
+ <a href="article_docgenhelp.html">DocGenerator Help feature</a> : This article explains how to use the JavaHelp-like feature of the tool<br/>
+ <a href="article_chapterscontent.html">Document content specification</a> : This article explains how to filter and configure the content of the wiki output<br/>
+ <a href="article_docx.html">DOCX generation</a> : This article explains how to generate a Word file rather than an HTML site<br/>
+ <a href="article_tutorial1.html">First tutorial</a> : This article is a tutorial to create your first wiki<br/>
+ <a href="article_helpcontent.html">Help content configuration</a> : This article explains how to configure the help content<br/>
+ <a href="article_tutorialJavaHelp.html">Help system tutorial</a> : This article is tutorial which explains how to produce and use a Help content in a Swing application<br/>
+ <a href="article_helpusage.html">Help usage</a> : This article explains the usage of the Help component<br/>
+ <a href="article_justification.html">Justification</a> : This article explains how to justify articles content<br/>
+ <a href="article_localization.html">Localization</a> : This article explains how to customize the localization of the wiki article pages<br/>
+ <a href="article_markdownmarkup.html">Markdown markup</a> : This article explains the supported Markdown markup<br/>
+ <a href="article_markdown.html">Markdown syntax</a> : This article explains the syntax which is supported by the tool<br/>
+ <a href="article_mediawikimarkup.html">Mediawiki markup</a> : This article explains the supported Mediawiki markup<br/>
+ <a href="article_mediawiki.html">Mediawiki syntax</a> : This article explains the Mediawiki syntax which is supported by the tool<br/>
+ <a href="article_namingconstraints.html">Naming constraints</a> : This article is about the naming constraints of the articles<br/>
+ <a href="article_pdf.html">PDF generation</a> : This article explains how to generate a PDF file rather than an HTML site<br/>
+ <a href="article_redirectarticles.html">Redirect articles</a> : Redirect articles allow to create an article with a redirection to another article or even a title or anchor in another article<br/>
+ <a href="article_references.html">References</a> : This article explains the concept of inter-wiki links<br/>
+ <a href="article_roots.html">Root files and packages</a> : This article explains how to use the generator with more than one root directory<br/>
+ <a href="article_syntax.html">Syntax</a> : This article explains the XML tags which can be used to specify the articles syntax<br/>
+ <a href="article_syntaxEndElements.html">Syntax end elements</a> : This article explains the XML tags which can be used at the beginning of articles<br/>
+ <a href="article_syntaxoverview.html">Syntax overview</a> : This article presents an overview of the tags supported in the XML syntax<br/>
+ <a href="article_syntaxStartingElements.html">Syntax starting elements</a> : This article explains the XML tags which can be used at the beginning of articles<br/>
+ <a href="article_tutorials.html">Tutorials</a> : This article presents a list of tutorials<br/>
+ <a href="article_typesoffiles.html">Types of files</a> : This article explains the types of files which can be found in the wiki input<br/>
+ <a href="article_helpmanualcontent.html">Using the Help API with manually produced content</a> : This article explains how to produce the Help content manually<br/>
+
+<hr/>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

@@ -1,0 +1,298 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_math.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Mathematical formulas</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#special_characters">1&nbsp; Special characters</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#examples">2&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#basic_example">2.1&nbsp; Basic example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#a_square_root">2.2&nbsp; A square root</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#a_fraction">2.3&nbsp; A fraction</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#an_integral">2.4&nbsp; An integral</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#a_sum">2.5&nbsp; A sum</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#a_matrix">2.6&nbsp; A matrix</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#a_complex_formula">2.7&nbsp; A complex formula</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">3&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ The "math" element allows to add math formulas. The syntax of the formula must conform to the   <a href="https://www.w3.org/TR/MathML2/" title="https://www.w3.org/TR/MathML2/">MathML2</a> syntax, which is an XML-based way of describing mathematical formulas.<br/>
+<br/>
+ This article present an overview of the MathML2 syntax.
+<H2 id="special_characters">Special characters</H2>
+ Mathematical characters are not ASCII. Therefore you should escape these characters. For example: <ul>
+<li>"&amp#x2212;": the mathematical minus character (−)</li>
+<li>"&amp#x00B1;": the ± character</li>
+<li>"&amp#x2208;": the element of character (∈) </li>
+<li>"&amp#x220F;": the ary product (∏) character</li>
+<li>"&amp#x221A;": the square root (√) character</li>
+<li>"&amp#x221E;": the infinity (∞) character</li>
+<li>"&amp#8721;": the sum (∑) character</li>
+</ul>
+
+<H2 id="examples">Examples</H2>
+
+<H3 id="basic_example">Basic example</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;math&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>a</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;msup&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>x</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mn&gt;</span><span>2</span><span style="color:blue;font-weight:bold;">&lt;/mn&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/msup&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/math&gt;</span><span>      </span>
+
+</pre>
+   Result:<br/>
+<br/>
+ <img src="../images/__math__0.png" id="_image_0" onclick="openImage(_image_0)" class="left" />
+
+<H3 id="a_square_root">A square root</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;math&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;msqrt&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>x</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mo&gt;</span><span>+</span><span style="color:blue;font-weight:bold;">&lt;/mo&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>y</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/msqrt&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/math&gt;</span><span>       </span>
+
+</pre>
+   Result:<br/>
+<br/>
+ <img src="../images/__math__1.png" id="_image_1" onclick="openImage(_image_1)" class="left" />
+
+<H3 id="a_fraction">A fraction</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;math&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mfrac&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>a</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>b</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/mfrac&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mo&gt;</span><span>=</span><span style="color:blue;font-weight:bold;">&lt;/mo&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>c</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/math&gt;</span><span>    </span>
+
+</pre>
+   Result:<br/>
+<br/>
+ <img src="../images/__math__2.png" id="_image_2" onclick="openImage(_image_2)" class="left" />
+
+<H3 id="an_integral">An integral</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;math&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;munderover&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mo&gt;</span><span style="color:#990033;font-weight:bold;">&#x222B;</span><span style="color:blue;font-weight:bold;">&lt;/mo&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mn&gt;</span><span>-1</span><span style="color:blue;font-weight:bold;">&lt;/mn&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mn&gt;</span><span>+1</span><span style="color:blue;font-weight:bold;">&lt;/mn&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/munderover&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mfrac&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>d</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>x</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>x</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/mfrac&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/math&gt;</span><span>     </span>
+
+</pre>
+   Result:<br/>
+<br/>
+ <img src="../images/__math__3.png" id="_image_3" onclick="openImage(_image_3)" class="left" />
+
+<H3 id="a_sum">A sum</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;math&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;munderover&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mo&gt;</span><span style="color:#990033;font-weight:bold;">&#x2211;</span><span style="color:blue;font-weight:bold;">&lt;/mo&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>n</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mo&gt;</span><span>=</span><span style="color:blue;font-weight:bold;">&lt;/mo&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mn&gt;</span><span>1</span><span style="color:blue;font-weight:bold;">&lt;/mn&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mn&gt;</span><span>5</span><span style="color:blue;font-weight:bold;">&lt;/mn&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/munderover&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;msup&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>                     </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>n</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>                     </span><span style="color:blue;font-weight:bold;">&lt;mn&gt;</span><span>2</span><span style="color:blue;font-weight:bold;">&lt;/mn&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;/msup&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/math&gt;</span><span>  </span>
+
+</pre>
+   Result:<br/>
+<br/>
+ <img src="../images/__math__4.png" id="_image_4" onclick="openImage(_image_4)" class="left" />
+
+<H3 id="a_matrix">A matrix</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;math&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mfenced</span><span style="color:#0d8200;font-weight:bold;"> open</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"["</span><span style="color:#0d8200;font-weight:bold;"> close</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"]"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mtable&gt;</span>
+<span>                     </span><span style="color:blue;font-weight:bold;">&lt;mtr&gt;</span>
+<span>                        </span><span style="color:blue;font-weight:bold;">&lt;mtd&gt;</span>
+<span>                           </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>a</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>                        </span><span style="color:blue;font-weight:bold;">&lt;/mtd&gt;</span>
+<span>                        </span><span style="color:blue;font-weight:bold;">&lt;mtd&gt;</span>
+<span>                           </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>b</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>                        </span><span style="color:blue;font-weight:bold;">&lt;/mtd&gt;</span>
+<span>                     </span><span style="color:blue;font-weight:bold;">&lt;/mtr&gt;</span>
+<span>                     </span><span style="color:blue;font-weight:bold;">&lt;mtr&gt;</span>
+<span>                        </span><span style="color:blue;font-weight:bold;">&lt;mtd&gt;</span>
+<span>                           </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>c</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>                        </span><span style="color:blue;font-weight:bold;">&lt;/mtd&gt;</span>
+<span>                        </span><span style="color:blue;font-weight:bold;">&lt;mtd&gt;</span>
+<span>                           </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>d</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>                        </span><span style="color:blue;font-weight:bold;">&lt;/mtd&gt;</span>
+<span>                     </span><span style="color:blue;font-weight:bold;">&lt;/mtr&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;/mtable&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/mfenced&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/math&gt;</span><span>       </span>
+
+</pre>
+   Result:<br/>
+<br/>
+ <img src="../images/__math__5.png" id="_image_5" onclick="openImage(_image_5)" class="left" />
+
+<H3 id="a_complex_formula">A complex formula</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;math&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>x</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;mo&gt;</span><span>=</span><span style="color:blue;font-weight:bold;">&lt;/mo&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mfrac&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mo&gt;</span><span style="color:#990033;font-weight:bold;">&#x2212;</span><span style="color:blue;font-weight:bold;">&lt;/mo&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>b</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mo&gt;</span><span style="color:#990033;font-weight:bold;">&#x00B1;</span><span style="color:blue;font-weight:bold;">&lt;/mo&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;msqrt&gt;</span>
+<span>                     </span><span style="color:blue;font-weight:bold;">&lt;msup&gt;</span>
+<span>                        </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>b</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>                        </span><span style="color:blue;font-weight:bold;">&lt;mn&gt;</span><span>2</span><span style="color:blue;font-weight:bold;">&lt;/mn&gt;</span>
+<span>                     </span><span style="color:blue;font-weight:bold;">&lt;/msup&gt;</span>
+<span>                     </span><span style="color:blue;font-weight:bold;">&lt;mo&gt;</span><span>-</span><span style="color:blue;font-weight:bold;">&lt;/mo&gt;</span>
+<span>                     </span><span style="color:blue;font-weight:bold;">&lt;mn&gt;</span><span>4</span><span style="color:blue;font-weight:bold;">&lt;/mn&gt;</span>
+<span>                     </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>a</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>                     </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>c</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;/msqrt&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;mrow&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mn&gt;</span><span>2</span><span style="color:blue;font-weight:bold;">&lt;/mn&gt;</span>
+<span>                  </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>a</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/mfrac&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/mrow&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/math&gt;</span><span>    </span>
+
+</pre>
+   Result:<br/>
+<br/>
+ <img src="../images/__math__6.png" id="_image_6" onclick="openImage(_image_6)" class="left" />
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntax.html#math">syntax</a>: This article explains the XML tags which can be used to specify the articles syntax</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

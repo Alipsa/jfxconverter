@@ -1,0 +1,156 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_search.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Search box</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#regular_search">1&nbsp; Regular search</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example">1.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#full_text_search">2&nbsp; Full text search</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#full_text_search_compression_level">2.1&nbsp; Full text search compression level</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_1">2.2&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#search_configuration_examples">3&nbsp; Search configuration examples</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+It is possible to show an auto-complete Search box at the top of the articles by setting the  <code>search</code> property in the   <a href="article_configFile.html#search">configuration file</a> or the  <a href="article_commandline.html#search">command-line</a>: <ul>
+<li>By default the Search box allow to search for the articles titles and their table of content sub-titles</li>
+<li>There can be a Search box for the articles titles only</li>
+<li>Or there can be no Search box</li>
+</ul>
+
+<H2 id="regular_search">Regular search</H2>
+ By default the Search box only search for article titles and table of content sub-titles. Clicking on a link will navigate to the corresponding article or title.
+<H3 id="example">Example</H3>
+ <img src="../images/searchbox.png" id="_image_0" onclick="openImage(_image_0)" class="left border" />
+
+<H2 id="full_text_search">Full text search</H2>
+If the "fullTextSearch" property is set in the  <a href="article_configFile.html#fulltextsearch">configuration file</a> or the  <a href="article_commandline.html#fulltextsearch">command-line</a>, then the search box includes a full-text search in the articles content. Clicking on a link will navigate to a Search page which will present links for all the pages which contain the searched term.<br/>
+<br/>
+ The Full text search uses the <a href="http://elasticlunr.com/" title="http://elasticlunr.com/">elasticlunr</a> Javascript library (or its associated Java conversion for the  <a href="article_docgenhelp.html">JavaHelp</a> implementation) to implement the search.
+<H3 id="full_text_search_compression_level">Full text search compression level</H3>
+ By default, the JSON or Javascript file for the full text search is compressed to save space. It is possible to have a more readable file by setting the  <a href="article_configFile.html#fulltextsearchcompressionlevel">fullTextSearchCompressionLevel</a> configuration property, or in the   <a href="article_commandline.html#fulltextsearchcompressionlevel">command-line</a>.<br/>
+<br/>
+ There are several values for the compression level: <ul>
+<li>"false" or "0" or "minimum" or "no" does not compress the file. This format indent the file to make it more readable, but can be very large</li>
+<li>"true" or "1" or "normal" apply the normal compression to the file (this is the default value). This format does not indent the file and can be three times smaller than the uncompressed one</li>
+<li>"2" or "maximum" apply the maximum compression to the file. This format is much smaller (even than the one with the normal compression), but the json format for the serialized index is not compatible with the regular  <code>elasticlunr</code> JavaScript library. However, the version of the JavaScript library shipped with the generator is compatible with it, so the full-text search will still work if you use the shipped library as is</li>
+</ul>
+<br/>
+<br/>
+ Note that for example, for this wiki: <ul>
+<li>The size of the index for no compression is 3200 Ko</li>
+<li>The size of the index for the normal compression is 750 Ko</li>
+<li>The size of the index for the maximum compression is 310 Ko</li>
+</ul>
+
+<H3 id="example_1">Example</H3>
+ <img src="../images/searchboxFullText.png" id="_image_1" onclick="openImage(_image_1)" class="left border" />
+<br/>
+<br/>
+<br/>
+ After clicking on "help", the following page will appear:<br/>
+<br/>
+<br/>
+ <img src="../images/searchboxFullTextResults.png" id="_image_2" onclick="openImage(_image_2)" class="left border" />
+
+<H2 id="search_configuration_examples">Search configuration examples</H2>
+ Examples with search only on articles, without full text search: <br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -search=true</span>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -search=articles</span>
+</pre>
+ Example with search on articles and titles, without full text search: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -search=titles</span>
+</pre>
+ Example with search on articles and titles, with full text search: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -search=titles -fullTextSearch=true</span>
+</pre>
+ Example with search on articles and titles, with full text search and maximum index compression: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -search=titles -fullTextSearch=true -fullTextSearchCompressionLevel=maximum</span>
+</pre>
+</div>
+</P>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

@@ -1,0 +1,345 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_tutorial1.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>First tutorial</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#create_an_index_file">1&nbsp; Create an index file</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#create_our_first_article">2&nbsp; Create our first article</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#create_a_second_article">3&nbsp; Create a second article</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#create_a_header_and_footer">4&nbsp; Create a header and footer</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#create_a_categories_list">5&nbsp; Create a categories list</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#add_an_article_with_a_mediawiki_markup">6&nbsp; Add an article with a Mediawiki markup</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#customize_the_left_menu">7&nbsp; Customize the left menu</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#create_the_faq_article">7.1&nbsp; Create the FAQ article</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#modify_the_first_and_second_articles">7.2&nbsp; Modify the first and second articles</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#customize_the_left_menu_1">7.3&nbsp; Customize the left menu</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">8&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">9&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ This article is a tutorial to create your first wiki. You will: <ul>
+<li>Create an index file</li>
+<li>Create our first article</li>
+<li>Create a second article</li>
+<li>Create a header and footer</li>
+<li>Create a categories list</li>
+<li>Add an article with a Mediawiki markup</li>
+<li>Customize the left menu</li>
+</ul>
+
+<H2 id="create_an_index_file">Create an index file</H2>
+ Choose an empty directory to put your articles. Remind that the structure of this directory (it's sub-directories) is meaningless for the generator (but of course it can be useful for you to find your articles).<br/>
+<br/>
+ Now you will create only an  <a href="article_articles.html#index_definition">index</a> article. Remind that you can have only one index in your directory. Lets create an XML file named <i>index.xml</i>. The name of the file itself has no importance, but it will be easier to name it like that to find it easily. Let's write our first article: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;index&gt;</span>
+<span>      The index for the tutorial wiki.</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/index&gt;</span>
+
+</pre>
+ The fact that the top element is an  <code>index</code> is enough to specify that this article is our index. In all articles, the "Home" link will get us back to this article.<br/>
+<br/>
+ Let's generate our wiki. Double-click on the jar file of the application and: <ul>
+<li>Input directories: Set your directory (with only the <i>index.xml</i> file for the moment)</li>
+<li>Output directory: Set another empty directory for the HTML wiki result</li>
+<li>Click on "Apply"</li>
+</ul>
+<img src="../images/tutorial10.png" id="_image_0" onclick="openImage(_image_0)" width="40%" class="left" />
+<br/>
+<br/>
+<br/>
+ If you open the <i>index.html</i> file in the result directory, you should see something like that in your navigator:<br/>
+<br/>
+<br/>
+<img src="../images/tutorial1.png" id="_image_1" onclick="openImage(_image_1)" width="40%" class="left" />
+<br/>
+ Of course the categories and dictionnary are empty because no category is defined and no articles besides the index have been created.
+<H2 id="create_our_first_article">Create our first article</H2>
+Now we will create a first  <a href="article_articles.html#regular_articles">article</a>. Let's do it (the name of the XML file has no importance): <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      The content of the first article.</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ We will also add an  <a href="article_syntax.html#ref">internal wikilink</a> to this article in our index file: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;index&gt;</span>
+<span>      The index for the tutorial wiki. A link to the </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first article"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/index&gt;</span>
+
+</pre>
+ Let's regenerate the wiki. Now the index looks like that:<br/>
+<br/>
+<br/>
+<img src="../images/tutorial2.png" id="_image_2" onclick="openImage(_image_2)" width="40%" class="left" />
+<br/>
+ And if we click on the link, we go to the article:<br/>
+<br/>
+<br/>
+<img src="../images/tutorial3.png" id="_image_3" onclick="openImage(_image_3)" width="30%" class="left" />
+<br/>
+ The articles dictionnary has also be generated, if we click on the Dictionnary link, we have a link for our first article.
+<H2 id="create_a_second_article">Create a second article</H2>
+Let's create a second article. This time we will define a  <a href="article_categories.html">category</a> for this article. <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"second article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      The content of the second article.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"articles"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ Let's also set the categories for the second article, for example:<br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      The content of the first article.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"articles"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"othercategory"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ Now two categories appear on the Categories link, each contain Category its articles:<br/>
+<br/>
+<br/>
+<img src="../images/tutorial4.png" id="_image_4" onclick="openImage(_image_4)" width="30%" class="left" />
+
+<H2 id="create_a_header_and_footer">Create a header and footer</H2>
+We will create  <a href="article_footerAndHeader.html">footer and header files</a> for all our HTML pages. For the header: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;header</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"My Header"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ For the footer:<br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;footer</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"docJGenerator Tutorial"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ Each of them must be on a different XML file.
+<H2 id="create_a_categories_list">Create a categories list</H2>
+ The categories names do not contain any meaningless description. Creating a categories list is just a way to add these descriptions. Let's create a new file for our categories descriptions: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;categories&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"articles"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"All the articles"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"othercategory"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"The other category"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/categories&gt;</span>
+
+</pre>
+ Now our categories have a description:<br/>
+<br/>
+<br/>
+<img src="../images/tutorial5.png" id="_image_5" onclick="openImage(_image_5)" width="30%" class="left" />
+
+<H2 id="add_an_article_with_a_mediawiki_markup">Add an article with a Mediawiki markup</H2>
+We will add an article with a  <a href="article_mediawikimarkup.html">Mediawiki Markup</a>. Create a new file with the extension "md": <br/>
+<br/>
+
+<pre>
+<span>      {{name:Mediawiki article}}</span>
+<span>  </span>
+<span>      The content of the Mediawiki article.</span>
+<span>  </span>
+<span>      [[Category:articles]]</span>
+</pre>
+ To allow Mediawiki Markup, you should now select the "Allow Mediawiki Markup" checkbox before the generation. The generation of this article will create the following html file:<br/>
+<br/>
+<br/>
+<img src="../images/tutorial6.png" id="_image_6" onclick="openImage(_image_6)" width="50%" class="left" />
+
+<H2 id="customize_the_left_menu">Customize the left menu</H2>
+By default the  <a href="article_custommenus.html#adding_custom_content_to_the_left_menu">left menu</a> only shows for each article: <ul>
+<li>A link to the  <a href="article_articles.html#index_definition">Home page</a> of the wiki (the index)</li>
+<li>A link to the  <a href="article_categories.html">Categories</a> page</li>
+<li>A link to the  <a href="article_dictionnary.html">Dictionnary</a> page</li>
+</ul>
+ <img src="../images/tutorial7.png" id="_image_7" onclick="openImage(_image_7)" class="left" />
+<br/>
+<br/>
+<br/>
+ We want to add to the left menu: <ul>
+<li>A link to a  <a href="article_custommenus.html#the_what_links_here_item">What links here item</a> which will give access for each article to a page showing all the articles which link to the current article</li>
+<li>A link to a FAQ article</li>
+</ul>
+ To do that: <ul>
+<li>We will create the FAQ article</li>
+<li>We will add the link to our "What links here"</li>
+</ul>
+ We will also modify our first and second articles to add internal wiki links from one article to the other. This will allow to see more clearly how the   <a href="article_custommenus.html#the_what_links_here_item">What links here item</a> is working.
+<H3 id="create_the_faq_article">Create the FAQ article</H3>
+ The FAQ article will have the following content. As for all articles, the file can have any name you want. <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"FAQ"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;meta</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Frequently Asked Questions"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      This is a FAQ for the tutorial, without any questions.</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ You can remark here that we added at the start of the FAQ a  <a href="article_syntaxStartingElements.html#meta">meta</a> element: it allows to show the text of this meta in the Dictionnary or the Categories along-side the name of the article itself. Here it is better for example to see the text <i>Frequently Asked Questions</i> than <i>This is a FAQ for the tutorial, without any questions</i> for the FAQ<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+If an article don't have  <code>meta</code> element, the text will be the first sentence the tool detects for this article</div></span>
+.
+<H3 id="modify_the_first_and_second_articles">Modify the first and second articles</H3>
+ We will also modify our first and second articles to add internal wiki links from one article to the other. We already saw how to add references, so there is nothing new here. We will have for the first article: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      The content of the first article. Link to the </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"second article"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"articles"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"othercategory"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ And for the second article: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"second article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      The content of the second article. Link to the </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first article"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"articles"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+
+<H3 id="customize_the_left_menu_1">Customize the left menu</H3>
+We will add an XML file with the  <code>leftMenu</code> root to customize what will appear in the left menu. In addition to the Categories and the Dictionnary, we want to have: <ul>
+<li>A link to a  <a href="article_custommenus.html#the_what_links_here_item">The What links here item</a> which will give access for each article to a page showing all the articles which link to the current article</li>
+<li>A link to our new FAQ article</li>
+</ul>
+<br/>
+<br/>
+ The XML file for the left menu will be: <br/>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;leftMenu</span><span style="color:#0d8200;font-weight:bold;"> onIndex</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;menuItem</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"What Links Here"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;linksFromRef</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/menuItem&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;menuItem</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"FAQ"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;itemInternalRef</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"FAQ"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/menuItem&gt;</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/leftMenu&gt;</span>
+
+</pre>
+ Now the left menu has changed:<br/>
+<br/>
+<br/>
+ <img src="../images/tutorial8.png" id="_image_8" onclick="openImage(_image_8)" class="left" />
+<br/>
+<br/>
+<br/>
+ Let's go to our first article and click on the <i>What Links Here</i> hyperlink: we see the list of articles which link to the first article (in our case, our list only contains the second article):<br/>
+<br/>
+<br/>
+ <img src="../images/tutorial9.png" id="_image_9" onclick="openImage(_image_9)" class="left" />
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_tutorial1.html#_note_1_1_" class="noteRefLink">^</a> If an article don't have  <code>meta</code> element, the text will be the first sentence the tool detects for this article</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_tutorial2.html">Second tutorial</a>: This article is a tutorial which explains the concepts of images and resources</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_tutorials.html">tutorials</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

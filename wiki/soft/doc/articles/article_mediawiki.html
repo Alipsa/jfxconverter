@@ -1,0 +1,128 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_mediawiki.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Mediawiki syntax</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#configure_the_tool_to_parse_articles_with_the_mediawiki_syntax">1&nbsp; Configure the tool to parse articles with the Mediawiki syntax</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#generalities">2&nbsp; Generalities</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#syntax">3&nbsp; Syntax</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#escaping_non_utf8_characters">4&nbsp; Escaping non UTF8 characters</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">5&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">6&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+This article explains the <a href="http://www.mediawiki.org/wiki/Help:Formatting" title="http://www.mediawiki.org/wiki/Help:Formatting">Mediawiki</a> syntax which is supported by the tool.
+<H2 id="configure_the_tool_to_parse_articles_with_the_mediawiki_syntax">Configure the tool to parse articles with the Mediawiki syntax</H2>
+To be able to parse files with the Mediawiki syntax, you need to set either:<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+You can't use both the   <a href="article_markdown.html">Markdown syntax</a> and the Mediawiki syntax</div></span>
+<ul>
+<li>The  <a href="article_commandline.html#allowmediawiki">allowMediawiki</a> property on the command-line</li>
+<li>Or the  <a href="article_configFile.html#allowmediawiki">allowMediawiki</a> configuration property</li>
+</ul>
+The files must have the  <code>.md</code> extension.<br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -allowMediawiki=true</span>
+</pre>
+
+<H2 id="generalities">Generalities</H2>
+The <a href="http://en.wikipedia.org/wiki/Markdown" title="http://en.wikipedia.org/wiki/Markdown">Mardown syntax</a> is a lightweight markup language which allows to convert the syntax to HTML files. However this format is not really standardized and does not support several features which are necessary in a wiki, such as: <ul>
+<li>links to resources and files</li>
+<li>inter-wiki links</li>
+<li>Categories</li>
+</ul>
+The docJGenerator tool uses the Mediawiki syntax used for wikipedia articles (<a href="http://www.mediawiki.org/wiki/Help:Formatting" title="http://www.mediawiki.org/wiki/Help:Formatting">Mediawiki</a>).
+<H2 id="syntax">Syntax</H2>
+See  <a href="article_mediawikimarkup.html">Mediawiki markup</a>.
+<H2 id="escaping_non_utf8_characters">Escaping non UTF8 characters</H2>
+ As for articles specified in XML, the parsing of Mediawiki files will escape non UTF8 characters by specifying the "escapeNonUTF8" option on the  <a href="article_commandline.html#escapenonutf8">command-line</a> or the  <a href="article_configFile.html#escapenonutf8">configuration file</a>.</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_mediawiki.html#_note_1_1_" class="noteRefLink">^</a> You can't use both the   <a href="article_markdown.html">Markdown syntax</a> and the Mediawiki syntax</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_mediawikimarkup.html">Mediawiki markup</a>: This article explains the supported Mediawiki markup</li>
+<li> <a href="article_wikipedia.html">Comparison with wikipedia syntax</a>: This article compares the docJGenerator syntax to the wikipedia syntax</li>
+<li> <a href="article_articles.html">Articles</a>: Article files are XML files which define the articles in the wiki</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_mediawiki.html">mediawiki</a> |
+ <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

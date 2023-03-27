@@ -1,0 +1,100 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_algorithm.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Algorithm</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+ The docJGenerator project allows to generate a html site with a list of XML files defining a documentation. It allows to produce an offline wiki-like site. It is also possible to configure the tool to parse files with the  <a href="article_mediawiki.html">mediawiki syntax</a> or the  <a href="article_markdown.html">markdown syntax</a>.
+<H2 id="usage">Usage</H2>
+To use the docJGenerator tool, you have to double-click on the Jar file of the application (or perform  <code>java -jar docGenerator.jar</code> if you did not associate the Java application to jar files), and configure the generator: <ul>
+<li>The input directory or directories where the input XML files and image resources are to be found. See  <a href="article_roots.html">root files and packages</a> if you want an explanation on how to use the generator with more than one root directory</li>
+<li>The output directory where the output web site must be generated</li>
+<li>(optional): an alternate index file to use if there are more than one input directory</li>
+<li>(optional): a configuration file (see  <a href="article_configFile.html">configuration file</a>)</li>
+<li>It is possible to define a  <a href="article_properties.html">properties file</a> defining key/value string replacements in the text</li>
+<li>The value for the maximum number of files to be generated in one directory</li>
+</ul>
+ The application will generate a web site with an index file (wiki-like). It is also possible to generate a   <a href="article_pdf.html">PDF file</a> or  <a href="article_docx.html">Word file</a> rather than a web site.
+<H2 id="algorithm">Algorithm</H2>
+<img src="../images/algorithm.png" id="_image_0" onclick="openImage(_image_0)" width="80%" class="left" />
+<br/>
+ The algorithm for creating the wiki content is the following: <ul>
+<li>The tool parser parses the content of the wiki source ( <a href="article_syntax.html">XML markup</a>,  <a href="article_markdownmarkup.html">markdown markup</a>, or  <a href="article_mediawikimarkup.html">mediawiki markup</a> and creates a  <a href="article_sourcetree.html">wiki source tree</a> model containing all the articles and resources definition</li>
+<li>The  <a href="article_chapterscontent.html">wikiContent</a> parameter allows to filter the content of the output and to structure the results for output formats which use chapters</li>
+<li>Optionnally, the  <a href="article_scripts.html">Scripts plugin</a> is called to modify the wiki source tree model</li>
+<li>Depending on the selected output format, the relevant writer generates the output content</li>
+</ul>
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_sourcetree.html">Wiki source tree</a>: This article presents the concept of the wiki source tree</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

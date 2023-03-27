@@ -1,0 +1,101 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_imageFiles.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Image files</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+ These files define the images ids and their associated files. For example: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;image</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image1"</span><span style="color:#0d8200;font-weight:bold;"> url</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"hand.png"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ It is possible to specify more than one image resource in one XML file, for example:<br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;images&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;image</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image1"</span><span style="color:#0d8200;font-weight:bold;"> url</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"hand.png"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;image</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image2"</span><span style="color:#0d8200;font-weight:bold;"> url</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"crocodile.png"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/images&gt;</span>
+
+</pre>
+ The URL is relative to the XML file. Note that there can be as many of these files as you want.
+<H2 id="supported_file_formats">Supported file formats</H2>
+All the file formats supported in the html  <code>img</code> element are supported. For example: <ul>
+<li>gif files</li>
+<li>png files</li>
+<li>jpg files</li>
+<li>svg files. Note that SVG support depends on the browser</li>
+</ul>
+   The file format will be detected by the file extension.</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntax.html#img">img element</a>: This article explains the XML tags which can be used to specify the articles syntax</li>
+<li> <a href="article_typesoffiles.html">Types of files</a>: This article explains the types of files which can be found in the wiki input</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_structure.html">structure</a> |
+ <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

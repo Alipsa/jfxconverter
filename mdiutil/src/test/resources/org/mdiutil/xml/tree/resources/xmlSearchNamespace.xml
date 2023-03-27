@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root desc="example" xmlns:h="http://www.test.org/">
+  <h:element1 name="first" id="theID">
+    <h:element2 name="second" />  
+    <h:element2 name="third" />
+  </h:element1>
+</root>

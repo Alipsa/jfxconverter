@@ -1,0 +1,111 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_categories.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Categories</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+Categories can be defined for  <a href="article_articles.html">wiki articles</a>. Each article can belong to any number of categories you want. For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      This is a very simple article.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"syntax"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"structure"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ The generation will generate an HTML file for each category and present all the articles which belong to each category. Also the list of categories is linked in each article.
+<H2 id="adding_descriptions_to_categories">Adding descriptions to categories</H2>
+ It is possible to add descriptions to categories. This can be specified in XML files with the "categories" root. Each "category" element allows to specify its description, which will be presented in the categories list. <br/>
+ For example: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;categories&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"syntax"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Articles about syntax"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"structure"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Articles about structure"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/categories&gt;</span>
+
+</pre>
+
+<H3 id="setting_detailed_descriptions">Setting detailed descriptions</H3>
+ It is possible to have more than just a sentence for the description of a category. For example: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;categories&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"syntax"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Articles about syntax"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      This category deals about the articles syntax.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/category&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"structure"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Articles about structure"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/categories&gt;</span>
+
+</pre>
+   Note that the description attribute is however always required and will be used when presenting the link to the category in the list of categories page.</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_typesoffiles.html">Types of files</a>: This article explains the types of files which can be found in the wiki input</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_structure.html">structure</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

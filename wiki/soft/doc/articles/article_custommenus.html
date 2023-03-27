@@ -1,0 +1,196 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_custommenus.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Custom menus</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#default_menu_content">1&nbsp; Default menu content</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#styling_the_left_menu">1.1&nbsp; Styling the left menu</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#adding_custom_content_to_the_left_menu">2&nbsp; Adding custom content to the left menu</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#adding_custom_items_to_the_left_menu">2.1&nbsp; Adding custom items to the left menu</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#items_refering_to_articles_in_the_wiki">2.1.1&nbsp; Items refering to articles in the wiki</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#items_refering_to_the_glossary">2.1.2&nbsp; Items refering to the glossary</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#items_refering_to_external_web_pages">2.1.3&nbsp; Items refering to external web pages</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#the_what_links_here_item">2.1.4&nbsp; The What links here item</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#adding_custom_content_to_the_left_menu_1">2.2&nbsp; Adding custom content to the left menu</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#adding_a_custom_right_menu">3&nbsp; Adding a custom right menu</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">4&nbsp; Notes</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ It is possible to add a custom content to the left menu, and also add a custom right menu to the index file.
+<H2 id="default_menu_content">Default menu content</H2>
+ By default there is no right menu, and the left menu contains: <ul>
+<li>For the "Home" article ( <a href="article_articles.html#index_definition">index</a>): a link to the  <a href="article_categories.html">categories</a> and the  <a href="article_dictionnary.html">dictionnary</a></li>
+<li>For the "Categories" : a link to the "Home" article and the  <a href="article_dictionnary.html">dictionnary</a></li>
+<li>For the "Dictionnary" : a link to the "Home" article and the  <a href="article_categories.html">categories</a></li>
+<li>For any  <a href="article_articles.html">article</a>: a link to the "Home" article, the  <a href="article_categories.html">categories</a>, and the  <a href="article_dictionnary.html">dictionnary</a>. There is also a link to the  <a href="article_glossary.html">glossary</a>, if there is a glossary for the wiki</li>
+</ul>
+
+<H3 id="styling_the_left_menu">Styling the left menu</H3>
+<div class="moreInfo" >
+Main Article: <a href="article_cssSelectors.html">Stylable syntax elements</a></div>
+<br/>
+ The left menu is a  <a href="article_cssSelectors.html">Stylable syntax elements</a>, which means that you can set its "class" and "style" elements. For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;leftMenu</span><span style="color:#0d8200;font-weight:bold;"> onIndex</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:#0d8200;font-weight:bold;"> style</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"font-size: 10px;"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      ...</span>
+
+</pre>
+ Note that it is possible to style the left menu ithout cusotmizing its content, therefore the following menu specification is valid: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;leftMenu</span><span style="color:#0d8200;font-weight:bold;"> onIndex</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:#0d8200;font-weight:bold;"> style</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"font-size: 10px;"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+
+<H2 id="adding_custom_content_to_the_left_menu">Adding custom content to the left menu</H2>
+ There are two ways to add custom content to the left menus: <ul>
+<li>By adding new custom items to the menu</li>
+<li>By adding a custom content to the menu</li>
+</ul>
+
+<H3 id="adding_custom_items_to_the_left_menu">Adding custom items to the left menu</H3>
+ To add custom items to the left menu, you have to define a file with a "leftMenu" top-element. This element has a "onIndex" attribute allowing to define if the menu items will be added to the   <a href="article_articles.html#index_definition">index article</a> only or to all the articles.<br/>
+<br/>
+ This element has as many "menuItem" children as there are additional menu items in the menu: <ul>
+<li>The "desc" attribute specifies the text to show in the menu</li>
+<li>The element can have:</li>
+
+<ul>
+<li>one "itemInternalRef" child for items refering to articles or other  <a href="article_references.html">interwiki links</a>,</li>
+<li>or one "itemExternalRef" child for items refering to external web pages,</li>
+<li>or one "glossaryRef" child for items refering to the  <a href="article_glossary.html">glossary</a><span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+If there is a glossary</div></span>
+,</li>
+<li>or one "linksFromRef" child for the item refering to the "What links here" content for each article</li>
+</ul>
+</ul>
+ For example: <br/>
+
+<pre>
+<span>      &lt;leftMenu onIndex="true"&gt;</span>
+<span>         &lt;menuItem desc="Website" &gt;</span>
+<span>            &lt;itemExternalRef url="http://sourceforge.net/projects/docjgenerator/" /&gt;</span>
+<span>         &lt;/menuItem&gt;</span>
+<span>         &lt;menuItem desc="What links here" &gt;</span>
+<span>            &lt;linksFromRef /&gt;</span>
+<span>         &lt;/menuItem&gt;</span>
+<span>         &lt;menuItem desc="License" &gt;</span>
+<span>            &lt;itemInternalRef id="License" /&gt;</span>
+<span>         &lt;/menuItem&gt;</span>
+<span>      &lt;/leftMenu&gt;</span>
+</pre>
+
+<H4 id="items_refering_to_articles_in_the_wiki">Items refering to articles in the wiki</H4>
+<div class="moreInfo" >
+Main Article: <a href="article_references.html">References</a></div>
+<br/>
+ The "itemInternalRef" element refer to articles in the wiki. The "id" attribute specifies the article reference as in the  <a href="article_syntax.html#ref">ref</a> element in articles.
+<H4 id="items_refering_to_the_glossary">Items refering to the glossary</H4>
+The "glossaryRef" element refer to the  <a href="article_glossary.html">glossary</a> (if it exists). Note that if there is a glossary but no "glossaryRef" element in the left menu, the glossary will be added automatically at the end of the left menu.
+<H4 id="items_refering_to_external_web_pages">Items refering to external web pages</H4>
+ The "itemExternalRef" element refer to external web pages. The "url" attribute specifies the URL of the web page.
+<H4 id="the_what_links_here_item">The What links here item</H4>
+ The "linksFromRef" element refer to a "What links here" page as it exists in wikipedia. For each article, this will give a list of all the other articles which refer to the current article. For example, the "What links here" page for the  <a href="article_configFile.html">configuration file</a> page is:<br/>
+<br/>
+<br/>
+<img src="../images/whatlinkshere.png" id="_image_0" onclick="openImage(_image_0)" width="60%" class="left border" />
+<br/>
+<br/>
+<br/>
+ Note that there won't be any "What links here" page if the associated Menu item is not present.
+<H3 id="adding_custom_content_to_the_left_menu_1">Adding custom content to the left menu</H3>
+The  <a href="article_configFile.html#leftindexmenu">configuration file</a> allows to specify a file containing the custom HTML content to add at the end of the left menu on the  <a href="article_articles.html#index_definition">index article</a>.
+<H2 id="adding_a_custom_right_menu">Adding a custom right menu</H2>
+The  <a href="article_configFile.html#rightindexmenu">configuration file</a> allows to specify a file containing the custom HTML content for the right menu on the  <a href="article_articles.html#index_definition">index article</a>.</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_custommenus.html#_note_1_1_" class="noteRefLink">^</a> If there is a glossary</li>
+</ol>
+</div>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

@@ -1,0 +1,138 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_justification.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Justification</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#justification_types">1&nbsp; Justification types</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#at_the_wiki_level">2&nbsp; At the wiki level</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#at_the_article_level">3&nbsp; At the article level</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#at_the_chapter_level">4&nbsp; At the chapter level</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#at_the_div_level">5&nbsp; At the div level</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">6&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ The justification is the way the text for several consecutive lines is aligned. By default the articles text are justified with a default justification. However it is possible to configure if and were the justification is applied.<br/>
+<br/>
+ There are several levels of justification: <ul>
+<li>At the wiki level</li>
+<li>At the  <a href="article_articles.html">article</a> level</li>
+<li>At the  <a href="article_chapters.html#chapter_elements">chapter</a> level</li>
+<li>At the  <a href="article_syntax.html#div">div</a> level</li>
+</ul>
+
+<H2 id="justification_types">Justification types</H2>
+ The different levels of justification can have the following values: <ul>
+<li>"none" or "false": no justification</li>
+<li>"inherit" : inherit the justification from its parent</li>
+<li>"auto" or "true": default justification, will set the "auto" CSS justification type</li>
+<li>"word" : word justification type, will set the "inter-word" CSS justification type</li>
+<li>"character" : character justification type, will set the "inter-character" CSS justification type</li>
+</ul>
+
+<H2 id="at_the_wiki_level">At the wiki level</H2>
+The command-line  <a href="article_commandline.html#justification">justification</a> argument and configuration  <a href="article_configFile.html#justification">justification</a> property allows to specify the default justification for the wiki.
+<H2 id="at_the_article_level">At the article level</H2>
+ The "justification" attribute for articles allows to override the default wiki justification for one article. For example: <br/>
+<br/>
+
+<pre>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"article1"</span><span style="color:#0d8200;font-weight:bold;"> justification</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"word"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+
+</pre>
+
+<H2 id="at_the_chapter_level">At the chapter level</H2>
+ The "justification" attribute for chapters allows to override the article justification for all the text under this chapter. For example: <br/>
+<br/>
+
+<pre>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;chapter</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my Chapter"</span><span style="color:#0d8200;font-weight:bold;"> justification</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"word"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+
+</pre>
+
+<H2 id="at_the_div_level">At the div level</H2>
+The "justification" attribute for  <a href="article_syntax.html#div">div</a> elements allows to override the article justification for all the text under this element. For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;div</span><span style="color:#0d8200;font-weight:bold;"> justification</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"word"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      the text with a word justification.</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/div&gt;</span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntax.html#justification">syntax</a>: This article explains the XML tags which can be used to specify the articles syntax</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

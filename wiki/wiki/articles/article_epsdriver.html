@@ -1,0 +1,92 @@
+<HEAD>
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY>
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left">
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/jfxConverter/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/jfxConverter/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/jfxConverter/blog/">Changes Log</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>EPS driver</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+   The EPS driver allows to serialize JavaFX content as an Encapsulated Postcript file.
+<H2 id="dependencies">Dependencies</H2>
+You should use the  <code>jfxConverter&minus;eps.jar</code> in addition to the  <code>jfxConverter.jar</code>. Note that the  PowerPoint driver uses any version of the  <code>jlibeps</code> library. <br/>
+<br/>
+Note that several versions of the  <code>jlibeps</code> library exist: <ul>
+<li>The <a href="https://sourceforge.net/projects/jlibeps/" title="https://sourceforge.net/projects/jlibeps/">sourceforge.net/projects/jlibeps</a> library</li>
+<li>The <a href="http://jlibeps.sourceforge.net/" title="http://jlibeps.sourceforge.net/">jlibeps.sourceforge.net</a> library</li>
+<li>The Github <a href="https://github.com/arnobl/jlibeps" title="https://github.com/arnobl/jlibeps">github.com/arnobl/jlibeps</a> library</li>
+</ul>
+The last version is the one which is used for the moment, but the EPS converter will work with any of these versions.
+<H2 id="usage_example">Usage example</H2>
+
+<pre>
+<span>      </span><span style="color:#404040;font-style:italic;">// create the Scene graph</span><span>  </span>
+<span>      JFXInvoker invoker = JFXInvoker.</span><span style="font-weight:bold;">getInstance</span><span>();</span><span>  </span>
+<span>      invoker.</span><span style="font-weight:bold;">invokeBlocking</span><span>(</span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Runnable</span><span>() {</span><span>  </span>
+<span>        @Override</span><span>  </span>
+<span>        </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">run</span><span>() {</span><span>  </span>
+<span>          StackPane root = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">StackPane</span><span>();</span><span>  </span>
+<span>          Scene scene = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Scene</span><span>(root, 300, 250);</span><span>  </span>
+<span>          Stage stage = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Stage</span><span>();</span><span>  </span>
+<span>          stage.</span><span style="font-weight:bold;">setScene</span><span>(scene);</span><span>  </span>
+<span>          </span><span style="font-weight:bold;">start</span><span>(stage);</span><span>  </span>
+<span>      </span><span>  </span>
+<span>          Line line = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Line</span><span>(0, 0, 200, 200);</span><span>  </span>
+<span>          line.</span><span style="font-weight:bold;">setStroke</span><span>(Color.RED);     </span><span>  </span>
+<span>         </span><span>  </span>
+<span>          root.</span><span style="font-weight:bold;">getChildren</span><span>().</span><span style="font-weight:bold;">add</span><span>(line);</span><span>  </span>
+<span>          primaryStage.</span><span style="font-weight:bold;">show</span><span>();</span><span>  </span>
+<span>        }</span><span>  </span>
+<span>      });</span><span>  </span>
+<span>      </span><span>  </span>
+<span>      </span><span style="color:#404040;font-style:italic;">// perform the conversion</span><span>  </span>
+<span>      EPSDriverUtils pptUtils = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">EPSDriverUtils</span><span>();</span><span>  </span>
+<span>      pptUtils.</span><span style="font-weight:bold;">convert</span><span>(node, file);</span><span>  </span>
+
+</pre>
+</div>
+</P>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_drivers.html">drivers</a>
+</div>
+<div class="bottom">
+<P><i>Copyright 2016-2018 Herve Girod. All Rights Reserved. Documentation and source under the BSD licence</i></P></div>
+</BODY>
+</HTML>

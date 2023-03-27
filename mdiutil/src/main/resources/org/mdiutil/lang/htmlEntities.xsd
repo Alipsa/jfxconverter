@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:complexType name="entities" >
+      <xs:sequence>
+         <xs:element name="entity" type="entity" />
+      </xs:sequence>
+   </xs:complexType>     
+   <xs:complexType name="entity" >
+      <xs:attribute name="html" type="xs:string"/>
+      <xs:attribute name="unicode" type="xs:string"/>
+   </xs:complexType>         
+   <xs:element name="entities" type="entities"/>
+</xs:schema>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ushortEnumLiteralSet>
+	<literal name="A661_AC_LAT" value="B010"/>
+	<literal name="A661_AC_LAT_LONG" value="B030"/>
+</ushortEnumLiteralSet>

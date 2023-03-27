@@ -1,0 +1,104 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_countproperty.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>count property</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+ The "count" property shows the number of articles in the wiki and is always provided by default. For example: <br/>
+<br/>
+
+<pre>
+<span>      The wiki has ${count} articles.</span>
+</pre>
+ Result: The wiki has 114 articles.
+<H2 id="usage_in_the_dictionnary_or_the_categories_description">Usage in the dictionnary or the categories description</H2>
+You can also use the property in the  <a href="article_dictionnary.html">dictionnary</a> or  the  <a href="article_categories.html#adding_descriptions_to_categories">categories description</a>.<br/>
+<br/>
+ Note that in the categories description, this property will not return the number of articles in the wiki, but the number of  articles in the category.
+<H2 id="examples">Examples</H2>
+ In the dictionnary description: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;dictionnary&gt;</span>
+<span>         This category has ${count} articles.</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/dictionnary&gt;</span><span>      </span>
+
+</pre>
+ In a category description: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myCategory"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Category for article3"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         This category has ${count} articles.</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/category&gt;</span><span>    </span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_properties.html">Properties</a>: This article presents the general properties which can be used in the wiki</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

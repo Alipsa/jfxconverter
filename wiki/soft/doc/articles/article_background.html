@@ -1,0 +1,147 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_background.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Setting a background</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#background_image">1&nbsp; Background image</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#background_color">2&nbsp; Background color</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#examples">3&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_with_an_image">3.1&nbsp; Example with an image</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_with_a_color">3.2&nbsp; Example with a color</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_with_a_color_gradient">3.3&nbsp; Example with a color gradient</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">4&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">5&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+The "background" property in the  <a href="article_configFile.html">configuration file</a> or the  <a href="article_commandline.html">command-line</a> allows to add a background to the article pages.<br/>
+<br/>
+ The "backgroundColor" property allows to add a background Color or gradient to the article pages. The format of the Color must be an HTML Color ID<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+For example -backgroundColor=#33CCFF</div></span>
+. Note that if the two properties are defined, the "background" property will be used.
+<H2 id="background_image">Background image</H2>
+The property is the absolute or relative path of the image used for the gradient (For example <code><span>-background=my/image/image.jpg</span></code>). The format of the image can be "jpg" or "png".
+<H2 id="background_color">Background color</H2>
+<ul>
+<li>You can specify only one color (For example <code><span>-backgroundColor=#33CCFF</span></code>). In that case the background will use only one color</li>
+<li>You can also specify a gradient with two colors (For example <code><span>-backgroundColor=#FFFFFF;#CCCCCC</span></code>). In that case the background will use a vertical gradient defined with the two colors</li>
+</ul>
+
+<H2 id="examples">Examples</H2>
+
+<H3 id="example_with_an_image">Example with an image</H3>
+<img src="../images/background.jpg" id="_image_0" onclick="openImage(_image_0)" width="60%" class="left" />
+
+<H3 id="example_with_a_color">Example with a color</H3>
+ With the following command-line property: <br/>
+
+<pre>
+<span>      -background=#33CCFF</span>
+</pre>
+ We will have the following background:<br/>
+<br/>
+<br/>
+<img src="../images/backgroundColor.jpg" id="_image_1" onclick="openImage(_image_1)" width="60%" class="left" />
+
+<H3 id="example_with_a_color_gradient">Example with a color gradient</H3>
+ With the following command-line property: <br/>
+
+<pre>
+<span>      -backgroundColor=#FFFFFF;#CCCCCC</span>
+</pre>
+ We will have the following background:<br/>
+<br/>
+<br/>
+<img src="../images/backgroundColor2.jpg" id="_image_2" onclick="openImage(_image_2)" width="60%" class="left" />
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_background.html#_note_1_1_" class="noteRefLink">^</a> For example -backgroundColor=#33CCFF</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_configFile.html">Configuration file</a>: It is possible to define an optional property / value configuration file when starting the application (using the graphical UI or the command line)</li>
+<li> <a href="article_commandline.html">Command-line starting</a>: This article is about how to execute the application by the command-line without showing the UI</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

@@ -1,0 +1,133 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_pdfdocxconfig.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>PDF and DOCX generation configuration</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#command_line_properties">1&nbsp; Command line properties</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#specific_docx_command_line_properties">1.1&nbsp; Specific DOCX Command line properties</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#configuration_properties">2&nbsp; Configuration properties</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">3&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+Specific  <a href="article_commandline.html">command-line</a> and  <a href="article_configFile.html">configuration</a> properties allow to configure the way the  <a href="article_pdf.html">pdf</a> or  <a href="article_docx.html">docx</a> generation is performed.
+<H2 id="command_line_properties">Command line properties</H2>
+<ul>
+<li>"fileName": the name of the file to generate. The file will be generated in the  <a href="article_commandline.html#output">output directory</a>. Note that if the "docFile" property is defined, the "fileName" property will not be used</li>
+<li>"docFile": the path of the file to generate</li>
+<li>"tocLevel": the maximum level of the table of contents (default is 2)</li>
+<li>"defaultChapter": the name of the default chapter, used for articles which belong in no category. The default name is the localized content for  <a href="article_localization.html#miscellanous">miscellanous</a></li>
+<li>"hasGlossary": true if the glossary should be generated, if there is one in the wiki (default is true)</li>
+<li>"chaptersContent": the path of the XML file defining the  <a href="article_chapterscontent.html">Document content</a>. By default a default content will be generated</li>
+</ul>
+
+<H3 id="specific_docx_command_line_properties">Specific DOCX Command line properties</H3>
+<ul>
+<li>"hasTOC": true if there is a table of contents (default is true)</li>
+<li>"title": the title of the document. The default title is "Wiki"</li>
+<li>"author": the author of the document. The default is "author"</li>
+<li>"nominalFontSize": the font size for the regular text</li>
+<li>"docxTemplate": the template to use for creating the DOCX document. If you don't specify it, a default DOCX template will be used</li>
+<li>"docxTemplateProperties": the headings names to use for the titles in the DOCX document. You may have to set them if you have specified a specific docxTemplate</li>
+</ul>
+Note that if you define some of these properties in the command-line, they will be parsed only if you define them <b>after</b> specifying the docx output type. For example, this will not work: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -hasTOC=false -outputType=docx</span>
+</pre>
+ But this will work:<br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -outputType=docx -hasTOC=false</span>
+</pre>
+
+<H2 id="configuration_properties">Configuration properties</H2>
+ The properties have the same names as for the Command line, but without the leading "-". For example: "tocLevel", "docFile", etc...<br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span style="color:blue;font-weight:bold;">      docxTemplate</span><span>=templateCustom.docx</span>
+<span style="color:blue;font-weight:bold;">      hasTOC</span><span>=false</span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_commandline.html">Command-line</a>: This article is about how to execute the application by the command-line without showing the UI</li>
+<li> <a href="article_configFile.html">Configuration file</a>: It is possible to define an optional property / value configuration file when starting the application (using the graphical UI or the command line)</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a> |
+ <a href="../categories/cat_docx.html">docx</a> |
+ <a href="../categories/cat_pdf.html">pdf</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

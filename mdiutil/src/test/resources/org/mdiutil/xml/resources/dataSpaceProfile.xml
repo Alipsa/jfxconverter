@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSpaceProfile xmlns="http://www.aviation-ia.com/aeec/SupportFiles/661/dataSpaceProfileSeed.xsd/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.aviation-ia.com/aeec/SupportFiles/661/dataSpaceProfileSeed.xsd/1 dataSpaceProfileSeed.xsd">
+	<dataSpaceNamespace segment="Part1" version="1" />
+</dataSpaceProfile>

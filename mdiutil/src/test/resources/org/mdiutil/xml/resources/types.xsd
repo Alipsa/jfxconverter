@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:simpleType name="nameType">
+      <xs:restriction base="xs:string">
+         <xs:pattern value="[A-Za-z_][A-Za-z_0-9]*"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="upperCaseNameType">
+      <xs:restriction base="xs:string">
+         <xs:pattern value="[A-Za-z_][A-Z_0-9]*"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="baseType">
+      <xs:annotation>
+         <xs:documentation>Represent the built-in basic types</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="int"/>
+         <xs:enumeration value="boolean"/>
+         <xs:enumeration value="string"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:complexType name="simpleType">
+      <xs:attribute name="baseType" type="baseType" use="required" />
+      <xs:attribute name="name" type="nameType" use="required" />
+   </xs:complexType>
+   <xs:complexType name="arrayType">
+      <xs:sequence>
+         <xs:element name="type" type="eltType" maxOccurs="1" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="type" type="nameType" />
+      <xs:attribute name="name" type="nameType" use="required" />
+   </xs:complexType>
+   <xs:complexType name="enumType">
+      <xs:sequence maxOccurs="unbounded" minOccurs="1">
+         <xs:element name="enumValue" type="enumValue" />
+      </xs:sequence>
+      <xs:attribute name="name" type="nameType" use="required" />
+   </xs:complexType>
+   <xs:complexType name="enumValue">
+      <xs:attribute name="name" type="upperCaseNameType" use="required" />
+   </xs:complexType>
+   <xs:complexType name="structType">
+      <xs:sequence maxOccurs="unbounded" minOccurs="1">
+         <xs:element name="field" type="fieldType" />
+      </xs:sequence>
+      <xs:attribute name="name" type="nameType" use="required" />
+   </xs:complexType>
+   <xs:complexType name="fieldType">
+      <xs:sequence>
+         <xs:element name="type" type="eltType" maxOccurs="1" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="name" type="nameType" use="required" />
+      <xs:attribute name="type" type="nameType" />
+   </xs:complexType>
+   <xs:complexType name="eltType">
+      <xs:attribute name="type" type="nameType" use="required" />
+   </xs:complexType>
+   <xs:complexType name="types">
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+         <xs:element name="simpleType" type="simpleType" />
+         <xs:element name="arrayType" type="arrayType" />
+         <xs:element name="enumType" type="enumType"/>
+         <xs:element name="structType" type="structType" />
+      </xs:choice>
+   </xs:complexType>
+   <xs:element name="types" type="types" />
+</xs:schema>

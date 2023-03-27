@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<leftMenu>
+   <menuItem desc="Download" >
+      <itemExternalRef url="http://sourceforge.net/projects/jfxConverter/files/" />
+   </menuItem>
+   <menuItem desc="Project Details" >
+      <itemExternalRef url="http://sourceforge.net/projects/jfxConverter/" />
+   </menuItem>
+   <menuItem desc="Changes Log" >
+      <itemExternalRef url="http://sourceforge.net/p/jfxConverter/blog/" />
+   </menuItem>
+   <menuItem desc="FAQ" >
+      <itemInternalRef id="FAQ" />
+   </menuItem>
+   <menuItem desc="License" >
+      <itemInternalRef id="License" />
+   </menuItem>
+</leftMenu>
+
+

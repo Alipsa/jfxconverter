@@ -1,0 +1,249 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" >
+$(document).ready(function() 
+  {
+    $("#table_0").tablesorter(); 
+  }
+);
+</script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_wikipedia.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Comparison with wikipedia syntax</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+Wikipedia uses the <a href="http://en.wikipedia.org/wiki/mediawiki" title="http://en.wikipedia.org/wiki/mediawiki">Mediawiki</a> syntax. DocJGenerator uses an XML-based syntax. However a lot of concepts handled by wikipedia exist in DocJGenerator. Note that if you really want to use a "full" Mediawiki syntax, you can define an article in full Mediawiki markup (see  <a href="article_mediawiki.html">mediawiki syntax</a>).
+<H2 id="comparison_table">Comparison table</H2>
+
+<table id="table_0" class="tablesorter border" >
+<thead>
+<tr>
+<th valign="center"  class="column" >Concept</th>
+<th valign="center"  class="column" >Wikipedia syntax</th>
+<th valign="center"  class="column" >docJGenerator XML syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">Titles</td>
+<td valign="center" class="border">series of "=" characters at the beginning of a line (example: <code>=== title</code> for a level 2 title)</td>
+<td valign="center" class="border"> <a href="article_syntax.html#title">title</a> element<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+Can also use the same syntax as Wikipedia titles if the  <a href="article_relaxedsyntax.html">relaxed Syntax</a> is set</div></span>
+</td>
+</tr>
+<tr>
+<td valign="center" class="border">Lists</td>
+<td valign="center" class="border">series of "*" or "#" characters at the beginning of a line (example: <code>* item 1</code>)</td>
+<td valign="center" class="border"> <a href="article_syntax.html#ul">ul</a> or  <a href="article_syntax.html#ol">ol</a> element<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+Can also use the same syntax as Wikipedia lists if the  <a href="article_relaxedsyntax.html">relaxed Syntax</a> is set</div></span>
+</td>
+</tr>
+<tr>
+<td valign="center" class="border">See also</td>
+<td valign="center" class="border">"about" structure</td>
+<td valign="center" class="border"> <a href="article_syntaxStartingElements.html#seealso">seeAlso</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Help:Category" title="http://en.wikipedia.org/wiki/Help:Category">Categories</a></td>
+<td valign="center" class="border">"[[Category:category name]]" structure</td>
+<td valign="center" class="border"> <a href="article_syntaxEndElements.html#cat">cat</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Help:Link#Interwiki_links" title="http://en.wikipedia.org/wiki/Help:Link#Interwiki_links">Reference to another article</a></td>
+<td valign="center" class="border">"[[other article name]]" structure</td>
+<td valign="center" class="border"> <a href="article_syntax.html#ref">ref</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Template:See_also" title="http://en.wikipedia.org/wiki/Template:See_also">See Also</a></td>
+<td valign="center" class="border">"{{see also" element</td>
+<td valign="center" class="border"> <a href="article_syntax.html#moreinfo">moreInfo</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Help:Files" title="http://en.wikipedia.org/wiki/Help:Files">Image</a></td>
+<td valign="center" class="border">"[[File:image file name]]" structure</td>
+<td valign="center" class="border"> <a href="article_syntax.html#img">img</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Template:Term" title="http://en.wikipedia.org/wiki/Template:Term">Glossaries</a></td>
+<td valign="center" class="border">"{{term:term|definition}}</td>
+<td valign="center" class="border"> <a href="article_syntax.html#term">term</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Wikipedia:External_links" title="http://en.wikipedia.org/wiki/Wikipedia:External_links">External link</a></td>
+<td valign="center" class="border">"[external link text]" structure</td>
+<td valign="center" class="border"> <a href="article_syntax.html#a">a</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Template:Javadoc:SE" title="http://en.wikipedia.org/wiki/Template:Javadoc:SE">Javadoc link</a></td>
+<td valign="center" class="border">"{{Javadoc:SE" structure</td>
+<td valign="center" class="border"> <a href="article_syntax.html#javadoc">javadoc</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="https://en.wikipedia.org/wiki/Template:Audio" title="https://en.wikipedia.org/wiki/Template:Audio">audio link</a></td>
+<td valign="center" class="border">"{{audio|" structure</td>
+<td valign="center" class="border"> <a href="article_syntax.html#audio">audio</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border">Bold or italic text</td>
+<td valign="center" class="border">enclosing '' or ''' characters</td>
+<td valign="center" class="border"> <a href="article_syntax.html#formatting_text">b</a> or  <a href="article_syntax.html#formatting_text">i</a> element<span class="tooltip"><a href="#_note_3" class="noteLink"><sup id="_note_3_1_">[3]</sup></a>
+<div class="tooltiptext">
+Can also use the same syntax as Wikipedia text formatting if the  <a href="article_relaxedsyntax.html">relaxed Syntax</a> is set</div></span>
+</td>
+</tr>
+<tr>
+<td valign="center" class="border">Code presentation</td>
+<td valign="center" class="border">"&lt;code&gt;the code&lt;/code&gt;" structure</td>
+<td valign="center" class="border"> <a href="article_syntax.html#code">code</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Template:Pre" title="http://en.wikipedia.org/wiki/Template:Pre">Pre presentation</a></td>
+<td valign="center" class="border">"&lt;pre&gt;" or "&lt;source&gt;"element or beginning a line with a space</td>
+<td valign="center" class="border"> <a href="article_syntax.html#pre">pre</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Help:Table" title="http://en.wikipedia.org/wiki/Help:Table">Tables</a></td>
+<td valign="center" class="border">"{| class="wikitable"" element</td>
+<td valign="center" class="border"> <a href="article_syntax.html#table">table</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="https://en.wikipedia.org/wiki/Template:Block_indent" title="https://en.wikipedia.org/wiki/Template:Block_indent">Block indent</a></td>
+<td valign="center" class="border">"{{block indent |1=" template</td>
+<td valign="center" class="border"> <a href="article_syntax.html#block">block</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Template:Warning" title="http://en.wikipedia.org/wiki/Template:Warning">Warning</a></td>
+<td valign="center" class="border">"{{Warning |heading=Heading |Lorem ipsum...}}" template</td>
+<td valign="center" class="border"> <a href="article_syntax.html#messagebox">messageBox</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Help:Math" title="http://en.wikipedia.org/wiki/Help:Math">Mathematical formulas</a></td>
+<td valign="center" class="border">"&lt;math&gt; element<span class="tooltip"><a href="#_note_4" class="noteLink"><sup id="_note_4_1_">[4]</sup></a>
+<div class="tooltiptext">
+Contrary to Wikipedia which uses the LaTeX syntax for formulas, docJGenerator uses the MathML syntax</div></span>
+</td>
+<td valign="center" class="border"> <a href="article_syntax.html#math">math</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Help:HTML_in_wikitext" title="http://en.wikipedia.org/wiki/Help:HTML_in_wikitext">Embedded HTML</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border"> <a href="article_syntax.html#html">html</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Template:Location_map" title="http://en.wikipedia.org/wiki/Template:Location_map">Maps</a></td>
+<td valign="center" class="border">"{{Location map element</td>
+<td valign="center" class="border"> <a href="article_syntax.html#map">map</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Wikipedia:Redirect" title="http://en.wikipedia.org/wiki/Wikipedia:Redirect">Redirecting</a></td>
+<td valign="center" class="border">special "REDIRECT" articles</td>
+<td valign="center" class="border"> <a href="article_syntaxStartingElements.html#alttitle">altTitle</a> element or  <a href="article_articles.html#redirect_articles">redirect articles</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Wikipedia:Transclusion" title="http://en.wikipedia.org/wiki/Wikipedia:Transclusion">Transclusion</a></td>
+<td valign="center" class="border">{{:&lt;article ID&gt;}}</td>
+<td valign="center" class="border"> <a href="article_syntax.html#include">include</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Wikipedia:Disambiguation" title="http://en.wikipedia.org/wiki/Wikipedia:Disambiguation">Disambiguation</a></td>
+<td valign="center" class="border">Disambiguation articles</td>
+<td valign="center" class="border"> <a href="article_articles.html#disambiguation_articles">Disambiguation articles</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Template:citation" title="http://en.wikipedia.org/wiki/Template:citation">Citations</a></td>
+<td valign="center" class="border">"{{cite" element</td>
+<td valign="center" class="border"> <a href="article_syntax.html#cite">cite</a> element</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Help:Footnotes" title="http://en.wikipedia.org/wiki/Help:Footnotes">Footnotes</a></td>
+<td valign="center" class="border">"&lt;ref&gt;" element</td>
+<td valign="center" class="border"> <a href="article_syntax.html#note">note</a> element. A "Notes" title will be automatically generated if necessary</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://en.wikipedia.org/wiki/Help:infobox" title="http://en.wikipedia.org/wiki/Help:infobox">infobox</a></td>
+<td valign="center" class="border">"{{infobox" element</td>
+<td valign="center" class="border"> <a href="article_syntaxStartingElements.html#infobox">infobox</a> element</td>
+</tr>
+</tbody>
+</table>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_wikipedia.html#_note_1_1_" class="noteRefLink">^</a> Can also use the same syntax as Wikipedia titles if the  <a href="article_relaxedsyntax.html">relaxed Syntax</a> is set</li>
+<li id="_note_2"> <a href="article_wikipedia.html#_note_2_1_" class="noteRefLink">^</a> Can also use the same syntax as Wikipedia lists if the  <a href="article_relaxedsyntax.html">relaxed Syntax</a> is set</li>
+<li id="_note_3"> <a href="article_wikipedia.html#_note_3_1_" class="noteRefLink">^</a> Can also use the same syntax as Wikipedia text formatting if the  <a href="article_relaxedsyntax.html">relaxed Syntax</a> is set</li>
+<li id="_note_4"> <a href="article_wikipedia.html#_note_4_1_" class="noteRefLink">^</a> Contrary to Wikipedia which uses the LaTeX syntax for formulas, docJGenerator uses the MathML syntax</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_mediawiki.html">Mediawiki syntax</a>: This article explains the Mediawiki syntax which is supported by the tool</li>
+<li> <a href="article_comparisons.html">Comparison with other wikis softwares</a>: This article compares the docJGenerator features with other wikis softwares</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

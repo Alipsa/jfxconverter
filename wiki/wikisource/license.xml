@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article desc="license" >
+   <meta desc="License" />
+   The project source code and associated javadoc is using a BSD licence. 
+   
+   Note that:
+   <ul>
+      <li>The <ref id="EPS driver" /> 
+         <code>jlibeps</code> associated library is under a LGPL license</li>
+      <li>The <ref id="PPT driver" /> 
+         <code>Apache POI</code> associated library is under an Apache license</li>         
+      <li>The <ref id="SVG driver" /> 
+         <code>Apache Batik</code> associated library is under an Apache license</li>                  
+   </ul>
+
+   <cat id="general" />
+</article>

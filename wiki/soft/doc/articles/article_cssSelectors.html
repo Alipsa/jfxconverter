@@ -1,0 +1,316 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" >
+$(document).ready(function() 
+  {
+    $("#table_0").tablesorter(); 
+  }
+);
+</script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_cssSelectors.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Elements to CSS selectors</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#attributes_of_a_stylable_element">1&nbsp; Attributes of a Stylable element</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#correspondance">2&nbsp; Correspondance</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">3&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">4&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ This article explains the correspondance from elements to CSS selectors. It is useful when you want to customize the  <a href="article_css.html">CSS StyleSheets</a> for the HTML result, or if you want to    <a href="article_customizingstyle.html#adding_a_style_attribute">add a style attribute</a> to an element.<br/>
+<br/>
+ For example, the  <a href="article_syntax.html#pre">pre</a> and  <a href="article_syntax.html#source">source</a> elements will both generate a corresponding "pre" element in HTML.
+<H2 id="attributes_of_a_stylable_element">Attributes of a Stylable element</H2>
+ A stylable element has the optional following attributes to specify its style: <ul>
+<li>"class": allows to sepcify the CSS StyleClasses of the element. It will be added to the existing styles which might already have been set by the generator for the element</li>
+<li>"style": allows to specify the inline "style" of the element</li>
+</ul>
+ These two attributes are not exclusive. For example: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;table</span><span style="color:#0d8200;font-weight:bold;"> class</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myStyle"</span><span style="color:#0d8200;font-weight:bold;"> style</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"style="</span><span style="color:blue;font-weight:bold;">font-size:12px;"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+
+<H2 id="correspondance">Correspondance</H2>
+ Only the elements which have a direct correspondance are described below.<br/>
+<br/>
+
+<table id="table_0" class="tablesorter border" >
+<caption class="tablecaption" >CSS correspondance</caption>
+<thead>
+<tr>
+<th valign="center"  class="column" >Element</th>
+<th valign="center"  class="column" >CSS Selector</th>
+<th valign="center"  class="column" >Support Style classes</th>
+<th valign="center"  class="column" >Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxJustifElements.html#empty">empty</a></td>
+<td valign="center" class="border">BR</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxJustifElements.html#br">br</a></td>
+<td valign="center" class="border">BR</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxJustifElements.html#hr">hr</a></td>
+<td valign="center" class="border">HR</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#code">code</a></td>
+<td valign="center" class="border">CODE</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#pre">pre</a></td>
+<td valign="center" class="border">PRE</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#source">source</a></td>
+<td valign="center" class="border">PRE</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#blockquote">blockquote</a></td>
+<td valign="center" class="border">BLOCKQUOTE</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#term">term</a></td>
+<td valign="center" class="border">DT and DD</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#wikipedia">wikipedia</a></td>
+<td valign="center" class="border">A</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#mediawiki">mediawiki</a></td>
+<td valign="center" class="border">A</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#video">video</a></td>
+<td valign="center" class="border">IFRAME</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#audio">audio</a></td>
+<td valign="center" class="border">IFRAME</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#javadoc">javadoc</a></td>
+<td valign="center" class="border">A</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#qtdoc">qtdoc</a></td>
+<td valign="center" class="border">A</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#javadoc">javadoc</a></td>
+<td valign="center" class="border">A</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#apidoc">apidoc</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">Can be customized by using the  <a href="article_apidocconf.html">API documentation configuration</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#ol">ol</a></td>
+<td valign="center" class="border">OL</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#ul">ul</a></td>
+<td valign="center" class="border">UL</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#li">li</a></td>
+<td valign="center" class="border">LI</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#img">img</a></td>
+<td valign="center" class="border">IMG</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#box">box</a></td>
+<td valign="center" class="border">DIV</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#resource">resource</a></td>
+<td valign="center" class="border">A</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#title">title</a></td>
+<td valign="center" class="border">Hi</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#ref">ref</a></td>
+<td valign="center" class="border">A</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#catref">catRef</a></td>
+<td valign="center" class="border">A</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxtable.html">table</a></td>
+<td valign="center" class="border">TABLE and CAPTION<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+CAPTION is used for the table caption if it exists</div></span>
+</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxtable.html">tableHeader</a></td>
+<td valign="center" class="border">TH</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#table">cell</a></td>
+<td valign="center" class="border">TD</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#term">term</a></td>
+<td valign="center" class="border">DL, DT, and DD</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_custommenus.html#default_menu_content">leftMenu</a></td>
+<td valign="center" class="border">DIV</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">-</td>
+</tr>
+</tbody>
+</table>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_cssSelectors.html#_note_1_1_" class="noteRefLink">^</a> CAPTION is used for the table caption if it exists</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_css.html">Custom StyleSheet</a>: The "css" property in the configuration file or the command-line allows to specify a custom StyleSheet for the HTML result</li>
+<li> <a href="article_customizingstyle.html">Customizing the elements style</a>: This article explains the two ways to customize the elements style</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

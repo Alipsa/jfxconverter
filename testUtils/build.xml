@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See commented blocks below for -->
+<!-- some examples of how to customize the build. -->
+<!-- (If you delete it and reopen the project it will be recreated.) -->
+<!-- By default, only the Clean and Build commands use this build script. -->
+<!-- Commands such as Run, Debug, and Test only use this build script if -->
+<!-- the Compile on Save feature is turned off for the project. -->
+<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
+<!-- in the project's Project Properties dialog box.-->
+<project name="Testutils" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Testutils.</description>
+    <import file="nbproject/build-impl.xml"/>
+   <!-- =================================================================== -->
+   <!-- NB overwrite targets : jar                                     -->
+   <!-- =================================================================== -->
+
+   <target depends="init,compile,-pre-jar,-do-jar-without-manifest,-post-jar" description="Build JAR." name="jar"/>
+
+   <target name="-do-jar-without-manifest" depends="init,compile,-pre-pre-jar,-pre-jar" >
+      <!-- Tests Utilities classes (for getting jar files)-->
+      <jar description="Tests Utilities LGPL jar binary file" compress="true" jarfile="${dist.dir}/TestEmbed.jar" >
+         <fileset defaultexcludes="yes" dir="${build.classes.dir}">
+            <include name="org/testutils/embed/**/*.class"/>
+         </fileset>
+      </jar>      
+      <zip destfile="${dist.dir}/testEmbedZipped.zip">
+         <zipfileset dir="${dist.dir}" includes="TestEmbed.jar"/>
+      </zip>                         
+   </target>
+   
+   <!-- =================================================================== -->
+   <!-- copy to parent project                                    -->
+   <!-- =================================================================== -->   
+    <target name="copy"  description="copy" depends="init" >
+      <copy todir="../dist">
+         <fileset defaultexcludes="no" dir="${dist.dir}">
+            <include name="testEmbedZipped.zip"/>
+         </fileset>
+      </copy>      
+    </target>  
+</project>

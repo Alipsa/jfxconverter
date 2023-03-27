@@ -1,0 +1,85 @@
+<HEAD>
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY>
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left">
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/jfxConverter/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/jfxConverter/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/jfxConverter/blog/">Changes Log</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>SVG driver</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+   The SVG driver allows to serialize JavaFX content as a SVG file.
+<H2 id="dependencies">Dependencies</H2>
+You should use the  <code>jfxConverter&minus;svg.jar</code> in addition to the  <code>jfxConverter.jar</code>. Note that the  PowerPoint driver uses the <a href="https://en.wikipedia.org/wiki/Batik_(software)" title="https://en.wikipedia.org/wiki/Batik_(software)">Apache Batik</a> library. 
+<H2 id="usage_example">Usage example</H2>
+
+<pre>
+<span>      </span><span style="color:#404040;font-style:italic;">// create the Scene graph</span><span>  </span>
+<span>      JFXInvoker invoker = JFXInvoker.</span><span style="font-weight:bold;">getInstance</span><span>();</span><span>  </span>
+<span>      invoker.</span><span style="font-weight:bold;">invokeBlocking</span><span>(</span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Runnable</span><span>() {</span><span>  </span>
+<span>        @Override</span><span>  </span>
+<span>        </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">run</span><span>() {</span><span>  </span>
+<span>          StackPane root = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">StackPane</span><span>();</span><span>  </span>
+<span>          Scene scene = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Scene</span><span>(root, 300, 250);</span><span>  </span>
+<span>          Stage stage = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Stage</span><span>();</span><span>  </span>
+<span>          stage.</span><span style="font-weight:bold;">setScene</span><span>(scene);</span><span>  </span>
+<span>          </span><span style="font-weight:bold;">start</span><span>(stage);</span><span>  </span>
+<span>      </span><span>  </span>
+<span>          Line line = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Line</span><span>(0, 0, 200, 200);</span><span>  </span>
+<span>          line.</span><span style="font-weight:bold;">setStroke</span><span>(Color.RED);     </span><span>  </span>
+<span>         </span><span>  </span>
+<span>          root.</span><span style="font-weight:bold;">getChildren</span><span>().</span><span style="font-weight:bold;">add</span><span>(line);</span><span>  </span>
+<span>          primaryStage.</span><span style="font-weight:bold;">show</span><span>();</span><span>  </span>
+<span>        }</span><span>  </span>
+<span>      });</span><span>  </span>
+<span>      </span><span>  </span>
+<span>      </span><span style="color:#404040;font-style:italic;">// perform the conversion</span><span>  </span>
+<span>      SVGDriverUtils pptUtils = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">SVGDriverUtils</span><span>();</span><span>  </span>
+<span>      pptUtils.</span><span style="font-weight:bold;">convert</span><span>(node, file);</span><span>  </span>
+
+</pre>
+</div>
+</P>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_drivers.html">drivers</a>
+</div>
+<div class="bottom">
+<P><i>Copyright 2016-2018 Herve Girod. All Rights Reserved. Documentation and source under the BSD licence</i></P></div>
+</BODY>
+</HTML>

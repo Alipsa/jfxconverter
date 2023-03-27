@@ -1,0 +1,253 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_properties.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Properties</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#default_properties">1&nbsp; Default properties</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#date_property">1.1&nbsp; date property</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#count_property">1.2&nbsp; count property</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#todo_property">1.3&nbsp; todo property</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#errors_property">1.4&nbsp; errors property</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#locale_property">1.5&nbsp; locale property</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#language_property">1.6&nbsp; language property</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#user-defined_properties">2&nbsp; User-defined properties</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#defining_properties_though_the_ant_file">2.1&nbsp; Defining properties though the ant file</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#example">3&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">4&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">5&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ It is possible to define key / values for string replacements in the text (both by using the GUI or by the command-line). This can be used to configure some parts of the text, for example, to print version number in the header.<br/>
+<br/>
+ Portions of text containing the pattern "${key}" will be replaced with the associated value.<br/>
+<br/>
+ Note that you can also use the property in the  <a href="article_dictionnary.html">dictionnary</a> or  the  <a href="article_categories.html#adding_descriptions_to_categories">categories description</a>. 
+<H2 id="default_properties">Default properties</H2>
+ The default properties are: <ul>
+<li>"date": the date of the generation</li>
+<li>"count": the number of articles</li>
+<li>"todo": the number of remaining TODOs</li>
+<li>"errors": the number of errors emitted during the generation</li>
+<li>"locale": the Locale of the wiki</li>
+<li>"language": the language of the wiki</li>
+</ul>
+
+<H3 id="date_property">date property</H3>
+ The "date" property shows the date of the generation and is always provided by default.<br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span>      Generated on ${date}</span>
+</pre>
+
+<H3 id="count_property">count property</H3>
+<div class="moreInfo" >
+Main Article: <a href="article_countproperty.html">count property</a></div>
+<br/>
+ The "count" property shows the number of articles and is always provided by default<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+Note that its value will be different if used in a  <a href="article_categories.html">category</a></div></span>
+.<br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span>      The wiki has ${count} articles.</span>
+</pre>
+ Result: The wiki has 114 articles.
+<H3 id="todo_property">todo property</H3>
+The "todo" property shows the number of  <a href="article_syntax.html#todo">todo</a> in the wiki and is always provided by default.<br/>
+<br/>
+ Note the the  <a href="article_syntax.html#todolist">todolist</a> element allows to show a list of all TODOs in the wiki.<br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span>      The wiki has ${todo} TODOs.</span>
+</pre>
+ Result: The wiki has 0 TODOs. 
+<H3 id="errors_property">errors property</H3>
+ The "errors" property shows the number of errors detected when parsing the source of the wiki and is always provided by default. Note that external links errors (external links not found) are not included in this count. <br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span>      The parsing emitted ${errors} errorss.</span>
+</pre>
+
+<H3 id="locale_property">locale property</H3>
+<div class="moreInfo" >
+Main Article: <a href="article_localization.html">Localization</a></div>
+<br/>
+ The "locale" property shows the locale of the wiki and is always provided by default. For example: <br/>
+<br/>
+
+<pre>
+<span>      The wiki uses the ${locale} locale.</span>
+</pre>
+ Result: The wiki uses the en locale.
+<H3 id="language_property">language property</H3>
+<div class="moreInfo" >
+Main Article: <a href="article_localization.html">Localization</a></div>
+<br/>
+ A "language" property shows the language of the wiki and is always provided by default. For example: <br/>
+<br/>
+
+<pre>
+<span>      The wiki uses the ${language} language.</span>
+</pre>
+ Result: The wiki uses the English language.
+<H2 id="user-defined_properties">User-defined properties</H2>
+To define a user-defined property, you just have to specify it on the  <a href="article_commandline.html">command-line</a> using the "$" character before the name of the property. For example for a  <code>version</code> property: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -$version=&lt;version_number&gt;</span>
+</pre>
+ You can also specify a file defining the properties on the command-line with the  <code>properties</code> key. For example: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -properties=properties.properties</span>
+</pre>
+  with the following content for this file:<br/>
+<br/>
+
+<pre>
+<span style="color:blue;font-weight:bold;">      version</span><span>=&lt;version_number&gt;</span>
+
+</pre>
+
+<H3 id="defining_properties_though_the_ant_file">Defining properties though the ant file</H3>
+We can use ant properties to define our own value for the property on the  <a href="article_ant.html">ant file</a>. For example, if  <code>version</code> is an ant property: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;java</span><span style="color:#0d8200;font-weight:bold;"> classname</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"org.docgene.main.DocGenerator"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-input=wiki/input"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-output=wiki/output"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-search=titles"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-$version=${version}"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;classpath&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"docGenerator.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/classpath&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/java&gt;</span>
+
+</pre>
+
+<H2 id="example">Example</H2>
+ Suppose we want to show the text "Version" followed by the version number in the header. We can define a property with the following key/value, for example: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -$version=&lt;version_number&gt;</span>
+</pre>
+ or by specifying in the GUI a file with the following properties:<br/>
+<br/>
+
+<pre>
+<span>      version=&lt;version_number&gt;</span>
+</pre>
+ If the  <a href="article_footerAndHeader.html#header">header file</a> contains the following structure: <br/>
+<br/>
+
+<pre>
+<span>      &lt;header desc="Version ${version}"/&gt;</span>
+</pre>
+   Then the header will present what we want.</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_properties.html#_note_1_1_" class="noteRefLink">^</a> Note that its value will be different if used in a  <a href="article_categories.html">category</a><br/>
+<br/>
+</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_countproperty.html">count property</a>: This article presents the count property which can be used in the wiki</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

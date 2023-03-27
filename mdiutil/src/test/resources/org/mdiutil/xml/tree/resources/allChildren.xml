@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root desc="example">
+   <element name="first">
+      <element name="second">  
+         <element2 name="four"/>
+      </element>
+      <element2 name="third"/>
+   </element>
+</root>

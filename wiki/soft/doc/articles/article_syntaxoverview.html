@@ -1,0 +1,476 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" >
+$(document).ready(function() 
+  {
+    $("#table_0").tablesorter(); 
+    $("#table_1").tablesorter(); 
+    $("#table_2").tablesorter(); 
+  }
+);
+</script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_syntaxoverview.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Syntax overview</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#starting_elements">1&nbsp; Starting elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#content_elements">2&nbsp; Content elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#end_elements">3&nbsp; End elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">4&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">5&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ This article presents an overview of the tags supported in the XML syntax. For detailed information, go to the   <a href="article_syntax.html">syntax</a> article.<br/>
+<br/>
+ This table also presents the tags which are supported for the  <a href="article_mediawikimarkup.html">Mediawiki markup</a> or  <a href="article_markdownmarkup.html">Markdown markup</a>.
+<H2 id="starting_elements">Starting elements</H2>
+
+<table id="table_0" class="tablesorter border" >
+<caption class="tablecaption" >Starting elements</caption>
+<thead>
+<tr>
+<th valign="center"  class="column" >Element</th>
+<th valign="center"  width="120" class="column" >Mediawiki</th>
+<th valign="center"  width="120" class="column" >Markdown</th>
+<th valign="center"  class="column" >Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxStartingElements.html#meta">meta</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#setting_the_article_meta">meta</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">specifies the text which should be written as an explanation for an article in the dictionnary or categories</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxStartingElements.html#alttitle">altTitle</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#adding_an_alternate_title">altTitle</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">specifies alternate titles which can be used for an article in the dictionnary, categories, or references</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxStartingElements.html#seealso">seeAlso</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">refer in the header of the article to another article which can have a similar title or subject</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxStartingElements.html#infobox">infobox</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#infobox">infobox</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add an infobox at the beginning of the article</td>
+</tr>
+</tbody>
+</table>
+
+<H2 id="content_elements">Content elements</H2>
+
+<table id="table_1" class="tablesorter border" >
+<caption class="tablecaption" >Content elements</caption>
+<thead>
+<tr>
+<th valign="center"  class="column" >Element</th>
+<th valign="center"  class="column" >Mediawiki</th>
+<th valign="center"  class="column" >Markdown</th>
+<th valign="center"  class="column" >Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#div">div</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">specifies a block of content</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#note">note</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#note">ref</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">specifies a note, added at the end of the article under the "Notes" title<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+All notes and citations will be regrouped under this title</div></span>
+</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#cite">cite</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">specifies a citation, added at the end of the article under the "Notes" title<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_2_">[1]</sup></a>
+<div class="tooltiptext">
+All notes and citations will be regrouped under this title</div></span>
+</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxJustifElements.html#empty">empty</a></td>
+<td valign="center" class="border">empty line</td>
+<td valign="center" class="border">empty line</td>
+<td valign="center" class="border">add an empty line</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxJustifElements.html#br">br</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#br">br</a></td>
+<td valign="center" class="border"> <a href="article_markdownmarkup.html#br">br</a></td>
+<td valign="center" class="border">add a break</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxJustifElements.html#hr">hr</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border"> <a href="article_markdownmarkup.html#hr">hr</a></td>
+<td valign="center" class="border">add a thematic break</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#code">code</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#code">code</a></td>
+<td valign="center" class="border"> <a href="article_markdownmarkup.html#code">code</a></td>
+<td valign="center" class="border">add a piece of "computer-code formatted" text</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#pre">pre</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#pre">pre</a></td>
+<td valign="center" class="border"> <a href="article_markdownmarkup.html#pre">pre</a></td>
+<td valign="center" class="border">add several lines of unformatted text (keeping the white spaces)</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#source">source</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#source">source</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add several lines of unformatted text (keeping the white spaces). Contrary to the "pre" element, the content will not begin on a new line</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#block">block</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">show content inside an indented box</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#blockquote">blockquote</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border"> <a href="article_markdownmarkup.html#blockquote">blockquote</a></td>
+<td valign="center" class="border">show content inside a blockquote</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#messagebox">messageBox</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">show content inside an information or warning message box</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#term">term</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#term">term</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">adds a term and its definition (useful to define glossaries)</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#box">box</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add content inside an html box</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#a">a</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#external_links">external links</a></td>
+<td valign="center" class="border"> <a href="article_markdownmarkup.html#external_links">external links</a></td>
+<td valign="center" class="border">add an external link</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#wikipedia">wikipedia</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add a Wikipedia link</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#mediawiki">mediawiki</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add a Mediawiki link<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+This is a link to any Mediawiki</div></span>
+</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#video">video</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add a youtube or dailymotion embedded video</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#audio">audio</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add an embedded audio</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#javadoc">javadoc</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add a link to a Java API documentation for a Class, a Package, a Field, or a Method</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#qtdoc">qtdoc</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add a link to a Qt class documentation for any Qt API</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#javaapi">javaAPI</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">includes an API documentation for a Java class, interface, or enum</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#pythonapi">pythonAPI</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">includes an API documentation for a Python class</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#apidoc">apidoc</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">includes an API documentation for any language. See also </td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#moreinfo">moreInfo</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#more_information">See also</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add a "Main Article" link at the start of a paragraph</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#seearticle">seeArticle</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#more_information">See also</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add a "See Also" link at the start of a paragraph</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#ol">ol</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#lists">lists</a></td>
+<td valign="center" class="border"> <a href="article_markdownmarkup.html#lists">lists</a></td>
+<td valign="center" class="border">defines an ordered list</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#ul">ul</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#lists">lists</a></td>
+<td valign="center" class="border"> <a href="article_markdownmarkup.html#lists">lists</a></td>
+<td valign="center" class="border">defines an unordered list</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#li">li</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#lists">lists</a></td>
+<td valign="center" class="border"> <a href="article_markdownmarkup.html#lists">lists</a></td>
+<td valign="center" class="border">defines a list item</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#img">img</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#images">image</a></td>
+<td valign="center" class="border"> <a href="article_markdownmarkup.html#images">image</a></td>
+<td valign="center" class="border">defines an interwiki link to an image specified by its id</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#resource">resource</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">defines an interwiki link to a resource specified by its id</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#title">title</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#titles">titles</a></td>
+<td valign="center" class="border">Line beginning with several "*"</td>
+<td valign="center" class="border">defines a title</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#ref">ref</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#article_references">article references</a></td>
+<td valign="center" class="border"> <a href="article_markdownmarkup.html#article_references">article references</a></td>
+<td valign="center" class="border">defines a reference to an article</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#catref">catRef</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">defines a reference to a  <a href="article_categories.html">category</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#glossaryref">glossaryRef</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">defines a reference to the  <a href="article_glossary.html">glossary</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#anchor">anchor</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">define an anchor in the wiki, which will be accessible via a  <a href="article_syntax.html#ref">ref</a> tag</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#include">include</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#including_another_article">transclusion</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">include the content of an article or template in another one</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#esc">esc</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">escape content</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#table">table</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#tables">tables</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add a table</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#math">math</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">Mathematical formulas (<a href="https://www.w3.org/TR/MathML2/" title="https://www.w3.org/TR/MathML2/">MathML2</a> syntax)</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#html">html</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">Embed HTML content</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#map">map</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">Include an <a href="https://en.wikipedia.org/wiki/OpenStreetMap" title="https://en.wikipedia.org/wiki/OpenStreetMap">OpenStreetMap</a> Map</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#condition">condition</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">Include a conditional content depending on the presence of a  <a href="article_roots.html">package</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#todo">todo</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">Shows a TODO in the wiki</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntax.html#todolist">todolist</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">Shows a TODO list in the wiki</td>
+</tr>
+</tbody>
+</table>
+
+<H2 id="end_elements">End elements</H2>
+
+<table id="table_2" class="tablesorter border" >
+<caption class="tablecaption" >Ending elements</caption>
+<thead>
+<tr>
+<th valign="center"  class="column" >Element</th>
+<th valign="center"  width="120" class="column" >Mediawiki</th>
+<th valign="center"  width="120" class="column" >Markdown</th>
+<th valign="center"  class="column" >Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxEndElements.html#see">see</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#see_also">See</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">add a "See Also" title at the end of the article with wiki links to other articles</td>
+</tr>
+<tr>
+<td valign="center" class="border"> <a href="article_syntaxEndElements.html#cat">cat</a></td>
+<td valign="center" class="border"> <a href="article_mediawikimarkup.html#setting_categories">setting categories</a></td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">define that the article belongs to one  <a href="article_categories.html">category</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1">^ <a href="article_syntaxoverview.html#_note_1_1_" class="noteRefLink">[1]</a> <a href="article_syntaxoverview.html#_note_1_2_" class="noteRefLink">[2]</a> All notes and citations will be regrouped under this title</li>
+<li id="_note_2"> <a href="article_syntaxoverview.html#_note_2_1_" class="noteRefLink">^</a> This is a link to any Mediawiki</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntax.html">Syntax</a>: This article explains the XML tags which can be used to specify the articles syntax</li>
+<li> <a href="article_mediawikimarkup.html">Mediawiki markup</a>: This article explains the supported Mediawiki markup</li>
+<li> <a href="article_wikipedia.html">Comparison with wikipedia syntax</a>: This article compares the docJGenerator syntax to the wikipedia syntax</li>
+<li> <a href="article_cssSelectors.html">CSS selectors</a>: This article explains the correspondance from elements to CSS selectors</li>
+<li> <a href="article_articles.html">Articles</a>: Article files are XML files which define the articles in the wiki</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_markdown.html">markdown</a> |
+ <a href="../categories/cat_mediawiki.html">mediawiki</a> |
+ <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

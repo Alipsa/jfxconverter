@@ -1,0 +1,234 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_ant.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Ant integration</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#usage">1&nbsp; Usage</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#character_encoding">1.1&nbsp; Character encoding</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#classnotfound_problems_when_using_the_tool_through_ant">2&nbsp; ClassNotFound problems when using the tool through ant</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#examples">3&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#basic_example">3.1&nbsp; Basic example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#adding_a_search_box">3.2&nbsp; Adding a Search box</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#usage_of_a_configuration_file">3.3&nbsp; Usage of a configuration file</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">4&nbsp; Notes</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ It is possible to integrate the application in an ant build file.
+<H2 id="usage">Usage</H2>
+ You must define at least the following properties: <ul>
+<li>"-input": the  <a href="article_commandline.html#input">input XML wiki directory</a></li>
+<li>"-output": the  <a href="article_commandline.html#output">output XML wiki directory</a></li>
+</ul>
+<br/>
+<br/>
+ You must also set the classpath for the application.<br/>
+<br/>
+ The most basic example is:  In this basic example: <ul>
+<li>The input directory is "wiki/input", which is in the same directory as the ant file</li>
+<li>The output directory is "wiki/output", which is in the same directory as the ant file</li>
+<li>The application jar is also in the same directory as the ant file</li>
+</ul>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;java</span><span style="color:#0d8200;font-weight:bold;"> classname</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"org.docgene.main.DocGenerator"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-input=wiki/input"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-output=wiki/output"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;classpath&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"docGenerator.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"plugins/scripts.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/classpath&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/java&gt;</span>
+
+</pre>
+
+<H3 id="character_encoding">Character encoding</H3>
+<div class="moreInfo" >
+Main Article: <a href="article_characterencoding.html">Character encoding</a></div>
+<br/>
+ You don't need to bother about the platform default character encoding, the generator make sure that all output files are encoded in UTF-8, whatever the encoding of the input files or the platform default character encoding.
+<H2 id="classnotfound_problems_when_using_the_tool_through_ant">ClassNotFound problems when using the tool through ant</H2>
+When you use the tool though ant, you can have a message in the error console such as  <code>Can't find the Class for Plugin Factory org.docgene.scripts.ScriptFactory</code>.<br/>
+<br/>
+ The reason is that you can run into problems whith ClassPath when running ant. ant do not take into account the libraries classpath but use the default classpath (however it allows to explictly set his own). It is said in the ant manual about the  <code>java</code> task that: <i>If you need to locate a JAR file relative to the directory the task will be run in, you need to explicitly create the full path to the JAR file.</i><span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+ See <a href="file:/D:/Java/docGenerator/code/wiki/output/Ant_manual" title="file:/D:/Java/docGenerator/code/wiki/output/Ant_manual">https://ant.apache.org/manual/index.html</a></div></span>
+<br/>
+<br/>
+ The way to fix it is to add explictly the relevant libraries to the  <code>classpath</code> in ant. For example, the following will fail to load the  <a href="article_scripts.html">Scripts plugin</a>: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;java</span><span style="color:#0d8200;font-weight:bold;"> classname</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"org.docgene.main.DocGenerator"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-input=wiki/input"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-output=wiki/output"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-search=titles"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;classpath&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"docGenerator.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/classpath&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;jvmarg</span><span style="color:#0d8200;font-weight:bold;"> line</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-Dfile.encoding=UTF-8"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/java&gt;</span>
+
+</pre>
+ The following will fix the problem: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;java</span><span style="color:#0d8200;font-weight:bold;"> classname</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"org.docgene.main.DocGenerator"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-input=wiki/input"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-output=wiki/output"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-search=titles"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;classpath&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"docGenerator.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">&lt;pathelement</span><span style="background-color:#ffff00;color:#0d8200;font-weight:bold;"> path</span><span style="background-color:#ffff00;font-weight:bold;">=</span><span style="background-color:#ffff00;color:#650099;">"plugins/scripts.jar"</span><span style="background-color:#ffff00;color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/classpath&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;jvmarg</span><span style="color:#0d8200;font-weight:bold;"> line</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-Dfile.encoding=UTF-8"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/java&gt;</span>
+
+</pre>
+
+<H2 id="examples">Examples</H2>
+
+<H3 id="basic_example">Basic example</H3>
+ In this basic example: <ul>
+<li>The input directory is "wiki/input", which is in the same directory as the ant file</li>
+<li>The output directory is "wiki/output", which is in the same directory as the ant file</li>
+<li>The application jar is also in the same directory as the ant file</li>
+</ul>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;java</span><span style="color:#0d8200;font-weight:bold;"> classname</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"org.docgene.main.DocGenerator"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-input=wiki/input"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-output=wiki/output"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;classpath&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"docGenerator.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"plugins/scripts.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/classpath&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/java&gt;</span>
+
+</pre>
+
+<H3 id="adding_a_search_box">Adding a Search box</H3>
+ In this example: <ul>
+<li>A  <a href="article_search.html">search box</a> allowing to search on the article titles and their table of contents sub-titles is added</li>
+</ul>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;java</span><span style="color:#0d8200;font-weight:bold;"> classname</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"org.docgene.main.DocGenerator"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-input=wiki/input"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-output=wiki/output"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-search=titles"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;classpath&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"docGenerator.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"plugins/scripts.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/classpath&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;jvmarg</span><span style="color:#0d8200;font-weight:bold;"> line</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-Dfile.encoding=UTF-8"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/java&gt;</span>
+
+</pre>
+
+<H3 id="usage_of_a_configuration_file">Usage of a configuration file</H3>
+ In the following example: <ul>
+<li>A  <a href="article_configFile.html">configuration file</a> is used</li>
+<li>A  <a href="article_properties.html">property</a> is used to write the version number. It uses the ant ${version} property</li>
+</ul>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;target</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"generateWiki"</span><span style="color:#0d8200;font-weight:bold;"> description</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"generate Wiki"</span><span style="color:#0d8200;font-weight:bold;"> depends</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"version"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;java</span><span style="color:#0d8200;font-weight:bold;"> classname</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"org.docgene.main.DocGenerator"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-input=wiki/input"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-output=wiki/output"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-search=titles"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-config=wikisource/config.properties"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-$version=${version}"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;classpath&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"docGenerator.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"plugins/scripts.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/classpath&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;jvmarg</span><span style="color:#0d8200;font-weight:bold;"> line</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-Dfile.encoding=UTF-8"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/java&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/target&gt;</span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_ant.html#_note_1_1_" class="noteRefLink">^</a>  See <a href="file:/D:/Java/docGenerator/code/wiki/output/Ant_manual" title="file:/D:/Java/docGenerator/code/wiki/output/Ant_manual">https://ant.apache.org/manual/index.html</a><br/>
+<br/>
+</li>
+</ol>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

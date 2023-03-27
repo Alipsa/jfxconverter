@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article desc="PPT driver" >
+   <altTitle desc="PowerPoint driver" />
+   <meta desc="This article explains how to use the PowerPoint driver" />
+   The PowerPoint driver allows to serialize JavaFX content as a vector PowerPoint file.
+   
+   <title title="dependencies" />
+   You should use the <code>jfxConverter-ppt.jar</code> in addition to the <code>jfxConverter.jar</code>. Note that the 
+   PowerPoint driver uses the <wikipedia path="Apache_POI" desc="Apache POI" /> library, which is in the <code>lib</code>
+   directory.   
+   
+   <title title="PPTDriverUtils Utility class" />
+   The <code>PPTDriverUtils</code> encapsulate the usage of the converter. for example:
+   <pre syntax="java">
+      PPTDriverUtils pptUtils = new PPTDriverUtils();
+      pptUtils.convert(node, file);      
+   </pre>
+   
+   <title level="2" title="adding additional processing to Nodes" />
+   To <ref id="usage#Adding additional processing to Nodes" desc="add additional processing to Nodes"/>:   
+   <pre syntax="java">
+      PPTDriverUtils pptUtils = new PPTDriverUtils();
+      pptUtils.convert(node, file, true);      
+   </pre>      
+   
+   <title title="usage example" />
+   <pre syntax="java">
+      // create the Scene graph
+      JFXInvoker invoker = JFXInvoker.getInstance();
+      invoker.invokeBlocking(new Runnable() {
+        @Override
+        public void run() {
+          StackPane root = new StackPane();
+          Scene scene = new Scene(root, 300, 250);
+          Stage stage = new Stage();
+          stage.setScene(scene);
+          start(stage);
+      
+          Line line = new Line(0, 0, 200, 200);
+          line.setStroke(Color.RED);     
+         
+          root.getChildren().add(line);
+          primaryStage.show();
+        }
+      });
+      
+      // perform the conversion
+      PPTDriverUtils pptUtils = new PPTDriverUtils();
+      pptUtils.convert(node, file);
+   </pre>
+      
+   <cat id="drivers" />
+</article>

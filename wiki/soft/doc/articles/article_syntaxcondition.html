@@ -1,0 +1,170 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_syntaxcondition.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>condition element</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#structure">1&nbsp; Structure</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#package_condition">2&nbsp; Package condition</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#property_condition">3&nbsp; Property condition</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#examples">4&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">5&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+This article explains the XML tags which can be used to specify a  <a href="article_syntax.html#condition">condition</a>.<br/>
+<br/>
+ The "condition" element allows to add conditional content depending on the presence of a  <a href="article_roots.html">package</a> or a  <a href="article_properties.html">property</a>. 
+<H2 id="structure">Structure</H2>
+A condtion has the following children: <ul>
+<li>One mandatory "if" child containing the content to be rendered if the condition is evaluated to true</li>
+<li>One optional "else" child containing the content to be rendered if the condition is evaluated to false</li>
+</ul>
+
+<H2 id="package_condition">Package condition</H2>
+A  <a href="article_roots.html">package</a> condition is evaluated to true if some specified packages are  present.<br/>
+<br/>
+ This type of condition has only one attribute: <ul>
+<li>"condition": The name or names of the packages (separated by commas) which must all be present for the condition to be evaluated as true. For example "myPack1, myPack2" is a valid value for the condition</li>
+</ul>
+
+<H2 id="property_condition">Property condition</H2>
+A  <a href="article_properties.html">property</a> condition is evaluated to true if a property is preent, and optionnaly has a specified value. <br/>
+<br/>
+ This type of condition has the following attributes: <ul>
+<li>"condition": The condition type for a property</li>
+<li>"property": The name or the property which must be present for the condition to be evaluated as true. If the "value" attribute is not present, the condition will be evaluated as true if the property is present</li>
+<li>"value": The value or the property which must be present for the condition to be evaluated as true. If the "value" attribute is present, the condition will be evaluated as true if the property is present and its value is equal to "value"</li>
+</ul>
+ Note that the possible values for the condition are: <ul>
+<li>"equal": the property value is equal to the value</li>
+<li>"noEqual": the property value is not equal to the value</li>
+<li>"greater": the property value is greater than the value</li>
+<li>"smaller": the property value is smaller than the value</li>
+<li>"greaterOrEqual": the property value is greater or equal than the value</li>
+<li>"smallerOrEqual": the property value is smaller or equal than the value</li>
+</ul>
+For a numeric property ("count", "todo", and "errors"), the conditions use the numeric comparisons. For other properties (for example "lang"), the conditions use the String comparisons.
+<H2 id="examples">Examples</H2>
+ Example with "condition": <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;condition</span><span style="color:#0d8200;font-weight:bold;"> condition</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myPack"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;if&gt;</span>
+<span>      The text inside the if for myPack (will be added if "myPack" is present).</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/if&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;else&gt;</span>
+<span>      The text inside the else for myPack (will be added if "myPack" is absent).</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/else&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/condition&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ Example with "property": <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;condition</span><span style="color:#0d8200;font-weight:bold;"> property</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myProperty"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;if&gt;</span>
+<span>      The text inside the if, will be added if "myProperty" exists.</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/if&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;else&gt;</span>
+<span>      The text inside the else, will be added if "myProperty" does not exist.</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/else&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/condition&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ Example with "property" and "value": <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;condition</span><span style="color:#0d8200;font-weight:bold;"> property</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myProperty"</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;if&gt;</span>
+<span>      The text inside the if, will be added if "myProperty" exists and its value is "true".</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/if&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;else&gt;</span>
+<span>      The text inside the else, will be added if "myProperty" does not exist or its value is not "true".</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/else&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/condition&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntax.html#condition">syntax</a>: This article explains the XML tags which can be used to specify the articles syntax</li>
+<li> <a href="article_syntaxoverview.html">Syntax overview</a>: This article presents an overview of the tags supported in the XML syntax</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

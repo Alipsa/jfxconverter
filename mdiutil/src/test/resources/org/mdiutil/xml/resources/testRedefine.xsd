@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:redefine schemaLocation="toto">
+      <xs:complexType name="root">
+         <xs:complexContent>
+            <xs:extension base="root">
+               <xs:sequence>
+                  <xs:element name="child1"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:redefine>
+</xs:schema> 

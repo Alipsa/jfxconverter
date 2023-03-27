@@ -1,0 +1,236 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_docgenhelp.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>DocGenerator Help feature</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#overview">1&nbsp; Overview</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#help_content_generation">2&nbsp; Help content generation</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#configuration_example">2.1&nbsp; Configuration example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#help_content_optimization">2.2&nbsp; Help content optimization</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#api_usage">3&nbsp; API usage</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_with_swing">3.1&nbsp; Example with Swing</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#dependencies">4&nbsp; Dependencies</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#help_usage">5&nbsp; Help usage</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">6&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">7&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ The docJGenerator tool allows to provide a help system in any Swing or JavaFX application. Note that the generated format, and the API, have no relationship at all with the original <a href="https://en.wikipedia.org/wiki/JavaHelp" title="https://en.wikipedia.org/wiki/JavaHelp">JavaHelp</a> system.
+<H2 id="overview">Overview</H2>
+ To provide a help system for your application, you need to: <ul>
+<li>Use the wiki definition (as for any wiki generation), and generate the help content with the  <code>help</code> output type. The result will be a zip file which will contain both the wiki and the associated Metadata</li>
+<li>Use the API which is able to produce a help component with this zip file</li>
+</ul>
+<br/>
+<br/>
+ Note that: <ul>
+<li>It is also possible to provide a  <a href="article_ctxsensitivehelp.html">context-sensitive help</a> on components</li>
+<li>It is possible to specify and  <a href="article_helpmanualcontent.html">create the Help content manually</a>, including the metadata</li>
+</ul>
+
+<H2 id="help_content_generation">Help content generation</H2>
+ To generate the help content, you should use the "help" output type. The help content generation will produce by default a zip file in the same directory than the output directory. You can specify the output type in the  <a href="article_gui.html">GUI interface</a>, the   <a href="article_commandline.html">command-line</a>, or the  <a href="article_configFile.html">configuration file</a>. Several options can be specified to customized the help content generation: <ul>
+<li>"helpFileName": the name of the zip file (used only if the path of the zip file is not defined)</li>
+<li>"helpFile": the path of the zip file</li>
+<li>"helpOptimizedForSwing": specifies if the help content is optimized for the Swing API (true by default). If this property is set to false, then the help content will be optimized for the JavaFX API. See also  <a href="article_docgenhelp.html#help_content_optimization">help content optimization</a></li>
+<li>"helpContent": the optional file which specifies how the chapters in the help content will be created. See  <a href="article_helpcontent.html">Help content configuration</a> for more information</li>
+<li>"helpPageWidth": the page width used for specifying the images width for the help content<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+Using a percentage width for images would not work for the help content, so the generator will compute the image width in this case by using this value for the overall "page width". The page width will be set by default to 600 if not specified</div></span>
+</li>
+</ul>
+<br/>
+<br/>
+ Note that setting the "resolveAPILinks" option can also be useful when generating the Help content. See  <a href="article_checklinks.html#resolving_api_links">Resolving API links</a>.
+<H3 id="configuration_example">Configuration example</H3>
+Here we have a configuration example for the  <a href="article_ant.html">ant integration</a>: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;java</span><span style="color:#0d8200;font-weight:bold;"> classname</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"org.docgene.main.DocGenerator"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-input=wiki/input"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-output=wiki/output"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-outputType=help"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-helpContent=wiki/helpContent.xml"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;classpath&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"docGenerator.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/classpath&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/java&gt;</span>
+
+</pre>
+
+<H3 id="help_content_optimization">Help content optimization</H3>
+ By default the help content is optimized for the Swing API. However the content of the help articles would not be seen correctly using the JavaFX help API. The "helpOptimizedForSwing" property allows to specify how the help content will be encoded. <br/>
+<br/>
+The JavaFX API uses the <a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/web/WebView.html" class="apiLink" title="javafx.scene.web.WebView">WebView</a> class. This class is not able to render images which are local to a zip file as it is the case for the articles packaged for the help system. If you choose to optimize the help content is for the JavaFX API, the images will be inlined in the the HTML files themselves, encoded in Base64. However the Swing <a href="http://docs.oracle.com/javase/8/docs/api//javax/swing/text/html/HTMLEditorKit.html" class="apiLink" title="javax.swing.text.html.HTMLEditorKit">HTMLEditorKit</a> is not able to render images inlined in HTML files, encoded in Base64.<br/>
+<br/>
+ Note that the generated zip file contain a  <code>README.txt</code> file which indicates for which format the Help content has been generated, and also if the content allows a full text search.
+<H2 id="api_usage">API usage</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_helpapi.html">Help API overview</a></div>
+<br/>
+ The generated help content can be used either for a Swing or JavaFX application. The help content will be presented in a component which can be integrated in any GUI<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+The Swing and the JavaFX APIs are very similar</div></span>
+. See: <ul>
+<li> <a href="article_helpswing.html">Help Swing API</a> for using the Swing API</li>
+<li> <a href="article_helpjavafx.html">Help JavaFX API</a> for using the JavaFX API</li>
+</ul>
+
+<H3 id="example_with_swing">Example with Swing</H3>
+
+<pre>
+<span>      </span><span style="color:#404040;font-style:italic;">// get the zip file as an URL</span>
+<span>      URL url = ...</span>
+
+<span>      </span><span style="color:blue;font-weight:bold;">try</span><span> {</span>
+<span>        </span><span style="color:#404040;font-style:italic;">// create the Help factory</span>
+<span>        JavaHelpFactory factory = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">JavaHelpFactory</span><span>(url);</span>
+<span>        factory.</span><span style="font-weight:bold;">create</span><span>();</span>
+<span>        ArticlesModel model = factory.</span><span style="font-weight:bold;">getModel</span><span>();</span>
+
+<span>        </span><span style="color:#404040;font-style:italic;">// create the viewer component</span>
+<span>        SwingHelpContentViewer viewer = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">SwingHelpContentViewer</span><span>();</span>
+<span>        viewer.</span><span style="font-weight:bold;">installModel</span><span>(model);</span>
+
+<span>        JComponent pane = viewer.</span><span style="font-weight:bold;">getComponent</span><span>();</span>
+<span>        </span><span style="color:#404040;font-style:italic;">// do whatever you want with the component</span>
+<span>      } </span><span style="color:blue;font-weight:bold;">catch</span><span> (IOException | SAXException ex) {</span>
+<span>        ex.</span><span style="font-weight:bold;">printStackTrace</span><span>();</span>
+<span>      }</span>
+
+</pre>
+
+<H2 id="dependencies">Dependencies</H2>
+The Help system does not have any other libraries dependencies, except if the  <a href="article_helpsearch.html#full_text_search">full text search</a>  is set. In that case the  <code>elasticlunr.jar</code> library must be in the same directory as the Help system jar file, or in the classpath of the library using it. 
+<H2 id="help_usage">Help usage</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_helpusage.html">Help usage</a></div>
+<br/>
+ The Help component<span class="tooltip"><a href="#_note_3" class="noteLink"><sup id="_note_3_1_">[3]</sup></a>
+<div class="tooltiptext">
+Both a Swing and a JavaFX implementations exist</div></span>
+ allows to navigate between the wiki articles: <ul>
+<li>The left panel shows a tree with all the article titles</li>
+<li>The right panel shows the content of the currently selected article</li>
+<li>The toolbar presents:</li>
+
+<ul>
+<li>A Home button allowing to go directly to the  <a href="article_articles.html#index_definition">index</a> article,</li>
+<li>Two buttons to navigate back or forward in the articles,</li>
+<li>A button to go to the glossary, if the wiki has a  <a href="article_glossary.html">glossary</a>,</li>
+<li>An auto-completion field to  <a href="article_helpsearch.html">search</a> for an article or title</li>
+</ul>
+</ul>
+ Note that the external http web sites will be opened in the desktop browser. Also all the hyperlinks are active.<br/>
+<br/>
+ Example without a  <a href="article_glossary.html">glossary</a>:<br/>
+<br/>
+<br/>
+<img src="../images/helpSwing.png" id="_image_0" onclick="openImage(_image_0)" width="60%" class="left" />
+<br/>
+<br/>
+<br/>
+ Example with a  <a href="article_glossary.html">glossary</a>:<br/>
+<br/>
+<br/>
+<img src="../images/helpSwingGlossary.png" id="_image_1" onclick="openImage(_image_1)" width="60%" class="left" />
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_docgenhelp.html#_note_1_1_" class="noteRefLink">^</a> Using a percentage width for images would not work for the help content, so the generator will compute the image width in this case by using this value for the overall "page width". The page width will be set by default to 600 if not specified</li>
+<li id="_note_2"> <a href="article_docgenhelp.html#_note_2_1_" class="noteRefLink">^</a> The Swing and the JavaFX APIs are very similar</li>
+<li id="_note_3"> <a href="article_docgenhelp.html#_note_3_1_" class="noteRefLink">^</a> Both a Swing and a JavaFX implementations exist</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_helpswing.html">Help Swing API</a>: This article explains how to use the Help Swing API</li>
+<li> <a href="article_helpjavafx.html">Help JavaFX API</a>: This article explains how to use the Help JavaFX API</li>
+<li> <a href="article_ctxsensitivehelp.html">Context-sensitive Help</a>: This article explains how to use the context-sensitive Help</li>
+<li> <a href="article_javahelp.html">Comparison with JavaHelp</a>: This article compares the help feature of docJGenerator with the JavaHelp system</li>
+<li> <a href="article_tutorialJavaHelp.html">Help system tutorial</a>: This article is tutorial which explains how to produce and use a Help content in a Swing application</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_javahelp.html">javahelp</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

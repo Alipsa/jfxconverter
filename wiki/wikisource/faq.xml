@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article desc="FAQ" >
+   <meta desc="Frequently Asked Questions" />
+
+   <title title="What is jfxConverter?"/>
+   jfxConverter is a Java library prodiving utilities to convert a JavaFX Scene to Swing Graphics2D orders. 
+   It is then simple to use it to convert to any format which takes a Graphics2D as input. The project comes with
+   PowerPoint and a SVG converters.
+   
+   <title title="What distribution must I use?"/>
+   See the <ref id="distribution" /> article.   
+
+   <title title="Which version of Java should I use?"/>
+   The latest version of the project require Java 8.
+
+   <cat id="general" />
+</article>

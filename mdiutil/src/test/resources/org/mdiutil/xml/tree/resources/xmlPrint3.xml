@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root desc="example">
+   <element name="first" id="theID"/>
+   <element name="second">  
+      <element2 name="thisName" />
+      <element2 name="thisName2" />
+   </element>
+   <element name="third">  
+      <element2 name="thisName" />
+      <element2 name="thisName2" />
+   </element>  
+</root>

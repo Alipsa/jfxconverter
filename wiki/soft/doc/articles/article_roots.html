@@ -1,0 +1,177 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_roots.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Root files and packages</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#usage_with_one_root_directory">1&nbsp; Usage with one root directory</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#usage_with_more_than_one_root_directory">2&nbsp; Usage with more than one root directory</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#defining_a_package_for_a_root">3&nbsp; Defining a package for a root</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#grammar">3.1&nbsp; Grammar</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#using_package_ids">4&nbsp; Using package IDs</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#default_imports">5&nbsp; Default imports</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#enforcing_the_dependencies_between_packages">6&nbsp; Enforcing the dependencies between packages</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#example">7&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">8&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ By default docJGenerator takes the content of only one input (root) directory, and generates the resulting wiki in one output directory. However, it is possible to: <ul>
+<li>Use the content of several input directories to generate the resulting wiki</li>
+<li>Define for each root directory a specific  <a href="article_roots.html#defining_a_package_for_a_root">package ID</a>, and enforcing the references from one package to another</li>
+</ul>
+This makes possible to define only one set of articles, but generates various resulting wikis depending on the generation configuration. Some use cases would be: <ul>
+<li>Generating a documentation for both Open Source and Closed Source parts, generating a limited documentation for the Open Source users of  the project, and a complete one for the Closed Source users of the project</li>
+</ul>
+
+<H2 id="usage_with_one_root_directory">Usage with one root directory</H2>
+ The simplest way to use the generator is to use it with only one input (root) directory. This usage is straightforward: <ul>
+<li>The generator will look for all the articles, resources, and images in the unique root directory (recursively going into sub-directories), and generate the HTML wiki result in the output</li>
+<li>There is only one "namespace" for all articles, images and resources in the input directpries, which means that if the tool finds for example two images with the same ID, it will emit an error</li>
+</ul>
+
+<H2 id="usage_with_more_than_one_root_directory">Usage with more than one root directory</H2>
+ However, it is possible to define more than one root directory and merge the documentation from all these input directories in one output wiki. In that case, an  <a href="article_articles.html#index_definition">index file</a> should be specified. For example: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input;wiki2/input -index=myIndex.xml -output=wiki/output</span>
+</pre>
+ Note that this file does not need to be in one of the root directories. In that case, it is possible to define packages for each root directory to avoid name clashing between articles, resources, and images between two root directories. To do that, you can define package IDs for each root directory. These IDs work as namespaces for all references in the wiki.
+<H2 id="defining_a_package_for_a_root">Defining a package for a root</H2>
+ To define a package ID for a root directory, you have to create an XML file with only one "package" element. For example: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;package</span><span style="color:#0d8200;font-weight:bold;"> package</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"mypackage"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ There can be only one package defintion per root directory (only the first one will be taken into account, the others will be discarded). Note that the name of a package can only contain letters, digits, "-" or "_" characters. For example, the following names are valid: <br/>
+<br/>
+
+<pre>
+<span>      MyPackage, ThePackage12, Another_Package, core-package</span>
+</pre>
+
+<H3 id="grammar">Grammar</H3>
+See  <a href="resources/package.xsd">The package declaration Schema</a>.
+<H2 id="using_package_ids">Using package IDs</H2>
+ The package ID is used as a namespace, and can be referenced in: <ul>
+<li> <a href="article_syntax.html#ref">Article references</a></li>
+<li> <a href="article_syntax.html#img">Images references</a></li>
+<li> <a href="article_syntax.html#resource">Resources references</a></li>
+<li> <a href="article_syntax.html#condition">Conditions</a></li>
+</ul>
+<br/>
+<br/>
+ The way articles, images, and resources are found is: <ul>
+<li>If the reference has no package attribute, the generator will look for references having the same package definition as the origin root (found within the same root directory)</li>
+<li>Else the generator will look for a reference in the specified package</li>
+</ul>
+
+<H2 id="default_imports">Default imports</H2>
+ It is possible to define packages which will be imported by default in a package. For example: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;package</span><span style="color:#0d8200;font-weight:bold;"> package</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"mypackage"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;defaultImports&gt;</span>
+<span>          </span><span style="color:blue;font-weight:bold;">&lt;import</span><span style="color:#0d8200;font-weight:bold;"> package</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"thePackage"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/defaultImports&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/package&gt;</span>
+
+</pre>
+ In that case, if the reference has no package attribute: <ul>
+<li>The generator will first look for a reference in the same package</li>
+<li>Else it will look for a reference in one of the default import packages</li>
+</ul>
+
+<H2 id="enforcing_the_dependencies_between_packages">Enforcing the dependencies between packages</H2>
+It is possible to enforce the dependencies between packages by specifying the  <a href="article_configFile.html#dependencies">dependencies</a> configuration property. See  <a href="article_packagedepend.html">packages dependencies</a>.
+<H2 id="example">Example</H2>
+ The following example has two root directories: <ul>
+<li>One defining the "package1" package</li>
+<li>One defining the "package2" package, with a default import to "package1"</li>
+</ul>
+<img src="../images/packages.png" id="_image_0" onclick="openImage(_image_0)" width="70%" class="left" />
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_packagedepend.html">Packages dependencies</a>: This article explains how to enforce package dependencies</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_structure.html">structure</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

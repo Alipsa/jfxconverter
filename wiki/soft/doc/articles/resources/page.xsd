@@ -1,0 +1,1406 @@
+<?xml version="1.0"?>
+<!--
+ Copyright (c) 2016, 2017, 2018, 2019, 2020 Herve Girod. All rights reserved.
+ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+ If you have any questions about this project, you can visit
+ the project website at the project page on http://sourceforge.net/projects/docjgenerator/
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:include schemaLocation="general.xsd"/>
+   <xs:simpleType name="formatting">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="regular"/>
+         <xs:enumeration value="italic"/>
+         <xs:enumeration value="bold"/>
+         <xs:enumeration value="underline"/>
+         <xs:enumeration value="super"/>
+         <xs:enumeration value="sub"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="ulStyle">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="default"/>
+         <xs:enumeration value="circle"/>
+         <xs:enumeration value="square"/>
+         <xs:enumeration value="none"/>
+         <xs:enumeration value="inherit"/>
+      </xs:restriction>
+   </xs:simpleType>     
+   <xs:simpleType name="olStyle">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="default"/>
+         <xs:enumeration value="decimal"/>
+         <xs:enumeration value="roman"/>
+         <xs:enumeration value="upper-roman"/>
+         <xs:enumeration value="lower-roman"/>
+         <xs:enumeration value="alpha"/>
+         <xs:enumeration value="lower-alpha"/>
+         <xs:enumeration value="upper-alpha"/>
+         <xs:enumeration value="lower-greek"/>
+         <xs:enumeration value="greek"/>
+         <xs:enumeration value="upper-greek"/>         
+         <xs:enumeration value="none"/>
+         <xs:enumeration value="inherit"/>
+      </xs:restriction>
+   </xs:simpleType>   
+   <xs:simpleType name="formattingList">
+      <xs:list itemType="formatting"/>
+   </xs:simpleType>
+   <xs:simpleType name="namedSize">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="medium"/>
+         <xs:enumeration value="xx-small"/>
+         <xs:enumeration value="x-small"/>
+         <xs:enumeration value="small"/>
+         <xs:enumeration value="large"/>
+         <xs:enumeration value="x-large"/>
+         <xs:enumeration value="xx-large"/>
+         <xs:enumeration value="smaller"/>
+         <xs:enumeration value="larger"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="fontSize">
+      <xs:union memberTypes="xs:positiveInteger namedSize"/>
+   </xs:simpleType>
+   <xs:simpleType name="syntaxType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="default"/>
+         <xs:enumeration value="strict"/>
+         <xs:enumeration value="relaxed"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="justifyType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="none"/>
+         <xs:enumeration value="false"/>
+         <xs:enumeration value="true"/>
+         <xs:enumeration value="character"/>
+         <xs:enumeration value="word"/>
+         <xs:enumeration value="auto"/>
+         <xs:enumeration value="inherit"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="borderType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="false"/>
+         <xs:enumeration value="true"/>
+         <xs:enumeration value="noBorder"/>
+         <xs:enumeration value="simple"/>
+         <xs:enumeration value="shadow"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="videoType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="youtube"/>
+         <xs:enumeration value="dailymotion"/>
+         <xs:enumeration value="ogg"/>
+         <xs:enumeration value="mp4"/>
+         <xs:enumeration value="webm"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="mapType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="openStreetMap"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="apiType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="class"/>
+         <xs:enumeration value="package"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="qtType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="class"/>
+         <xs:enumeration value="method"/>
+         <xs:enumeration value="property"/>
+         <xs:enumeration value="enum"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="doxygenType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="class"/>
+         <xs:enumeration value="struct"/>
+         <xs:enumeration value="namespace"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="doxygenMemberType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="method"/>
+         <xs:enumeration value="attribute"/>
+         <xs:enumeration value="enum"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="apiFullPath">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="true"/>
+         <xs:enumeration value="false"/>
+         <xs:enumeration value="class"/>
+         <xs:enumeration value="member"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="javaAPIType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="class"/>
+         <xs:enumeration value="interface"/>
+         <xs:enumeration value="enum"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="pythonAPIType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="class"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="size">
+      <xs:restriction base="xs:string">
+         <xs:pattern value="[0-9]+"/>
+         <xs:pattern value="[0-9]+px"/>
+         <xs:pattern value="[0-9]+%"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="coords">
+      <xs:restriction base="xs:string">
+         <xs:pattern value="[0-9]+,[0-9]+,[0-9]+,[0-9]+"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="colorType">
+      <xs:restriction base="xs:string">
+         <xs:pattern value="#[0-9A-F]+"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="messageBoxType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="info"/>
+         <xs:enumeration value="success"/>
+         <xs:enumeration value="warning"/>
+         <xs:enumeration value="error"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="positionType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="left"/>
+         <xs:enumeration value="center"/>
+         <xs:enumeration value="right"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="verticalAlignType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="default"/>
+         <xs:enumeration value="baseline"/>
+         <xs:enumeration value="middle"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:complexType name="defaultArticleType" mixed="true">
+      <xs:sequence>
+         <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="altTitle" type="altTitle" maxOccurs="unbounded" minOccurs="0" />
+            <xs:element name="meta" type="meta" maxOccurs="1" minOccurs="0" />
+            <xs:element ref="infobox" maxOccurs="unbounded" minOccurs="0" />
+         </xs:choice>
+         <xs:element name="seeAlso" type="seeAlso" maxOccurs="1" minOccurs="0" />
+         <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="ul" type="ul" />
+            <xs:element name="ol" type="ol" />
+            <xs:element name="link" type="link" />
+            <xs:element name="email" type="email" />
+            <xs:element name="moreInfo" type="moreInfo" />
+            <xs:element name="seeArticle" type="seeArticle" />
+            <xs:element name="term" type="term" />
+            <xs:element name="javadoc" type="javadoc" />
+            <xs:element name="qtdoc" type="qtdoc" />
+            <xs:element name="doxygen" type="doxygen" />
+            <xs:element name="apidoc" type="apidoc" />
+            <xs:element name="javaAPI" type="javaAPIElementType" />
+            <xs:element name="pythonAPI" type="pythonAPIElementType" />
+            <xs:element name="wikipedia" type="wikipedia" />
+            <xs:element name="mediawiki" type="mediawiki" />
+            <xs:element name="video" type="video" />
+            <xs:element name="audio" type="audio" />
+            <xs:element name="ref" type="ref" />
+            <xs:element name="catRef" type="catRef" />
+            <xs:element name="glossaryRef" type="glossaryRef" />
+            <xs:element name="anchor" type="anchor" />
+            <xs:element name="img" type="img" />
+            <xs:element name="map" type="map" />
+            <xs:element name="pre" type="pre" />
+            <xs:element name="block" type="block" />
+            <xs:element name="blockquote" type="blockquote" />
+            <xs:element name="messageBox" type="messageBox" />
+            <xs:element name="source" type="source" />
+            <xs:element name="code" type="code" />
+            <xs:element name="a" type="a" />
+            <xs:element name="note" type="note" />
+            <xs:element name="cite" type="cite" />
+            <xs:element name="resource" type="resource" />
+            <xs:element name="br" type="br" />
+            <xs:element name="hr" type="hr" />
+            <xs:element name="empty" type="empty" />
+            <xs:element name="tab" type="tab" />
+            <xs:element name="font" type="font" />
+            <xs:element name="b" type="b" />
+            <xs:element name="i" type="i" />
+            <xs:element name="u" type="u" />
+            <xs:element name="todo" type="todo" />
+            <xs:element name="todolist" type="todolist" />
+            <xs:element name="esc" type="esc" />
+            <xs:element name="title" type="title" />
+            <xs:element name="par" type="par" />
+            <xs:element name="div" type="par" />
+            <xs:element name="box" type="box" />
+            <xs:element name="chapter" type="chapter" />
+            <xs:element name="include" type="include" />
+            <xs:element name="table" type="table" />
+            <xs:element name="math" type="math" />
+            <xs:element name="html" type="html" />
+            <xs:element name="condition" type="conditionType" />
+         </xs:choice>
+         <xs:element name="see" type="see" maxOccurs="unbounded" minOccurs="0" />
+         <xs:element name="cat" type="cat" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" />
+      <xs:attribute name="date" type="xs:string" />
+      <xs:attribute name="package" type="xs:string" />
+      <xs:attribute name="syntax" type="syntaxType" />
+      <xs:attribute name="justify" type="justifyType" />
+      <xs:attribute name="toc" type="xs:boolean" />
+   </xs:complexType>
+   <xs:complexType name="classElementType">
+      <xs:attribute name="class" type="xs:string" />
+      <xs:attribute name="style" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="abstractParentType" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+               <xs:element name="ul" type="ul" />
+               <xs:element name="ol" type="ol" />
+               <xs:element name="link" type="link" />
+               <xs:element name="email" type="email" />
+               <xs:element name="apidoc" type="apidoc" />
+               <xs:element name="javaAPI" type="javaAPIElementType" />
+               <xs:element name="pythonAPI" type="pythonAPIElementType" />
+               <xs:element name="javadoc" type="javadoc" />
+               <xs:element name="qtdoc" type="qtdoc" />
+               <xs:element name="doxygen" type="doxygen" />
+               <xs:element name="wikipedia" type="wikipedia" />
+               <xs:element name="mediawiki" type="mediawiki" />
+               <xs:element name="video" type="video" />
+               <xs:element name="audio" type="audio" />
+               <xs:element name="math" type="math" />
+               <xs:element name="html" type="html" />
+               <xs:element name="ref" type="ref" />
+               <xs:element name="catRef" type="catRef" />
+               <xs:element name="glossaryRef" type="glossaryRef" />
+               <xs:element name="pre" type="pre" />
+               <xs:element name="source" type="source" />
+               <xs:element name="anchor" type="anchor" />
+               <xs:element name="img" type="img" />
+               <xs:element name="code" type="code" />
+               <xs:element name="note" type="note" />
+               <xs:element name="cite" type="cite" />
+               <xs:element name="esc" type="esc" />
+               <xs:element name="a" type="a" />
+               <xs:element name="resource" type="resource" />
+               <xs:element name="br" type="br" />
+               <xs:element name="hr" type="hr" />
+               <xs:element name="empty" type="empty" />
+               <xs:element name="tab" type="tab" />
+               <xs:element name="font" type="font" />
+               <xs:element name="b" type="b" />
+               <xs:element name="i" type="i" />
+               <xs:element name="u" type="u" />
+               <xs:element name="todo" type="todo" />
+               <xs:element name="todolist" type="todolist" />
+            </xs:choice>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="articleType">
+      <xs:complexContent>
+         <xs:extension base="defaultArticleType">
+            <xs:attribute name="id" type="xs:string" />
+            <xs:attribute name="desc" type="xs:string" use="required" />
+            <xs:attribute name="keepCase" type="xs:boolean" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="conditionType">
+      <xs:sequence>
+         <xs:element name="if" type="ifType" maxOccurs="1" minOccurs="0" />
+         <xs:element name="else" type="ifType" maxOccurs="1" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="property" type="xs:string" />
+      <xs:attribute name="value" type="xs:string" />
+      <xs:attribute name="condition" type="xs:string" />  
+   </xs:complexType>
+   <xs:complexType name="ifType" mixed="true">
+      <xs:sequence>
+         <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="ul" type="ul" />
+            <xs:element name="ol" type="ol" />
+            <xs:element name="link" type="link" />
+            <xs:element name="email" type="email" />
+            <xs:element name="moreInfo" type="moreInfo" />
+            <xs:element name="seeArticle" type="seeArticle" />
+            <xs:element name="term" type="term" />
+            <xs:element name="javadoc" type="javadoc" />
+            <xs:element name="qtdoc" type="qtdoc" />
+            <xs:element name="doxygen" type="doxygen" />
+            <xs:element name="wikipedia" type="wikipedia" />
+            <xs:element name="mediawiki" type="mediawiki" />
+            <xs:element name="video" type="video" />
+            <xs:element name="audio" type="audio" />
+            <xs:element name="ref" type="ref" />
+            <xs:element name="catRef" type="catRef" />
+            <xs:element name="glossaryRef" type="glossaryRef" />
+            <xs:element name="anchor" type="anchor" />
+            <xs:element name="img" type="img" />
+            <xs:element name="map" type="map" />
+            <xs:element name="pre" type="pre" />
+            <xs:element name="block" type="block" />
+            <xs:element name="blockquote" type="blockquote" />
+            <xs:element name="messageBox" type="messageBox" />
+            <xs:element name="source" type="source" />
+            <xs:element name="code" type="code" />
+            <xs:element name="a" type="a" />
+            <xs:element name="note" type="note" />
+            <xs:element name="cite" type="cite" />
+            <xs:element name="resource" type="resource" />
+            <xs:element name="br" type="br" />
+            <xs:element name="hr" type="hr" />
+            <xs:element name="empty" type="empty" />
+            <xs:element name="tab" type="tab" />
+            <xs:element name="font" type="font" />
+            <xs:element name="b" type="b" />
+            <xs:element name="i" type="i" />
+            <xs:element name="u" type="u" />
+            <xs:element name="todo" type="todo" />
+            <xs:element name="todolist" type="todolist" />
+            <xs:element name="esc" type="esc" />
+            <xs:element name="title" type="title" />
+            <xs:element name="par" type="par" />
+            <xs:element name="div" type="par" />
+            <xs:element name="box" type="box" />
+            <xs:element name="chapter" type="chapter" />
+            <xs:element name="include" type="include" />
+            <xs:element name="table" type="table" />
+            <xs:element name="math" type="math" />
+            <xs:element name="html" type="html" />
+         </xs:choice>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="infoboxType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="property" type="property" />
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="pack" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="property" mixed="true">
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+         <xs:element name="ul" type="ul" />
+         <xs:element name="ol" type="ol" />
+         <xs:element name="link" type="link" />
+         <xs:element name="email" type="email" />
+         <xs:element name="ref" type="ref" />
+         <xs:element name="catRef" type="catRef" />
+         <xs:element name="glossaryRef" type="glossaryRef" />
+         <xs:element name="code" type="code" />
+         <xs:element name="a" type="a" />
+         <xs:element name="br" type="br" />
+         <xs:element name="empty" type="empty" />
+         <xs:element name="font" type="font" />
+         <xs:element name="b" type="b" />
+         <xs:element name="i" type="i" />
+         <xs:element name="u" type="u" />
+         <xs:element name="todo" type="todo" />
+         <xs:element name="todolist" type="todolist" />
+      </xs:choice>
+      <xs:attribute name="key" type="xs:string" use="required"/>
+      <xs:attribute name="value" type="xs:string"/>
+   </xs:complexType>
+   <xs:complexType name="redirectType">
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+         <xs:element name="altTitle" type="altTitle" maxOccurs="unbounded" minOccurs="0" />
+         <xs:element name="meta" type="meta" maxOccurs="1" minOccurs="0" />
+      </xs:choice>
+      <xs:attribute name="id" type="xs:string" />
+      <xs:attribute name="desc" type="xs:string" use="required" />
+      <xs:attribute name="keepCase" type="xs:boolean" />
+      <xs:attribute name="redirectTo" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="disambArticleType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="1" name="disambElt" type="disambElt" />
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" />
+      <xs:attribute name="date" type="xs:string" />
+      <xs:attribute name="desc" type="xs:string" use="required" />
+      <xs:attribute name="keepCase" type="xs:boolean" />
+   </xs:complexType>
+   <xs:complexType name="parElementType" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+               <xs:element name="ul" type="ul" />
+               <xs:element name="ol" type="ol" />
+               <xs:element name="link" type="link" />
+               <xs:element name="email" type="email" />
+               <xs:element name="javadoc" type="javadoc" />
+               <xs:element name="qtdoc" type="qtdoc" />
+               <xs:element name="doxygen" type="doxygen" />
+               <xs:element name="wikipedia" type="wikipedia" />
+               <xs:element name="mediawiki" type="mediawiki" />
+               <xs:element name="video" type="video" />
+               <xs:element name="audio" type="audio" />
+               <xs:element name="ref" type="ref" />
+               <xs:element name="catRef" type="catRef" />
+               <xs:element name="glossaryRef" type="glossaryRef" />
+               <xs:element name="anchor" type="anchor" />
+               <xs:element name="note" type="note" />
+               <xs:element name="cite" type="cite" />
+               <xs:element name="img" type="img" />
+               <xs:element name="map" type="map" />
+               <xs:element name="esc" type="esc" />
+               <xs:element name="div" type="par" />
+               <xs:element name="pre" type="pre" />
+               <xs:element name="source" type="source" />
+               <xs:element name="block" type="block" />
+               <xs:element name="blockquote" type="blockquote" />
+               <xs:element name="messageBox" type="messageBox" />
+               <xs:element name="code" type="code" />
+               <xs:element name="a" type="a" />
+               <xs:element name="resource" type="resource" />
+               <xs:element name="br" type="br" />
+               <xs:element name="hr" type="hr" />
+               <xs:element name="empty" type="empty" />
+               <xs:element name="tab" type="tab" />
+               <xs:element name="font" type="font" />
+               <xs:element name="b" type="b" />
+               <xs:element name="i" type="i" />
+               <xs:element name="u" type="u" />
+               <xs:element name="math" type="math" />
+               <xs:element name="html" type="html" />
+               <xs:element name="todo" type="todo" />
+               <xs:element name="todolist" type="todolist" />
+            </xs:choice>
+            <xs:attribute name="justify" type="justifyType" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="note">
+      <xs:complexContent>
+         <xs:extension base="parElementType">
+            <xs:attribute name="id" type="xs:string" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="term">
+      <xs:complexContent>
+         <xs:extension base="parElementType">
+            <xs:attribute name="term" type="xs:string" use="required" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="cite" mixed="true">
+      <xs:attribute name="id" type="xs:string" />
+      <xs:attribute name="href" type="xs:anyURI" use="required"/>
+      <xs:attribute name="desc" type="xs:string" />
+      <xs:attribute name="author" type="xs:string" />
+      <xs:attribute name="publisher" type="xs:string" />
+      <xs:attribute name="date" type="xs:date" />
+   </xs:complexType>
+   <xs:complexType name="cell">
+      <xs:complexContent>
+         <xs:extension base="parElementType">
+            <xs:attribute name="colspan" type="xs:positiveInteger" />
+            <xs:attribute name="rowspan" type="xs:positiveInteger" />
+            <xs:attribute name="color" type="colorType" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="column">
+      <xs:complexContent>
+         <xs:extension base="parElementType">
+            <xs:attribute name="colspan" type="xs:positiveInteger" />
+            <xs:attribute name="width" type="size" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="box">
+      <xs:complexContent>
+         <xs:extension base="parElementType">
+            <xs:attribute name="width" type="xs:string" default="limited" />
+            <xs:attribute name="position" type="positionType" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <!-- first level elements -->
+   <xs:element name="template" type="articleType" />
+   <xs:element name="article" type="articleType" />
+   <xs:element name="disambArticle" type="disambArticleType" />
+   <xs:element name="redirect" type="redirectType" />
+   <xs:element name="index" type="defaultArticleType" />
+   <xs:element name="infobox" type="infoboxType" />
+   <xs:element name="package">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" name="defaultImports" type="defaultImports" />
+         </xs:sequence>
+         <xs:attribute name="version" type="xs:string" />
+         <xs:attribute name="date" type="xs:string" />
+         <xs:attribute name="package" type="packageName" use="required" />               
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="leftMenu">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="classElementType">         
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="menuItem" type="menuItem" />
+               </xs:sequence>
+               <xs:attribute name="version" type="xs:string" />
+               <xs:attribute name="date" type="xs:string" />
+               <xs:attribute name="onIndex" type="xs:boolean" default="true" />
+            </xs:extension>            
+         </xs:complexContent>         
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="footer">
+      <xs:complexType mixed="true">
+         <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="ref" type="ref" />
+            <xs:element name="a" type="a" />
+            <xs:element name="img" type="img" />
+            <xs:element name="b" type="b" />
+         </xs:choice>
+         <xs:attribute name="desc" type="xs:string" />
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="header">
+      <xs:complexType mixed="true">
+         <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="ref" type="ref" />
+            <xs:element name="a" type="a" />
+            <xs:element name="img" type="img" />
+            <xs:element name="b" type="b" />
+         </xs:choice>
+         <xs:attribute name="version" type="xs:string" />
+         <xs:attribute name="date" type="xs:string" />
+         <xs:attribute name="desc" type="xs:string"/>
+         <xs:attribute name="left" type="xs:string" />
+         <xs:attribute name="right" type="xs:string" />
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="dictionnary">
+      <xs:complexType mixed="true">
+         <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="ul" type="ul" />
+            <xs:element name="ol" type="ol" />
+            <xs:element name="link" type="link" />
+            <xs:element name="condition" type="conditionType" />
+            <xs:element name="email" type="email" />
+            <xs:element name="ref" type="ref" />
+            <xs:element name="catRef" type="catRef" />
+            <xs:element name="glossaryRef" type="glossaryRef" />
+            <xs:element name="code" type="code" />
+            <xs:element name="a" type="a" />
+            <xs:element name="br" type="br" />
+            <xs:element name="hr" type="hr" />
+            <xs:element name="empty" type="empty" />
+            <xs:element name="tab" type="tab" />
+            <xs:element name="font" type="font" />
+            <xs:element name="b" type="b" />
+            <xs:element name="i" type="i" />
+            <xs:element name="u" type="u" />
+            <xs:element name="todo" type="todo" />
+            <xs:element name="todolist" type="todolist" />
+         </xs:choice>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="categories">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="category" type="category" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="glossary">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="word" type="glossaryWord" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <!-- children types-->
+   <xs:complexType name="disambElt">
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="menuItem">
+      <xs:choice minOccurs="1" maxOccurs="1">
+         <xs:element name="itemInternalRef" type="itemInternalRef" />
+         <xs:element name="itemExternalRef" type="itemExternalRef" />
+         <xs:element name="linksFromRef" type="linksFromRef" />
+         <xs:element name="glossaryRef" type="itemGlossaryRef" />
+      </xs:choice>
+      <xs:attribute name="desc" type="xs:string" default="true" />
+   </xs:complexType>
+   <xs:complexType name="itemGlossaryRef"/>
+   <xs:complexType name="itemInternalRef">
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="itemExternalRef">
+      <xs:attribute name="url" type="xs:string" use="required" />
+   </xs:complexType>
+   <xs:complexType name="linksFromRef"/>
+   <xs:complexType name="table">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:sequence>
+               <xs:element maxOccurs="1" minOccurs="0" name="tableHeader" type="tableHeader" />
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="row" type="row" />
+            </xs:sequence>
+            <xs:attribute name="caption" type="xs:string" />
+            <xs:attribute name="sortable" type="xs:boolean" />
+            <xs:attribute name="borders" type="xs:boolean" />
+            <xs:attribute name="vertical" type="xs:boolean" />
+            <xs:attribute name="position" type="positionType" />
+            <xs:attribute name="float" type="xs:boolean" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="tableHeader">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="column" type="column" />
+            </xs:sequence>
+            <xs:attribute name="vertical" type="xs:boolean" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="row">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="cell" type="cell" />
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="chapter" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="par" type="par" />
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="chapter" type="chapter" />
+            </xs:sequence>
+            <xs:attribute name="title" type="xs:string" use="required" />
+            <xs:attribute name="keepCase" type="xs:boolean" />
+            <xs:attribute name="thematicBreak" type="xs:boolean" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="par" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+               <xs:element name="ul" type="ul" />
+               <xs:element name="ol" type="ol" />
+               <xs:element name="link" type="link" />
+               <xs:element name="email" type="email" />
+               <xs:element name="moreInfo" type="moreInfo" />
+               <xs:element name="seeAlso" type="seeArticle" />
+               <xs:element name="term" type="term" />
+               <xs:element name="apidoc" type="apidoc" />
+               <xs:element name="javaAPI" type="javaAPIElementType" />
+               <xs:element name="pythonAPI" type="pythonAPIElementType" />
+               <xs:element name="javadoc" type="javadoc" />
+               <xs:element name="qtdoc" type="qtdoc" />
+               <xs:element name="doxygen" type="doxygen" />
+               <xs:element name="wikipedia" type="wikipedia" />
+               <xs:element name="mediawiki" type="mediawiki" />
+               <xs:element name="video" type="video" />
+               <xs:element name="audio" type="audio" />
+               <xs:element name="math" type="math" />
+               <xs:element name="html" type="html" />
+               <xs:element name="ref" type="ref" />
+               <xs:element name="catRef" type="catRef" />
+               <xs:element name="glossaryRef" type="glossaryRef" />
+               <xs:element name="anchor" type="anchor" />
+               <xs:element name="img" type="img" />
+               <xs:element name="map" type="map" />
+               <xs:element name="pre" type="pre" />
+               <xs:element name="div" type="par" />
+               <xs:element name="source" type="source" />
+               <xs:element name="block" type="block" />
+               <xs:element name="blockquote" type="blockquote" />
+               <xs:element name="messageBox" type="messageBox" />
+               <xs:element name="code" type="code" />
+               <xs:element name="a" type="a" />
+               <xs:element name="note" type="note" />
+               <xs:element name="esc" type="esc" />
+               <xs:element name="cite" type="cite" />
+               <xs:element name="resource" type="resource" />
+               <xs:element name="br" type="br" />
+               <xs:element name="hr" type="hr" />
+               <xs:element name="empty" type="empty" />
+               <xs:element name="tab" type="tab" />
+               <xs:element name="font" type="font" />
+               <xs:element name="b" type="b" />
+               <xs:element name="i" type="i" />
+               <xs:element name="u" type="u" />
+               <xs:element name="box" type="box" />
+               <xs:element name="title" type="title" />
+               <xs:element name="todo" type="todo" />
+               <xs:element name="todolist" type="todolist" />
+            </xs:choice>
+            <xs:attribute name="justify" type="justifyType" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ul">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+               <xs:element name="li" type="li" />
+               <xs:element name="ul" type="ul" />
+               <xs:element name="ol" type="ol" />
+            </xs:choice>
+            <xs:attribute name="bulletStyle" type="ulStyle" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ol">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+               <xs:element name="li" type="li" />
+               <xs:element name="ul" type="ul" />
+               <xs:element name="ol" type="ol" />
+            </xs:choice>
+            <xs:attribute name="bulletStyle" type="olStyle" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="li" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+               <xs:element name="ul" type="ul" />
+               <xs:element name="ol" type="ol" />
+               <xs:element name="link" type="link" />
+               <xs:element name="email" type="email" />
+               <xs:element name="apidoc" type="apidoc" />
+               <xs:element name="javaAPI" type="javaAPIElementType" />
+               <xs:element name="pythonAPI" type="pythonAPIElementType" />
+               <xs:element name="javadoc" type="javadoc" />
+               <xs:element name="qtdoc" type="qtdoc" />
+               <xs:element name="doxygen" type="doxygen" />
+               <xs:element name="wikipedia" type="wikipedia" />
+               <xs:element name="mediawiki" type="mediawiki" />
+               <xs:element name="video" type="video" />
+               <xs:element name="audio" type="audio" />
+               <xs:element name="math" type="math" />
+               <xs:element name="html" type="html" />
+               <xs:element name="ref" type="ref" />
+               <xs:element name="catRef" type="catRef" />
+               <xs:element name="glossaryRef" type="glossaryRef" />
+               <xs:element name="pre" type="pre" />
+               <xs:element name="source" type="source" />
+               <xs:element name="anchor" type="anchor" />
+               <xs:element name="img" type="img" />
+               <xs:element name="code" type="code" />
+               <xs:element name="note" type="note" />
+               <xs:element name="cite" type="cite" />
+               <xs:element name="esc" type="esc" />
+               <xs:element name="a" type="a" />
+               <xs:element name="resource" type="resource" />
+               <xs:element name="br" type="br" />
+               <xs:element name="hr" type="hr" />
+               <xs:element name="empty" type="empty" />
+               <xs:element name="tab" type="tab" />
+               <xs:element name="font" type="font" />
+               <xs:element name="b" type="b" />
+               <xs:element name="i" type="i" />
+               <xs:element name="u" type="u" />
+               <xs:element name="todo" type="todo" />
+               <xs:element name="todolist" type="todolist" />
+            </xs:choice>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="link">
+      <xs:attribute name="url" type="xs:string" use="required" />
+      <xs:attribute name="desc" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="email">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:attribute name="url" type="xs:anyURI" use="required" />
+            <xs:attribute name="desc" type="xs:string" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="javaAPIElementType" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="abstractParentType">
+            <xs:sequence>
+               <xs:element name="field" type="apiField" maxOccurs="unbounded" minOccurs="0"/>
+               <xs:element name="method" type="apiMethod" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="api" type="xs:string" />
+            <xs:attribute name="modifiers" type="xs:string" />
+            <xs:attribute name="path" type="xs:string" use="required"/>
+            <xs:attribute name="type" type="javaAPIType"/>
+            <xs:attribute name="hr" type="xs:boolean" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="pythonAPIElementType" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="abstractParentType">
+            <xs:sequence>
+               <xs:element name="field" type="apiField" maxOccurs="unbounded" minOccurs="0"/>
+               <xs:element name="method" type="apiMethod" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="api" type="xs:string" />
+            <xs:attribute name="modifiers" type="xs:string" />
+            <xs:attribute name="path" type="xs:string" use="required"/>
+            <xs:attribute name="type" type="pythonAPIType"/>
+            <xs:attribute name="hr" type="xs:boolean" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="apidoc" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="abstractParentType">
+            <xs:sequence>
+               <xs:element name="element" type="apidocElement" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="lang" type="xs:string" use="required"/>
+            <xs:attribute name="api" type="xs:string" />
+            <xs:attribute name="path" type="xs:string" use="required"/>
+            <xs:attribute name="modifiers" type="xs:string"/>
+            <xs:attribute name="type" type="xs:string" use="required"/>
+            <xs:attribute name="hr" type="xs:boolean" />
+            <xs:attribute name="compact" type="xs:boolean" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType> 
+   <xs:complexType name="apidocElement" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="abstractParentType">
+            <xs:sequence>
+               <xs:element name="element" type="apidocElement" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="path" type="xs:string"/>
+            <xs:attribute name="modifiers" type="xs:string"/>
+            <xs:attribute name="type" type="xs:string"/>   
+         </xs:extension>   
+      </xs:complexContent>
+   </xs:complexType>     
+   <xs:complexType name="apiField" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="abstractParentType">
+            <xs:attribute name="modifiers" type="xs:string" />
+            <xs:attribute name="member" type="xs:string" use="required"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="apiMethod" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="abstractParentType">
+            <xs:sequence>
+               <xs:element name="argument" type="apiArgument" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="modifiers" type="xs:string" />
+            <xs:attribute name="member" type="xs:string" use="required"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="apiArgument" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="abstractParentType">
+            <xs:attribute name="argument" type="xs:string" use="required"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="javadoc">
+      <xs:attribute name="api" type="xs:string" />
+      <xs:attribute name="path" type="xs:string" use="required"/>
+      <xs:attribute name="type" type="apiType" default="class"/>
+      <xs:attribute name="full" type="apiFullPath" default="false"/>
+      <xs:attribute name="member" type="xs:string"/>
+   </xs:complexType>
+   <xs:complexType name="wikipedia">
+      <xs:attribute name="lang" type="xs:string" />
+      <xs:attribute name="path" type="xs:string" use="required"/>
+      <xs:attribute name="desc" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="mediawiki">
+      <xs:attribute name="wiki" type="xs:string" use="required"/>
+      <xs:attribute name="path" type="xs:string" use="required"/>
+      <xs:attribute name="desc" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="video">
+      <xs:attribute name="type" type="videoType"/>
+      <xs:attribute name="path" type="xs:string" use="required"/>
+      <xs:attribute name="width" type="size" />
+      <xs:attribute name="height" type="xs:positiveInteger" />
+      <xs:attribute name="position" type="positionType" />
+   </xs:complexType>
+   <xs:complexType name="audio">
+      <xs:attribute name="path" type="xs:string" use="required"/>
+      <xs:attribute name="type" type="xs:string" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="qtdoc">
+      <xs:attribute name="api" type="xs:string" />
+      <xs:attribute name="path" type="xs:string" use="required"/>
+      <xs:attribute name="type" type="qtType" default="class"/>
+      <xs:attribute name="member" type="xs:string"/>
+   </xs:complexType>
+   <xs:complexType name="doxygen">
+      <xs:attribute name="api" type="xs:string" />
+      <xs:attribute name="path" type="xs:string" use="required"/>
+      <xs:attribute name="type" type="doxygenType" default="class"/>
+      <xs:attribute name="memberType" type="doxygenMemberType" />
+      <xs:attribute name="member" type="xs:string"/>
+   </xs:complexType>
+   <xs:complexType name="ref">
+      <xs:attribute name="id" type="xs:string" />
+      <xs:attribute name="path" type="xs:string" />
+      <xs:attribute name="desc" type="xs:string" />
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="catRef">
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="desc" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="glossaryRef">
+      <xs:attribute name="desc" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="include">
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="map">
+      <xs:sequence maxOccurs="1" minOccurs="1">
+         <xs:element name="mapBounds" type="mapBounds" />
+      </xs:sequence>
+      <xs:attribute name="type" type="mapType" />
+      <xs:attribute name="width" type="size" />
+      <xs:attribute name="height" type="xs:positiveInteger" />
+      <xs:attribute name="position" type="positionType" />
+      <xs:attribute name="float" type="xs:boolean" />
+      <xs:attribute name="projection" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="mapBounds">
+      <xs:attribute name="latCenter" type="xs:decimal" use="required" />
+      <xs:attribute name="lonCenter" type="xs:decimal" use="required" />
+      <xs:attribute name="zoomLevel" type="xs:positiveInteger" use="required" />
+   </xs:complexType>
+   <xs:complexType name="img">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:sequence maxOccurs="unbounded" minOccurs="0">
+               <xs:element name="areaRef" type="areaRef" />
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:string" use="required" />
+            <xs:attribute name="caption" type="xs:string" />
+            <xs:attribute name="width" type="size" />
+            <xs:attribute name="height" type="size" />
+            <xs:attribute name="package" type="xs:string" />
+            <xs:attribute name="position" type="positionType" />
+            <xs:attribute name="valign" type="verticalAlignType" />
+            <xs:attribute name="border" type="borderType" />
+            <xs:attribute name="float" type="xs:boolean" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="areaRef">
+      <xs:attribute name="coords" type="coords" use="required" />
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="desc" type="xs:string" />
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="pre" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:sequence>
+               <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <!-- boxed is used for backward compatibility -->
+            <xs:attribute name="boxed" type="borderType" />
+            <xs:attribute name="border" type="borderType" />
+            <xs:attribute name="syntax" type="xs:string" />
+            <xs:attribute name="invisibleChars" type="xs:boolean" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="source" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:sequence>
+               <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="syntax" type="xs:string" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="block" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+               <xs:element name="ul" type="ul" />
+               <xs:element name="ol" type="ol" />
+               <xs:element name="link" type="link" />
+               <xs:element name="javadoc" type="javadoc" />
+               <xs:element name="qtdoc" type="qtdoc" />
+               <xs:element name="doxygen" type="doxygen" />
+               <xs:element name="wikipedia" type="wikipedia" />
+               <xs:element name="mediawiki" type="mediawiki" />
+               <xs:element name="video" type="video" />
+               <xs:element name="audio" type="audio" />
+               <xs:element name="ref" type="ref" />
+               <xs:element name="catRef" type="catRef" />
+               <xs:element name="anchor" type="anchor" />
+               <xs:element name="note" type="note" />
+               <xs:element name="cite" type="cite" />
+               <xs:element name="img" type="img" />
+               <xs:element name="map" type="map" />
+               <xs:element name="esc" type="esc" />
+               <xs:element name="pre" type="pre" />
+               <xs:element name="source" type="source" />
+               <xs:element name="code" type="code" />
+               <xs:element name="a" type="a" />
+               <xs:element name="resource" type="resource" />
+               <xs:element name="br" type="br" />
+               <xs:element name="hr" type="hr" />
+               <xs:element name="empty" type="empty" />
+               <xs:element name="tab" type="tab" />
+               <xs:element name="font" type="font" />
+               <xs:element name="b" type="b" />
+               <xs:element name="i" type="i" />
+               <xs:element name="u" type="u" />
+               <xs:element name="math" type="math" />
+               <xs:element name="html" type="html" />
+               <xs:element name="todo" type="todo" />
+               <xs:element name="todolist" type="todolist" />
+            </xs:choice>
+            <xs:attribute name="border" type="borderType" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="blockquote" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+               <xs:element name="ul" type="ul" />
+               <xs:element name="ol" type="ol" />
+               <xs:element name="link" type="link" />
+               <xs:element name="javadoc" type="javadoc" />
+               <xs:element name="qtdoc" type="qtdoc" />
+               <xs:element name="doxygen" type="doxygen" />
+               <xs:element name="blockquote" type="blockquote" />
+               <xs:element name="wikipedia" type="wikipedia" />
+               <xs:element name="mediawiki" type="mediawiki" />
+               <xs:element name="video" type="video" />
+               <xs:element name="audio" type="audio" />
+               <xs:element name="ref" type="ref" />
+               <xs:element name="catRef" type="catRef" />
+               <xs:element name="anchor" type="anchor" />
+               <xs:element name="note" type="note" />
+               <xs:element name="cite" type="cite" />
+               <xs:element name="img" type="img" />
+               <xs:element name="map" type="map" />
+               <xs:element name="esc" type="esc" />
+               <xs:element name="pre" type="pre" />
+               <xs:element name="source" type="source" />
+               <xs:element name="code" type="code" />
+               <xs:element name="a" type="a" />
+               <xs:element name="resource" type="resource" />
+               <xs:element name="br" type="br" />
+               <xs:element name="hr" type="hr" />
+               <xs:element name="empty" type="empty" />
+               <xs:element name="tab" type="tab" />
+               <xs:element name="font" type="font" />
+               <xs:element name="b" type="b" />
+               <xs:element name="i" type="i" />
+               <xs:element name="u" type="u" />
+               <xs:element name="math" type="math" />
+               <xs:element name="html" type="html" />
+               <xs:element name="todo" type="todo" />
+               <xs:element name="todolist" type="todolist" />
+            </xs:choice>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="messageBox" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+               <xs:element name="ul" type="ul" />
+               <xs:element name="ol" type="ol" />
+               <xs:element name="link" type="link" />
+               <xs:element name="javadoc" type="javadoc" />
+               <xs:element name="qtdoc" type="qtdoc" />
+               <xs:element name="doxygen" type="doxygen" />
+               <xs:element name="wikipedia" type="wikipedia" />
+               <xs:element name="mediawiki" type="mediawiki" />
+               <xs:element name="video" type="video" />
+               <xs:element name="audio" type="audio" />
+               <xs:element name="ref" type="ref" />
+               <xs:element name="catRef" type="catRef" />
+               <xs:element name="anchor" type="anchor" />
+               <xs:element name="note" type="note" />
+               <xs:element name="cite" type="cite" />
+               <xs:element name="img" type="img" />
+               <xs:element name="map" type="map" />
+               <xs:element name="esc" type="esc" />
+               <xs:element name="pre" type="pre" />
+               <xs:element name="source" type="source" />
+               <xs:element name="code" type="code" />
+               <xs:element name="a" type="a" />
+               <xs:element name="resource" type="resource" />
+               <xs:element name="br" type="br" />
+               <xs:element name="hr" type="hr" />
+               <xs:element name="empty" type="empty" />
+               <xs:element name="tab" type="tab" />
+               <xs:element name="font" type="font" />
+               <xs:element name="b" type="b" />
+               <xs:element name="i" type="i" />
+               <xs:element name="u" type="u" />
+               <xs:element name="math" type="math" />
+               <xs:element name="html" type="html" />
+               <xs:element name="todo" type="todo" />
+               <xs:element name="todolist" type="todolist" />
+            </xs:choice>
+            <xs:attribute name="imageID" type="xs:string" />
+            <xs:attribute name="package" type="xs:string" />
+            <xs:attribute name="type" type="messageBoxType" />
+            <xs:attribute name="color" type="colorType" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="code" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:sequence>
+               <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="anchor">
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="desc" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="empty"/>
+   <xs:complexType name="br"/>
+   <xs:complexType name="tab"/>
+   <xs:complexType name="hr"/>
+   <xs:complexType name="a" mixed="true">
+      <xs:attribute name="href" type="xs:anyURI" use="required" />
+   </xs:complexType>
+   <xs:complexType name="resource" mixed="true">
+      <xs:attribute name="href" type="xs:anyURI"/>
+      <xs:attribute name="id" type="xs:string" />
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="font" mixed="true">
+      <xs:attribute name="color" type="xs:string" />
+      <xs:attribute name="background" type="xs:string" />
+      <xs:attribute name="size" type="fontSize" />
+      <xs:attribute name="format" type="formattingList" />
+      <xs:attribute name="face" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="b" mixed="true"/>
+   <xs:complexType name="esc">
+      <xs:attribute name="text" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="i" mixed="true"/>
+   <xs:complexType name="u" mixed="true"/>
+   <xs:complexType name="title">
+      <xs:complexContent>
+         <xs:extension base="classElementType">
+            <xs:attribute name="level" type="xs:positiveInteger" />
+            <xs:attribute name="title" type="xs:string" use="required" />
+            <xs:attribute name="keepCase" type="xs:boolean" />
+            <xs:attribute name="hr" type="xs:boolean" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="see">
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="desc" type="xs:string" />
+      <xs:attribute name="text" type="xs:string" />
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="seeAlso">
+      <xs:attribute name="this" type="xs:string" use="required"/>
+      <xs:attribute name="other" type="xs:string" use="required"/>
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="seeArticle">
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="desc" type="xs:string" />
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="moreInfo">
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="desc" type="xs:string" />
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="meta">
+      <xs:attribute name="desc" type="xs:string" use="required" />
+   </xs:complexType>
+   <xs:complexType name="altTitle">
+      <xs:attribute name="desc" type="xs:string" use="required" />
+      <xs:attribute name="keepCase" type="xs:boolean" />
+   </xs:complexType>
+   <xs:complexType name="cat">
+      <xs:attribute name="id" type="xs:string" use="required" />
+   </xs:complexType>
+   <xs:element name="urlExceptions">
+      <xs:complexType>
+         <xs:sequence maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="urlException" type="urlException" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="urlException">
+      <xs:attribute name="url" type="xs:anyURI" use="required" />
+   </xs:complexType>
+   <xs:element name="APIs">
+      <xs:complexType>
+         <xs:all>
+            <xs:element minOccurs="0" name="javaAPIs" type="javaAPIs"/>
+            <xs:element minOccurs="0" name="QtAPIs" type="QtAPIs" />
+            <xs:element minOccurs="0" name="doxygenAPIs" type="doxygenAPIs"/>
+         </xs:all>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="javaAPIs">
+      <xs:sequence maxOccurs="unbounded" minOccurs="0">
+         <xs:element name="javaAPI" type="javaAPI" />
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="javaAPI">
+      <xs:sequence maxOccurs="unbounded" minOccurs="0">
+         <xs:element name="javaAPILibrary" type="javaAPILibrary" />
+      </xs:sequence>
+      <xs:attribute name="url" type="xs:anyURI" use="required" />
+      <xs:attribute name="id" type="xs:string" use="required" />
+   </xs:complexType>
+   <xs:complexType name="javaAPILibrary">
+      <xs:attribute name="jarFile" type="xs:anyURI" use="required" />
+   </xs:complexType>
+   <xs:complexType name="QtAPIs">
+      <xs:sequence maxOccurs="unbounded" minOccurs="0">
+         <xs:element name="QtAPI" type="QtAPI" />
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="QtAPI">
+      <xs:attribute name="url" type="xs:anyURI" />
+      <xs:attribute name="id" type="xs:string" use="required" />
+   </xs:complexType>
+   <xs:complexType name="doxygenAPIs">
+      <xs:sequence maxOccurs="unbounded" minOccurs="0">
+         <xs:element name="doxygenAPI" type="doxygenAPI" />
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="doxygenAPI">
+      <xs:attribute name="url" type="xs:anyURI" />
+      <xs:attribute name="id" type="xs:string" use="required" />
+   </xs:complexType>
+   <xs:complexType name="math">
+      <xs:sequence>
+         <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="size" type="xs:positiveInteger" />
+   </xs:complexType>
+   <xs:complexType name="html">
+      <xs:sequence>
+         <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="todolist"/>  
+   <xs:complexType name="todo">
+      <xs:attribute name="reason" type="xs:string" />
+   </xs:complexType>   
+   <xs:complexType name="category" mixed="true">
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+         <xs:element name="ul" type="ul" />
+         <xs:element name="ol" type="ol" />
+         <xs:element name="link" type="link" />
+         <xs:element name="ref" type="ref" />
+         <xs:element name="condition" type="conditionType" />
+         <xs:element name="catRef" type="catRef" />
+         <xs:element name="code" type="code" />
+         <xs:element name="a" type="a" />
+         <xs:element name="br" type="br" />
+         <xs:element name="empty" type="empty" />
+         <xs:element name="font" type="font" />
+         <xs:element name="b" type="b" />
+         <xs:element name="i" type="i" />
+         <xs:element name="u" type="u" />
+         <xs:element name="todo" type="todo" />
+      </xs:choice>
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="desc" type="xs:string" use="required" />
+   </xs:complexType>
+   <xs:complexType name="glossaryWord">
+      <xs:sequence>
+         <xs:element name="altTerm" type="glossaryAltTerm" maxOccurs="unbounded" minOccurs="0"/>
+         <xs:element name="description" type="glossaryDescription" maxOccurs="1" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="word" type="xs:string" use="required" />
+      <xs:attribute name="id" type="xs:string" />
+      <xs:attribute name="keepCase" type="xs:boolean" />
+   </xs:complexType>   
+   <xs:complexType name="glossaryAltTerm">
+      <xs:attribute name="term" type="xs:string" use="required" />
+      <xs:attribute name="keepCase" type="xs:boolean" />
+   </xs:complexType>
+   <xs:complexType name="glossaryDescription" mixed="true">
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+         <xs:element name="ul" type="ul" />
+         <xs:element name="ol" type="ol" />
+         <xs:element name="link" type="link" />
+         <xs:element name="ref" type="ref" />
+         <xs:element name="code" type="code" />
+         <xs:element name="source" type="source" />
+         <xs:element name="a" type="a" />
+         <xs:element name="br" type="br" />
+         <xs:element name="empty" type="empty" />
+         <xs:element name="font" type="font" />
+         <xs:element name="b" type="b" />
+         <xs:element name="i" type="i" />
+         <xs:element name="u" type="u" />
+         <xs:element name="todo" type="todo" />
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="defaultImports">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="1" name="import" type="import" />
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="import">
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+</xs:schema>

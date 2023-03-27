@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root desc="example">
+   <element1 name="first" id="theID">
+      <element2 name="second"> 
+         <element3 name="fourth" />  
+         <element2 name="fith"/>      
+      </element2> 
+      <element3 name="third" />
+   </element1>
+</root>

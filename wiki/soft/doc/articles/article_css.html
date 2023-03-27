@@ -1,0 +1,271 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_css.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Custom StyleSheet</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#correspondance_from_elements_to_css_selectors">1&nbsp; Correspondance from elements to CSS selectors</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#usage">2&nbsp; Usage</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#list_of_useful_style_classes_to_customize">3&nbsp; List of useful style classes to customize</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#adding_custom_styles_for_elements">4&nbsp; Adding custom styles for elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#custom_styles_inheritance">4.1&nbsp; Custom styles inheritance</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#custom_styles_example">4.2&nbsp; Custom styles example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#examples">5&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#increasing_the_header_height">5.1&nbsp; Increasing the header height</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#changing_the_font_of_table_captions">5.2&nbsp; Changing the font of table captions</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#changing_the_color_of_titles">5.3&nbsp; Changing the color of titles</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#support_in_docx_and_pdf_generation">6&nbsp; Support in DOCX and PDF generation</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">7&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+The "css" property in the  <a href="article_configFile.html">configuration file</a> or the  <a href="article_commandline.html">command-line</a> allows to specify a custom StyleSheet for the HTML result.
+<H2 id="correspondance_from_elements_to_css_selectors">Correspondance from elements to CSS selectors</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_cssSelectors.html">Elements to CSS selectors</a></div>
+<br/>
+ The tool generates HTML elements from each element defined in the syntax. For example, the  <a href="article_syntax.html#pre">pre</a> and   <a href="article_syntax.html#source">source</a> elements will both generate a corresponding "pre" element in HTML.
+<H2 id="usage">Usage</H2>
+ This custom StyleSheet will modify the generic StyleSheet generated for the wiki. For example, it allows to modify or add specific StyleSheet rules properties.<br/>
+<br/>
+ For example, the "figcaption" rule specifies the size and font type of  <a href="article_syntax.html#img">image</a> captions: <br/>
+<br/>
+
+<pre>
+<span>      figcaption {</span>
+<span style="color:blue;font-weight:bold;">        font-size</span><span>: 13px;</span>
+<span style="color:blue;font-weight:bold;">        font-style</span><span>: italic;</span>
+<span>      }</span>
+
+</pre>
+ The following rule defined in the custom CSS file will ensure that image captions will be defined in bold rather than italic: <br/>
+<br/>
+
+<pre>
+<span>      figcaption {</span>
+<span style="color:blue;font-weight:bold;">        font-style</span><span>: bold;</span>
+<span>      }</span>
+
+</pre>
+ Note that the specific StyleSheet rules will not have any effect on the  <a href="article_pdf.html">PDF generation</a>.
+<H2 id="list_of_useful_style_classes_to_customize">List of useful style classes to customize</H2>
+<ul>
+<li>"noteLink": superscripts links to notes in the page</li>
+<li>"glossaryTitleLink": links in glossary words</li>
+<li>"note": notes in the page</li>
+<li>"boxed": boxed text (when boxes are limited to the boxed text)</li>
+<li>"boxedUnlimited": boxed text (when boxes go to right of the page)</li>
+<li>"div.left": the left div content</li>
+<li>"div.right": the left right content</li>
+<li>"div.middle": the middle content containing the article content</li>
+<li>"div.bottom": the bottom div content containing the footer content</li>
+<li>"div.bottomAdditional": the bottom div additional content for the footer</li>
+<li>"iframe.header": the top iframe from the top header text</li>
+<li>"infobox": the table used for the  <a href="article_syntaxStartingElements.html#infobox">infobox</a> content</li>
+<li>"infoboxcaption": the infobox caption</li>
+<li>"infoboxtitle": the infobox properties titles</li>
+<li>"infoboxvalue": the infobox properties values</li>
+<li>"figcaption": the images caption</li>
+<li>"caption": the tables caption</li>
+<li>"blockquote": the blockquotes</li>
+</ul>
+
+<H2 id="adding_custom_styles_for_elements">Adding custom styles for elements</H2>
+ It is possible to define custom styles for elements by specifying a "class" attribute for the element.<br/>
+<br/>
+ The list of elements which can have custom styles are: <ul>
+<li> <a href="article_chapters.html#title_elements">title</a></li>
+<li> <a href="article_chapters.html#chapter_elements">chapter</a></li>
+<li> <a href="article_syntax.html#div">div</a></li>
+<li> <a href="article_syntax.html#img">img</a></li>
+<li> <a href="article_syntax.html#table">table</a></li>
+<li> <a href="article_syntax.html#table">tableHeader</a></li>
+<li> <a href="article_syntax.html#table">cell</a></li>
+<li> <a href="article_syntax.html#ul">ul</a></li>
+<li> <a href="article_syntax.html#ol">ol</a></li>
+<li> <a href="article_syntax.html#li">li</a></li>
+<li> <a href="article_syntax.html#pre">pre</a></li>
+<li> <a href="article_syntax.html#source">source</a></li>
+<li> <a href="article_syntax.html#code">code</a></li>
+<li> <a href="article_syntax.html#blockquote">blockquote</a></li>
+<li> <a href="article_syntax.html#term">term</a></li>
+</ul>
+
+<H3 id="custom_styles_inheritance">Custom styles inheritance</H3>
+ Some elements inherit their custom styles from their parent element if they don't have custom styles themselves: <ul>
+<li> <a href="article_syntax.html#table">tableHeader</a>: inherit its custom styles from its parent  <code>table</code> if it has no custom styles</li>
+<li> <a href="article_syntax.html#table">cell</a>: inherit its custom styles from its parent  <code>table</code> if it has no custom styles</li>
+<li> <a href="article_syntax.html#ul">ul</a>: inherit its custom styles from its parent  <code>ul</code> or  <code>ol</code> if it has no custom styles</li>
+<li> <a href="article_syntax.html#ol">ol</a>: inherit its custom styles from its parent  <code>ul</code> or  <code>ol</code> if it has no custom styles</li>
+<li> <a href="article_syntax.html#li">li</a>: inherit its custom styles from its parent  <code>ul</code> or  <code>ol</code> if it has no custom styles</li>
+</ul>
+<br/>
+<br/>
+ For example in the following table the header and cells will all have the "myTable" custom style: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;table</span><span style="color:#0d8200;font-weight:bold;"> class</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myTable"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;tableHeader&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>first column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>second column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/tableHeader&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span>
+
+</pre>
+ For example in the following list all the child lists and list items will have the "myList" custom style: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ul</span><span style="color:#0d8200;font-weight:bold;"> class</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myList"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>First item</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>Second item</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ul&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>Third item</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>Fourth item</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/ul&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/ul&gt;</span>
+
+</pre>
+
+<H3 id="custom_styles_example">Custom styles example</H3>
+ For example for a red title: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;title</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the title"</span><span style="color:#0d8200;font-weight:bold;"> class</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"red"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ If you use a Custom StyleSheet with the following rule, this title will appear in red: <br/>
+<br/>
+
+<pre>
+<span style="color:#0d8200;font-weight:bold;">      h2</span><span>.red {</span>
+<span style="color:blue;font-weight:bold;">        color</span><span>: red;</span>
+<span>      }</span>
+
+</pre>
+
+<H2 id="examples">Examples</H2>
+
+<H3 id="increasing_the_header_height">Increasing the header height</H3>
+ If you add a lot of content in the header, you may need to increase the header height. For example: <br/>
+
+<pre>
+<span style="color:#0d8200;font-weight:bold;">      iframe</span><span>.header {</span>
+<span style="color:blue;font-weight:bold;">      height</span><span>: 100px;</span>
+<span>      }</span>
+
+</pre>
+
+<H3 id="changing_the_font_of_table_captions">Changing the font of table captions</H3>
+ You can change the font of table captions with: <br/>
+
+<pre>
+<span>      caption {</span>
+<span style="color:blue;font-weight:bold;">        font-weight</span><span>: italic;</span>
+<span>      }</span>
+
+</pre>
+
+<H3 id="changing_the_color_of_titles">Changing the color of titles</H3>
+ You can change the color of first-level titles with: <br/>
+
+<pre>
+<span>      h2 {</span>
+<span style="color:blue;font-weight:bold;">        color</span><span>: red;</span>
+<span>      }</span>
+
+</pre>
+
+<H2 id="support_in_docx_and_pdf_generation">Support in DOCX and PDF generation</H2>
+There is a limited level of support for the custom CSS in the  <a href="article_pdf.html">PDF</a> or  <a href="article_docx.html">DOCX</a> generation. See  <a href="article_pdfcssupport.html">PDF custom CSS support</a> and  <a href="article_docxcssupport.html">DOCX custom CSS support</a> for more information.</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_cssSelectors.html">Elements to CSS selectors</a>: This article explains the correspondance from elements to CSS selectors</li>
+<li> <a href="article_customizingstyle.html">Customizing the elements style</a>: This article explains the two ways to customize the elements style</li>
+<li> <a href="article_configFile.html">Configuration file</a>: It is possible to define an optional property / value configuration file when starting the application (using the graphical UI or the command line)</li>
+<li> <a href="article_commandline.html">Command-line starting</a>: This article is about how to execute the application by the command-line without showing the UI</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

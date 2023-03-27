@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE preferences SYSTEM 'http://java.sun.com/dtd/preferences.dtd'>
+
+<preferences EXTERNAL_XML_VERSION="1.0">
+  <root type="user">
+    <map>
+      <entry key="waitBehavior" value="2" />
+      <entry key="limitQueue" value="true" />
+      <entry key="bigEndian" value="true" />
+      <entry key="extjar" value="C:\Programmes\Java\ARINC661\config\TAVExtension.jar" />
+      <entry key="serverInputSize" value="200" />
+      <entry key="hasExtensions" value="true" />
+      <entry key="colorsConfigfile" value="C:\Programmes\Java\ARINC661\config\DefColorsTAV.xml" />
+      <entry key="server.background" value="0;0;0;255" />
+      <entry key="computeLayerSize" value="true" />
+      <entry key="linestyleConfigfile" value="C:\Programmes\Java\ARINC661\config\DefStyles.xml" />
+      <entry key="clientPort" value="8080" />
+      <entry key="uiFile" value="C:\Programmes\Java\ARINC661\config\LookAndFeel.xml" />
+      <entry key="warnUndefAttrs" value="false" />
+      <entry key="serverOutputSize" value="100" />
+      <entry key="styleSetsConfigfile" value="C:\Programmes\Java\ARINC661\config\GLStudioStyles.xml" />
+      <entry key="picturesConfigfile" value="C:\Programmes\Java\ARINC661\config\DefPictures.xml" />
+      <entry key="defaultPath" value="C:\Programmes\Java\ARINC661\sampleFiles" />
+      <entry key="validateBehavior" value="0" />
+      <entry key="queueMaximumSize" value="30" />
+      <entry key="fontsConfigfile" value="C:\Programmes\Java\ARINC661\config\DefFontsTAV.xml" />
+      <entry key="serverPort" value="8081" />
+    </map>
+    <node name="plugin.a661tav.TAVPlugin">
+      <map />
+    </node>
+    <node name="plugin.ua.UAPlugin">
+      <map />
+    </node>
+  </root>
+</preferences>

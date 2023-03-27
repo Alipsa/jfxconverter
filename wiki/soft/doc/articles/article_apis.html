@@ -1,0 +1,145 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_apis.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>APIs property</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#apis_property">1&nbsp; APIs property</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#grammar">2&nbsp; Grammar</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#apis_syntax_elements">3&nbsp; APIs syntax elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#example">4&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">5&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">6&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+The  <a href="article_configFile.html#apis">APIs</a> property in the configuration file allows to configure the access to external APIs and wikis.
+<H2 id="apis_property">APIs property</H2>
+The "APIs" property in the  <a href="article_configFile.html">configuration file</a> specifes an XML file defining a list of APIs and wikis.  See  <a href="resources/APIs.xsd">APIs.xsd</a> for the the associated Schema. Thei file allows to specify a list of APIs and Mediawikis, and for each API or wikis: <ul>
+<li>Its URL</li>
+<li>Its ID</li>
+<li>Optionally, for  <a href="article_javadocs.html">Javadocs APIs</a>, a list of local libraries (Jar files) which represent this API. These Jar files will be used to validate the  <a href="article_syntax.html#javadoc">javadoc</a> tags for the corresponding API if the API URL is an http link and the "checkHTTPLinks" property is set to false</li>
+</ul>
+
+<H2 id="grammar">Grammar</H2>
+See  <a href="resources/APIs.xsd">The APIs Schema</a>.
+<H2 id="apis_syntax_elements">APIs syntax elements</H2>
+ The following elements in the articles will point to APIs: <ul>
+<li> <a href="article_syntax.html#javadoc">javadoc</a> will point to a javadoc documentation</li>
+<li> <a href="article_syntax.html#qtdoc">qtdoc</a> will point to a Qt documentation</li>
+<li> <a href="article_syntax.html#doxygen">doxygen</a> will point to a doxygen documentation</li>
+<li> <a href="article_syntax.html#mediawiki">wiki</a> will point to a Mediawiki wiki<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+For wikis, the URL must point to the "final" URL before the articles themselves. For example, for the English wikipedia, it would be "http://en.wikipedia.org/wiki"</div></span>
+<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+Note that it is not necessary to define an API link for wikipedia, the  <a href="article_syntax.html#wikipedia">wikipedia</a> element in article allows to refer directly to Wikipedia articles without having to define the path of Wikipedia itself in the APis configuration file</div></span>
+</li>
+</ul>
+
+<H2 id="example">Example</H2>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;APIs&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;javaAPIs&gt;</span>
+<span>          </span><span style="color:blue;font-weight:bold;">&lt;javaAPI</span><span style="color:#0d8200;font-weight:bold;"> url</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"http://junit.sourceforge.net/javadoc"</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"junit"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;javaAPILibrary</span><span style="color:#0d8200;font-weight:bold;"> jarFile</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"../junit5.jar"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>          </span><span style="color:blue;font-weight:bold;">&lt;/javaAPI&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/javaAPIs&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;qtAPIs&gt;</span>
+<span>          </span><span style="color:blue;font-weight:bold;">&lt;qtAPI</span><span style="color:#0d8200;font-weight:bold;"> url</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"http://qt.apidoc.info/4.6.4/"</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"qt4.6.4"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/qtAPIs&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;mediawikis&gt;</span>
+<span>          </span><span style="color:blue;font-weight:bold;">&lt;mediawiki</span><span style="color:#0d8200;font-weight:bold;"> url</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"https://en.wikipedia.org/wiki"</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"wikipediaEN"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/mediawikis&gt;</span><span>        </span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/APIs&gt;</span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_apis.html#_note_1_1_" class="noteRefLink">^</a> For wikis, the URL must point to the "final" URL before the articles themselves. For example, for the English wikipedia, it would be "http://en.wikipedia.org/wiki"</li>
+<li id="_note_2"> <a href="article_apis.html#_note_2_1_" class="noteRefLink">^</a> Note that it is not necessary to define an API link for wikipedia, the  <a href="article_syntax.html#wikipedia">wikipedia</a> element in article allows to refer directly to Wikipedia articles without having to define the path of Wikipedia itself in the APis configuration file</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_javadocs.html">Javadocs APIs</a>: Configure how to access external Javadocs APIs</li>
+<li> <a href="article_qtdocs.html">Qt APIs</a>: Configure how to access external Qt APIs</li>
+<li> <a href="article_wikis.html">Mediawikis</a>: Configure how to access external Mediawikis</li>
+<li> <a href="article_apiselts.html">APIs elements</a>: This article presents the elements which link to APIs or embed APIs in the wiki</li>
+<li> <a href="article_configFile.html">Configuration file</a>: It is possible to define an optional property / value configuration file when starting the application (using the graphical UI or the command line)</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a> |
+ <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

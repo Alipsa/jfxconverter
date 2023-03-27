@@ -1,0 +1,1812 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_syntax.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Syntax</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#syntax_justification_elements">1&nbsp; Syntax justification elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#justification">2&nbsp; Justification</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#escaped_characters">3&nbsp; Escaped characters</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#formatting_text">4&nbsp; Formatting text</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#customizing_the_elements_style">5&nbsp; Customizing the elements style</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#starting_elements">6&nbsp; Starting elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#structure_elements">7&nbsp; Structure elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#custom_styling">7.1&nbsp; Custom Styling</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#paragraphs">7.2&nbsp; Paragraphs</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example">7.2.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#term">7.3&nbsp; term</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_1">7.3.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#note">7.4&nbsp; note</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#notes_tooltip">7.4.1&nbsp; Notes tooltip</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#examples">7.4.2&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#cite">7.5&nbsp; cite</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_2">7.5.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#code">7.6&nbsp; code</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_3">7.6.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#pre">7.7&nbsp; pre</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#relaxed_syntax">7.7.1&nbsp; Relaxed syntax</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#syntax_hightlighting">7.7.2&nbsp; Syntax hightlighting</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_4">7.7.3&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#source">7.8&nbsp; source</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_5">7.8.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#blockquote">7.9&nbsp; blockquote</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_6">7.9.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#block">7.10&nbsp; block</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_7">7.10.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#messagebox">7.11&nbsp; messageBox</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_8">7.11.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#box">7.12&nbsp; box</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#email">7.13&nbsp; email</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_9">7.13.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#a">7.14&nbsp; a</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_10">7.14.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#wikipedia">7.15&nbsp; wikipedia</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_11">7.15.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#mediawiki">7.16&nbsp; mediawiki</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_12">7.16.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#video">7.17&nbsp; video</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_with_a_youtube_video">7.17.1&nbsp; Example with a youtube video</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_with_an_mpeg4_video">7.17.2&nbsp; Example with an mpeg4 video</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#audio">7.18&nbsp; audio</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_13">7.18.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#javadoc">7.19&nbsp; javadoc</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#examples_1">7.19.1&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#qtdoc">7.20&nbsp; qtdoc</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#examples_2">7.20.1&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#doxygen">7.21&nbsp; doxygen</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#ul">7.22&nbsp; ul</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_14">7.22.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#ol">7.23&nbsp; ol</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_15">7.23.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#javaapi">7.24&nbsp; javaAPI</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_16">7.24.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#pythonapi">7.25&nbsp; pythonAPI</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_17">7.25.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#apidoc">7.26&nbsp; apidoc</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_18">7.26.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#moreinfo">7.27&nbsp; moreInfo</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_19">7.27.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#seearticle">7.28&nbsp; seeArticle</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_20">7.28.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#li">7.29&nbsp; li</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#img">7.30&nbsp; img</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#examples_3">7.30.1&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#linking_on_images">7.31&nbsp; Linking on images</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_21">7.31.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#resource">7.32&nbsp; resource</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_22">7.32.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#chapter">7.33&nbsp; chapter</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#title">7.34&nbsp; title</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#div">7.35&nbsp; div</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#ref">7.36&nbsp; ref</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_23">7.36.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#catref">7.37&nbsp; catRef</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_24">7.37.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#glossaryref">7.38&nbsp; glossaryRef</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_25">7.38.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#anchor">7.39&nbsp; anchor</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_26">7.39.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#include">7.40&nbsp; include</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_27">7.40.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#esc">7.41&nbsp; esc</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_28">7.41.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#todo">7.42&nbsp; todo</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_29">7.42.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#todolist">7.43&nbsp; todolist</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_30">7.43.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#table">7.44&nbsp; table</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_31">7.44.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#math">7.45&nbsp; math</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_32">7.45.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#html">7.46&nbsp; html</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_33">7.46.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#map">7.47&nbsp; map</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_34">7.47.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#condition">7.48&nbsp; condition</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#examples_4">7.48.1&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#end_elements">8&nbsp; End elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">9&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">10&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ This article explains the XML tags which can be used to specify the articles syntax.
+<H2 id="syntax_justification_elements">Syntax justification elements</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_syntaxJustifElements.html">Syntax justification elements</a></div>
+<br/>
+ It is possible to add several elements to justify the text, as: <ul>
+<li> <a href="article_syntaxJustifElements.html#new_lines">new lines</a></li>
+<li> <a href="article_syntaxJustifElements.html#empty">empty lines</a></li>
+<li> <a href="article_syntaxJustifElements.html#br">line breaks</a></li>
+<li> <a href="article_syntaxJustifElements.html#tab">tabulations</a></li>
+<li> <a href="article_syntaxJustifElements.html#hr">thematic break</a></li>
+</ul>
+
+<H2 id="justification">Justification</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_syntaxJustifElements.html#justification">Justification</a></div>
+<br/>
+ By default the articles text is justified. However it is possible to configure if and were the justification is applied.
+<H2 id="escaped_characters">Escaped characters</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_syntaxJustifElements.html#escaped_characters">Escaped characters</a></div>
+<br/>
+ Characters such as &lt; and &gt; can't be used in the XML file. It is possible to use HTML escaped characters.
+<H2 id="formatting_text">Formatting text</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_syntaxJustifElements.html#formatting_text">Formatting text</a></div>
+<br/>
+ It is possible to set the color, the style (bold or italic), or the font size of text.
+<H2 id="customizing_the_elements_style">Customizing the elements style</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_customizingstyle.html">Customizing the elements style</a></div>
+<br/>
+ There are two ways to customize the elements style: <ul>
+<li>By specifying a  <a href="article_css.html">Custom StyleSheet</a> and setting custom StyleClasses for some elements</li>
+<li>Or simply by adding a  <code>style</code> attribute for the element for which you want to customize ther style. This way (which work exactly as in HTML) is much more simple but of course you will have to specify the style each time you need to</li>
+</ul>
+See  <a href="article_cssSelectors.html">Stylable syntax elements</a> for the list of elements which are <i>stylable</i>. 
+<H2 id="starting_elements">Starting elements</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_syntaxStartingElements.html">Starting elements</a></div>
+<br/>
+ The following elements can be used at the beginning of articles: <ul>
+<li>" <a href="article_syntaxStartingElements.html#meta">meta</a>": specifies the text which should be written as an explanation for an article</li>
+<li>" <a href="article_syntaxStartingElements.html#alttitle">altTitle</a>": specify alternate titles for the article</li>
+<li>" <a href="article_syntaxStartingElements.html#seealso">seeAlso</a>": allows to add a text at the beginning of the article (before the table of contents) which can refer to another article which can have a similar title or subject</li>
+<li>" <a href="article_syntaxStartingElements.html#infobox">infobox</a>": a fixed-format table added to the top right-hand corner of articles to consistently present a summary of some unifying aspect that the articles share</li>
+</ul>
+
+<H2 id="structure_elements">Structure elements</H2>
+
+<H3 id="custom_styling">Custom Styling</H3>
+<div class="moreInfo" >
+Main Article: <a href="article_css.html#adding_custom_styles_for_elements">Custom Styling</a></div>
+<br/>
+ It is possible to define custom styles for elements by specifying a "class" attribute. For example for a red title: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;title</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the title"</span><span style="color:#0d8200;font-weight:bold;"> class</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"red"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ If you use a  <a href="article_css.html">Custom StyleSheet</a> with the following rule, this title will appear in red: <br/>
+<br/>
+
+<pre>
+<span style="color:#0d8200;font-weight:bold;">      h2</span><span>.red {</span>
+<span style="color:blue;font-weight:bold;">      color</span><span>: red;</span>
+<span>      }</span>
+
+</pre>
+
+<H3 id="paragraphs">Paragraphs</H3>
+ A new paragraph is specified by using the tag "par". Note that if no paragraph is defined in an article, a default paragraph will be created.
+<H4 id="example">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;par&gt;</span>
+<span>      This is a very simple article.</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/par&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ will have the same result as: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      This is a very simple article.</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+
+<H3 id="term">term</H3>
+The "term" element adds a term and its definition (useful to define glossaries). A term is also an  <a href="article_syntax.html#anchor">anchor</a> and as such can be referenced in the same article or another article.<br/>
+<br/>
+ The "term" element has only one attribute: <ul>
+<li>"term": represent the term to define</li>
+</ul>
+
+<H4 id="example_1">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;term</span><span style="color:#0d8200;font-weight:bold;"> term</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"term 1"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>The definition</span><span style="color:blue;font-weight:bold;">&lt;/term&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;term</span><span style="color:#0d8200;font-weight:bold;"> term</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"faq"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>The </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"faq"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"FAQ"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;&lt;/term&gt;</span>
+
+</pre>
+ Result: <br/>
+<dl>
+<dt>Term 1</dt>
+<dd>The definition</dd></dl>
+<dl>
+<dt>Faq</dt>
+<dd>The  <a href="article_faq.html">FAQ</a></dd></dl>
+
+<H3 id="note">note</H3>
+ A note will be added by the "note" element. The text is inside the note. Note that: <ul>
+<li>A "Note" title will be added at the end of the article if there is at least one note in the article</li>
+<li>Several portions of the text can reference the same note</li>
+</ul>
+<br/>
+<br/>
+ The "note" element has only one optional attribute: <ul>
+<li>"id": represent the note identification, allowing to reference the same note in more than one portion of the article text</li>
+</ul>
+
+<H4 id="notes_tooltip">Notes tooltip</H4>
+It is possible to show a small tooltip for every note if the  <code>hasNotesTooltips</code> property is set to true for the   <a href="article_commandline.html#hasnotestooltips">command-line</a> or  <a href="article_configFile.html#hasnotestooltips">configuration file</a>.<br/>
+<br/>
+ For example:<br/>
+<br/>
+<br/>
+ <img src="../images/tooltips.png" id="_image_0" onclick="openImage(_image_0)" class="left border" />
+
+<H4 id="examples">Examples</H4>
+
+<pre>
+<span>      Present a first note</span><span style="color:blue;font-weight:bold;">&lt;note&gt;</span><span>the first note</span><span style="color:blue;font-weight:bold;">&lt;/note&gt;</span>
+
+<span>      Present a second note</span><span style="color:blue;font-weight:bold;">&lt;note</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myID"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>the second note</span><span style="color:blue;font-weight:bold;">&lt;/note&gt;</span>
+
+<span>      Present the second note a second time</span><span style="color:blue;font-weight:bold;">&lt;note</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myID"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+
+<H3 id="cite">cite</H3>
+ A note with a reference to an external web page will be added by the "cite" element, working like the "cite" element in wikipedia. These "cite" elements behave like the "note" element: <ul>
+<li>A "Note" title will be added at the end of the article if there is at least one note (or cite) in the article</li>
+<li>Several portions of the text can reference the same note</li>
+</ul>
+<br/>
+<br/>
+ There are several attributes for this element: <ul>
+<li>"id": represent the citation identification, allowing to reference the same note in more than one portion of the article text</li>
+<li>"href": the link to the external web page</li>
+<li>"desc": the optional text of the link</li>
+<li>"author": the optional author</li>
+<li>"publisher": the optional publisher</li>
+<li>"date": the optional date. The format should be  <code>year-month-day</code></li>
+</ul>
+<br/>
+<br/>
+ The text inside the "cite" element wil be the optional quote of the citation.
+<H4 id="example_2">Example</H4>
+
+<pre>
+<span>      Present a citation</span><span style="color:blue;font-weight:bold;">&lt;cite</span><span style="color:#0d8200;font-weight:bold;"> href</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"http://docs.oracle.com/javase/8/docs/api/index.html"</span>
+<span style="color:#0d8200;font-weight:bold;">      desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the external link"</span>
+<span style="color:#0d8200;font-weight:bold;">      publisher</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Oracle"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>the citation note</span><span style="color:blue;font-weight:bold;">&lt;/cite&gt;</span>
+
+</pre>
+ Result: Present a citation<a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+
+<H3 id="code">code</H3>
+ The "code" element allows to enter a piece of computer code. It is possible to put any kind of children elements inside code.
+<H4 id="example_3">Example</H4>
+
+<pre>
+<span>      This a a piece of computer </span><span style="color:blue;font-weight:bold;">&lt;code&gt;</span><span>code</span><span style="color:blue;font-weight:bold;">&lt;/code&gt;</span>
+<span>      This a </span><span style="color:blue;font-weight:bold;">&lt;code&gt;&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"faq"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"link"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span> formatted as code</span><span style="color:blue;font-weight:bold;">&lt;/code&gt;</span>
+
+</pre>
+ The result will be: <br/>
+This a a piece of computer  <code>code</code>
+<H3 id="pre">pre</H3>
+ The "pre" element allows to enter several lines of unformatted text (keeping the white spaces). However it is possible to specify part of the text in a different font or color by using the  <a href="article_syntax.html#formatting_text">font</a> element.<br/>
+<br/>
+ It is possible to put a colored background under the "pre" element with the "boxed" or "border" attribute<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+It is not allowed to have both the "boxed" and "border" attributes on the "pre" element</div></span>
+. This attribute can have the following values: <ul>
+<li>"true" or "simple": the "pre" element will have a colored background bordered by simple line</li>
+<li>"shadow": the "pre" element will have a colored background with a shadowed border</li>
+<li>"false" or "noBorder" : (the default) no border</li>
+<li>"invisibleChars": specifies if the usage of "invisible characters" is allowed. See  <a href="article_syntaxhighlighting.html">syntax highlighting</a> for more information</li>
+</ul>
+
+<H4 id="relaxed_syntax">Relaxed syntax</H4>
+ It is possible to allow directly any XML content inside the "pre" element by setting the "relaxedSyntax" property on the command-line or the configuration file. See  <a href="article_relaxedsyntax.html">Relaxed syntax</a> for more information.<br/>
+<br/>
+ For example the following content is not allowed if the "relaxedSyntax" property is not set but is allowed if it is set: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;pre&gt;</span>
+<span>      first line</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;parent</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"name"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;child</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"child"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/parent&gt;</span>
+<span>      second line</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/pre&gt;</span>
+
+</pre>
+
+<H4 id="syntax_hightlighting">Syntax hightlighting</H4>
+<div class="moreInfo" >
+Main Article: <a href="article_syntaxhighlighting.html">Syntax highlighting</a></div>
+<br/>
+ It is possible to use syntax highlighting on the "pre" content by specifying the "syntax" property. See  <a href="article_syntaxhighlighting.html">syntax highlighting</a> for more information.<br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span>   &lt;pre syntax="java"&gt;</span>
+<span>      public void toto(int i) {</span>
+<span>      _ System.out.println(i);</span>
+<span>      }</span>
+<span>   &lt;/pre&gt;</span>
+</pre>
+ will have the following result: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">toto</span><span>(</span><span style="color:blue;font-weight:bold;">int</span><span> i) {</span>
+<span>        System.out.</span><span style="font-weight:bold;">println</span><span>(i);</span>
+<span>      }</span>
+
+</pre>
+ or: <br/>
+<br/>
+
+<pre>
+<span>   &lt;pre syntax="xml"&gt;</span>
+<span>      &lt;parent name="name"&gt;</span>
+<span>        &lt;child name="child" /&gt;</span>
+<span>      &lt;/parent&gt;</span>
+<span>   &lt;/pre&gt;</span>
+</pre>
+ will have the following result: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;parent</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"name"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;child</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"child"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/parent&gt;</span>
+
+</pre>
+ It is possible to use the "font" element with syntax hightlighting. For example: <br/>
+<br/>
+
+<pre>
+<span>   &lt;pre syntax="xml"&gt;</span>
+<span>      &lt;parent name="name"&gt;</span>
+<span>      the text with a &lt;font background="yellow"&gt;yellow background&lt;/font&gt;</span>
+<span>      &lt;/parent&gt;</span>
+<span>   &lt;/pre&gt;</span>
+</pre>
+ It is also possible to use the "i" or "b" elements with syntax hightlighting. For example: <br/>
+<br/>
+
+<pre>
+<span>   &lt;pre syntax="xml"&gt;</span>
+<span>      &lt;parent name="name"&gt;</span>
+<span>      the text with a &lt;b&gt;bold font&lt;/b&gt;</span>
+<span>      &lt;/parent&gt;</span>
+<span>   &lt;/pre&gt;</span>
+</pre>
+ will have the following result: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;parent</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"name"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      the text with a </span><span style="background-color:#ffff00;">yellow background</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/parent&gt;</span>
+
+</pre>
+
+<H4 id="example_4">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;pre&gt;</span>
+<span>      first line</span>
+<span>      second line</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/pre&gt;</span>
+
+</pre>
+ Result: <br/>
+<br/>
+
+<pre>
+<span>      first line</span>
+<span>      second line</span>
+</pre>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;pre&gt;</span>
+<span>      first line in </span><span style="color:blue;font-weight:bold;">&lt;font</span><span style="color:#0d8200;font-weight:bold;"> color</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"blue"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>blue</span><span style="color:blue;font-weight:bold;">&lt;/font&gt;</span>
+<span>      second line</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/pre&gt;</span>
+
+</pre>
+ Result: <br/>
+<br/>
+
+<pre>
+<span>      first line in </span><span style="color:blue;">blue</span>
+<span>      second line</span>
+</pre>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;pre</span><span style="color:#0d8200;font-weight:bold;"> boxed</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      first line</span>
+<span>      second line</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/pre&gt;</span>
+
+</pre>
+ Result: <br/>
+<br/>
+<div class="preUnlimited">
+
+<pre>
+<span>      first line</span>
+<span>      second line</span>
+</pre>
+</div>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;pre</span><span style="color:#0d8200;font-weight:bold;"> boxed</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"shadow"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      first line</span>
+<span>      second line</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/pre&gt;</span>
+
+</pre>
+ Result: <br/>
+<br/>
+<div class="preUnlimited shadow">
+
+<pre>
+<span>      first line</span>
+<span>      second line</span>
+</pre>
+</div>
+
+<H3 id="source">source</H3>
+The "source" element allows to enter several lines of unformatted text. It is identical to the  <a href="article_syntax.html#pre">pre</a> element, except that: <ul>
+<li>the content will not begin on a new line</li>
+<li>the "boxed" attribute is not supported</li>
+</ul>
+ This element main usage is to add highlighted syntax inline (rather tha that "pre" element which will being a new line).
+<H4 id="example_5">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ul&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>The XML file: </span><span style="color:blue;font-weight:bold;">&lt;source</span><span style="color:#0d8200;font-weight:bold;"> syntax</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"xml"</span><span style="color:blue;font-weight:bold;">&gt;&lt;root</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"blue"</span><span style="color:blue;font-weight:bold;">/root&gt;&lt;/source&gt;&lt;/li&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/ul&gt;</span>
+
+</pre>
+ Result: <ul>
+<li>The XML file: <code><span style="color:blue;font-weight:bold;">&lt;root</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"blue"</span><span style="color:blue;font-weight:bold;">/&gt;</span></code></li>
+</ul>
+
+<H3 id="blockquote">blockquote</H3>
+ The "blockquote" element allows to add an HTML blockquote. Note that you can have several levels of blockquotes.
+<H4 id="example_6">Example</H4>
+
+<pre>
+<span>    </span><span style="color:blue;font-weight:bold;">&lt;blockquote&gt;</span>
+<span>      this is a text with two lines inside a blockquote</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;br/&gt;</span>
+<span>      the second line</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/block&gt;</span>
+
+</pre>
+ Result: <blockquote> this is a text with two lines inside a blockquote <br/>
+ the second line<br/>
+<br/>
+</blockquote>
+
+<H3 id="block">block</H3>
+ The "block" element allows to enter content inside an indented box.<br/>
+<br/>
+ It is possible to put a border around the "block" element with the "border" attribute. This attribute can have the following values: <ul>
+<li>"true" or "simple": the "pre" element will have bordered a simple line border</li>
+<li>"shadow": the "pre" element will have a a shadowed border</li>
+<li>"false" or "noBorder" : (the default) no border</li>
+</ul>
+
+<H4 id="example_7">Example</H4>
+
+<pre>
+<span>    </span><span style="color:blue;font-weight:bold;">&lt;block</span><span style="color:#0d8200;font-weight:bold;"> border</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"shadow"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      this is a text with two lines inside a block</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;br/&gt;</span>
+<span>      the second line</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/block&gt;</span>
+
+</pre>
+ Result: <div class="shadow indent">
+ this a a text with two lines inside a block <br/>
+ the second line<br/>
+<br/>
+</div>
+
+<H3 id="messagebox">messageBox</H3>
+ The "messageBox" element allows to enter a warning or informative message associated with an image.<br/>
+<br/>
+ This element has the following attributes: <ul>
+<li>"id" (optional): The image id. See  <a href="article_imageFiles.html">image files</a> for the specification of image ids</li>
+<li>"type" (optional): the message box type. Can be:</li>
+
+<ul>
+<li>"info": for an information message</li>
+<li>"success": for a "success" message</li>
+<li>"warning": for a warning message</li>
+<li>"error": for an error message</li>
+<li>"default" (the default value): for an undefined message type</li>
+</ul>
+<li>"color" (optional): the background color of the box, specified in HTML color codes</li>
+<li>"package": The optional package attribute allows to reference an image in  <a href="article_roots.html#using_package_ids">another package</a></li>
+</ul>
+ If the type of the message box is different from "default", the image id and the background color will get default values if they are not specified.
+<H4 id="example_8">Example</H4>
+
+<pre>
+<span>    </span><span style="color:blue;font-weight:bold;">&lt;messageBox</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"warning"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      this a a text with two lines inside a message box</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;br/&gt;</span>
+<span>      the second line</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;messageBox&gt;</span>
+
+</pre>
+ Result: A text with a message box: <div class="messageBox" style="color: #9F6000; background: #FEEFB3 url('../images/messageBoxImg_3_0.png') no-repeat 10px;">
+ this a a text with two lines inside a message box <br/>
+ the second line<br/>
+<br/>
+</div>
+
+<H3 id="box">box</H3>
+ The "box" element allows to put content inside an html box. <br/>
+<br/>
+ This element has the following attributes: <ul>
+<li>"width" (optional): define tyhe type of width of this box. Can be:</li>
+
+<ul>
+<li>"limited": (the default) the box will fit to the text content</li>
+<li>"unlimited": the box will fill the width of the page</li>
+<li>a value in pixels or in %: a specified width for the box. The text content will fit in the box</li>
+</ul>
+<li>"position": (optional) the alignment of the box. Can be "left" (the default), or "center".</li>
+</ul>
+&lt;title level="3" title="examples"/&gt; Box which fits around the text: <br/>
+<br/>
+
+<pre>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;box&gt;</span>
+<span>      this is a boxed </span><span style="color:blue;font-weight:bold;">&lt;code&gt;</span><span>text</span><span style="color:blue;font-weight:bold;">&lt;/code&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/box&gt;</span>
+
+</pre>
+ Result: <div>
+<div class="boxed" >
+ this is a boxed  <code>code</code><br/>
+<br/>
+</div>
+</div>
+<br/>
+<br/>
+ Box which goes to the right of the page: <br/>
+<br/>
+
+<pre>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;box</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"unlimited"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      this is a boxed </span><span style="color:blue;font-weight:bold;">&lt;code&gt;</span><span>text</span><span style="color:blue;font-weight:bold;">&lt;/code&gt;</span>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;/box&gt;</span>
+
+</pre>
+ Result: <div class="boxedUnlimited" >
+ this is a boxed  <code>code</code><br/>
+<br/>
+</div>
+<br/>
+<br/>
+ Centered Box with a specified width: <br/>
+<br/>
+
+<pre>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;box</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"80%"</span><span style="color:#0d8200;font-weight:bold;"> position</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"center"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>      this is a boxed </span><span style="color:blue;font-weight:bold;">&lt;code&gt;</span><span>text</span><span style="color:blue;font-weight:bold;">&lt;/code&gt;</span>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;/box&gt;</span>
+
+</pre>
+ Result: <div style="width:80%; margin-left: auto; margin-right: auto;" >
+<div class="boxed" >
+ this is a boxed  <code>code</code><br/>
+<br/>
+</div>
+</div>
+
+<H3 id="email">email</H3>
+ The "mail" element allows to define a link to an e-mail.
+<H4 id="example_9">Example</H4>
+
+<pre>
+<span>      This is an </span><span style="color:blue;font-weight:bold;">&lt;email</span><span style="color:#0d8200;font-weight:bold;"> url</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"johndoe.org"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"johndoe email"</span><span style="color:blue;font-weight:bold;">&lt;/a&gt;</span>
+
+</pre>
+ Result: This is an <a href="mailto:file:/D:/Java/docGenerator/code/wiki/output/johndoe.org" title="file:/D:/Java/docGenerator/code/wiki/output/johndoe.org">johndoe email</a>
+<H3 id="a">a</H3>
+ The "a" element allows to define a link to an external file on the web.
+<H4 id="example_10">Example</H4>
+
+<pre>
+<span>      This is an </span><span style="color:blue;font-weight:bold;">&lt;a</span><span style="color:#0d8200;font-weight:bold;"> href</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"http://docs.oracle.com/javase/8/docs/api/index.html"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>external link</span><span style="color:blue;font-weight:bold;">&lt;/a&gt;</span>
+
+</pre>
+ Result: This is an <a href="http://docs.oracle.com/javase/8/docs/api/index.html" title="http://docs.oracle.com/javase/8/docs/api/index.html">external link</a>
+<H3 id="wikipedia">wikipedia</H3>
+ The "wikipedia" element allows to define a link to a wikipedia article on the web. The attributes of this element are: <ul>
+<li>"lang": the optional language of the wikipedia to access. The default is "en" (English Wikipedia)</li>
+<li>"path": the wikipedia article. It has the same syntax as wikipedia <a href="http://en.wikipedia.org/wiki/Help:Link#Interwiki_links" title="http://en.wikipedia.org/wiki/Help:Link#Interwiki_links">internal links</a></li>
+<li>"desc": the optional alternate text to use for the link</li>
+</ul>
+
+<H4 id="example_11">Example</H4>
+
+<pre>
+<span>      This is an article about </span><span style="color:blue;font-weight:bold;">&lt;wikipedia</span><span style="color:#0d8200;font-weight:bold;"> lang</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"fr"</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Java (langage)"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ Result: This is an article about This is an article about <a href="https://fr.wikipedia.org/wiki/Java_(langage)" title="https://fr.wikipedia.org/wiki/Java_(langage)">Java (langage)</a>
+<H3 id="mediawiki">mediawiki</H3>
+ The "mediawiki" element allows to define a link to any Mediawiki website. The attributes of this element are: <ul>
+<li>"wiki": the wiki ID reference. See  <a href="article_wikis.html">Mediawikis</a></li>
+<li>"path": the wikipedia article. It has the same syntax as wikipedia <a href="http://en.wikipedia.org/wiki/Help:Link#Interwiki_links" title="http://en.wikipedia.org/wiki/Help:Link#Interwiki_links">internal links</a></li>
+<li>"desc": the optional alternate text to use for the link</li>
+</ul>
+
+<H4 id="example_12">Example</H4>
+
+<pre>
+<span>      This is an article about </span><span style="color:blue;font-weight:bold;">&lt;mediawiki</span><span style="color:#0d8200;font-weight:bold;"> wiki</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"wikipediaFR"</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Java (langage)"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ Result: This is an article about <a href="https://fr.wikipedia.org/wiki/Java_(langage)" title="https://fr.wikipedia.org/wiki/Java_(langage)">Java (langage)</a>
+<H3 id="video">video</H3>
+ The "video" element allows to define an embedded youtube or dailymotion video. The attributes of this element are: <ul>
+<li>"path": the video ID. This is the path which appear when getting the "Share" content for the video on youtube</li>
+<li>"width": the width of the video. Exclusive with the "height" parameter</li>
+<li>"height": the height of the video. Exclusive with the "width" parameter</li>
+<li>"position": Optionally the alignment of the video</li>
+<li>"type": Optionally the type of the video. The video will be by default a youtube video, but it is possible to embed a dailymotion video by setting the "dailymotion" value to this attribute. Also MP4, OGG or WEBM videos can be embedded using the "mp4", "ogg", or "webm" tagsfor the type</li>
+</ul>
+ If the width or height of the image is specified, the resulting video. will have this width and height, the other size will be defined accordingly to keep the ratio of the video, else a default width and height will be used. The alignment of an image can be set through the "position" attribute, which can have the values "center", "left", or "right".
+<H4 id="example_with_a_youtube_video">Example with a youtube video</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;video</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"jtluNyIzfQ4"</span><span style="color:#0d8200;font-weight:bold;"> position</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"left"</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"200"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ Result: <br/>
+<iframe class="video" src="https://www.youtube.com/embed/jtluNyIzfQ4"  width="200" height="162" float="left" ></iframe>
+
+<H4 id="example_with_an_mpeg4_video">Example with an mpeg4 video</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;video</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"http://www.w3schools.com/tags/movie.mp4"</span><span style="color:#0d8200;font-weight:bold;"> position</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"left"</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"200"</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"mp4"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ Result: <br/>
+<video width="200" height="162" controls>
+<source src="http://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+Your browser does not support the video element.
+</video>
+
+<H3 id="audio">audio</H3>
+ The "audio" element allows to define an embedded audio. The attributes of this element are: <ul>
+<li>"path": the audio link</li>
+<li>"type": the type of the video (for example: "audio/mpeg" or "audio/ogg")</li>
+</ul>
+
+<H4 id="example_13">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;audio</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"https://www.w3schools.com/html/horse.mp3"</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"audio/mpeg"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ Result: <br/>
+<audio controls>
+<source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+
+<H3 id="javadoc">javadoc</H3>
+ The "javadoc" element allows to define a link to a Java class documentation for an API. The attributes of this element are: <ul>
+<li>"api": the API, will point to the "JAVASE" API (The Java 8 API) if not present, else it will refer to the javadoc API defined in the  <a href="article_javadocs.html">configuration file</a></li>
+<li>"path": the path to the class, with package names separated by "." (dot) characters. To separate the name of the internal class from its parent class, use the "$" character</li>
+<li>"member": a field or method of the specified class or interface</li>
+<li>"full": there are several possible values for this attribute<span class="tooltip"><a href="#_note_3" class="noteLink"><sup id="_note_3_1_">[3]</sup></a>
+<div class="tooltiptext">
+For packages, the package complete path will always be presented regardless of the value of this attribute</div></span>
+:</li>
+
+<ul>
+<li>"false" or "class": (the default) only the class name must be presented in the link associated text</li>
+<li>"true": the complete classpath of the class must be presented in full in the link associated text</li>
+<li>"member": only the member name must be presented. Note that if the path represents a class, it will have the same result as "class"</li>
+</ul>
+<li>"type": the type of the link</li>
+
+<ul>
+<li>"class" for a Class (the default value)</li>
+<li>"package" for a package</li>
+</ul>
+</ul>
+
+<H4 id="examples_1">Examples</H4>
+
+<pre>
+<span>      This is a link to </span><span style="color:blue;font-weight:bold;">&lt;javadoc</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"java.awt.Button"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      This is a link to </span><span style="color:blue;font-weight:bold;">&lt;javadoc</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"java.awt.geom.Rectangle2D$Float"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      This is a complete link to </span><span style="color:blue;font-weight:bold;">&lt;javadoc</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"java.awt.Button"</span><span style="color:#0d8200;font-weight:bold;"> full</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      This is a link to </span><span style="color:blue;font-weight:bold;">&lt;javadoc</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"java.awt.Button"</span><span style="color:#0d8200;font-weight:bold;"> member</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"setLabel(java.lang.String)"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      This is a link to </span><span style="color:blue;font-weight:bold;">&lt;javadoc</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"java.awt.Button"</span><span style="color:#0d8200;font-weight:bold;"> member</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"setLabel(java.lang.String)"</span><span style="color:#0d8200;font-weight:bold;"> full</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"member"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      This is a link to the </span><span style="color:blue;font-weight:bold;">&lt;javadoc</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"java.awt.geom"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span> package;</span>
+
+</pre>
+ Result: This is a link to <a href="http://docs.oracle.com/javase/8/docs/api//java/awt/Button.html" class="apiLink" title="java.awt.Button">Button</a><br/>
+<br/>
+ This is a link to <a href="http://docs.oracle.com/javase/8/docs/api//java/awt/geom/Rectangle2D.Float.html" class="apiLink" title="java.awt.geom.Rectangle2D$Float">Rectangle2D.Float</a><br/>
+<br/>
+ This is a complete link to <a href="http://docs.oracle.com/javase/8/docs/api//java/awt/Button.html" class="apiLink" title="java.awt.Button">java.awt.Button</a><br/>
+<br/>
+ This is a link to <a href="http://docs.oracle.com/javase/8/docs/api//java/awt/Button.html#setLabel-java.lang.String-" class="apiLink" title="java.awt.Button.setLabel(java.lang.String)">Button.setLabel(String)</a><br/>
+<br/>
+ This is a link to <a href="http://docs.oracle.com/javase/8/docs/api//java/awt/Button.html#setLabel-java.lang.String-" class="apiLink" title="java.awt.Button.setLabel(java.lang.String)">setLabel(String)</a><br/>
+<br/>
+ This is a link to <a href="http://docs.oracle.com/javase/8/docs/api//java/awt/geom/package-summary.html" class="apiLink" title="java.awt.geom">java.awt.geom</a>
+<H3 id="qtdoc">qtdoc</H3>
+ The "qtdoc" element allows to define a link to a Qt class documentation for an API. The attributes of this element are: <ul>
+<li>"api": the API, will point to the QT-5 API, if not present, else it will refer to the Qt API defined in the  <a href="article_qtdocs.html">configuration file</a></li>
+<li>"path": the path to the class</li>
+<li>"member": the method, property or enum of the specified class</li>
+<li>"type": the type of the link:</li>
+
+<ul>
+<li>"class": (the default) the documentation points to the class declaration</li>
+<li>"method": the documentation points to the method</li>
+<li>"property": the documentation points to the property</li>
+<li>"enum": the documentation points to the enum</li>
+</ul>
+</ul>
+
+<H4 id="examples_2">Examples</H4>
+
+<pre>
+<span>      This is a link to </span><span style="color:blue;font-weight:bold;">&lt;qtdoc</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"QAbstractAxis"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      This is a link to </span><span style="color:blue;font-weight:bold;">&lt;qtdoc</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"QAbstractAxis"</span><span style="color:#0d8200;font-weight:bold;"> member</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"AxisType"</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"enum"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      This is a link to </span><span style="color:blue;font-weight:bold;">&lt;qtdoc</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"QAbstractAxis"</span><span style="color:#0d8200;font-weight:bold;"> member</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"alignment"</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"property"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      This is a link to </span><span style="color:blue;font-weight:bold;">&lt;qtdoc</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"QAbstractAxis"</span><span style="color:#0d8200;font-weight:bold;"> member</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"setRange"</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"method"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ Result: This is a link to <a href="http://doc.qt.io/qt-5.12//QAbstractAxis.html" class="apiLink" title="QAbstractAxis">QAbstractAxis</a><br/>
+<br/>
+ This is a link to <a href="http://doc.qt.io/qt-5.12//QAbstractAxis.html#AxisType-enum" class="apiLink" title="QAbstractAxis.AxisType">QAbstractAxis.AxisType</a><br/>
+<br/>
+ This is a link to <a href="http://doc.qt.io/qt-5.12//QAbstractAxis.html#alignment-prop" class="apiLink" title="QAbstractAxis.alignment">QAbstractAxis.alignment</a><br/>
+<br/>
+ This is a link to <a href="http://doc.qt.io/qt-5.12//QAbstractAxis.html#setRange" class="apiLink" title="QAbstractAxis.setRange">QAbstractAxis.setRange</a>
+<H3 id="doxygen">doxygen</H3>
+ The "doxygen" element allows to define a link to a doxygen class documentation for an API.
+<H3 id="ul">ul</H3>
+<div class="moreInfo" >
+Main Article: <a href="article_listbullet.html#ul_list">List bullet style</a></div>
+<br/>
+ The "ul" element defined a bulleted list. It contains "li" elements. Note that it possible to customize the bullet style of the list.
+<H4 id="example_14">Example</H4>
+
+<pre>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;ul&gt;</span>
+<span>       </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>first element</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>       </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>second element</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;/ul&gt;</span>
+
+</pre>
+ Result: <ul>
+<li>first element</li>
+<li>second element</li>
+</ul>
+
+<H3 id="ol">ol</H3>
+<div class="moreInfo" >
+Main Article: <a href="article_listbullet.html#ol_list">List bullet style</a></div>
+<br/>
+ The "ol" element defined an ordered list. It contains "li" elements. Note that it possible to customize the bullet style of the list.
+<H4 id="example_15">Example</H4>
+
+<pre>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;ol&gt;</span>
+<span>       </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>first element</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>       </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>second element</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;/ol&gt;</span>
+
+</pre>
+ Result: <ol>
+<li>first element</li>
+<li>second element</li>
+</ol>
+
+<H3 id="javaapi">javaAPI</H3>
+The "javaAPI" element allows to embed a "javadoc-like" API for a Java class. Contrary to the  <a href="article_syntax.html#javadoc">javadoc</a> element, it does not refer to an existing API structure, but it shows the API in the document. The attributes of this element are: <ul>
+<li>"api": (optional) the API. For the moment this attribute is not used</li>
+<li>"path": the path to the element (class, interface, or enum) with package names separated by "." (dot) characters</li>
+<li>"modifiers": (optional) the modifiers of the element (For example, "public final"). By default, it is considered as public</li>
+<li>"type": (optional) the type of the element, which can be  <code>class</code> (the default),  <code>interface</code>, or  <code>enum</code></li>
+<li>"hr": (optional) true if we should add a thematic break ("hr" element) before and after the API</li>
+</ul>
+<br/>
+<br/>
+ This element can contain one or several: <ul>
+<li> <code>field</code> elements, declaring the fields of the class</li>
+<li> <code>method</code> elements, declaring the methods of the class</li>
+</ul>
+ <code>field</code> and  <code>method</code> elements have the following attributes: <ul>
+<li>"member": the name of the field or the signature of the method, including the return type</li>
+<li>"modifiers": (optional) the modifiers of the element (For example, "public final"). By default, it is considered as public</li>
+</ul>
+
+<H4 id="example_16">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;javaAPI</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"JButton"</span><span style="color:#0d8200;font-weight:bold;"> modifiers</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"public"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>An implementation of a "push" button.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;method</span><span style="color:#0d8200;font-weight:bold;"> member</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"AccessibleContext getAccessibleContext()"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>Gets the AccessibleContext associated with this JButton</span><span style="color:blue;font-weight:bold;">&lt;/method&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;method</span><span style="color:#0d8200;font-weight:bold;"> member</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"setDefaultCapable(boolean defaultCapable)"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>Sets the defaultCapable property, which determines whether this button</span>
+<span>      can be made the default button for its root pane.</span><span style="color:blue;font-weight:bold;">&lt;/method&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;method</span><span style="color:#0d8200;font-weight:bold;"> member</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"setDefaultCapable(int defaultCapable)"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>Sets the defaultCapable property, which determines whether this button</span>
+<span>      can be made the default button for its root pane.</span><span style="color:blue;font-weight:bold;">&lt;/method&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/javaAPI&gt;</span>
+
+</pre>
+ will show the following content: <br/>
+<table class="borderNone" >
+<tbody>
+<th valign="center" class="headerAPI">public class JButton</th>
+<br/>
+</tbody>
+</table>
+An implementation of a "push" button. <br/>
+<br/>
+<table class="border" >
+<thead>
+<tr>
+<th valign="center" class="columnAPI">Modifier and Type</th>
+<th valign="center" class="columnAPI">Method and Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="rowAPI">
+<th valign="left" class="rowModifierAPI">AccessibleContext</th>
+<th valign="center" class="rowContentAPI">getAccessibleContext()
+<br/>
+<div class="rowContentTextAPI">
+Gets the AccessibleContext associated with this JButton</div>
+</th>
+</tr>
+<tr class="rowAPI">
+<th valign="left" class="rowModifierAPI">void</th>
+<th valign="center" class="rowContentAPI">setDefaultCapable(boolean defaultCapable)
+<br/>
+<div class="rowContentTextAPI">
+Sets the defaultCapable property, which determines whether this button can be made the default button for its root pane.</div>
+</th>
+</tr>
+<tr class="rowAPI">
+<th valign="left" class="rowModifierAPI">void</th>
+<th valign="center" class="rowContentAPI">setDefaultCapable(int defaultCapable)
+<br/>
+<div class="rowContentTextAPI">
+Sets the defaultCapable property, which determines whether this button can be made the default button for its root pane.</div>
+</th>
+</tr>
+</tbody>
+</table>
+<br/>
+
+<H3 id="pythonapi">pythonAPI</H3>
+The "pythonAPI" element allows to embed a "pdoc-like" API for a Python class<span class="tooltip"><a href="#_note_4" class="noteLink"><sup id="_note_4_1_">[4]</sup></a>
+<div class="tooltiptext">
+See <a href="https://pdoc3.github.io/pdoc/doc/pdoc/" title="https://pdoc3.github.io/pdoc/doc/pdoc/">pdoc3.github.io</a> for more information of the pdoc API</div></span>
+. It does not refer to an existing API structure, but it shows the API in the document. The attributes of this element are: <ul>
+<li>"api": (optional) the API. For the moment this attribute is not used</li>
+<li>"path": the path to the element (class, interface, or enum) with package names separated by "." (dot) characters</li>
+<li>"type": (optional) the type of the element, for now can only be  <code>class</code> (the default)</li>
+<li>"hr": (optional) true if we should add a thematic break ("hr" element) before and after the API</li>
+</ul>
+<br/>
+<br/>
+ This element can contain one or several: <ul>
+<li> <code>field</code> elements, declaring the variables of the class</li>
+<li> <code>method</code> elements, declaring the methods of the class</li>
+</ul>
+ <code>field</code> and  <code>method</code> elements have the following attributes: <ul>
+<li>"member": the name of the field or the signature of the method</li>
+</ul>
+
+<H4 id="example_17">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;pythonAPI</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Class"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>Representation of a class documentation</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;field</span><span style="color:#0d8200;font-weight:bold;"> member</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"doc"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>A mapping from identifier name to a Doc objects</span><span style="color:blue;font-weight:bold;">&lt;/field&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;method</span><span style="color:#0d8200;font-weight:bold;"> member</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"class_variables(self, include_inherited=True, sort=True)"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      Returns an optionally-sorted list of Variable objects that represent this class class variables.</span><span style="color:blue;font-weight:bold;">&lt;/method&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/pythonAPI&gt;</span>
+
+</pre>
+ will show the following content: <br/>
+<table class="borderNone" >
+<tbody>
+<th valign="center" class="headerPythonAPI">class Class</th>
+<br/>
+</tbody>
+</table>
+Representation of a class documentation <br/>
+<br/>
+<table class="borderNone" >
+<tbody>
+<tr class="rowPythonAPI">
+<th valign="left" class="rowModifierAPI">var</th>
+<th valign="center" class="rowContentPythonAPI">doc
+<br/>
+<div class="rowContentTextAPI">
+A mapping from identifier name to a Doc objects</div>
+</th>
+</tr>
+</tbody>
+</table>
+<br/>
+<br/>
+<table class="borderNone" >
+<tbody>
+<tr class="rowPythonAPI">
+<th valign="left" class="rowModifierAPI">def</th>
+<th valign="center" class="rowContentPythonAPI">class_variables(self, include_inherited=True, sort=True)
+<br/>
+<div class="rowContentTextAPI">
+ Returns an optionally-sorted list of Variable objects that represent this class class variables.</div>
+</th>
+</tr>
+</tbody>
+</table><br/>
+
+<H3 id="apidoc">apidoc</H3>
+<div class="moreInfo" >
+Main Article: <a href="article_apidoc.html">apidoc</a></div>
+<br/>
+ The "apidoc" element allows to embed an internal API for any language. It does not refer to an existing API structure, but it shows the API in the document. The APIs provided by default are: <ul>
+<li>Java APIs</li>
+<li>Python APIs. It is a "pdoc-like" API (See <a href="https://pdoc3.github.io/pdoc/doc/pdoc/" title="https://pdoc3.github.io/pdoc/doc/pdoc/">pdoc3.github.io</a>)</li>
+<li>C# APIs</li>
+<li>Doxygen APIs (for both C and C++ programs)</li>
+</ul>
+It is possible to add any other language API and to configure them by specifying the  <a href="article_apidocconf.html">API documentation configuration</a>.
+<H4 id="example_18">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;apidoc</span><span style="color:#0d8200;font-weight:bold;"> lang</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"java"</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"class"</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"JButton"</span><span style="color:#0d8200;font-weight:bold;"> modifiers</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"public"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>An implementation of a "push" button.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;element</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"method"</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"AccessibleContext getAccessibleContext()"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>Gets the AccessibleContext associated with this JButton</span><span style="color:blue;font-weight:bold;">&lt;/element&gt;</span><span>      </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;element</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"method"</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"setDefaultCapable(boolean defaultCapable)"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>Sets the defaultCapable property, which determines whether this button</span>
+<span>      can be made the default button for its root pane.</span><span style="color:blue;font-weight:bold;">&lt;/element&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;element</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"method"</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"setDefaultCapable(int defaultCapable)"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>Sets the defaultCapable property, which determines whether this button</span>
+<span>      can be made the default button for its root pane.element</span><span style="color:blue;font-weight:bold;">&lt;/element&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/apidoc&gt;</span>
+
+</pre>
+  This represents the same API as for the  <a href="article_syntax.html#javaapi">javaAPI example</a>
+<H3 id="moreinfo">moreInfo</H3>
+ The "moreInfo" element allows to add a "Main Article" link at the start of a paragraph. The attributes of this element are: <ul>
+<li>"id": the identification of the main article</li>
+<li>"desc": the text to refer to the article</li>
+<li>"package": the optional package</li>
+</ul>
+
+<H4 id="example_19">Example</H4>
+
+<pre>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;moreInfo</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"faq"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the FAQ"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      Text after the tag.</span>
+
+</pre>
+ Result:  <div class="moreInfo" >
+Main Article: <a href="article_faq.html">the FAQ</a></div>
+<br/>
+ Text after the tag.
+<H3 id="seearticle">seeArticle</H3>
+ The "seeArticle" element allows to add a "See Also" link at the start of a paragraph. The attributes of this element are: <ul>
+<li>"id": the identification of the main article</li>
+<li>"desc": the text to refer to the article</li>
+<li>"package": the optional package</li>
+</ul>
+
+<H4 id="example_20">Example</H4>
+
+<pre>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;seeArticle</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"faq"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the FAQ"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      Text after the tag.</span>
+
+</pre>
+ Result:  <div class="moreInfo">
+See Also <a href="article_faq.html">the FAQ</a></div>
+<br/>
+ Text after the tag.
+<H3 id="li">li</H3>
+ The "li" element defines a list item under an ordered or unordered list.
+<H3 id="img">img</H3>
+ The "img" element allows to show an image specified by its id. The attributes of this element are: <ul>
+<li>"id": The image id. See  <a href="article_imageFiles.html">image files</a> for the specification of image ids</li>
+<li>"width": The optional image width: can be specified in pixels or in % of the HTML page width</li>
+<li>"height": The optional image heigh: can be specified in pixels or in % of the HTML page width</li>
+<li>"caption": The optional image caption</li>
+<li>"border": Optionally, the property specifying that we should add a border around the image. This attribute can have the following values:</li>
+
+<ul>
+<li>"true" or "simple": the image will be bordered by simple line</li>
+<li>"shadow": the image will have a shadowed border</li>
+<li>"false" or "noBorder" : (the default) no border</li>
+</ul>
+<li>"package": The optional package attribute allows to reference an image in  <a href="article_roots.html#using_package_ids">another package</a></li>
+<li>"position": Optionally the alignment of the image. Can be "left", "right", or "center"</li>
+<li>"valign": Optionally the vertical alignment of the image relative to the text. Can be "middle", or "baseline". THis can be useful if you want to add an icon in a line of text</li>
+<li>"float": Optional, true if the image should have the "float" attribute (which means that there will be text around the image)</li>
+<li>"caption": Optionally the caption of the image</li>
+</ul>
+ If the width or height of the image is specified, the resulting image will have this width and height, else we will use the width and height of the original image definition. The alignment of an image can be set through the "position" attribute, which can have the values "center", "left", or "right".<br/>
+<br/>
+ Note that it is possible for images to have a <a href="https://en.wikipedia.org/wiki/Lightbox_(JavaScript)" title="https://en.wikipedia.org/wiki/Lightbox_(JavaScript)">Lightbox</a> effect if the  <a href="article_configFile.html#lightbox">lightbox</a> property is set on the command line or the configuration properties<span class="tooltip"><a href="#_note_5" class="noteLink"><sup id="_note_5_1_">[5]</sup></a>
+<div class="tooltiptext">
+A Lightbox effect is a JavaScript mechanism that displays images and videos by filling the screen, and dimming out the rest of the web page, when the image is clicked on</div></span>
+.
+<H4 id="examples_3">Examples</H4>
+
+<pre>
+<span>      An image:</span><span style="color:blue;font-weight:bold;">&lt;img</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image1"</span><span style="color:#0d8200;font-weight:bold;"> valign</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"middle"</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"40"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+<span>      The same image but bigger:</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;img</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image1"</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"20%"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+<span>      The same image image with a border:</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;img</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image1"</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"20%"</span><span style="color:#0d8200;font-weight:bold;"> border</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+<span>      The same image image with a border and a caption:</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;img</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image1"</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"20%"</span><span style="color:#0d8200;font-weight:bold;"> border</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:#0d8200;font-weight:bold;"> caption</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the caption"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+<span>      The same image image with a shadowed border:</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;img</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image1"</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"20%"</span><span style="color:#0d8200;font-weight:bold;"> border</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"shadow"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+<span>      The image aligned on the left:</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;img</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image1"</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"40"</span><span style="color:#0d8200;font-weight:bold;"> position</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"left"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+<span>      An SVG image:</span><span style="color:blue;font-weight:bold;">&lt;img</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"svgLogo"</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"40"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ Result: An image:<img src="../images/ball.jpg" id="_image_1" onclick="openImage(_image_1)" width="40" class="left middle" />
+<br/>
+<br/>
+<br/>
+ The same image but bigger:<br/>
+<br/>
+<br/>
+<img src="../images/ball.jpg" id="_image_2" onclick="openImage(_image_2)" width="20%" class="left" />
+<br/>
+<br/>
+<br/>
+ The same image with a border:<br/>
+<br/>
+<br/>
+<img src="../images/ball.jpg" id="_image_3" onclick="openImage(_image_3)" width="20%" class="left border" />
+<br/>
+<br/>
+<br/>
+ The same image with a border and a caption:<br/>
+<br/>
+<br/>
+<table class="imageWrappedLeft">
+<tr>
+<td valign="center" class="borderNone">
+<img src="../images/ball.jpg" id="_image_4" onclick="openImage(_image_4)" width="20%" class="center middle border" />
+</td>
+</tr>
+<tr>
+<td valign="center" class="borderNone">
+<figure>
+<figcaption id="_image_4_caption" class="imageWrapped">the caption</figcaption>
+</figure></td>
+</tr>
+</table>
+<br/>
+<br/>
+<br/>
+ The same image with a shadowed border:<br/>
+<br/>
+<br/>
+<img src="../images/ball.jpg" id="_image_5" onclick="openImage(_image_5)" width="20%" class="left border shadow" />
+<br/>
+<br/>
+<br/>
+ The image aligned on the left:<br/>
+<br/>
+<br/>
+<img src="../images/ball.jpg" id="_image_6" onclick="openImage(_image_6)" width="40" class="left" />
+<br/>
+<br/>
+<br/>
+ An SVG image: <img src="../images/SVG_logo.svg" id="_image_7" onclick="openImage(_image_7)" width="60" class="left" />
+
+<H3 id="linking_on_images">Linking on images</H3>
+ It is possible to add internal wiki links on portions of images using the "areaRef" element inside an "img" element. The attributes of the "areaRef" elements which specify each area are: <ul>
+<li>"coords": the coordinates of the rectangle specifying the active area. The coordinates are separated by "," (commas) and specify the left, top, right, bottom corner of the rectangle. Note that the Y coordinates are defined from the top (such as 0 will be the top)</li>
+<li>"id": the id of the inter-wiki reference, specified exactly as for the  <a href="article_syntax.html#ref">ref</a> element</li>
+<li>"desc": the optional alternate text for the inter-wiki reference, specified exactly as for the  <a href="article_syntax.html#ref">ref</a> element</li>
+<li>"package": the optional package for the inter-wiki reference, specified exactly as for the  <a href="article_syntax.html#ref">ref</a> element</li>
+</ul>
+
+<H4 id="example_21">Example</H4>
+ The following image has two links: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;img</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image1"</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"200"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;areaRef</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"#Linking on images"</span><span style="color:#0d8200;font-weight:bold;"> coords</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"0,0,200,100"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;areaRef</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"#img"</span><span style="color:#0d8200;font-weight:bold;"> coords</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"0,100,200,200"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/img&gt;</span>
+
+</pre>
+ Result:<br/>
+<br/>
+<br/>
+<img src="../images/ball.jpg" id="_image_8" onclick="openImage(_image_8)" width="200" class="left" usemap="#_imgMap_1" />
+
+<map name="_imgMap_1" >
+<area shape="rect" coords="0,0,200,100" href="article_syntax.html#linking_on_images" alt="Linking on images" />
+<area shape="rect" coords="0,100,200,200" href="article_syntax.html#img" alt="img" />
+</map>
+
+<H3 id="resource">resource</H3>
+ The "resource" tag allows to link to a resource File internally defined in the wiki. Note that the optional "package" attribute allows to reference a resource in  <a href="article_roots.html#using_package_ids">another package</a>. See  <a href="article_resourceFiles.html">resource files</a>.
+<H4 id="example_22">Example</H4>
+
+<pre>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;resource</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"resource1"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>Example resource</span><span style="color:blue;font-weight:bold;">&lt;/resource&gt;</span>
+
+</pre>
+ Result:  <a href="resources/resourceExample.xml">Example resource</a>
+<H3 id="chapter">chapter</H3>
+See  <a href="article_chapters.html#chapter_elements">Chapter elements</a>
+<H3 id="title">title</H3>
+See  <a href="article_chapters.html#title_elements">Title elements</a>
+<H3 id="div">div</H3>
+ The "div" element allows to group content as in HTML. The attributes of this element are: <ul>
+<li>"justify": the justification of the element. See the  <a href="article_justification.html">Justification</a> article</li>
+<li>"style": the style classes of the element. See the  <a href="article_css.html">Custom StyleSheet</a> article</li>
+</ul>
+
+<H3 id="ref">ref</H3>
+The "ref" element allows to define an  <a href="article_references.html">interwiki link</a>. The attributes of this element are: <ul>
+<li>"id": the id of the referenced article (and optionnally chapter or title). See  <a href="article_chapters.html#referencing_a_title_or_chapter">the chapters and title</a> article for how the id must be specified</li>
+<li>"path": the absolute or relative path of the referenced article input file</li>
+<li>"desc": the optional text to show for the link</li>
+<li>The optional "package" attribute allows to reference an article in  <a href="article_roots.html#using_package_ids">another package</a></li>
+</ul>
+<br/>
+<br/>
+ Note that the two "id" and "path" attributes are mutually exclusive. Also it is better to use the "id" attribute because you don't have to bother about the name of the file and the referenced article relative path, which means that you can move it freely. However it can be useful to use the "path" attribute if you want to link an article using the XML syntax to an article using the  <a href="article_markdown.html">Markdown</a> syntax.<br/>
+<br/>
+ This tag allows to define an interwiki link to: <ul>
+<li>a  <a href="article_syntax.html#chapter">chapter</a></li>
+<li>a  <a href="article_syntax.html#title">title</a></li>
+<li>an  <a href="article_syntax.html#anchor">anchor</a></li>
+</ul>
+ All these links can point to the same article or another article.
+<H4 id="example_23">Example</H4>
+ Suppose the following article: <br/>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"thisArticle"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;title</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first chapter"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      ...</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ This article can be referenced through any of the following constructions:<br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"thisArticle"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my article"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my_article"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ The article chapter be referenced through any of the following constructions:<br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"thisArticle#first chapter"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"thisArticle#first_chapter"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my article#first chapter"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my_article#first_chapter"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+
+<H3 id="catref">catRef</H3>
+The "catRef" element allows to define a link to a  <a href="article_categories.html">category</a> description. The attributes of this element are: <ul>
+<li>"id": the id of the referenced caegory</li>
+<li>"desc": the optional text to show for the link</li>
+</ul>
+
+<H4 id="example_24">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;catRef</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"mycategory"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the category"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+
+<H3 id="glossaryref">glossaryRef</H3>
+The "glossaryRef" element allows to define a link to the  <a href="article_glossary.html">glossary</a>. The attribute of this element is: <ul>
+<li>"desc": the optional text to show for the link (if this attribute is not present, the  <a href="article_localization.html">localization</a> for the glossary will be used</li>
+</ul>
+
+<H4 id="example_25">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;glossaryRef</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the Glossary"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+
+<H3 id="anchor">anchor</H3>
+ The "anchor" element allows to define an anchor in the wiki, which will be accessible via a "ref" tag.
+<H4 id="example_26">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;anchor</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"theAnchor"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"anchor"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+
+<H3 id="include">include</H3>
+The "include" element allows to include the content of an article or template in another one<span class="tooltip"><a href="#_note_6" class="noteLink"><sup id="_note_6_1_">[6]</sup></a>
+<div class="tooltiptext">
+This has the same effect as the transclusion on wikipedia</div></span>
+. The attributes of this element are: <ul>
+<li>"id": the id of the included article or template</li>
+</ul>
+
+<H4 id="example_27">Example</H4>
+ Suppose the following template: <br/>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;template</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my template"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;title</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first template chapter"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      some text in the template.</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/template&gt;</span>
+
+</pre>
+ This template can be included like for the  <a href="article_syntax.html#ref">ref</a> element, for example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;include</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my template"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ For example, if we have the following article:<br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      This is a very simple article.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;include</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my template"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;see</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"anotherArticle"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the other linked article"</span><span style="color:#0d8200;font-weight:bold;"> text</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"example of a SeeAlso element"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myCategory"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+<br/>
+ The result will be the same as for: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      This is a very simple article.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;title</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first template chapter"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      some text in the template.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;see</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"anotherArticle"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the other linked article"</span><span style="color:#0d8200;font-weight:bold;"> text</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"example of a SeeAlso element"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myCategory"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+
+<H3 id="esc">esc</H3>
+ The "esc" element allows to escape content. The only attribute of this element is: <ul>
+<li>"text": the text to escape</li>
+</ul>
+Note that this will only be taken into account if  <a href="article_configFile.html#supportescaping">supportEscaping</a> is set in the configuration file. See also  <a href="article_escapingCharacters.html#use_the_esc_element">Escaping characters</a>.
+<H4 id="example_28">Example</H4>
+
+<pre>
+<span>      this is a line with a </span><span style="color:blue;font-weight:bold;">&lt;esc</span><span style="color:#0d8200;font-weight:bold;"> text</span><span style="font-weight:bold;">=\</span><span style="color:#650099;">"&lt;\"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ The result will be as the XML file have been set as: <br/>
+<br/>
+
+<pre>
+<span>      this is a line with a &lt;![CDATA[&lt;]]&gt;</span>
+</pre>
+
+<H3 id="todo">todo</H3>
+ The "todo" element allows to add a "TODO" in the wiki. 
+<H4 id="example_29">Example</H4>
+ The following example shows a simple TODO: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;todo</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ The following example shows a TODO with a reason: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;todo</span><span style="color:#0d8200;font-weight:bold;"> reason</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"this is the reason"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ Note that it is possible to show the number of TODOs in the wiki by the "todo" property (see    <a href="article_properties.html#todo_property">properties</a> ).
+<H3 id="todolist">todolist</H3>
+ The "todolist" element allows to add a list of all TODOs found in the wiki (which is a list of all the  <a href="article_syntax.html#todo">todo</a> elements found in the wiki with their associated article.  This element has no attributes.
+<H4 id="example_30">Example</H4>
+ For example: <br/>
+
+<pre>
+<span>      number of TODOs: ${todo}.</span>
+<span>   </span>
+<span>      number of errors: ${errors}.</span>
+<span>   </span>
+<span>      todolist:</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;todolist</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+  Result:<br/>
+ <img src="../images/todolist.png" id="_image_9" onclick="openImage(_image_9)" class="left" />
+
+<H3 id="table">table</H3>
+<div class="moreInfo" >
+Main Article: <a href="article_syntaxtable.html">table element</a></div>
+<br/>
+ The "table" element allows to define a Table. A table must have the following children: <ul>
+<li>"tableHeader" which will define the columns in the table.</li>
+
+<ul>
+<li>The header will have one "column" child for each column</li>
+<li>The header can be defined to be vertical</li>
+</ul>
+<li>several "row" elements which will define the rows in the table</li>
+
+<ul>
+<li>The row will have one "cell" child for each cell in the row. Each cell contains its content, and can have a background color if using the "color" attribute</li>
+</ul>
+</ul>
+
+<H4 id="example_31">Example</H4>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;table</span><span style="color:#0d8200;font-weight:bold;"> caption</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"table caption"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;tableHeader&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>first column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>second column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/tableHeader&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell</span><span style="color:#0d8200;font-weight:bold;"> color</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"#00FF00"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>name2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span>
+
+</pre>
+ Result: 
+<table class="border" >
+<caption class="tablecaption" >table caption</caption>
+<thead class="notSortable">
+<tr>
+<th valign="center"  class="column" >first column</th>
+<th valign="center"  class="column" >second column</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">name</td>
+<td valign="center" class="border">value</td>
+</tr>
+<tr>
+<td valign="center" class="border" style="background-color: #00FF00;">name2</td>
+<td valign="center" class="border">value2</td>
+</tr>
+</tbody>
+</table>
+ Another example (with fixed column width):<br/>
+<br/>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;table&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;tableHeader&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;column</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"200"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>first column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;column</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"300"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>second column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/tableHeader&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span>
+
+</pre>
+ Result: 
+<table class="border" >
+<thead class="notSortable">
+<tr>
+<th valign="center"  width="200" class="column" >first column</th>
+<th valign="center"  width="300" class="column" >second column</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">name</td>
+<td valign="center" class="border">value</td>
+</tr>
+<tr>
+<td valign="center" class="border">name2</td>
+<td valign="center" class="border">value2</td>
+</tr>
+</tbody>
+</table>
+
+<H3 id="math">math</H3>
+<div class="moreInfo" >
+Main Article: <a href="article_math.html">Mathematical formulas</a></div>
+<br/>
+ The "math" element allows to add math formulas. The syntax of the formula must conform to the  <a href="https://www.w3.org/TR/MathML2/" title="https://www.w3.org/TR/MathML2/">MathML2</a> syntax.<br/>
+<br/>
+ The "math" element can have the following attribute: <ul>
+<li>"size": the size of the text for the formulas<span class="tooltip"><a href="#_note_7" class="noteLink"><sup id="_note_7_1_">[7]</sup></a>
+<div class="tooltiptext">
+If not present, a default size will be used</div></span>
+</li>
+</ul>
+
+<H4 id="example_32">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;math&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>a</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;msup&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mi&gt;</span><span>x</span><span style="color:blue;font-weight:bold;">&lt;/mi&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;mn&gt;</span><span>2</span><span style="color:blue;font-weight:bold;">&lt;/mn&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/msup&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/math&gt;</span>
+
+</pre>
+   Result:  <img src="../images/__math__7.png" id="_image_10" onclick="openImage(_image_10)" class="left" />
+
+<H3 id="html">html</H3>
+ The "html" element allows to add included embedded html content.
+<H4 id="example_33">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;html&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;font</span><span style="color:#0d8200;font-weight:bold;"> style</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"color:blue"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>Embedded html content</span><span style="color:blue;font-weight:bold;">&lt;/font&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/html&gt;</span>
+
+</pre>
+   Result: <font style="color:blue">Embedded html content</font>
+
+<H3 id="map">map</H3>
+The "map" element allows to add <a href="https://en.wikipedia.org/wiki/OpenStreetMap" title="https://en.wikipedia.org/wiki/OpenStreetMap">OpenStreetMap</a> Maps in the wiki.<br/>
+<br/>
+ The "map" element can have the following attribute: <ul>
+<li>"width": The map width: can be specified in pixels or in % of the HTML page width</li>
+<li>"height": The map heigh"</li>
+<li>"position": Optionally the alignment of the map</li>
+<li>"float": Optional, true if the map should have the "float" attribute (which means that there will be text around the map)</li>
+<li>"projection": Optional, defines the projection to use. The default will be "EPSG:4326". See also <a href="https://en.wikipedia.org/wiki/World_Geodetic_System" title="https://en.wikipedia.org/wiki/World_Geodetic_System">World Geodetic System</a></li>
+</ul>
+ The alignment of an map can be set through the "position" attribute, which can have the values "center", "left", or "right".<br/>
+<br/>
+ The "map" element has an embedded "mapBounds" element which has the following attributes: <ul>
+<li>"latCenter": The map center latitude</li>
+<li>"lonCenter": The map center longitude"</li>
+<li>"zoomLevel": The map zoom level</li>
+</ul>
+Note that by default Maps will be dynamically loaded by script, but the  <a href="article_configFile.html#dynamicmaps">dynamicMaps</a> configuration property allows to force the maps to be processed as images.
+<H4 id="example_34">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;map</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"200"</span><span style="color:#0d8200;font-weight:bold;"> height</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"200"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;mapBounds</span><span style="color:#0d8200;font-weight:bold;"> latCenter</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"34.070"</span><span style="color:#0d8200;font-weight:bold;"> lonCenter</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-118.73"</span><span style="color:#0d8200;font-weight:bold;"> zoomLevel</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"5"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/map&gt;</span>
+
+</pre>
+ Result:<br/>
+<br/>
+<br/>
+<img src="../images/map.png" id="_image_11" onclick="openImage(_image_11)" width="200" height="200" class="left" />
+
+<H3 id="condition">condition</H3>
+<div class="moreInfo" >
+Main Article: <a href="article_syntaxcondition.html">condition element</a></div>
+<br/>
+ The "condition" element allows to add conditional content depending on the presence of a  <a href="article_roots.html">package</a> or a  <a href="article_properties.html">property</a>.<br/>
+<br/>
+ The "condition" element can have the following attributes: <ul>
+<li>"condition": The name or names of the packages (separated by commas) which must all be present for the condition to be evaluated as true, or the condition type for a property<span class="tooltip"><a href="#_note_8" class="noteLink"><sup id="_note_8_1_">[8]</sup></a>
+<div class="tooltiptext">
+For example "myPack1, myPack2" is a valid value for the condition</div></span>
+</li>
+<li>"property": The name or the property which must be present for the condition to be evaluated as true. If the "value" attribute is not present, the condition will be evaluated as true if the property is present</li>
+<li>"value": The value or the property which must be present for the condition to be evaluated as true. If the "value" attribute is present, the condition will be evaluated as true if the property is present and its value is equal to "value"</li>
+</ul>
+<br/>
+<br/>
+ Note that either the "condition" attribute, or the "property" (an optionally "value") attribute must be present. If both are present, only the property condition will be evaluated.<br/>
+<br/>
+ Concerning the children elements: <ul>
+<li>The "if" child element defines the content which will be added if the condition is true</li>
+<li>The "else" child element defines the content which will be added if the condition is false</li>
+</ul>
+ Note that both the "if" and "else" elements are optional.
+<H4 id="examples_4">Examples</H4>
+ Example with "condition": <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;condition</span><span style="color:#0d8200;font-weight:bold;"> condition</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myPack"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;if&gt;</span>
+<span>      The text inside the if for myPack (will be added if "myPack" is present).</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/if&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;else&gt;</span>
+<span>      The text inside the else for myPack (will be added if "myPack" is absent).</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/else&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/condition&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ Example with "property": <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;condition</span><span style="color:#0d8200;font-weight:bold;"> property</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myProperty"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;if&gt;</span>
+<span>      The text inside the if, will be added if "myProperty" exists.</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/if&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;else&gt;</span>
+<span>      The text inside the else, will be added if "myProperty" does not exist.</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/else&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/condition&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ Example with "property" and "value": <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;condition</span><span style="color:#0d8200;font-weight:bold;"> property</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myProperty"</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;if&gt;</span>
+<span>      The text inside the if, will be added if "myProperty" exists and its value is "true".</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/if&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;else&gt;</span>
+<span>      The text inside the else, will be added if "myProperty" does not exist or its value is not "true".</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/else&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/condition&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+
+<H2 id="end_elements">End elements</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_syntaxEndElements.html">End elements</a></div>
+<br/>
+ The following elements can be used at the end of articles: <ul>
+<li>"see": allows to add a "See Also" chapter at the end of the article with wiki links to other articles</li>
+<li>"cat": define that an article belongs to one  <a href="article_categories.html">category</a></li>
+</ul>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_syntax.html#_note_1_1_" class="noteRefLink">^</a> <a href="http://docs.oracle.com/javase/8/docs/api/index.html" title="http://docs.oracle.com/javase/8/docs/api/index.html">the external link</a>.Oracle<i>. "The citation quote"</i></li>
+<li id="_note_2"> <a href="article_syntax.html#_note_2_1_" class="noteRefLink">^</a> It is not allowed to have both the "boxed" and "border" attributes on the "pre" element</li>
+<li id="_note_3"> <a href="article_syntax.html#_note_3_1_" class="noteRefLink">^</a> For packages, the package complete path will always be presented regardless of the value of this attribute</li>
+<li id="_note_4"> <a href="article_syntax.html#_note_4_1_" class="noteRefLink">^</a> See <a href="https://pdoc3.github.io/pdoc/doc/pdoc/" title="https://pdoc3.github.io/pdoc/doc/pdoc/">pdoc3.github.io</a> for more information of the pdoc API</li>
+<li id="_note_5"> <a href="article_syntax.html#_note_5_1_" class="noteRefLink">^</a> A Lightbox effect is a JavaScript mechanism that displays images and videos by filling the screen, and dimming out the rest of the web page, when the image is clicked on</li>
+<li id="_note_6"> <a href="article_syntax.html#_note_6_1_" class="noteRefLink">^</a> This has the same effect as the transclusion on wikipedia</li>
+<li id="_note_7"> <a href="article_syntax.html#_note_7_1_" class="noteRefLink">^</a> If not present, a default size will be used</li>
+<li id="_note_8"> <a href="article_syntax.html#_note_8_1_" class="noteRefLink">^</a> For example "myPack1, myPack2" is a valid value for the condition</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntaxoverview.html">Syntax overview</a>: This article presents an overview of the tags supported in the XML syntax</li>
+<li> <a href="article_mediawikimarkup.html">Mediawiki markup</a>: This article explains the supported Mediawiki markup</li>
+<li> <a href="article_wikipedia.html">Comparison with wikipedia syntax</a>: This article compares the docJGenerator syntax to the wikipedia syntax</li>
+<li> <a href="article_articles.html">Articles</a>: Article files are XML files which define the articles in the wiki</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

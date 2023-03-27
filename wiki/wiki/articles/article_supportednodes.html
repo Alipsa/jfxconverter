@@ -1,0 +1,306 @@
+<HEAD>
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY>
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left">
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/jfxConverter/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/jfxConverter/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/jfxConverter/blog/">Changes Log</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Supported Nodes and CSS properties</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#supported_nodes">1&nbsp; Supported Nodes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#supported_properties">2&nbsp; Supported properties</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#general_properties">2.1&nbsp; General properties</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#region_properties">2.2&nbsp; Region properties</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#2d_shapes_properties">2.3&nbsp; 2D Shapes properties</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">3&nbsp; Notes</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ This article presents the Nodes and CSS properties supported by the converter.<br/>
+<br/>
+ See <a href="https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html" title="https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html">cssref</a> for the definition of JavaFX CSS properties.
+<H2 id="supported_nodes">Supported Nodes</H2>
+ The Nodes supported by the converter are presented in the following table.<br/>
+<br/>
+
+<table class="border" >
+<thead class="notSortable">
+<tr>
+<th valign="center"  class="column" >Node</th>
+<th valign="center"  class="column" >Specific Properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/shape/Line.html" class="apiLink" title="javafx.scene.shape.Line">Line</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#2d_shapes_properties">2D Shapes properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/text/Text.html" class="apiLink" title="javafx.scene.text.Text">Text</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#2d_shapes_properties">2D Shapes properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/shape/Polygon.html" class="apiLink" title="javafx.scene.shape.Polygon">Polygon</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#2d_shapes_properties">2D Shapes properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/shape/Polyline.html" class="apiLink" title="javafx.scene.shape.Polyline">Polyline</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#2d_shapes_properties">2D Shapes properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/shape/SVGPath.html" class="apiLink" title="javafx.scene.shape.SVGPath">SVGPath</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#2d_shapes_properties">2D Shapes properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/shape/Path.html" class="apiLink" title="javafx.scene.shape.Path">Path</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#2d_shapes_properties">2D Shapes properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/shape/Circle.html" class="apiLink" title="javafx.scene.shape.Circle">Circle</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#2d_shapes_properties">2D Shapes properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/shape/Ellipse.html" class="apiLink" title="javafx.scene.shape.Ellipse">Ellipse</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#2d_shapes_properties">2D Shapes properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/shape/Arc.html" class="apiLink" title="javafx.scene.shape.Arc">Arc</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#2d_shapes_properties">2D Shapes properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/shape/Rectangle.html" class="apiLink" title="javafx.scene.shape.Rectangle">Rectangle</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#2d_shapes_properties">2D Shapes properties</a><br/>
+ &minus;fx&minus;arc&minus;width<br/>
+ &minus;fx&minus;arc&minus;height </td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/shape/QuadCurve.html" class="apiLink" title="javafx.scene.shape.QuadCurve">QuadCurve</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#2d_shapes_properties">2D Shapes properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/shape/CubicCurve.html" class="apiLink" title="javafx.scene.shape.CubicCurve">CubicCurve</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#2d_shapes_properties">2D Shapes properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/Group.html" class="apiLink" title="javafx.scene.Group">Group</a></td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/layout/Region.html" class="apiLink" title="javafx.scene.layout.Region">Region</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#region_properties">Region properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/control/Control.html" class="apiLink" title="javafx.scene.control.Control">Control</a></td>
+<td valign="center" class="border">handle  <a href="article_supportednodes.html#region_properties">Region properties</a></td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/image/ImageView.html" class="apiLink" title="javafx.scene.image.ImageView">ImageView</a></td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/shape/Shape3D.html" class="apiLink" title="javafx.scene.shape.Shape3D">Shape3D</a><span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+Handled by creating an image from the 3D Shape</div></span>
+</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border"><a href="http://docs.oracle.com/javase/8/javafx/api//javafx/scene/SubScene.html" class="apiLink" title="javafx.scene.SubScene">SubScene</a></td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+</tbody>
+</table>
+
+<H2 id="supported_properties">Supported properties</H2>
+
+<H3 id="general_properties">General properties</H3>
+ The general properties supported by the converter are presented in the following table. Note that properties specific to a Node are presented in the previous table.<br/>
+<br/>
+
+<table class="border" >
+<thead class="notSortable">
+<tr>
+<th valign="center"  class="column" >Property</th>
+<th valign="center"  class="column" >Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;opacity</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+</tbody>
+</table>
+
+<H3 id="region_properties">Region properties</H3>
+ Region properties are applied on Regions and Controls.<br/>
+<br/>
+
+<table class="border" >
+<thead class="notSortable">
+<tr>
+<th valign="center"  class="column" >Property</th>
+<th valign="center"  class="column" >Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;region&minus;background</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;region&minus;border</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;shape</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;scale&minus;shape</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;background&minus;color</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;background&minus;image</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;background&minus;position</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+</tbody>
+</table>
+
+<H3 id="2d_shapes_properties">2D Shapes properties</H3>
+ Shapes properties are applied on 2D Shapes.<br/>
+<br/>
+
+<table class="border" >
+<thead class="notSortable">
+<tr>
+<th valign="center"  class="column" >Property</th>
+<th valign="center"  class="column" >Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;stroke&minus;width</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;stroke&minus;line&minus;cap</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;stroke&minus;line&minus;join</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;stroke&minus;miter&minus;limit</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;stroke&minus;dash&minus;array</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;stroke&minus;dash&minus;offset</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;stroke</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;font&minus;family</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;font&minus;size</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;font&minus;style</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;font&minus;weight</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;font</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;text&minus;fill</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+<tr>
+<td valign="center" class="border">&minus;fx&minus;fill</td>
+<td valign="center" class="border">&minus;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_supportednodes.html#_note_1_1_" class="noteRefLink">^</a> Handled by creating an image from the 3D Shape</li>
+</ol>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>Copyright 2016-2018 Herve Girod. All Rights Reserved. Documentation and source under the BSD licence</i></P></div>
+</BODY>
+</HTML>

@@ -1,0 +1,114 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_wikis.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Mediawikis</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#apis_property">1&nbsp; APIs property</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example">1.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#association_with_the_checklinks_property">2&nbsp; Association with the checkLinks property</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">3&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+The location of Mediawikis can be specified using the "mediawiki" elements in  <a href="article_apis.html">APIs configuration XML file</a>.<br/>
+<br/>
+ Note that: <ul>
+<li>APIs paths can only be defined as absolute as an external http link</li>
+<li>The URL must point to the "final" URL before the articles themselves. For example, for the English wikipedia, it would  be "http://en.wikipedia.org/wiki"</li>
+<li>It is not necessary to define an API link for wikipedia, the  <a href="article_syntax.html#wikipedia">wikipedia</a> element in article allows to refer directly to Wikipedia articles without having to define the path of Wikipedia itself in the APis configuration file</li>
+</ul>
+
+<H2 id="apis_property">APIs property</H2>
+The "APIs" property specifes an XML file defining a list of Mediawiki links. See  <a href="resources/APIs.xsd">APIs.xsd</a> for the APIs Schema. Thei file allows to specify a list of Mediawiki links, and for each Mediawiki: <ul>
+<li>Its URL</li>
+<li>Its ID</li>
+</ul>
+
+<H3 id="example">Example</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;APIs&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;mediawikis&gt;</span>
+<span>          </span><span style="color:blue;font-weight:bold;">&lt;mediawiki</span><span style="color:#0d8200;font-weight:bold;"> url</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"https://en.wikipedia.org/wiki"</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"wikipediaEN"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/mediawikis&gt;</span><span>   </span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/APIs&gt;</span>
+
+</pre>
+
+<H2 id="association_with_the_checklinks_property">Association with the checkLinks property</H2>
+The validity and existence of  <a href="article_syntax.html#mediawiki">mediawiki</a> tags will only be checked if the "checkLinks" property is set to true.</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_apis.html">APIs property</a>: Configure how to access external APIs and wikis</li>
+<li> <a href="article_configFile.html">Configuration file</a>: It is possible to define an optional property / value configuration file when starting the application (using the graphical UI or the command line)</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a> |
+ <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

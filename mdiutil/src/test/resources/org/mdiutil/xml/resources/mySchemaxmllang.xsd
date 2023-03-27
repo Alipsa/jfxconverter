@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:sb="http://my/Domain"
+           targetNamespace="http://my/Domain"
+           elementFormDefault="qualified">
+   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2009/01/xml.xsd" /> 
+   <xs:simpleType name="QueryMode">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Auto"/>
+         <xs:enumeration value="Manual"/>
+      </xs:restriction>
+   </xs:simpleType>   
+   
+   <xs:simpleType name="QueryFilter">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Always"/>
+         <xs:enumeration value="OnDemand"/>
+      </xs:restriction>
+   </xs:simpleType>    
+   
+   <xs:element name="KnowledgeSets" type="sb:KnowledgeSets" />
+   <xs:complexType name="KnowledgeSets">
+      <xs:sequence>
+         <xs:element maxOccurs="1" minOccurs="1" name="Title" type="sb:Title"/>
+         <xs:element maxOccurs="1" minOccurs="1" name="NextSetId" type="sb:NextSetId"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="KnowledgeFeatureModel" type="sb:KnowledgeFeatureModel"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:lang"/>
+   </xs:complexType>
+   <xs:complexType name="Title" mixed="true" /> 
+   <xs:complexType name="NextSetId" mixed="true" /> 
+      
+   <xs:complexType name="KnowledgeFeatureModel">   
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="Value" type="sb:Value"/>
+      </xs:sequence>      
+      <xs:attribute name="QueryFilter" type="sb:QueryFilter" use="required" />
+      <xs:attribute name="QueryDetail" type="sb:QueryFilter" use="required"/>
+      <xs:attribute name="QuerySet" type="sb:QueryFilter"/>
+   </xs:complexType>      
+   
+   
+   <xs:complexType name="Value" mixed="true">    
+      <xs:attribute ref="xml:lang"/>
+   </xs:complexType>      
+</xs:schema>

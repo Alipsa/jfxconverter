@@ -1,0 +1,140 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_syntaxStartingElements.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Syntax starting elements</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#meta">1&nbsp; meta</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example">1.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#alttitle">2&nbsp; altTitle</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#relationship_with_the_redirect_article_types">2.1.1&nbsp; Relationship with the redirect article types</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_1">2.2&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#seealso">3&nbsp; seeAlso</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#infobox">4&nbsp; infobox</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_2">4.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">5&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ This article explains the XML tags which can be used at the beginning of articles. The following elements can be used at the beginning of articles: <ul>
+<li>"meta": specifies the text which should be written as an explanation for an article</li>
+<li>"altTitle": specify alternate titles for the article</li>
+<li>"seeAlso": allows to add a text at the beginning of the article (before the table of contents) which can refer to another article which can have a similar title or subject</li>
+<li>"infobox": a fixed-format table added to the top right-hand corner of articles to consistently present a summary of some unifying aspect that the articles share</li>
+</ul>
+
+<H2 id="meta">meta</H2>
+ The "meta" element specifies the text which should be written as an explanation for an article in the dictionnary or categories.
+<H3 id="example">Example</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;meta</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"This text will appear in the dictionnary and categories listings"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+
+<H2 id="alttitle">altTitle</H2>
+ The "altTitle" element allows to specify alternate titles for the article. These titles will be used for the   <a href="article_dictionnary.html">dictionnary</a>, the  <a href="article_categories.html">categories</a>, and even the autocomplete search box.
+<H4 id="relationship_with_the_redirect_article_types">Relationship with the redirect article types</H4>
+Contrary to the  <a href="article_articles.html#redirect_articles">redirect</a> article types, "altTitle" elements allow to specify more than one alternate title for one article. However, it does not allow to redirect to a title or anchor inside an article.
+<H3 id="example_1">Example</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"article name"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;altTitle</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the other name"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+
+<H2 id="seealso">seeAlso</H2>
+ The "seeAlso" element allows to add a text at the beginning of the article (before the table of contents) which can refer to another article which can have a similar title or subject. The attributes of this element are: <ul>
+<li>"this": a text to refer to the article</li>
+<li>"other": a text to refer to the other article</li>
+<li>"id": the identification of the other article</li>
+<li>"package": the optional package</li>
+</ul>
+
+<H2 id="infobox">infobox</H2>
+The "infobox" element allows to add an  <a href="article_infobox.html">infobox</a> at the beginning of an article. As for wikipedia, an infobox is a fixed-format table added to the top right-hand corner of articles to consistently present a summary of some unifying aspect that the articles share.<br/>
+<br/>
+ The "infobox" element define the values for the properties specified in the associated  <a href="article_infobox.html">infobox template</a>.
+<H3 id="example_2">Example</H3>
+See  <a href="article_infobox.html#usage">infobox template</a>.</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntaxoverview.html">Syntax overview</a>: This article presents an overview of the tags supported in the XML syntax</li>
+<li> <a href="article_syntax.html">Syntax</a>: This article explains the XML tags which can be used to specify the articles syntax</li>
+<li> <a href="article_articles.html">Articles</a>: Article files are XML files which define the articles in the wiki</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

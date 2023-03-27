@@ -1,0 +1,5 @@
+/dist/
+/distrib/
+/.project
+target/
+/.idea/

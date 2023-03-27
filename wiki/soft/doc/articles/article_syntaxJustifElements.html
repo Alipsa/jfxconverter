@@ -1,0 +1,243 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_syntaxJustifElements.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Syntax justification elements</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#new_lines">1&nbsp; New lines</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example">1.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#br">2&nbsp; br</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_1">2.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#empty">3&nbsp; empty</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_2">3.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#tab">4&nbsp; tab</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_3">4.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#hr">5&nbsp; hr</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_4">5.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#justification">6&nbsp; Justification</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#escaped_characters">7&nbsp; Escaped characters</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#formatting_text">8&nbsp; Formatting text</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#font_size">8.1&nbsp; Font size</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_5">8.2&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">9&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ This article explains the XML tags which can be used to specify the articles justification.
+<H2 id="new_lines">New lines</H2>
+ In order for the next text to go into a new line, you can: <ul>
+<li>Add a  <a href="article_syntaxJustifElements.html#br">br</a> tag after the line</li>
+<li>or add a blanck line</li>
+</ul>
+
+<H3 id="example">Example</H3>
+
+<pre>
+<span>      First line.</span>
+<span>  </span>
+<span>      Second line.</span>
+</pre>
+ will result to: First line.<br/>
+<br/>
+ Second line.
+<H2 id="br">br</H2>
+ The "br" element allows to enter a line break.
+<H3 id="example_1">Example</H3>
+
+<pre>
+<span>      first line of text</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;br/&gt;</span>
+<span>      second line of text</span>
+
+</pre>
+ The result will be: <br/>
+ first line of text <br/>
+ second line of text
+<H2 id="empty">empty</H2>
+ The "br" element allows to put an empty line before the next sentence.
+<H3 id="example_2">Example</H3>
+
+<pre>
+<span>      first line of text</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;empty/&gt;</span>
+<span>      second line of text</span>
+
+</pre>
+ The result will be: <br/>
+ first line of text <br/>
+<br/>
+ second line of text
+<H2 id="tab">tab</H2>
+ The "tab" element allows to enter a tab.
+<H3 id="example_3">Example</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;tab/&gt;</span><span>the line of text</span>
+
+</pre>
+ The result will be: <br/>
+<span style="display:inline-block; width:1em;"></span>the line of text
+<H2 id="hr">hr</H2>
+ The "hr" element allows to enter a thematic break.
+<H3 id="example_4">Example</H3>
+
+<pre>
+<span>      first line of text</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;hr/&gt;</span>
+<span>      second line of text</span>
+
+</pre>
+ The result will be: <br/>
+ first line of text 
+<hr/>
+ second line of text 
+<H2 id="justification">Justification</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_justification.html">Justification</a></div>
+<br/>
+ By default the articles text is justified. However it is possible to configure if and were the justification is applied.
+<H2 id="escaped_characters">Escaped characters</H2>
+Characters such as &lt; and &gt; can't be used in the XML file. It is possible to use HTML escaped characters for: <ul>
+<li>&lt; escaped by &amp;lt;</li>
+<li>&gt; escaped by &amp;gt;</li>
+</ul>
+ Furthermore, it is possible to escape characters by using the regular XML CDATA way for escaping characters or by using the "esc" element. See  <a href="article_escapingCharacters.html">Escaping characters</a> for more information.<br/>
+<br/>
+ Also, non UTF8 characters should be escaped by default (for example: &amp;#A0;). However, it is possible to let the generator escape them for you. See  <a href="article_escapeNonUTF8.html">Escaping non UTF8 characters</a> for more information.
+<H2 id="formatting_text">Formatting text</H2>
+ It is possible to set the color, the style (bold or italic), or the font size of text using one of the following tags: <ul>
+<li>"i": put the enclosed text in italic. Example:  <code>&lt;i&gt;text in italic&lt;/i&gt;</code></li>
+<li>"b": put the enclosed text in bold. Example:  <code>&lt;b&gt;text in bold&lt;/b&gt;</code></li>
+<li>"u": put the enclosed text in underlined text. Example:  <code>&lt;u&gt;text in underline&lt;/u&gt;</code></li>
+<li>"font": set the font size, color, and format of the enclosed text. The following attributes are:</li>
+
+<ul>
+<li>"size": the text size, which can be a number value or an HTML font size name. See  <a href="article_syntaxJustifElements.html#font_size">font size</a> for more information</li>
+<li>"color": the text color, using an HTML color name</li>
+<li>"background": the text background color, using an HTML color name</li>
+<li>"format": the text style, which can be "regular", "italic", "bold", "underline", "sub" (for subscript), or "sup" (for superscript),  or a combination of these tags</li>
+<li>"face": the font face of the font</li>
+</ul>
+</ul>
+ Text can be formatted in a lot of elements: <ul>
+<li> <a href="article_syntax.html#pre">pre</a></li>
+<li> <a href="article_syntax.html#ul">li</a></li>
+<li> <a href="article_syntax.html#box">box</a></li>
+<li> <a href="article_syntax.html#paragraphs">paragraphs</a></li>
+<li> <a href="article_syntax.html#table">table cells</a></li>
+</ul>
+
+<H3 id="font_size">Font size</H3>
+ The font size can be specified as a number or with one of the HTML font size names: <ul>
+<li>medium</li>
+<li>xx-small</li>
+<li>x-small</li>
+<li>small</li>
+<li>large</li>
+<li>x-large</li>
+<li>xx-large</li>
+<li>smaller</li>
+<li>larger</li>
+</ul>
+
+<H3 id="example_5">Example</H3>
+
+<pre>
+<span>      This is a sentence with </span><span style="color:blue;font-weight:bold;">&lt;font</span><span style="color:#0d8200;font-weight:bold;"> color</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"red"</span><span style="color:#0d8200;font-weight:bold;"> format</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"bold"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>a bold text in red</span><span style="color:blue;font-weight:bold;">&lt;/font&gt;</span>
+<span>      This is another sentence with </span><span style="color:blue;font-weight:bold;">&lt;font</span><span style="color:#0d8200;font-weight:bold;"> background</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"yellow"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>a text on yellow background</span><span style="color:blue;font-weight:bold;">&lt;/font&gt;</span>
+<span>      This is another sentence with </span><span style="color:blue;font-weight:bold;">&lt;font</span><span style="color:#0d8200;font-weight:bold;"> color</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"blue"</span><span style="color:#0d8200;font-weight:bold;"> background</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"yellow"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>a blue text on yellow background</span><span style="color:blue;font-weight:bold;">&lt;/font&gt;</span>
+<span>      This is another sentence with </span><span style="color:blue;font-weight:bold;">&lt;i&gt;</span><span>a text in italic</span><span style="color:blue;font-weight:bold;">&lt;/i&gt;</span>
+<span>      This is a sentence with </span><span style="color:blue;font-weight:bold;">&lt;font</span><span style="color:#0d8200;font-weight:bold;"> format</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"bold italic"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>a bold and italic text</span><span style="color:blue;font-weight:bold;">&lt;/font&gt;</span>
+
+</pre>
+ Result: <br/>
+This is a sentence with <font color="red"><b>a bold text in red</b></font><br/>
+This is another sentence with <font><span style="background-color:yellow;">a text on yellow background</span></font><br/>
+This is another sentence with <font color="blue"><span style="background-color:yellow;">a blue text on yellow background</span></font><br/>
+This is another sentence with <i>a text in italic</i><br/>
+This is another sentence with <b><i>a bold and italic text</i></b></div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntaxoverview.html">Syntax overview</a>: This article presents an overview of the tags supported in the XML syntax</li>
+<li> <a href="article_syntax.html">Syntax</a>: This article explains the XML tags which can be used to specify the articles syntax</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

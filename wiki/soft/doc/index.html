@@ -1,0 +1,191 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="resources/articles.js"></script>
+<script type="text/javascript" src="resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="categories.html">Categories</a> 
+<br/>
+ <a href="dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="articles/article_faq.html">FAQ</a>
+<br/>
+<a href="articles/article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div class="middleForIDX">
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#wiki_source_format">1&nbsp; Wiki source format</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#wiki_output_format">2&nbsp; Wiki output format</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#distribution">3&nbsp; Distribution</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#usage">4&nbsp; Usage</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#gui_interface">4.1&nbsp; GUI interface</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#command-line_starting">4.2&nbsp; Command-line starting</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#usage_in_ant_build_files">4.2.1&nbsp; Usage in ant build files</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#specification_syntax">5&nbsp; Specification syntax</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#customizing_the_wiki_content">6&nbsp; Customizing the wiki content</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#dependencies">7&nbsp; Dependencies</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#tutorial">8&nbsp; Tutorial</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#troubleshooting">9&nbsp; Troubleshooting</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">10&nbsp; Notes</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ The docJGenerator project allows to generate a html site with a list of XML files defining a documentation. It allows to produce an offline wiki-like site. It is also possible to configure the tool to parse files with the  <a href="articles/article_mediawiki.html">mediawiki syntax</a> or the  <a href="articles/article_markdown.html">markdown syntax</a>. You can also see the  <a href="articles/article_comparisons.html#features_overview">features overview</a> of this tool. <br/>
+<br/>
+It also allows to generate a  <a href="articles/article_docgenhelp.html">DocGenerator Help</a>, which provide a help system in any Swing or JavaFX application, with the same definition. Note that the generated format, and the API, have no relationship at all with the original <a href="https://en.wikipedia.org/wiki/JavaHelp" title="https://en.wikipedia.org/wiki/JavaHelp">JavaHelp</a> system. For more information on how the docJGenerator compares to JavaHelp, see  <a href="articles/article_javahelp.html">Comparison with JavaHelp</a>.
+<H2 id="wiki_source_format">Wiki source format</H2>
+The default format for the wiki generator is a custom XML-format<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+See  <a href="articles/article_syntax.html">syntax</a></div></span>
+. However it is possible to use two other popular wiki formats: <ul>
+<li>The  <a href="articles/article_mediawiki.html">mediawiki</a> markup which is used on Wikipedia and more generally on all Mediawiki wikis</li>
+<li>The  <a href="articles/article_markdown.html">markdown</a> markup</li>
+</ul>
+
+<H2 id="wiki_output_format">Wiki output format</H2>
+The default output is a html site. However, it is also possible to generate the wiki in the  <a href="articles/article_pdf.html">PDF</a> or  <a href="articles/article_docx.html">DOCX</a> formats.
+<H2 id="distribution">Distribution</H2>
+See  <a href="articles/article_distrib.html">distribution</a> for how to install the tool.
+<H2 id="usage">Usage</H2>
+<div class="moreInfo" >
+Main Article: <a href="articles/article_algorithm.html">Algorithm</a></div>
+<br/>
+ Just double-click on the Jar file of the application (or perform  <code>java -jar docGenerator.jar</code> if you did not associate the Java application to jar files), and configure the generator: <ul>
+<li>The input directory or directories where the input XML files and image resources are to be found. See  <a href="articles/article_roots.html">root files and packages</a> if you want an explanation on how to use the generator with more than one root directory</li>
+<li>The output directory where the output web site must be generated</li>
+<li>(optional): an alternate index file to use if there are more than one input directory</li>
+<li>(optional): a configuration file (see  <a href="articles/article_configFile.html">configuration file</a>)</li>
+<li>It is possible to define a  <a href="articles/article_properties.html">properties file</a> defining key/value string replacements in the text</li>
+<li>The value for the maximum number of files to be generated in one directory</li>
+</ul>
+ The application will generate a web site with an index file (wiki-like). It is also possible to generate a   <a href="articles/article_pdf.html">PDF file</a> or  <a href="articles/article_docx.html">Word file</a> rather than a web site.<br/>
+<br/>
+ For more information how the tool works, see  <a href="articles/article_algorithm.html">Algorithm</a>.
+<H3 id="gui_interface">GUI interface</H3>
+<div class="moreInfo" >
+Main Article: <a href="articles/article_gui.html">GUI interface</a></div>
+<br/>
+ Double clicking on the Jar file of the application without specifying any command-line parameter will open the GUI of the application.
+<H3 id="command-line_starting">Command-line starting</H3>
+<div class="moreInfo" >
+Main Article: <a href="articles/article_commandline.html">Command-line starting</a></div>
+<br/>
+ It is possible to execute the application by the command-line without showing the UI. Examples: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output</span>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -$version=0.6</span>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -cleaned=true -limit=500</span>
+<span>      java -jar docGenerator.jar -input=wiki/input;wiki2/input -index=myIndex.xml -output=wiki/output</span>
+</pre>
+
+<H4 id="usage_in_ant_build_files">Usage in ant build files</H4>
+<div class="moreInfo" >
+Main Article: <a href="articles/article_ant.html">Ant integration</a></div>
+<br/>
+ It is possible to use it in an ant build file, such as for example:  In this basic example: <ul>
+<li>The input directory is "wiki/input", which is in the same directory as the ant file</li>
+<li>The output directory is "wiki/output", which is in the same directory as the ant file</li>
+<li>The application jar is also in the same directory as the ant file</li>
+</ul>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;java</span><span style="color:#0d8200;font-weight:bold;"> classname</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"org.docgene.main.DocGenerator"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-input=wiki/input"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-output=wiki/output"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;classpath&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"docGenerator.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"plugins/scripts.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/classpath&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/java&gt;</span>
+
+</pre>
+ See  <a href="articles/article_ant.html">ant integration</a>.
+<H2 id="specification_syntax">Specification syntax</H2>
+<div class="moreInfo" >
+Main Article: <a href="articles/article_typesoffiles.html">Types of files</a></div>
+<br/>
+ The input directory can contain several types of files: <ul>
+<li>Image Files (as png, jpg, etc...) and XML definition files for  <a href="articles/article_imageFiles.html">wiki image resources</a></li>
+<li>Resource Files and XML definition files for  <a href="articles/article_resourceFiles.html">wiki resources</a></li>
+<li>XML definition files for  <a href="articles/article_articles.html">wiki articles</a> and their  <a href="articles/article_syntaxoverview.html">syntax</a>. See also  <a href="articles/article_syntax.html">syntax</a> for the detailed XML syntax specification</li>
+<li>XML definition files for  <a href="articles/article_categories.html#adding_descriptions_to_categories">categories description</a></li>
+<li>XML definition files for the  <a href="articles/article_glossary.html">glossary</a></li>
+<li>The optional XML definition file for the  <a href="articles/article_footerAndHeader.html#header">header</a> and the  <a href="articles/article_footerAndHeader.html#footer">footer</a> which can be presented for each article</li>
+</ul>
+Note that contrary to wikipedia, DocJGenerator uses an XML-based syntax. See the  <a href="articles/article_wikipedia.html">comparison with wikipedia syntax</a> for more information on the differences between the two syntaxes.
+<H2 id="customizing_the_wiki_content">Customizing the wiki content</H2>
+See  <a href="articles/article_customize.html">customizing the wiki</a>.
+<H2 id="dependencies">Dependencies</H2>
+See  <a href="articles/article_dependencies.html">dependencies</a>.
+<H2 id="tutorial">Tutorial</H2>
+See  <a href="articles/article_tutorials.html">tutorials</a> for a list of tutorials on how to use this tool. The  <a href="articles/article_tutorial1.html">first tutorial</a> is a step-by-step tutorial to create your first wiki.
+<H2 id="troubleshooting">Troubleshooting</H2>
+See  <a href="articles/article_troubleshooting.html">Troubleshooting</a>.</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="index.html#_note_1_1_" class="noteRefLink">^</a> See  <a href="articles/article_syntax.html">syntax</a></li>
+</ol>
+</div>
+
+<hr/>
+ <a href="categories.html">Categories</a>:  <a href="categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

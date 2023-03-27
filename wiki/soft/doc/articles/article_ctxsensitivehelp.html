@@ -1,0 +1,161 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_ctxsensitivehelp.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Context-sensitive Help</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#context-sensitive_help_overview">1&nbsp; Context-sensitive Help overview</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#help_content_configuration">2&nbsp; Help content configuration</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#context-sensitive_help_integration">3&nbsp; Context-sensitive Help integration</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#registering_menu_items">3.1&nbsp; Registering Menu items</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">4&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">5&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ The context-sensitive help allows to go to an article in the help system by clicking on a component in the GUI. The Help content allows to specify IDs which will be used to link the elements in the GUI where the user will click to their corresponding articles and titles. 
+<H2 id="context-sensitive_help_overview">Context-sensitive Help overview</H2>
+ To use the Context-sensitive help: <ul>
+<li>The user click on the button to call the context-sensitive help (by default the button has this icon:  <img src="../images/questionMark.png" id="_image_0" onclick="openImage(_image_0)" class="left middle" />
+)</li>
+<li>The pointer changes to a new shape (by default the shape will be:  <img src="../images/helpCursor.png" id="_image_1" onclick="openImage(_image_1)" class="left middle" />
+)</li>
+<li>If the user now left click on a component which has an associated helpID, then the Help window appear on the associated article and title</li>
+</ul>
+<img src="../images/helpcontext3.png" id="_image_2" onclick="openImage(_image_2)" width="50%" class="left" />
+<br/>
+<br/>
+<br/>
+ It is possible to exit the Context-sensitive help by either: <ul>
+<li>Typing the escape key</li>
+<li>Right clicking anywhere on the application</li>
+</ul>
+
+<H2 id="help_content_configuration">Help content configuration</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_helpcontent.html#context-sensitive_help">Help content configuration</a></div>
+<br/>
+ The help topics IDs must be defined in the  <a href="article_helpcontent.html#context-sensitive_help">Help content configuration</a>. For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;helpContent&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button1"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button 1"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button2"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button 2"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>      </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button3"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"several components"</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button 3"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"textfield"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"several components"</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"text field"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"panel"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"several components"</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"panel"</span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/helpContent&gt;</span><span>      </span>
+
+</pre>
+ In this example, the "button1" ID links to the article with the name "button 1". The "textfield" ID links to the title "text field" in the  article "several components". Note that as for  <a href="article_syntax.html#ref">references</a>, you don't need to type the exact name for the title and the article:  See  <a href="article_namingconstraints.html">naming constraints</a>.
+<H2 id="context-sensitive_help_integration">Context-sensitive Help integration</H2>
+ To integrate the context-sensitive help, you must: <ul>
+<li>First have a Help component and window (see  <a href="article_docgenhelp.html#api_usage">DocGenerator Help feature</a>)</li>
+<li>Register the components which will be associated with a help topic, by calling <code><span>HelpContentViewer.</span><span style="font-weight:bold;">registerContextHelp</span><span>(helpID, component)</span></code></li>
+<li>Create a context-sensitive help button, by calling <code><span>HelpContentViewer.</span><span style="font-weight:bold;">createContextHelpButton</span><span>()</span></code></li>
+</ul>
+Note that you might also need to register the top-level Windows in which they are or will be defined<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+This is only necessary if some of the components you add are not  in any window when you register them</div></span>
+, by calling: <br/>
+<br/>
+
+<pre>
+<span>      HelpContentViewer.</span><span style="font-weight:bold;">registerContextHelpWindow</span><span>(window);</span>
+
+</pre>
+
+<H3 id="registering_menu_items">Registering Menu items</H3>
+It is possible to register Menu items as for any GUI component<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+The functionality only work for the moment in Swing</div></span>
+. in this case,   clicking on the parent Menu will open the menu if it is not already registered for the Help system, and clicking on a Menu item registered   with the help will show the associated article or title in the Help Window. </div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_ctxsensitivehelp.html#_note_1_1_" class="noteRefLink">^</a> This is only necessary if some of the components you add are not  in any window when you register them</li>
+<li id="_note_2"> <a href="article_ctxsensitivehelp.html#_note_2_1_" class="noteRefLink">^</a> The functionality only work for the moment in Swing</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_docgenhelp.html">Help system</a>: This article explains how to use the JavaHelp-like feature of the tool</li>
+<li> <a href="article_helpcontent.html#context-sensitive_help">Help content configuration</a>: This article explains how to configure the help content</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_javahelp.html">javahelp</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

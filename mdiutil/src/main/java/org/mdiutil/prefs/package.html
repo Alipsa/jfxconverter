@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+  <HEAD>
+    <TITLE></TITLE>
+  </HEAD>
+  <BODY>
+  This package contains an implementation of the java preferences classes,
+  allowing to use these preferences in a network. These preferences have the following properties:
+  <ul>
+  <li>the user preferences are serialized in an xml file, under a directory specific of the application</li>
+  <li>the system preferences are serialized in an xml file</li>
+  </ul>
+  <p>This ensures that the preferences will follow the "nomad" user.</p> 
+  <p>FIXED : It was necessary to perfom a more thoroughly modification than expected in
+  the package, because the java.util.prefs package does create "java" Preferences by default  
+  when an XML tree is imported, or nodes added, which result in the creation of a node in the 
+  default java backing store.</p>
+ <p>For example, in Windows, the backing store is the Windows registry, which is modified even
+ if a custom PreferencesFactory is used.</p>
+  </BODY>
+</HTML>

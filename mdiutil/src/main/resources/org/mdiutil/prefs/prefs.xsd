@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+   <xs:simpleType name="rootType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="system"/>
+         <xs:enumeration value="user"/>
+      </xs:restriction>
+   </xs:simpleType>  
+   <xs:complexType name="map" >
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="entry" type="entry" />
+      </xs:sequence>     
+   </xs:complexType> 
+   <xs:complexType name="entry" >   
+      <xs:attribute name="key" type="xs:string" use="required"/>      
+      <xs:attribute name="value" type="xs:string" use="required"/>   
+   </xs:complexType>       
+   <xs:complexType name="node" >   
+      <xs:sequence>
+         <xs:element maxOccurs="1" minOccurs="1" name="map" type="map" />
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="node" type="node" />
+      </xs:sequence>         
+      <xs:attribute name="name" type="xs:string" use="required"/>        
+   </xs:complexType>          
+   <xs:complexType name="root" >
+      <xs:sequence>
+         <xs:element maxOccurs="1" minOccurs="1" name="map" type="map" />
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="node" type="node" />
+      </xs:sequence>         
+      <xs:attribute name="type" type="rootType" use="required"/>
+   </xs:complexType>    
+   <xs:complexType name="preferences" >
+      <xs:sequence>
+         <xs:element maxOccurs="1" minOccurs="1" name="root" type="root" />
+      </xs:sequence>         
+      <xs:attribute name="EXTERNAL_XML_VERSION" type="xs:string"/>
+   </xs:complexType>      
+   <xs:element name="preferences" type="preferences"/>
+</xs:schema>

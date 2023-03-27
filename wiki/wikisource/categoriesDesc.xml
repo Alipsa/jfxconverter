@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<categories>
+   <category id="general" desc="General informations" />
+   <category id="drivers" desc="Drivers informations" />
+   <category id="tutorials" desc="Tutorials" />
+</categories>

@@ -1,0 +1,210 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_relaxedsyntax.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Relaxed Syntax</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#setting_of_the_property">1&nbsp; Setting of the property</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#syntax">2&nbsp; Syntax</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#pre_content">2.1&nbsp; Pre content</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#titles_definition">2.2&nbsp; Titles definition</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#first_example">2.2.1&nbsp; First Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#second_example">2.2.2&nbsp; Second Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#lists">2.3&nbsp; Lists</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example">2.3.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#bold_and_italic_text">2.4&nbsp; Bold and italic text</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_1">2.4.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">3&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">4&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+The "relaxedSyntax"  <a href="article_configFile.html#relaxedsyntax">configuration property</a> allows a relaxed syntax for some elements in the XML content of articles. Note that if you really want to use a "full" Mediawiki syntax, you can define an article in full Mediawiki markup  (see  <a href="article_mediawiki.html">mediawiki syntax</a>). 
+<H2 id="setting_of_the_property">Setting of the property</H2>
+ The property can be set in several ways: <ul>
+<li>Directly on the  <a href="article_gui.html">GUI interface</a></li>
+<li>As a  <a href="article_commandline.html#relaxedsyntax">command-line argument</a></li>
+<li>As a  <a href="article_configFile.html#relaxedsyntax">configuration file property</a></li>
+</ul>
+<br/>
+<br/>
+ Note that this property specifies the default syntax for each article. However, it is still possible to override this setting for any article by specifying the "syntax" attribute on any article.
+<H2 id="syntax">Syntax</H2>
+There are several alternative syntaxes which can be used if the syntax is relaxed<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+These alternative syntaxes are similar to the Mediawiki flavor used by wikipedia (see also  <a href="article_wikipedia.html">comparison with wikipedia syntax</a>)</div></span>
+: <ul>
+<li>The content of "pre" tags can contain any XML content inside the element</li>
+<li>There is a simpler way to define titles</li>
+<li>There is a simpler way to define lists</li>
+<li>There is a simpler way to define bold and italic text</li>
+</ul>
+ Note that the strict syntax is still alllowed even if the syntax is set as relaxed. Also if you really want to use a "full" Mediawiki syntax, you can define an article in full Mediawiki markup (see  <a href="article_mediawiki.html">mediawiki syntax</a>). 
+<H3 id="pre_content">Pre content</H3>
+The content of  <a href="article_syntax.html#pre">pre</a> tags can contain any XML content inside the element (by default only  <a href="article_syntax.html#formatting_text">font</a> elements are allowed inside these elements). For example the following content is not allowed if the "relaxedSyntax" property is not set but will be allowed if it is set: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;pre&gt;</span>
+<span>      first line</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;parent</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"name"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;child</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"child"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/parent&gt;</span>
+<span>      second line</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/pre&gt;</span>
+
+</pre>
+
+<H3 id="titles_definition">Titles definition</H3>
+Titles can be defined by setting two or more "=" characters <b>at the beginning</b> of a line. The level of the title is specified by the number of "=" characters.
+<H4 id="first_example">First Example</H4>
+ For example: <br/>
+
+<pre>
+<span>      == my title</span>
+</pre>
+ is equivalent to:<br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;title</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my title"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+
+<H4 id="second_example">Second Example</H4>
+
+<pre>
+<span>      === my level 2 title</span>
+</pre>
+ is equivalent to:<br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;title</span><span style="color:#0d8200;font-weight:bold;"> level</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"2"</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my level 2 title"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+
+<H3 id="lists">Lists</H3>
+Lists can be defined by setting one or more "*" characters <b>at the beginning</b> of a line. The level of each list  item is specified by the number of "*" characters.
+<H4 id="example">Example</H4>
+ For example: <br/>
+
+<pre>
+<span>      * first item</span>
+<span>      * second item</span>
+</pre>
+ is equivalent to:<br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ul&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>first item</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>second item</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/ul&gt;</span><span>      </span>
+
+</pre>
+
+<H3 id="bold_and_italic_text">Bold and italic text</H3>
+ Bold text can be set by enclosing the text wich must be in bold by ''' (three simple quotes).  Italic text can be set by enclosing the text wich must be in italic by '' (two simple quotes).
+<H4 id="example_1">Example</H4>
+ For example: <br/>
+
+<pre>
+<span>      text '''in bold''' and text ''in italic''</span>
+</pre>
+ is equivalent to:<br/>
+<br/>
+
+<pre>
+<span>      text </span><span style="color:blue;font-weight:bold;">&lt;b&gt;</span><span>in bold</span><span style="color:blue;font-weight:bold;">&lt;/b&gt;</span><span> and text </span><span style="color:blue;font-weight:bold;">&lt;i&gt;</span><span>in italic</span><span style="color:blue;font-weight:bold;">&lt;/i&gt;</span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_relaxedsyntax.html#_note_1_1_" class="noteRefLink">^</a> These alternative syntaxes are similar to the Mediawiki flavor used by wikipedia (see also  <a href="article_wikipedia.html">comparison with wikipedia syntax</a>)</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_configFile.html#relaxedsyntax">configuration file</a>: It is possible to define an optional property / value configuration file when starting the application (using the graphical UI or the command line)</li>
+<li> <a href="article_commandline.html#relaxedsyntax">command-line starting</a>: This article is about how to execute the application by the command-line without showing the UI</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

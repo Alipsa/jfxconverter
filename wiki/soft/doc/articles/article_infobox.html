@@ -1,0 +1,178 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_infobox.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Infobox template</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#infobox_id">1&nbsp; Infobox ID</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#infobox_properties">2&nbsp; Infobox properties</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#properties_values">2.1&nbsp; Properties values</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#usage">3&nbsp; Usage</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#example">4&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#infobox_definition">4.1&nbsp; Infobox definition</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#infobox_usage">4.2&nbsp; Infobox usage</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">5&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+As for wikipedia, an <a href="http://en.wikipedia.org/wiki/Help:infobox" title="http://en.wikipedia.org/wiki/Help:infobox">infobox</a> is a fixed-format table added to the top right-hand corner of articles to consistently present a summary of some unifying aspect that the articles share. The infobox template element allows to define the type of an infobox and the properties associates with this infobox.<br/>
+<br/>
+ An infobox template must be defined in an xml file with the "infoboxDefinition" top-level XML element.
+<H2 id="infobox_id">Infobox ID</H2>
+ The ID of the infobox template is specified through the "id" attribute of the "infoboxDefinition" top-level XML element.
+<H2 id="infobox_properties">Infobox properties</H2>
+ The children "property" elements define the properties specified for this infobox. Each propety can have the following attributes: <ul>
+<li>"key": the key of the property</li>
+<li>"desc": the optional description of the property which will appear in the infoboxes (by dfault the key will be used)</li>
+<li>"keyRef": the optional  <a href="article_references.html">reference</a> to an article or anchor which will be used for the property name in infoboxes</li>
+<li>"type": the optional type of the infobox, which can be:</li>
+
+<ul>
+<li>"text": the default type for text properties</li>
+<li>"url": the type for properties which refer to external links</li>
+<li>"image": the type for properties which refer to  <a href="article_imageFiles.html">images</a></li>
+</ul>
+<li>"value" the value of the property. How this value will be parsed depend on the type of the property</li>
+</ul>
+<b>Note that it is not allowed to define a property with the key "name", because this property is defined by default for all infoboxes</b>.
+<H3 id="properties_values">Properties values</H3>
+ There are two ways to define the value of a property: <ul>
+<li>Using the "value" attribute. The way this attribute will be parsed will depend on the property type:</li>
+
+<ul>
+<li>the value for a  <code>text</code> property means the text value of the property</li>
+<li>the value for an  <code>url</code> property means the URL of the external link</li>
+<li>the value for an  <code>image</code> property means the ID of the  <a href="article_imageFiles.html">image</a></li>
+</ul>
+<li>(only for text properties): specifying the content of the property with children elements</li>
+</ul>
+<br/>
+<br/>
+ For example, for a text value, the following syntaxes are all valid: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> key</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"prop1"</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my value"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> key</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"prop1"</span><span style="color:blue;font-weight:bold;"> &gt;</span><span>a reference to </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"anArticle"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;&lt;/property&gt;</span>
+
+</pre>
+
+<H2 id="usage">Usage</H2>
+The  <a href="article_syntaxStartingElements.html#infobox">infobox</a> element in articles allows to add an infobox with a specified template at the top-right corner of the associated article. The content of this element will specify the key/value pairs for the properties of the infobox, and the properties will be presented as cells of a table in their order of their definition in the template. <ul>
+<li>If a value is set for the "name" property, then the associated value will be used for the infobox caption</li>
+<li>Every properties which have an associated value will be presented as a key/value pair in the infobox</li>
+</ul>
+
+<H2 id="example">Example</H2>
+
+<H3 id="infobox_definition">Infobox definition</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;infoboxDefinition</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"infobox1"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> key</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"prop1"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"property 1"</span><span style="color:#0d8200;font-weight:bold;"> keyRef</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"article2"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> key</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"prop2"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"property 2"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> key</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"prop3"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"property 3"</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"url"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> key</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"prop4"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"property 4"</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/infoboxDefinition&gt;</span>
+
+</pre>
+
+<H3 id="infobox_usage">Infobox usage</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"article20"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;infobox</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"infobox1"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> key</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"name"</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the name"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> key</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"prop1"</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my value"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> key</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"prop2"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>The text</span><span style="color:blue;font-weight:bold;">&lt;/property&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> key</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"prop3"</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"http://docs.oracle.com/javase/8/docs/api/index.html"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> key</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"prop4"</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image1"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/infobox&gt;</span>
+<span>      a text.</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ The result will be:<br/>
+<img src="../images/infobox.png" id="_image_0" onclick="openImage(_image_0)" width="80%" class="left border" />
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntaxStartingElements.html#infobox">Syntax starting elements</a>: This article explains the XML tags which can be used at the beginning of articles</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_structure.html">structure</a> |
+ <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

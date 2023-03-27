@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <node1>
+        <node11 />
+        <node12 />
+        <node13 />
+    </node1>
+    <node2>
+        <node21 />
+        <node22 />
+        <node23 />
+    </node2>
+    <node3 />
+    <node4 /> 
+    <node5>
+        <node51 />
+        <node52 />
+        <node53 />    
+    </node5>       
+</root>

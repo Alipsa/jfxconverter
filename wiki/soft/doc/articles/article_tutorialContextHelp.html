@@ -1,0 +1,253 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_tutorialContextHelp.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Context-sensitive Help tutorial</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#specify_the_help_content_configuration">1&nbsp; Specify the Help content configuration</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#generate_the_help_content">2&nbsp; Generate the help content</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#create_our_swing_application">3&nbsp; Create our Swing application</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#integrating_the_context-sensitive_help_in_our_swing_application">4&nbsp; Integrating the context-sensitive help in our Swing application</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#launch_our_application">5&nbsp; Launch our application</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">6&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">7&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+This article is tutorial which explains how to add a  <a href="article_ctxsensitivehelp.html">Context-sensitive Help</a> to a Swing application. You will: <ul>
+<li>Reuse the content specified for the  <a href="article_tutorialJavaHelp.html">Help system Swing tutorial</a></li>
+<li>Specify the Help content configuration to add the references to use for our   <a href="article_helpcontent.html#context-sensitive_help">Context-sensitive help</a></li>
+<li>Regenerate the zip file containing the help content</li>
+<li>Modify the  <a href="article_helpswing.html">Swing</a> Java code to integrate the Context-sensitive help to  our application components</li>
+</ul>
+
+<H2 id="specify_the_help_content_configuration">Specify the Help content configuration</H2>
+We will add help IDs for our articles and titles<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+We can add Help IDs for any article or title, but we dont need to add IDs for every article and title defined in our wiki</div></span>
+:  <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;helpContent&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button1"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button 1"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button2"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button 2"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>      </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button3"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"several components"</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button 3"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"textfield"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"several components"</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"text field"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"panel"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"several components"</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"panel"</span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/helpContent&gt;</span><span>      </span>
+
+</pre>
+
+<H2 id="generate_the_help_content">Generate the help content</H2>
+ Let's generate our help content. Double-click on the jar file of the application and: <ul>
+<li>Input directories: Set your directory</li>
+<li>Output directory: Set another empty directory for the help content result</li>
+<li>Output type: Set "HELP" as the output type</li>
+<li>Click on "Apply"</li>
+</ul>
+Note the structure of the zip file has not changed: <br/>
+<br/>
+
+<pre>
+<span>      articles</span>
+<span>      resources</span>
+<span>      -- articles.xml</span>
+<span>      -- index.html</span>
+<span>      -- README.txt</span>
+</pre>
+ The  <code>articles.xml</code> now also contains the references for the help IDs.
+<H2 id="create_our_swing_application">Create our Swing application</H2>
+We will reuse the code written for our  <a href="article_tutorialJavaHelp.html">Help system Swing tutorial</a>. We will add a toolbar with several buttons: <br/>
+<br/>
+
+<pre>
+<span>      </span>
+<span style="background-color:#ffff00;">      </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">private</span><span style="background-color:#ffff00;"> </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">void</span><span style="background-color:#ffff00;"> </span><span style="background-color:#ffff00;font-weight:bold;">createToolbar</span><span style="background-color:#ffff00;">(Container cont) {</span>
+<span style="background-color:#ffff00;">        JPanel panel = </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">new</span><span style="background-color:#ffff00;"> </span><span style="background-color:#ffff00;font-weight:bold;">JPanel</span><span style="background-color:#ffff00;">();</span>
+<span style="background-color:#ffff00;">        cont.</span><span style="background-color:#ffff00;font-weight:bold;">add</span><span style="background-color:#ffff00;">(panel, BorderLayout.NORTH);</span>
+<span style="background-color:#ffff00;">        JButton button1 = </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">new</span><span style="background-color:#ffff00;"> </span><span style="background-color:#ffff00;font-weight:bold;">JButton</span><span style="background-color:#ffff00;">(</span><span style="background-color:#ffff00;color:#650099;">"button 1"</span><span style="background-color:#ffff00;">);</span>
+<span style="background-color:#ffff00;">        JButton button2 = </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">new</span><span style="background-color:#ffff00;"> </span><span style="background-color:#ffff00;font-weight:bold;">JButton</span><span style="background-color:#ffff00;">(</span><span style="background-color:#ffff00;color:#650099;">"button 2"</span><span style="background-color:#ffff00;">);</span>
+<span style="background-color:#ffff00;">        JButton button3 = </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">new</span><span style="background-color:#ffff00;"> </span><span style="background-color:#ffff00;font-weight:bold;">JButton</span><span style="background-color:#ffff00;">(</span><span style="background-color:#ffff00;color:#650099;">"button 3"</span><span style="background-color:#ffff00;">);</span>
+<span style="background-color:#ffff00;">        panel.</span><span style="background-color:#ffff00;font-weight:bold;">add</span><span style="background-color:#ffff00;">(button1);</span>
+<span style="background-color:#ffff00;">        panel.</span><span style="background-color:#ffff00;font-weight:bold;">add</span><span style="background-color:#ffff00;">(button2);</span>
+<span style="background-color:#ffff00;">        panel.</span><span style="background-color:#ffff00;font-weight:bold;">add</span><span style="background-color:#ffff00;">(button3);</span>
+<span style="background-color:#ffff00;">      }      </span>
+<span style="background-color:#ffff00;">      </span>
+<span>      </span>
+<span>      </span><span style="color:blue;font-weight:bold;">private</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">createLayout</span><span>() {</span>
+<span>        Container cont = </span><span style="color:#650099;font-weight:bold;">this</span><span>.</span><span style="font-weight:bold;">getContentPane</span><span>();</span>
+<span>        cont.</span><span style="font-weight:bold;">setLayout</span><span>(</span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">BorderLayout</span><span>());</span>
+
+<span>        </span><span style="color:blue;font-weight:bold;">try</span><span> {</span>
+<span>          viewer = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">SwingHelpContentViewer</span><span>();</span>
+<span>          factory.</span><span style="font-weight:bold;">install</span><span>(viewer);</span>
+<span>          viewer.</span><span style="font-weight:bold;">getHelpWindow</span><span>(</span><span style="color:#650099;font-weight:bold;">this</span><span>, </span><span style="color:#650099;">"Help Content"</span><span>, 600, 700);</span>
+
+<span>          </span><span style="background-color:#ffff00;font-weight:bold;">createToolbar</span><span style="background-color:#ffff00;">(cont);</span>
+<span>          </span><span style="font-weight:bold;">createContent</span><span>(cont);</span>
+<span>          </span><span style="font-weight:bold;">createMenu</span><span>();</span>
+<span>        } </span><span style="color:blue;font-weight:bold;">catch</span><span> (IOException ex) {</span>
+<span>          ex.</span><span style="font-weight:bold;">printStackTrace</span><span>();</span>
+<span>        }</span>
+<span>      }</span>
+
+</pre>
+ We have the following Window:<br/>
+<br/>
+<br/>
+<img src="../images/tutorial5_1.png" id="_image_0" onclick="openImage(_image_0)" width="40%" class="left border" />
+
+<H2 id="integrating_the_context-sensitive_help_in_our_swing_application">Integrating the context-sensitive help in our Swing application</H2>
+ Now we will integrate a Help system with our Help content in this application. For that, we need to: <ul>
+<li>Register the application window with our  <code>SwingHelpContentViewer</code>:<br/>
+
+<pre>
+<span>            viewer.</span><span style="font-weight:bold;">registerContextHelpWindow</span><span>(</span><span style="color:#650099;font-weight:bold;">this</span><span>);</span>
+
+</pre>
+</li>
+<li>Register each button for which we want to add a context-sensitive help:<br/>
+
+<pre>
+<span>            viewer.</span><span style="font-weight:bold;">registerContextHelp</span><span>(&lt;helpID&gt;, button);</span>
+
+</pre>
+</li>
+<li>Create the context-help button (to start the context-sensitive help), and add it to the toolbar:<br/>
+
+<pre>
+<span>            JButton helpButton = viewer.</span><span style="font-weight:bold;">createContextHelpButton</span><span>();</span>
+<span>            panel.</span><span style="font-weight:bold;">add</span><span>(helpButton);</span>
+
+</pre>
+</li>
+</ul>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">private</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">createToolbar</span><span>(Container cont) {</span>
+<span>        </span><span style="background-color:#ffff00;">viewer.</span><span style="background-color:#ffff00;font-weight:bold;">registerContextHelpWindow</span><span style="background-color:#ffff00;">(</span><span style="background-color:#ffff00;color:#650099;font-weight:bold;">this</span><span style="background-color:#ffff00;">);</span>
+
+<span>        JPanel panel = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">JPanel</span><span>();</span>
+<span>        cont.</span><span style="font-weight:bold;">add</span><span>(panel, BorderLayout.NORTH);</span>
+<span>        JButton button1 = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">JButton</span><span>(</span><span style="color:#650099;">"button 1"</span><span>);</span>
+<span>        </span><span style="background-color:#ffff00;">viewer.</span><span style="background-color:#ffff00;font-weight:bold;">registerContextHelp</span><span style="background-color:#ffff00;">(</span><span style="background-color:#ffff00;color:#650099;">"button1"</span><span style="background-color:#ffff00;">, button1);</span>
+<span>        JButton button2 = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">JButton</span><span>(</span><span style="color:#650099;">"button 2"</span><span>);</span>
+<span>        </span><span style="background-color:#ffff00;">viewer.</span><span style="background-color:#ffff00;font-weight:bold;">registerContextHelp</span><span style="background-color:#ffff00;">(</span><span style="background-color:#ffff00;color:#650099;">"button2"</span><span style="background-color:#ffff00;">, button2);</span>
+<span>        JButton button3 = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">JButton</span><span>(</span><span style="color:#650099;">"button 3"</span><span>);</span>
+<span>        </span><span style="background-color:#ffff00;">viewer.</span><span style="background-color:#ffff00;font-weight:bold;">registerContextHelp</span><span style="background-color:#ffff00;">(</span><span style="background-color:#ffff00;color:#650099;">"button3"</span><span style="background-color:#ffff00;">, button3);</span>
+<span style="background-color:#ffff00;">        viewer.</span><span style="background-color:#ffff00;font-weight:bold;">registerContextHelp</span><span style="background-color:#ffff00;">(</span><span style="background-color:#ffff00;color:#650099;">"panel"</span><span style="background-color:#ffff00;">, panel);</span>
+<span>        panel.</span><span style="font-weight:bold;">add</span><span>(button1);</span>
+<span>        panel.</span><span style="font-weight:bold;">add</span><span>(button2);</span>
+<span>        panel.</span><span style="font-weight:bold;">add</span><span>(button3);</span>
+
+<span>        </span><span style="background-color:#ffff00;">JButton helpButton = viewer.</span><span style="background-color:#ffff00;font-weight:bold;">createContextHelpButton</span><span style="background-color:#ffff00;">();</span>
+<span style="background-color:#ffff00;">        panel.</span><span style="background-color:#ffff00;font-weight:bold;">add</span><span style="background-color:#ffff00;">(helpButton);</span>
+<span>      }      </span>
+
+</pre>
+ We now have the following window for our application:<br/>
+<br/>
+<br/>
+<img src="../images/tutorial5_2.png" id="_image_1" onclick="openImage(_image_1)" width="40%" class="left border" />
+
+<H2 id="launch_our_application">Launch our application</H2>
+ Now the context-sensitive help is integrated in our Swing application.<br/>
+<br/>
+ To use the Context-sensitive help: <ul>
+<li>Click on the question-mark button to call the context-sensitive help</li>
+<li>The pointer changes to a new shape:  <img src="../images/helpCursor.png" id="_image_2" onclick="openImage(_image_2)" class="left middle" />
+</li>
+<li>Left click on a button, then the Help window appear on the associated article and title</li>
+</ul>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_tutorialContextHelp.html#_note_1_1_" class="noteRefLink">^</a> We can add Help IDs for any article or title, but we dont need to add IDs for every article and title defined in our wiki</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_tutorials.html">Tutorials</a>: This article presents a list of tutorials</li>
+<li> <a href="article_docgenhelp.html">Help system</a>: This article explains how to use the JavaHelp-like feature of the tool</li>
+<li> <a href="article_helpswing.html">Help Swing API</a>: This article explains how to use the Help Swing API</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_javahelp.html">javahelp</a> |
+ <a href="../categories/cat_tutorials.html">tutorials</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

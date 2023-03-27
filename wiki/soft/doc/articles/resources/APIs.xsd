@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+ Copyright (c) 2016, 2017 Herve Girod. All rights reserved.
+ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+ If you have any questions about this project, you can visit
+ the project website at the project page on http://sourceforge.net/projects/docjgenerator/
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="APIs">
+      <xs:complexType>
+         <xs:all>
+            <xs:element minOccurs="0" ref="javaAPIs" />
+            <xs:element minOccurs="0" ref="QtAPIs" />
+            <xs:element minOccurs="0" ref="doxygenAPIs" />
+            <xs:element minOccurs="0" ref="mediawikis" />
+         </xs:all>
+      </xs:complexType>
+   </xs:element>   
+   <xs:element name="javaAPIs">
+      <xs:complexType>
+         <xs:sequence maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="javaAPI" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="javaAPI">
+      <xs:complexType>
+         <xs:sequence maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="javaAPILibrary" />
+         </xs:sequence>
+         <xs:attribute name="url" type="xs:anyURI" />
+         <xs:attribute name="id" type="xs:string" use="required" />
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="javaAPILibrary">
+      <xs:complexType>
+         <xs:attribute name="jarFile" type="xs:anyURI" use="required" />
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="QtAPIs">
+      <xs:complexType>
+         <xs:sequence maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="QtAPI" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="QtAPI">
+      <xs:complexType>
+         <xs:attribute name="url" type="xs:anyURI" />
+         <xs:attribute name="id" type="xs:string" use="required" />
+      </xs:complexType>
+   </xs:element>   
+   <xs:element name="doxygenAPIs">
+      <xs:complexType>
+         <xs:sequence maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="doxygenAPI" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="doxygenAPI">
+      <xs:complexType>
+         <xs:attribute name="url" type="xs:anyURI" />
+         <xs:attribute name="id" type="xs:string" use="required" />
+      </xs:complexType>
+   </xs:element>     
+   <xs:element name="mediawikis">
+      <xs:complexType>
+         <xs:sequence maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="mediawiki" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="mediawiki">
+      <xs:complexType>
+         <xs:attribute name="url" type="xs:anyURI" />
+         <xs:attribute name="id" type="xs:string" use="required" />
+      </xs:complexType>
+   </xs:element>      
+</xs:schema>

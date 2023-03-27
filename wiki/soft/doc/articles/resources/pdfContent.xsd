@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+ Copyright (c) 2016, Herve Girod. All rights reserved.
+ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+ If you have any questions about this project, you can visit
+ the project website at the project page on http://sourceforge.net/projects/docjgenerator/
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="pdfContent">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="category" />
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="chapter" />
+         </xs:sequence>
+      </xs:complexType>
+      <xs:unique name="chapterKey">
+         <xs:selector xpath="chapter"/>
+         <xs:field xpath="@name"/>
+      </xs:unique>
+      <xs:unique name="categoryKey">
+         <xs:selector xpath="chapter/category"/>
+         <xs:field xpath="@name"/>
+      </xs:unique>
+      <xs:unique name="articleKey">
+         <xs:selector xpath="chapter/article"/>
+         <xs:field xpath="@name"/>
+      </xs:unique>
+      <xs:unique name="priorityKey">
+         <xs:selector xpath="category"/>
+         <xs:field xpath="@name"/>
+      </xs:unique>
+   </xs:element>
+   <xs:element name="chapter">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="category" />
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="article" />
+         </xs:sequence>
+         <xs:attribute name="name" type="xs:string" use="required" />
+         <xs:attribute name="desc" type="xs:string" />
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="category">
+      <xs:complexType>
+         <xs:attribute name="name" type="xs:string" use="required" />
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="article">
+      <xs:complexType>
+         <xs:attribute name="name" type="xs:string" use="required" />
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

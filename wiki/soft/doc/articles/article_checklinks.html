@@ -1,0 +1,135 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_checklinks.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Checking external links</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#overview">1&nbsp; Overview</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#algorithm">2&nbsp; Algorithm</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#javadoc_specificities">3&nbsp; Javadoc specificities</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#resolving_api_links">4&nbsp; Resolving API links</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#wikipedia_and_mediawiki_specificities">5&nbsp; Wikipedia and Mediawiki specificities</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#wikipedia_and_mediawiki_specificities_1">6&nbsp; Wikipedia and Mediawiki specificities</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">7&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">8&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+
+<H2 id="overview">Overview</H2>
+The  <a href="article_configFile.html#checklinks">checkLinks</a> property specifies that the presence of external links must be checked: <ul>
+<li>For the  <a href="article_syntax.html#a">a</a> tag</li>
+<li>For the  <a href="article_syntax.html#cite">cite</a> tag</li>
+<li>For the  <a href="article_syntax.html#javadoc">javadoc</a> tag</li>
+<li>For the  <a href="article_syntax.html#qtdoc">qtdoc</a> tag</li>
+<li>For the  <a href="article_syntax.html#doxygen">doxygen</a> tag</li>
+<li>For the  <a href="article_syntax.html#wikipedia">wikipedia</a> tag</li>
+<li>For the  <a href="article_syntax.html#mediawiki">mediawiki</a> tag</li>
+</ul>
+ However these links can be local to the wiki (for example, an HTML file relative to the wiki itself), or accessed on the Web through an http or https protocol. http or https links will only be checkd if the additional  <a href="article_configFile.html#checkhttplinks">checkHTTPLinks</a> property is set to true.
+<H2 id="algorithm">Algorithm</H2>
+ The process used to check if a link is valid differ depending on the type of the link:  <ul>
+<li>If the link is local, then the presence of the file associated with the link will be checked, and also the existence of the anchor  in the file<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+For example, the  <code>&lt;a href="myHTMLFile.html#theAnchor" /&gt;</code> link is a link with an ahcor, and the <code>&lt;a href="myHTMLFile.html" /&gt;</code> link is a link without anchor</div></span>
+</li>
+<li>If the link is not local (http or https), the tool will try to access the associated web site to check if the resource associated with the link  is present</li>
+</ul>
+Note that the links checking is performed in a background threadPool. Each spawned thread will check all the links for one base URL<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+The link URL without the ref part. For example, the base URL for "http://my/file.html#title" would be  "http://my/file.html"</div></span>
+, to avoid to check the existence of the same HTTP URL more than once. This speeds up the checking and also avoid some cases where the same link would be accessed twice very closely leading to a "not found" exception.
+<H2 id="javadoc_specificities">Javadoc specificities</H2>
+If the "checkHTTPLinks" property is not set to true, but the associated  <a href="article_javadocs.html">Javadoc API</a> is the Java 8 API or the JavaFX 8  API, then the tool will directly perform the check using the installed JRE.
+<H2 id="resolving_api_links">Resolving API links</H2>
+ It is possible to specify that APIs which are defined internal to the wiki output will not be resolved by setting the "resolveAPILInks" property to false. <br/>
+<br/>
+ This can be useful for example if you want to produce a  <a href="article_docgenhelp.html">Help content</a> with  references to APIs but you don't want to include the APIs in the zipped output content.
+<H2 id="wikipedia_and_mediawiki_specificities">Wikipedia and Mediawiki specificities</H2>
+The specificity of Mediawikis is that the HTML articles are created on demand from the wiki databse, which means that an article will be found if the  wiki is correct but the article name does not exist in the databse. In that case the tool is able to find that the returned HTML page is not a regular  page but a "Page not exists" response.
+<H2 id="wikipedia_and_mediawiki_specificities_1">Wikipedia and Mediawiki specificities</H2>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_checklinks.html#_note_1_1_" class="noteRefLink">^</a> For example, the  <code>&lt;a href="myHTMLFile.html#theAnchor" /&gt;</code> link is a link with an ahcor, and the <code>&lt;a href="myHTMLFile.html" /&gt;</code> link is a link without anchor</li>
+<li id="_note_2"> <a href="article_checklinks.html#_note_2_1_" class="noteRefLink">^</a> The link URL without the ref part. For example, the base URL for "http://my/file.html#title" would be  "http://my/file.html"</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_externallinks.html">Access to external links</a>: Configure how to access external links</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

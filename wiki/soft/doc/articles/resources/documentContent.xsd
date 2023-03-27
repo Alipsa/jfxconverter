@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!--
+ Copyright (c) 2016, 2019 Herve Girod. All rights reserved.
+ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+ If you have any questions about this project, you can visit
+ the project website at the project page on http://sourceforge.net/projects/docjgenerator/
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="documentContent">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="category" type="categoryPriority" />
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="chapter" type="chapter">
+               <xs:unique name="categoryKey">
+                  <xs:selector xpath="category|excludeCategory"/>
+                  <xs:field xpath="@name"/>
+               </xs:unique>
+            </xs:element>
+         </xs:sequence>
+         <xs:attribute name="defaultExclude" type="xs:boolean" default="false" />
+         <xs:attribute name="anyPackageByDefault" type="xs:boolean"  default="true"/>
+      </xs:complexType>
+      <xs:unique name="chapterKey">
+         <xs:selector xpath="chapter"/>
+         <xs:field xpath="@name"/>
+      </xs:unique>
+      <xs:unique name="articleKey">
+         <xs:selector xpath="chapter/head/article|chapter/article|chapter/excludeArticle"/>
+         <xs:field xpath="@name"/>
+         <xs:field xpath="@package"/>
+      </xs:unique>
+      <xs:unique name="priorityKey">
+         <xs:selector xpath="category"/>
+         <xs:field xpath="@name"/>
+      </xs:unique>
+   </xs:element>
+   <xs:complexType name="chapter">
+      <xs:sequence>
+         <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element maxOccurs="1" minOccurs="0" name="category" type="category" />
+            <xs:element maxOccurs="1" minOccurs="0" name="excludeCategory" type="excludeCategory"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="package" type="package" />
+            <xs:element maxOccurs="1" minOccurs="0" name="excludePackage" type="excludePackage"/>
+         </xs:choice>
+         <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" name="head" type="head"/>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+               <xs:element maxOccurs="1" minOccurs="0" name="chapter" type="chapter">
+                  <xs:unique name="categoryKey2">
+                     <xs:selector xpath="category|excludeCategory"/>
+                     <xs:field xpath="@name"/>
+                  </xs:unique>
+               </xs:element>
+               <xs:element maxOccurs="1" minOccurs="0" name="article" type="article"/>
+               <xs:element maxOccurs="1" minOccurs="0" name="articlesList" type="articlesList"/>
+               <xs:element maxOccurs="1" minOccurs="0" name="excludeArticle" type="excludeArticle"/>
+            </xs:choice>
+         </xs:sequence>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="desc" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="head">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="article" type="article"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="categoryPriority">
+      <xs:attribute name="name" type="xs:string" use="required" />
+   </xs:complexType>
+   <xs:complexType name="category">
+      <xs:attribute name="name" type="xs:string" use="required" />
+   </xs:complexType>
+   <xs:complexType name="article">
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="articlesList">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="article" type="article" />
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="package">
+      <xs:attribute name="name" type="xs:string" use="required" />
+   </xs:complexType>
+   <xs:complexType name="excludeCategory">
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="strict" type="xs:boolean" default="false" />
+   </xs:complexType>
+   <xs:complexType name="excludePackage">
+      <xs:attribute name="name" type="xs:string" use="required" />
+   </xs:complexType>   
+   <xs:complexType name="excludeArticle">
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="package" type="xs:string" />
+   </xs:complexType>
+</xs:schema>

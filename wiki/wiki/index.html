@@ -1,0 +1,77 @@
+<HEAD>
+<link rel="stylesheet" type="text/css" href="resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="resources/articles.js"></script>
+<script type="text/javascript" src="resources/searchOnTitles.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY>
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left">
+ <a href="categories.html">Categories</a> 
+<br/>
+ <a href="dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/jfxConverter/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/jfxConverter/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/jfxConverter/blog/">Changes Log</a>
+<br/>
+<a href="articles/article_faq.html">FAQ</a>
+<br/>
+<a href="articles/article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div class="middleForIDX">
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#the_problem">1&nbsp; The problem</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#the_solution">2&nbsp; The solution</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#usage">3&nbsp; Usage</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#supported_nodes_and_css_properties">4&nbsp; Supported Nodes and CSS properties</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+   jfxConverter is a Java library prodiving utilities to convert a JavaFX Scene to Swing Graphics2D orders.    It is then simple to use it to convert to any format which takes a Graphics2D as input. The project comes with   PowerPoint and a SVG converters.
+<H2 id="the_problem">The problem</H2>
+It is relatively simple to draw any Swing content in various formats. Each The  <code>JComponent</code> has a <a href="http://docs.oracle.com/javase/8/docs/api//javax/swing/JComponent.html#paint-java.awt.Graphics-" class="apiLink" title="javax.swing.JComponent.paint(java.awt.Graphics)">JComponent.paint(Graphics)</a> method which allows to draw the component in any  <code>Graphics</code> context, and many Java libraries dealing with various graphics formats have classes which allow to create files of their respective format by emitting <a href="http://docs.oracle.com/javase/8/docs/api//java/awt/Graphics2D.html" class="apiLink" title="java.awt.Graphics2D">Graphics2D</a> drawing orders. <br/>
+<br/>
+ There is not similar capabilities in the JavaFX framework. Therefore converting JavaFX Scene content to graphics formats is not an easy task.
+<H2 id="the_solution">The solution</H2>
+jfxConverter allows to walk through the JavaFX Scene tree and emit <a href="http://docs.oracle.com/javase/8/docs/api//java/awt/Graphics2D.html" class="apiLink" title="java.awt.Graphics2D">Graphics2D</a> drawing orders,  therefore the same libraries which can be used with Swing to create files of various graphic formats can also be used with  JavaFX. The library comes with both a PowerPoint and an SVG driver, but creating other drivers for other graphic formats is possible.
+<H2 id="usage">Usage</H2>
+<div class="moreInfo">
+Main Article: <a href="articles/article_usage.html">Usage</a></div>
+<br/>
+
+<H2 id="supported_nodes_and_css_properties">Supported Nodes and CSS properties</H2>
+<div class="moreInfo">
+Main Article: <a href="articles/article_supportednodes.html">Supported Nodes and CSS properties</a></div>
+<br/>
+</div>
+</P>
+
+<hr/>
+ <a href="categories.html">Categories</a>:  <a href="categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>Copyright 2016-2018 Herve Girod. All Rights Reserved. Documentation and source under the BSD licence</i></P></div>
+</BODY>
+</HTML>

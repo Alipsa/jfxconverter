@@ -1,0 +1,7 @@
+.autoComplete-category {
+   -fx-font-style: italic;
+}
+
+.autoComplete-hit-category {
+   -fx-padding: 0 0 0 5;
+}

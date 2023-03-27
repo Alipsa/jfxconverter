@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article desc="supported Nodes and CSS properties" >
+   This article presents the Nodes and CSS properties supported by the converter.
+
+   See <a href="https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html" >cssref</a> for the definition of JavaFX CSS properties.
+
+   <title title="supported Nodes" />
+   The Nodes supported by the converter are presented in the following table.
+
+   <table>
+      <tableHeader>
+         <column>Node</column>
+         <column>Specific Properties</column>
+      </tableHeader>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.shape.Line" />
+         </cell>
+         <cell>handle <ref id="#2D Shapes properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.text.Text" />
+         </cell>
+         <cell>handle <ref id="#2D Shapes properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.shape.Polygon" />
+         </cell>
+         <cell>handle <ref id="#2D Shapes properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.shape.Polyline" />
+         </cell>
+         <cell>handle <ref id="#2D Shapes properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.shape.SVGPath" />
+         </cell>
+         <cell>handle <ref id="#2D Shapes properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.shape.Path" />
+         </cell>
+         <cell>handle <ref id="#2D Shapes properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.shape.Circle" />
+         </cell>
+         <cell>handle <ref id="#2D Shapes properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.shape.Ellipse" />
+         </cell>
+         <cell>handle <ref id="#2D Shapes properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.shape.Arc" />
+         </cell>
+         <cell>handle <ref id="#2D Shapes properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.shape.Rectangle" />
+         </cell>
+         <cell>handle <ref id="#2D Shapes properties" />
+         <br/>
+         -fx-arc-width
+         <br/>
+         -fx-arc-height
+         </cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.shape.QuadCurve" />
+         </cell>
+         <cell>handle <ref id="#2D Shapes properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.shape.CubicCurve" />
+         </cell>
+         <cell>handle <ref id="#2D Shapes properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.Group" />
+         </cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.layout.Region" />
+         </cell>
+         <cell>handle <ref id="#Region properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.control.Control" />
+         </cell>
+         <cell>handle <ref id="#Region properties" /></cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.image.ImageView" />
+         </cell>
+         <cell>-fx-image</cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.shape.Shape3D" />
+            <note>Handled by creating an image from the 3D Shape</note>
+         </cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>
+            <javadoc api="JAVAFX" path="javafx.scene.SubScene" />
+         </cell>
+         <cell>-</cell>
+      </row>
+   </table>
+
+   <title title="supported properties" />
+   Properties specific to a Node are presented in the <ref id="#supported Nodes" /> table.
+
+   <title level="2" title="general properties" />
+   The general properties supported by the converter are presented in the following table.
+   <table>
+      <tableHeader>
+         <column>Property</column>
+         <column>Limitations</column>
+      </tableHeader>
+      <row>
+         <cell>-fx-opacity</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-visibility</cell>
+         <cell>-</cell>
+      </row>
+   </table>
+
+   <title level="2" title="transform properties" />
+   The transform properties (translation, scale, and rotation) supported by the converter are presented in the following table.
+
+   <table>
+      <tableHeader>
+         <column>Property</column>
+         <column>Limitations</column>
+      </tableHeader>
+      <row>
+         <cell>-fx-translate-x</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-translate-y</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-scale-x</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-scale-y</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-rotate</cell>
+         <cell>-</cell>
+      </row>
+   </table>
+
+   <title level="2" title="Region properties" />
+   Region properties are applied on Regions and Controls.
+
+   <table>
+      <tableHeader>
+         <column>Property</column>
+         <column>Limitations</column>
+      </tableHeader>
+      <row>
+         <cell>-fx-region-background</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-region-border</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-shape</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-scale-shape</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-background-color</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-background-image</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-background-position</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-background-radius</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-border-color</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-border-radius</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-border-width</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-border-style</cell>
+         <cell>-</cell>
+      </row>
+   </table>
+
+   <title level="2" title="2D Shapes properties" />
+   Shapes properties are applied on 2D Shapes.
+
+   <table>
+      <tableHeader>
+         <column>Property</column>
+         <column>Limitations</column>
+      </tableHeader>
+      <row>
+         <cell>-fx-stroke-width</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-stroke-line-cap</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-stroke-line-join</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-stroke-miter-limit</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-stroke-dash-array</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-stroke-dash-offset</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-stroke</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-font-family</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-font-size</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-font-style</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-font-weight</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell>-fx-font</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell> -fx-text-fill</cell>
+         <cell>-</cell>
+      </row>
+      <row>
+         <cell> -fx-fill</cell>
+         <cell>-</cell>
+      </row>
+   </table>
+
+   <cat id="general" />
+</article>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xsi:schemaLocation="http://my/schema.xsd xmlnode.xsd" xmlns="http://my/schema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <child name="first">
+    <child1 name3="second"/>  
+    <child1 name2="third"/>
+  </child>
+</root>

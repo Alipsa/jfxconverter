@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+   jfxConverter is a Java library prodiving utilities to convert a JavaFX Scene to Swing Graphics2D orders. 
+   It is then simple to use it to convert to any format which takes a Graphics2D as input. The project comes with
+   PowerPoint and a SVG converters.
+   
+   <title title="the problem" />
+   It is relatively simple to draw any Swing content in various formats. Each The <code>JComponent</code> has
+   a <javadoc path="javax.swing.JComponent" member="paint(java.awt.Graphics)" /> method which allows to draw the component in
+   any <code>Graphics</code> context, and many Java libraries dealing with various graphics formats have classes which allow to
+   create files of their respective format by emitting <javadoc path="java.awt.Graphics2D" /> drawing orders.
+   <empty/>
+   There is not similar capabilities in the JavaFX framework. Therefore converting JavaFX Scene content to graphics formats is
+   not an easy task.
+   
+   <title title="the solution" />
+   jfxConverter allows to walk through the JavaFX Scene tree and emit <javadoc path="java.awt.Graphics2D" /> drawing orders, 
+   therefore the same libraries which can be used with Swing to create files of various graphic formats can also be used with 
+   JavaFX. The library comes with both a PowerPoint and an SVG driver, but creating other drivers for other graphic formats is possible.
+   
+   <title title="usage" />
+   <moreInfo id="usage" />
+   
+   <title title="supported Nodes and CSS properties"/>
+   <moreInfo id="Supported Nodes and CSS properties" /> 
+   
+   <title title="Testing the usage of the converter"/>
+   <moreInfo id="Testing the usage of the converter" /> 
+   It is possible to test the usage of the converter with a script setting the Node structure.
+   
+   <cat id="general" />
+</index>

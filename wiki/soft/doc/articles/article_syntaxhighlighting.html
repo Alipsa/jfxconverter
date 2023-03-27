@@ -1,0 +1,219 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_syntaxhighlighting.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Syntax highlighting</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#supported_syntaxes">1&nbsp; Supported syntaxes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#using_invisible_characters">2&nbsp; Using invisible characters</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#additional_syntaxes_packs">3&nbsp; Additional syntaxes packs</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#examples">4&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#on_a_java_syntax">4.1&nbsp; On a Java syntax</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#on_a_java_syntax,_with_usage_of_invisible_characters">4.2&nbsp; On a Java syntax, with usage of invisible characters</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#on_an_xml_syntax">4.3&nbsp; On an XML syntax</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">5&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">6&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+This article explains how the syntax highlighting in the  <a href="article_syntax.html#pre">pre</a> element works.
+<H2 id="supported_syntaxes">Supported syntaxes</H2>
+ The built-in supported syntaxes are: <ul>
+<li>"java": Java</li>
+<li>"xml": XML</li>
+<li>"batch": Windows bat files</li>
+<li>"sparql": SPARQL</li>
+<li>"c++": C++</li>
+<li>"c": C</li>
+<li>"python": Python</li>
+<li>"csharp": CSharp</li>
+<li>"jscript": JavaScript</li>
+<li>"json": JSON (note that the JSON syntax is the same as the JavaScript syntax)</li>
+<li>"css": CSS files</li>
+<li>"props": Properties files</li>
+<li>"manifest": Java manifest files</li>
+<li>"fortran": Fortran</li>
+<li>"html": HTML</li>
+<li>"php": PHP</li>
+<li>"sql": SQL</li>
+<li>"xpath": XPath</li>
+<li>"idl": IDL</li>
+<li>"make": makefiles</li>
+<li>"patch": Patch files</li>
+<li>"eiffel": Eiffel</li>
+<li>"tex": TeX</li>
+<li>"shell": Shell scripts</li>
+<li>"batch": Batch files</li>
+<li>"csv": Csv files (using comma-separated values)</li>
+<li>"csv2": Csv files (using semicolon-separated values)</li>
+<li>"sql": SQL files</li>
+<li>"tsql": T-SQL files</li>
+</ul>
+
+<H2 id="using_invisible_characters">Using invisible characters</H2>
+ It is possible to use the "_" character at the start of a line in the "pre" element, which will be replaced by a space. This is the case when there are one or more "_" character followed by a space, before the rest of the line. For example: <br/>
+<br/>
+
+<pre>
+<span>   &lt;pre syntax="java"&gt;</span>
+<span>      public void toto(int i) {</span>
+<span>      _  System.out.println(i);</span>
+<span>      }</span>
+<span>   &lt;/pre&gt;</span>
+</pre>
+ This allows to keep the indentation for programming languages when using formatting in some editors<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+For example, Netbeans remove the white spaces at the beginning of a line when specifying text in XML, which might not be what we want</div></span>
+<br/>
+<br/>
+ By default the "_" character will be relaced by a space for code and shell syntaxes<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+For example,  <code>java</code>,  <code>groovy</code>,  <code>bat</code> or  <code>shell</code> syntaxes among others</div></span>
+. It is possible to set explictly if "_" characters must be kept or replaced by setting the  <code>invisibleChars</code> attribute in the "pre" element. For example: <br/>
+<br/>
+
+<pre>
+<span>   &lt;pre syntax="java" invisibleChars="false"&gt;</span>
+<span>      public void toto(int i) {</span>
+<span>      _ System.out.println(i);</span>
+<span>      }</span>
+<span>   &lt;/pre&gt;</span>
+</pre>
+
+<H2 id="additional_syntaxes_packs">Additional syntaxes packs</H2>
+The application uses the <a href="http://sourceforge.net/projects/jeditor/" title="http://sourceforge.net/projects/jeditor/">jeditor</a> library to highlight pre element syntax. It is possible to use additional syntax packs by specifying the  <a href="article_configFile.html#presyntax">preSyntax</a> property in the  <a href="article_configFile.html">configuration file</a>.
+<H2 id="examples">Examples</H2>
+
+<H3 id="on_a_java_syntax">On a Java syntax</H3>
+
+<pre>
+<span>   &lt;pre syntax="java"&gt;</span>
+<span>      public void toto(int i) {</span>
+<span>      System.out.println(i);</span>
+<span>      }</span>
+<span>   &lt;/pre&gt;</span>
+</pre>
+
+<H3 id="on_a_java_syntax,_with_usage_of_invisible_characters">On a Java syntax, with usage of invisible characters</H3>
+
+<pre>
+<span>   &lt;pre syntax="java"&gt;</span>
+<span>      public void toto(int i) {</span>
+<span>      _  System.out.println(i);</span>
+<span>      }</span>
+<span>   &lt;/pre&gt;</span>
+</pre>
+ will have the following result: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">toto</span><span>(</span><span style="color:blue;font-weight:bold;">int</span><span> i) {</span>
+<span>         System.out.</span><span style="font-weight:bold;">println</span><span>(i);</span>
+<span>      }</span>
+
+</pre>
+
+<H3 id="on_an_xml_syntax">On an XML syntax</H3>
+
+<pre>
+<span>   &lt;pre syntax="java"&gt;</span>
+<span>      &lt;parent name="name"&gt;</span>
+<span>         &lt;child name="child" /&gt;</span>
+<span>      &lt;/parent&gt;</span>
+<span>   &lt;/pre&gt;</span>
+</pre>
+ will have the following result: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;parent</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"name"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;child</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"child"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/parent&gt;</span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_syntaxhighlighting.html#_note_1_1_" class="noteRefLink">^</a> For example, Netbeans remove the white spaces at the beginning of a line when specifying text in XML, which might not be what we want</li>
+<li id="_note_2"> <a href="article_syntaxhighlighting.html#_note_2_1_" class="noteRefLink">^</a> For example,  <code>java</code>,  <code>groovy</code>,  <code>bat</code> or  <code>shell</code> syntaxes among others</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntax.html#pre">pre</a>: This article explains the XML tags which can be used to specify the articles syntax</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

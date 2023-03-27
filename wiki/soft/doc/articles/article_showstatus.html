@@ -1,0 +1,102 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_showstatus.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Wiki status</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+ There are several ways to show the status of the wiki: <ul>
+<li>It is possible to count the number of errors during the parsing by using the  <a href="article_properties.html#errors_property">errors</a> property</li>
+<li>It is possible to count the number of  <a href="article_syntax.html#todo">TODO </a> in the wikiby using the   <a href="article_properties.html#todo_property">todo</a> property</li>
+<li>It is possible to show the list of TODOs by using the  <a href="article_syntax.html#todolist">todolist </a> element</li>
+</ul>
+It is even possible to use the  <a href="article_syntax.html#condition">condition </a> element to customize the content of  an article depending on the presence of errors or TODOs.
+<H2 id="example">Example</H2>
+ The following content will show a "The wiki has no errors." if no errors have been detected during the parsing, and it will show the todolist only if there are TODOs. <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;condition</span><span style="color:#0d8200;font-weight:bold;"> property</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"errors"</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"0"</span><span style="color:#0d8200;font-weight:bold;"> condition</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"notEqual"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;if&gt;</span>
+<span>            The wiki has ${errors} errors.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/if&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;else&gt;</span>
+<span>            The wiki has no errors.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/else&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/condition&gt;</span><span>       </span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;condition</span><span style="color:#0d8200;font-weight:bold;"> property</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"todo"</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"0"</span><span style="color:#0d8200;font-weight:bold;"> condition</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"notEqual"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;if&gt;</span>
+<span>            The wiki has ${todo} TODOs:</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;todolist</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/if&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/condition&gt;</span><span>      </span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_properties.html">Properties</a>: This article presents the general properties which can be used in the wiki</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

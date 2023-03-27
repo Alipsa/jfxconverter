@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ushortEnum name="A661_WidgetTypes" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<xi:include href="widgetTypesConstants.xml" parse="xml"/>
+</ushortEnum>

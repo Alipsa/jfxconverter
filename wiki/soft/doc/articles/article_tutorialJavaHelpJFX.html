@@ -1,0 +1,299 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_tutorialJavaHelpJFX.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Help system JavaFX tutorial</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#create_the_help_content">1&nbsp; Create the help content</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#generate_the_help_content">2&nbsp; Generate the help content</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#create_our_javafx_application">3&nbsp; Create our JavaFX application</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#integrating_the_help_content_in_our_javafx_application">4&nbsp; Integrating the help content in our JavaFX application</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#launch_our_application">5&nbsp; Launch our application</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">6&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+This article is tutorial which explains how to produce and use a  <a href="article_docgenhelp.html">Help content</a> in a JavaFX application. You will: <ul>
+<li>Generate a zip file containing the help content</li>
+<li>Use this content to create a help system for a  <a href="article_helpjavafx.html">JavaFX application</a></li>
+</ul>
+
+<H2 id="create_the_help_content">Create the help content</H2>
+ We will reuse the content specified for the .   <a href="article_tutorialJavaHelp.html#create_the_help_content">Help system Swing tutorial</a>
+<H2 id="generate_the_help_content">Generate the help content</H2>
+ Let's generate our help content. Double-click on the jar file of the application and: <ul>
+<li>Input directories: Set your directory</li>
+<li>Output directory: Set another empty directory for the help content result</li>
+<li>Output type: Set "HELP" as the output type</li>
+<li>Don't optimize for Swing: Uncheck the "optimize for Swing" checkbox</li>
+<li>Click on "Apply"</li>
+</ul>
+<img src="../images/tutorial4_1.png" id="_image_0" onclick="openImage(_image_0)" width="40%" class="left" />
+<br/>
+ Now we have a file named  <code>articles.zip</code> at the same level as the output directory. This file contains the  Help content generated with the content of our wiki.<br/>
+<br/>
+ You should note that we unchecked the "Optimized for Swing" checkbox (see   <a href="article_docgenhelp.html#help_content_optimization">help content optimization</a> for more information on that). However in this case as there are no images in the wiki the JavaFX content would be the same as the content generated for Swing.<br/>
+<br/>
+ Note the structure of the zip file: <br/>
+<br/>
+
+<pre>
+<span>      articles</span>
+<span>      resources</span>
+<span>      -- articles.xml</span>
+<span>      -- index.html</span>
+<span>      -- README.txt</span>
+</pre>
+ The  <code>articles.xml</code> contains the names and the paths of all the articles of the wiki, which will be used by the Help System.
+<H2 id="create_our_javafx_application">Create our JavaFX application</H2>
+ In our example we will just use a Stage which will show the content of our help system upon clicing on a Menu item.  First we will create our very simple application with a MenuBar but without our help system: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">class</span><span> JFXJavaHelp </span><span style="color:blue;font-weight:bold;">extends</span><span> Application {</span>
+<span>        @Override</span>
+<span>        </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">start</span><span>(Stage primaryStage) {</span>
+<span>          BorderPane root = </span><span style="font-weight:bold;">createLayout</span><span>(primaryStage);</span>
+
+<span>          Scene scene = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Scene</span><span>(root, 400, 400);</span>
+<span>          primaryStage.</span><span style="font-weight:bold;">setTitle</span><span>(</span><span style="color:#650099;">"DocGenerator Help Tutorial"</span><span>);</span>
+<span>          primaryStage.</span><span style="font-weight:bold;">setScene</span><span>(scene);</span>
+<span>          primaryStage.</span><span style="font-weight:bold;">show</span><span>();</span>
+<span>        }</span>
+
+<span>        </span><span style="color:blue;font-weight:bold;">private</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">createContent</span><span>(BorderPane root) {</span>
+<span>          TextArea area = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">TextArea</span><span>();</span>
+<span>          area.</span><span style="font-weight:bold;">setStyle</span><span>(</span><span style="color:#650099;">"-fx-background-color: null;"</span><span>);</span>
+<span>          Insets insets = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Insets</span><span>(10, 10, 10, 10);</span>
+<span>          area.</span><span style="font-weight:bold;">setPadding</span><span>(insets);</span>
+<span>          area.</span><span style="font-weight:bold;">setText</span><span>(</span><span style="color:#650099;">"my area content"</span><span>);</span>
+<span>          root.</span><span style="font-weight:bold;">setCenter</span><span>(area);</span>
+<span>        }</span>
+
+<span>        </span><span style="color:blue;font-weight:bold;">private</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">createMenu</span><span>(VBox top) {</span>
+<span>          MenuBar menuBar = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">MenuBar</span><span>();</span>
+<span>          top.</span><span style="font-weight:bold;">getChildren</span><span>().</span><span style="font-weight:bold;">add</span><span>(menuBar);</span>
+<span>          Menu menu = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Menu</span><span>(</span><span style="color:#650099;">"Help"</span><span>);</span>
+<span>          menuBar.</span><span style="font-weight:bold;">getMenus</span><span>().</span><span style="font-weight:bold;">add</span><span>(menu);</span>
+<span>          MenuItem item = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">MenuItem</span><span>(</span><span style="color:#650099;">"Help Content"</span><span>);</span>
+<span>          menu.</span><span style="font-weight:bold;">getItems</span><span>().</span><span style="font-weight:bold;">add</span><span>(item);</span>
+<span>          item.</span><span style="font-weight:bold;">setOnAction</span><span>(</span><span style="color:blue;font-weight:bold;">new</span><span> EventHandler&lt;ActionEvent&gt;() {</span>
+<span>            @Override</span>
+<span>            </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">handle</span><span>(ActionEvent e) {</span>
+<span>            }</span>
+<span>          });</span>
+<span>        }</span>
+
+<span>        </span><span style="color:blue;font-weight:bold;">private</span><span> BorderPane </span><span style="font-weight:bold;">createLayout</span><span>(Stage stage) {</span>
+<span>          BorderPane root = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">BorderPane</span><span>();</span>
+<span>          VBox top = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">VBox</span><span>();</span>
+<span>          root.</span><span style="font-weight:bold;">setTop</span><span>(top);</span>
+<span>          </span><span style="font-weight:bold;">createContent</span><span>(root);</span>
+<span>          </span><span style="font-weight:bold;">createMenu</span><span>(top);</span>
+<span>          </span><span style="color:blue;font-weight:bold;">return</span><span> root;</span>
+<span>        }</span>
+
+<span>        </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">static</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">main</span><span>(String[] args) {</span>
+<span>          </span><span style="font-weight:bold;">launch</span><span>(args);</span>
+<span>        }</span>
+
+<span>      }</span>
+
+</pre>
+<br/>
+<br/>
+<br/>
+<img src="../images/tutorial4_2.png" id="_image_1" onclick="openImage(_image_1)" width="40%" class="left border" />
+
+<H2 id="integrating_the_help_content_in_our_javafx_application">Integrating the help content in our JavaFX application</H2>
+ Now we will integrate a Help system with our Help content in this application.<br/>
+<br/>
+ Before we add our help system, copy the generated  <code>articles.zip</code> alongside our application. First we need to initialize our Help factory: <br/>
+<br/>
+
+<pre>
+<span>      @Override</span>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">start</span><span>(Stage primaryStage) {</span>
+<span>        </span><span style="background-color:#ffff00;font-weight:bold;">createFactory</span><span style="background-color:#ffff00;">();</span><span>   </span>
+
+<span>        BorderPane root = </span><span style="font-weight:bold;">createLayout</span><span>(primaryStage);</span>
+
+<span>        Scene scene = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Scene</span><span>(root, 400, 400);</span>
+<span>        primaryStage.</span><span style="font-weight:bold;">setTitle</span><span>(</span><span style="color:#650099;">"DocGenerator Help Tutorial"</span><span>);</span>
+<span>        primaryStage.</span><span style="font-weight:bold;">setScene</span><span>(scene);</span>
+<span>        primaryStage.</span><span style="font-weight:bold;">show</span><span>();</span>
+<span>      }</span>
+
+</pre>
+<br/>
+
+<pre>
+<span>      </span>
+<span style="background-color:#ffff00;">         </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">private</span><span style="background-color:#ffff00;"> </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">void</span><span style="background-color:#ffff00;"> </span><span style="background-color:#ffff00;font-weight:bold;">createFactory</span><span style="background-color:#ffff00;">() {</span>
+<span style="background-color:#ffff00;">           URL url = </span><span style="background-color:#ffff00;color:#650099;font-weight:bold;">this</span><span style="background-color:#ffff00;">.</span><span style="background-color:#ffff00;font-weight:bold;">getClass</span><span style="background-color:#ffff00;">().</span><span style="background-color:#ffff00;font-weight:bold;">getResource</span><span style="background-color:#ffff00;">(</span><span style="background-color:#ffff00;color:#650099;">"resources/articles.zip"</span><span style="background-color:#ffff00;">);</span>
+
+<span style="background-color:#ffff00;">           factory = </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">new</span><span style="background-color:#ffff00;"> </span><span style="background-color:#ffff00;font-weight:bold;">JavaHelpFactory</span><span style="background-color:#ffff00;">(url);</span>
+<span style="background-color:#ffff00;">           </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">try</span><span style="background-color:#ffff00;"> {</span>
+<span style="background-color:#ffff00;">             factory.</span><span style="background-color:#ffff00;font-weight:bold;">create</span><span style="background-color:#ffff00;">();</span>
+<span style="background-color:#ffff00;">           } </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">catch</span><span style="background-color:#ffff00;"> (IOException | SAXException ex) {</span>
+<span style="background-color:#ffff00;">             ex.</span><span style="background-color:#ffff00;font-weight:bold;">printStackTrace</span><span style="background-color:#ffff00;">();</span>
+<span style="background-color:#ffff00;">           }</span>
+<span style="background-color:#ffff00;">         }</span>
+
+</pre>
+ Now we will create a  <code>JFXHelpContentViewer</code>, install the Help content on this viewer, and create our HelpWindow: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">private</span><span> BorderPane </span><span style="font-weight:bold;">createLayout</span><span>(Stage stage) {</span>
+<span>        BorderPane root = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">BorderPane</span><span>();</span>
+<span>        VBox top = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">VBox</span><span>();</span>
+<span>        root.</span><span style="font-weight:bold;">setTop</span><span>(top);</span>
+<span>      </span>
+<span style="background-color:#ffff00;">        </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">try</span><span style="background-color:#ffff00;"> {</span>
+<span style="background-color:#ffff00;">          viewer = </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">new</span><span style="background-color:#ffff00;"> </span><span style="background-color:#ffff00;font-weight:bold;">JFXHelpContentViewer</span><span style="background-color:#ffff00;">();</span>
+<span style="background-color:#ffff00;">          factory.</span><span style="background-color:#ffff00;font-weight:bold;">install</span><span style="background-color:#ffff00;">(viewer);</span>
+<span style="background-color:#ffff00;">          viewer.</span><span style="background-color:#ffff00;font-weight:bold;">getHelpWindow</span><span style="background-color:#ffff00;">(stage, </span><span style="background-color:#ffff00;color:#650099;">"Help Content"</span><span style="background-color:#ffff00;">, 600, 700);</span>
+
+<span style="background-color:#ffff00;">        } </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">catch</span><span style="background-color:#ffff00;"> (IOException ex) {</span>
+<span style="background-color:#ffff00;">          ex.</span><span style="background-color:#ffff00;font-weight:bold;">printStackTrace</span><span style="background-color:#ffff00;">();</span>
+<span style="background-color:#ffff00;">        }</span>
+<span style="background-color:#ffff00;">      </span><span> </span>
+<span>        </span><span style="font-weight:bold;">createContent</span><span>(root);</span>
+<span>        </span><span style="font-weight:bold;">createMenu</span><span>(top);</span>
+<span>            </span>
+<span>        </span><span style="color:blue;font-weight:bold;">return</span><span> root;</span>
+<span>      }              </span>
+
+</pre>
+ The last step is to wire our help item to the help content: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">private</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">createMenu</span><span>(VBox top) {</span>
+<span>        MenuBar menuBar = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">MenuBar</span><span>();</span>
+<span>        top.</span><span style="font-weight:bold;">getChildren</span><span>().</span><span style="font-weight:bold;">add</span><span>(menuBar);</span>
+<span>        Menu menu = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">Menu</span><span>(</span><span style="color:#650099;">"Help"</span><span>);</span>
+<span>        menuBar.</span><span style="font-weight:bold;">getMenus</span><span>().</span><span style="font-weight:bold;">add</span><span>(menu);</span>
+<span>        MenuItem item = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">MenuItem</span><span>(</span><span style="color:#650099;">"Help Content"</span><span>);</span>
+<span>        menu.</span><span style="font-weight:bold;">getItems</span><span>().</span><span style="font-weight:bold;">add</span><span>(item);</span>
+<span>        item.</span><span style="font-weight:bold;">setOnAction</span><span>(</span><span style="color:blue;font-weight:bold;">new</span><span> EventHandler&lt;ActionEvent&gt;() {</span>
+<span>          @Override</span>
+<span>          </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">handle</span><span>(ActionEvent e) {</span>
+<span>          </span><span style="background-color:#ffff00;">viewer.</span><span style="background-color:#ffff00;font-weight:bold;">showHelpDialog</span><span style="background-color:#ffff00;">(menu.</span><span style="background-color:#ffff00;font-weight:bold;">getGraphic</span><span style="background-color:#ffff00;">());</span><span> </span>
+<span>          }</span>
+<span>        });</span>
+<span>      }  </span>
+
+</pre>
+  See the  <a href="resources/JFXJavaHelp.java">full source code for the example</a><br/>
+<br/>
+ Now its done. Let's understand more precisely what we did: <ul>
+<li>Get the URL of the zip file container the help content. This URL have been generated by the  <a href="article_docgenhelp.html#help_content_generation">help content generation</a></li>
+<li>Create the  <code>JavaHelpFactory</code>:<br/>
+
+<pre>
+<span>            JavaHelpFactory factory = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">JavaHelpFactory</span><span>(url);</span>
+<span>            factory.</span><span style="font-weight:bold;">create</span><span>();            </span>
+
+</pre>
+</li>
+<li>Create a  <code>JFXHelpContentViewer</code> and install the model on this viewer:<br/>
+
+<pre>
+<span>            JFXHelpContentViewer viewer = </span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">JFXHelpContentViewer</span><span>();</span>
+<span>            factory.</span><span style="font-weight:bold;">installModel</span><span>(viewer);</span>
+
+</pre>
+</li>
+<li>In this case we created the Help window by <code><span>viewer.</span><span style="font-weight:bold;">getHelpWindow</span><span>(stage, </span><span style="color:#650099;">"Help Content"</span><span>, 600, 700)</span></code> but we did not need in this case to use this Window directly. It is performed by  the <code><span>viewer.showHelpDialog(menu.getGraphic())</span></code> code. We could have use the Help window or directly get the Help component by <code><span>viewer.</span><span style="font-weight:bold;">getHelpComponent</span><span>()</span></code></li>
+</ul>
+
+<H2 id="launch_our_application">Launch our application</H2>
+ Now the help system is integrated in our JavaFX application, and the following Window appear upon clicking on the "Help Content" menu item:<br/>
+<br/>
+<br/>
+<img src="../images/tutorial4_3.png" id="_image_2" onclick="openImage(_image_2)" width="40%" class="left border" />
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_tutorials.html">Tutorials</a>: This article presents a list of tutorials</li>
+<li> <a href="article_docgenhelp.html">Help system</a>: This article explains how to use the JavaHelp-like feature of the tool</li>
+<li> <a href="article_helpjavafx.html">Help JavaFX API</a>: This article explains how to use the Help JavaFX API</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_javahelp.html">javahelp</a> |
+ <a href="../categories/cat_tutorials.html">tutorials</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

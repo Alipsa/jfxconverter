@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article desc="drivers" >
+   <meta desc="This article explains how to use the drivers distributed with the library" />
+   Several specific drivers are proviced with the project:
+   <ul>
+      <li>The <code>jfxConverter-ppt.jar</code> contains a PowerPoint Graphics2D implementation</li>
+      <li>The <code>jfxConverter-svg.jar</code> contains a SVG Graphics2D implementation</li>   
+      <li>The <code>jfxConverter-eps.jar</code> contains 
+         an <wikipedia path="Encapsulated PostScript" desc="EPS" /> Graphics2D implementation</li>     
+   </ul> 
+   
+   Note that in general the JavaFX content must be shown in order to be converted. However you don't need to be in the 
+   FX Application Thread to execute the conversion.
+   
+   <title title="Using the PPT driver" />  
+   <moreInfo id="PPT driver" />
+   You should use the <code>jfxConverter-ppt.jar</code> in addition to the <code>jfxConverter.jar</code>.
+     
+   <title title="Using the SVG driver" /> 
+   <moreInfo id="SVG driver" />
+   You should use the <code>jfxConverter-svg.jar</code> in addition to the <code>jfxConverter.jar</code>.
+     
+   <title title="Using the EPS driver" />
+   <moreInfo id="EPS driver" />
+   You should use the <code>jfxConverter-eps.jar</code> in addition to the <code>jfxConverter.jar</code>. Note that the 
+   PowerPoint driver uses any version of the <code>jlibeps</code> library.
+      
+   <cat id="drivers" />
+</article>

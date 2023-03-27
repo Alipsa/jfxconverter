@@ -1,0 +1,69 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Pages that link to DOCX generation</H1>
+
+<hr/>
+ <a href="article_algorithm.html">Algorithm</a> : This article presents the way the tool works<br/>
+ <a href="article_apidoc.html">apidoc</a> : This article explains how the apidoc element can be used<br/>
+ <a href="article_comparisons.html">Comparison with other wikis softwares</a> : This article compares the docJGenerator features with other wikis softwares<br/>
+ <a href="article_css.html">Custom StyleSheet</a> : The "css" property in the configuration file or the command-line allows to specify a custom StyleSheet for the HTML result<br/>
+ <a href="article_distrib.html">Distribution</a> : This article is about the distribution of the tool<br/>
+ <a href="article_chapterscontent.html">Document content specification</a> : This article explains how to filter and configure the content of the wiki output<br/>
+ <a href="article_tutorialdoc.html">Document generation tutorial</a> : This article is a tutorial which explains how to generate a PDF or DOCX document<br/>
+ <a href="article_faq.html">FAQ</a> : Frequently Asked Questions<br/>
+ <a href="article_outputtype.html">OutputType configuration property</a> : This article is about the outputType configuration property<br/>
+ <a href="article_pdfdocxconfig.html">PDF and DOCX generation configuration</a> : This article explains how to configure the generation of the PDF or DOCX file<br/>
+ <a href="article_plugins.html">Plugins framework</a> : This article explains the Plugins framework<br/>
+ <a href="article_tutorials.html">Tutorials</a> : This article presents a list of tutorials<br/>
+
+<hr/>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

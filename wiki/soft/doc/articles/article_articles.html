@@ -1,0 +1,286 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_articles.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Articles</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#grammar">1&nbsp; Grammar</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#index_definition">2&nbsp; Index definition</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example">2.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#regular_articles">3&nbsp; Regular articles</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#meta_and_alttitle_elements">3.1&nbsp; Meta and altTitle elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#article_xml_attributes">3.2&nbsp; Article XML attributes</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#examples">3.3&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#templates">4&nbsp; Templates</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_1">4.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#redirect_articles">5&nbsp; Redirect articles</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#relationship_with_the_alttitle_element">5.1&nbsp; Relationship with the altTitle element</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_2">5.2&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#disambiguation_articles">6&nbsp; Disambiguation articles</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also_chapter">7&nbsp; See also chapter</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#encoding">8&nbsp; Encoding</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">9&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">10&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ Article files are XML files which define the articles in the wiki. There are several kinds or articles: <ul>
+<li> <a href="article_articles.html#index_definition">Index articles</a>: the index is the article which will is the entry-point to the wiki. There can be only one index for the wiki</li>
+<li> <a href="article_articles.html#regular_articles">Regular articles</a></li>
+<li> <a href="article_articles.html#templates">Templates</a>: these are similar to regular articles, but they are meant to be included in another articles, and as such won't be present in the dictionnary or categories</li>
+<li> <a href="article_articles.html#redirect_articles">Redirect articles</a></li>
+<li> <a href="article_articles.html#disambiguation_articles">Disambiguation articles</a></li>
+</ul>
+
+<H2 id="grammar">Grammar</H2>
+See  <a href="resources/page.xsd">The wiki articles Schema</a>.
+<H2 id="index_definition">Index definition</H2>
+ An index has the top-level element "index" and has no name. Appart from that, it can contain exactly the same elements as a regular article.
+<H3 id="example">Example</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;index&gt;</span>
+<span>      This is the index.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"general"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/index&gt;</span>
+
+</pre>
+
+<H2 id="regular_articles">Regular articles</H2>
+ A regular article has the top-level element "article". It can contain: <ul>
+<li>An optional list of  <a href="article_syntaxStartingElements.html#alttitle">alternate titles</a> for the article</li>
+<li>A  <a href="article_syntaxStartingElements.html#meta">meta</a> element at the top of the article, specifies the text which should be written as an explanation for an article in the dictionnary or categories</li>
+<li>An optional  <a href="article_syntaxStartingElements.html#seealso">SeeAlso</a> element allowing to reference another article which title or subject might be close ot this one</li>
+<li>Paragraphs, which in turn can contain various construction elements. See  <a href="article_syntax.html">syntax</a></li>
+<li>Chapters and titles. See  <a href="article_chapters.html">chapters and titles</a></li>
+<li>An optional "See Also" chapter. See  <a href="article_articles.html#see_also_chapter">see also</a></li>
+<li>Categories definition. See  <a href="article_categories.html">categories description</a></li>
+</ul>
+
+<H3 id="meta_and_alttitle_elements">Meta and altTitle elements</H3>
+Any ordering is allowed between the  <a href="article_syntaxStartingElements.html#meta">meta</a> and  <a href="article_syntaxStartingElements.html#alttitle">alternate titles</a> elements. For example, the following structure are all valid: <br/>
+<br/>
+
+<pre>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> dec</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"article1"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>       </span><span style="color:blue;font-weight:bold;">&lt;meta</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"this article is about"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>       </span><span style="color:blue;font-weight:bold;">&lt;altTitle</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"alternate title 1"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>       </span><span style="color:blue;font-weight:bold;">&lt;altTitle</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"alternate title 2"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ and:<br/>
+<br/>
+
+<pre>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> dec</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"article1"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>       </span><span style="color:blue;font-weight:bold;">&lt;altTitle</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"alternate title 1"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>       </span><span style="color:blue;font-weight:bold;">&lt;altTitle</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"alternate title 2"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>       </span><span style="color:blue;font-weight:bold;">&lt;meta</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"this article is about"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+
+<H3 id="article_xml_attributes">Article XML attributes</H3>
+ An article has the following attributes: <ul>
+<li>"desc": the article description</li>
+<li>"id": (optional) an alternate article ID</li>
+<li>"syntax": specifies the syntax of the article. By default it will use the general setting property (see  <a href="article_relaxedsyntax.html">Relaxed Syntax</a>). However it is possible to override this setting by setting one of the following values for this attribute:</li>
+
+<ul>
+<li>"strict": override the syntax to be strict for the article</li>
+<li>"relaxed": override the syntax to be relaxed for the article</li>
+</ul>
+<li>"keepCase": (optional) true if the article description case should be kept as is (which means that the first character won't be forced as UpperCase in the HTML output)</li>
+<li>"justify": the justification of the text in the article. See the  <a href="article_justification.html">Justification</a> article for more information</li>
+<li>"toc": (optional) false if the Table of contents should not be presented at the beginning of the article. By default the table of contents of the article is prenseted at the beginning of the article if there are more than 3 titles of any level in the article</li>
+</ul>
+
+<H3 id="examples">Examples</H3>
+ A basic example: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      This is a very simple article.</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ Another simple example, using the "see" tag, and specifying a category for the article. <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      This is a very simple article.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;see</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"anotherArticle"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the other linked article"</span><span style="color:#0d8200;font-weight:bold;"> text</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"example of a SeeAlso element"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myCategory"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ A more complex example, using the "seeAlso", "altTitle", and "meta" tags. <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"an article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;altTitle</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"second title"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;meta</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"A Very simple article example"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;seeAlso</span><span style="color:#0d8200;font-weight:bold;"> this</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"describing an article"</span><span style="color:#0d8200;font-weight:bold;"> other</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"specifying another type of article"</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"another article"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>      This is a very simple article.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;see</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"anotherArticle"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the other linked article"</span><span style="color:#0d8200;font-weight:bold;"> text</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"example of a SeeAlso element"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cat</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myCategory"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+
+<H2 id="templates">Templates</H2>
+ A template is similar to a regular article but has the top-level element "template". It can contain: <ul>
+<li>Paragraphs, which in turn can contain various construction elements. See  <a href="article_syntax.html">syntax</a></li>
+<li>Chapters and titles. See  <a href="article_chapters.html">chapters and titles</a></li>
+</ul>
+ Contrary to regular articles, it can't contain an optional "See Also" chapter alternate titles, or Categories definition.
+<H3 id="example_1">Example</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;template</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"a template"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      This is a very simple template.</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;title</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"template title"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/template&gt;</span>
+
+</pre>
+
+<H2 id="redirect_articles">Redirect articles</H2>
+"redirect" articles allow to create an article with a redirection to another article or even a  <a href="article_syntax.html#title">title</a> or  <a href="article_syntax.html#anchor">anchor</a> in another article<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+This article must be in the same package as the "redirect" articles itself</div></span>
+. These articles can contain only one "redirect" element. See  <a href="article_redirectarticles.html">Redirect articles</a> for more information.
+<H3 id="relationship_with_the_alttitle_element">Relationship with the altTitle element</H3>
+Contrary to the  <a href="article_syntaxStartingElements.html#alttitle">altTitle</a> element, "redirect" articles allow to perform a redirection to a title or anchor of an article. However one article must be created for any redirection.
+<H3 id="example_2">Example</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;redirect</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the redirect article"</span><span style="color:#0d8200;font-weight:bold;"> redirectTo</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"other article"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ This could have been performed with an "altTitle" element in the redirected article with: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"other article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;altTitle</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the redirect article"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ In this other example, we redirect to a title in another article: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;redirect</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the redirect article"</span><span style="color:#0d8200;font-weight:bold;"> redirectTo</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"other article#title"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;meta</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the redirect article title"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/redirect&gt;</span>
+
+</pre>
+
+<H2 id="disambiguation_articles">Disambiguation articles</H2>
+Disambiguation articles allow to specify an article which will point to several articles of approaching names<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+It is similar to Wikipedia disambiguation articles</div></span>
+. See  <a href="article_disambarticles.html">Disambiguation articles</a> for more information.
+<H2 id="see_also_chapter">See also chapter</H2>
+A "See Also" chapter will be added at the end of all the article chapters if there is at least one "see" element at the end of the article (just before the categories if there are categories). All the "see" elements will be presented in a bulleted list.
+<H2 id="encoding">Encoding</H2>
+The  <a href="article_commandline.html#escapenonutf8">escapeNonUTF8</a> option in the command-line or the equivalent   <a href="article_configFile.html#escapenonutf8">configuration property</a> allows to escape non UTF8 characters (such as accented letters)</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_articles.html#_note_1_1_" class="noteRefLink">^</a> This article must be in the same package as the "redirect" articles itself</li>
+<li id="_note_2"> <a href="article_articles.html#_note_2_1_" class="noteRefLink">^</a> It is similar to Wikipedia disambiguation articles</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntax.html">Article Syntax</a>: Specification of the article Syntax</li>
+<li> <a href="article_redirectarticles.html">Redirect articles</a>: Redirect articles allow to create an article with a redirection to another article or even a title or anchor in another article</li>
+<li> <a href="article_typesoffiles.html">Types of files</a>: This article explains the types of files which can be found in the wiki input</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_structure.html">structure</a> |
+ <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

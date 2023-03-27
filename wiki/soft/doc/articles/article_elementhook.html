@@ -1,0 +1,141 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_elementhook.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Plugin ElementHook</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#pluginfactory_interface">1&nbsp; PluginFactory interface</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#elementhook_interface">2&nbsp; ElementHook interface</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#hookcontext_class">3&nbsp; HookContext class</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">4&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">5&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+It is possible to modify the  <a href="article_sourcetree.html">wiki source tree</a> content before the generation through a  <a href="article_plugins.html">Plugin</a>.
+<H2 id="pluginfactory_interface">PluginFactory interface</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_plugins.html#plugin_factory_implementation">Plugin factory implementation</a></div>
+<br/>
+ To modify the wiki source tree content before the generation, you must implement the following methods in the <a href="../javadoc/pluginsAPI/org/docgene/plugins/PluginFactory.html" class="apiLink" title="org.docgene.plugins.PluginFactory">PluginFactory</a> interface: <ul>
+<li><a href="../javadoc/pluginsAPI/org/docgene/plugins/PluginFactory.html#getElementHook-org.docgene.parser.DirectoryParser-org.docgene.parser.HookContext-" class="apiLink" title="org.docgene.plugins.PluginFactory.getElementHook(org.docgene.parser.DirectoryParser, org.docgene.parser.HookContext)">PluginFactory.getElementHook(DirectoryParser, HookContext)</a> to get the hook which will be used to perform the modifications. It will only be taken into account if the <a href="../javadoc/pluginsAPI/org/docgene/plugins/PluginFactory.html#hasElementHook--" class="apiLink" title="org.docgene.plugins.PluginFactory.hasElementHook()">PluginFactory.hasElementHook()</a> method return true</li>
+<li><a href="../javadoc/pluginsAPI/org/docgene/plugins/PluginFactory.html#hasElementHook--" class="apiLink" title="org.docgene.plugins.PluginFactory.hasElementHook()">PluginFactory.hasElementHook()</a> to specify that the factory provides a hook which will be used to perform the modifications. If you return true, you will need to implement the <a href="../javadoc/pluginsAPI/org/docgene/plugins/PluginFactory.html#getElementHook-org.docgene.parser.DirectoryParser-org.docgene.parser.HookContext-" class="apiLink" title="org.docgene.plugins.PluginFactory.getElementHook(org.docgene.parser.DirectoryParser, org.docgene.parser.HookContext)">PluginFactory.getElementHook(DirectoryParser, HookContext)</a> method</li>
+</ul>
+
+<H2 id="elementhook_interface">ElementHook interface</H2>
+The  <code>PluginFactory</code> returns an implementation of the <a href="../javadoc/pluginsAPI/org/docgene/plugins/ElementHook.html" class="apiLink" title="org.docgene.plugins.ElementHook">ElementHook</a> interface, which will be used on then elements in the  <a href="article_sourcetree.html">wiki source tree</a>. This interface has the following methods: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:#404040;font-style:italic;">/**</span>
+<span style="color:#404040;font-style:italic;">      * Return the set of elements declarations which will be handled by this ElementHook.</span>
+<span style="color:#404040;font-style:italic;">      */</span>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> Set&lt;String&gt; </span><span style="font-weight:bold;">supportedElements</span><span>();</span>
+
+<span>      </span><span style="color:#404040;font-style:italic;">/**</span>
+<span style="color:#404040;font-style:italic;">      * Start the processing of an article.</span>
+<span style="color:#404040;font-style:italic;">      */</span>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">default</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">startArticle</span><span>(XMLArticle article) {</span>
+<span>      }</span>
+
+<span>      </span><span style="color:#404040;font-style:italic;">/**</span>
+<span style="color:#404040;font-style:italic;">      * Handle an element.</span>
+<span style="color:#404040;font-style:italic;">      */</span>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">handleElement</span><span>(ParagraphElement element);</span>
+
+</pre>
+<ul>
+<li>The <a href="../javadoc/pluginsAPI/org/docgene/plugins/ElementHook.html#supportedElements--" class="apiLink" title="org.docgene.plugins.ElementHook.supportedElements()">supportedElements()</a> method  returns the Set of elements in the wiki source tree which will potentially be handled by the hook<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+For example if you  return "title", only  <a href="article_syntax.html#title">syntax</a> elements will be handled</div></span>
+. See  <a href="article_elementdecl.html">Elements declarations</a> for more information</li>
+<li>The <a href="../javadoc/pluginsAPI/org/docgene/plugins/ElementHook.html#handleElement-org.docgene.model.ParagraphElement-" class="apiLink" title="org.docgene.plugins.ElementHook.handleElement(org.docgene.model.ParagraphElement)">handleElement(ParagraphElement)</a> method  will be called for all elements in the wiki source tree whose declaration ID is supported. For example,  if  <code>supportedElements()</code> returns a set with only "title", the method will be fired only for  <a href="article_syntax.html#title">syntax</a> elements</li>
+</ul>
+
+<H2 id="hookcontext_class">HookContext class</H2>
+The <a href="../javadoc/pluginsAPI/org/docgene/parser/HookContext.html" class="apiLink" title="org.docgene.parser.HookContext">HookContext</a> is passed to the <a href="../javadoc/pluginsAPI/org/docgene/plugins/PluginFactory.html" class="apiLink" title="org.docgene.plugins.PluginFactory">PluginFactory</a> instance to create an <a href="../javadoc/pluginsAPI/org/docgene/plugins/ElementHook.html" class="apiLink" title="org.docgene.plugins.ElementHook">ElementHook</a> object. This class provides several methods to modify the content of the tree, including: <ul>
+<li>Inserting a list of elements in the source tree before or after the current element</li>
+<li>Removing the current element</li>
+</ul>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_elementhook.html#_note_1_1_" class="noteRefLink">^</a> For example if you  return "title", only  <a href="article_syntax.html#title">syntax</a> elements will be handled</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_hooktreevisit.html">ElementHook tree visit</a>: This article explains how the ElementHook is called to modify the wiki source tree content</li>
+<li> <a href="article_plugins.html">Plugins</a>: This article explains the Plugins framework</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_plugins.html">plugins</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

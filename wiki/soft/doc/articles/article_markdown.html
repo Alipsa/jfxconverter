@@ -1,0 +1,123 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_markdown.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Markdown syntax</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#configure_the_tool_to_parse_articles_with_the_markdown_syntax">1&nbsp; Configure the tool to parse articles with the Markdown syntax</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#generalities">2&nbsp; Generalities</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#syntax">3&nbsp; Syntax</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">4&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">5&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+This article explains the <a href="https://en.wikipedia.org/wiki/Markdown" title="https://en.wikipedia.org/wiki/Markdown">Markdown</a> syntax which is supported by the tool.
+<H2 id="configure_the_tool_to_parse_articles_with_the_markdown_syntax">Configure the tool to parse articles with the Markdown syntax</H2>
+To be able to parse files with the Markdown syntax, you need to set either:<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+You can't use both the Markdown syntax and the  <a href="article_mediawiki.html">Mediawiki syntax</a></div></span>
+<ul>
+<li>The  <a href="article_commandline.html#allowmarkdown">allowMarkdown</a> property on the command-line</li>
+<li>Or the  <a href="article_configFile.html#allowmarkdown">allowMarkdown</a> configuration property</li>
+</ul>
+The files must have the  <code>.md</code> extension.<br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -allowMarkdown=true</span>
+</pre>
+
+<H2 id="generalities">Generalities</H2>
+The <a href="http://en.wikipedia.org/wiki/Markdown" title="http://en.wikipedia.org/wiki/Markdown">Mardown syntax</a> is a lightweight markup language which allows to convert the syntax to HTML files.<br/>
+<br/>
+ The markup is not clearly specified but is defined in the following website by Daring Fireball who invented this markup:  <a href="https://daringfireball.net/projects/markdown/" title="https://daringfireball.net/projects/markdown/">daringfireball.net/projects/markdown</a>. <br/>
+<br/>
+ The markup is not designed for interrelationships between articles, but several types of markups have been defined to allow for a wiki-style structure. The current Markdown format for docJGenerator uses the following:  <a href="https://docsify.js.org" title="https://docsify.js.org">docsify.js.org</a>.
+<H2 id="syntax">Syntax</H2>
+See  <a href="article_markdownmarkup.html">Markdown markup</a>.</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_markdown.html#_note_1_1_" class="noteRefLink">^</a> You can't use both the Markdown syntax and the  <a href="article_mediawiki.html">Mediawiki syntax</a></li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_markdownmarkup.html">Markdown markup</a>: This article explains the supported Markdown markup</li>
+<li> <a href="article_markdowncomp.html">Comparison with markdown syntax</a>: This article compares the docJGenerator syntax to the Markdown syntax</li>
+<li> <a href="article_articles.html">Articles</a>: Article files are XML files which define the articles in the wiki</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_markdown.html">markdown</a> |
+ <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

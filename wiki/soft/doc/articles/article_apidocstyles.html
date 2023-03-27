@@ -1,0 +1,279 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_apidocstyles.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Generic apidocs API styles</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+It is possible to specify custom CSS styles for an element in the  <a href="article_apidoc.html">apidoc</a> html rendering. It will override the styles defined for this element by default in the API type. 
+<H2 id="list_of_style_ids">List of style IDs</H2>
+
+<table style="font-size:11px;" class="border" >
+<thead class="notSortable">
+<tr>
+<th valign="center"  class="column" >Style ID</th>
+<th valign="center"  width="150" class="column" >Apply On</th>
+<th valign="center"  width="150" class="column" >Default Java styleClass</th>
+<th valign="center"  width="150" class="column" >Default Python styleClass</th>
+<th valign="center"  width="150" class="column" >Default CSharp styleClass</th>
+<th valign="center"  width="150" class="column" >Default Doxygen styleClass</th>
+<th valign="center"  width="300" class="column" >Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">header</td>
+<td valign="center" class="border">table</td>
+<td valign="center" class="border">headerTitleAPI</td>
+<td valign="center" class="border">headerTitlePythonAPI</td>
+<td valign="center" class="border">headerTitleCSharpAPI</td>
+<td valign="center" class="border">headerTitleDoxygenAPI</td>
+<td valign="center" class="border">styleClass specifying the style of the table enclosing the title of the API</td>
+</tr>
+<tr>
+<td valign="center" class="border">apiTitle</td>
+<td valign="center" class="border">th</td>
+<td valign="center" class="border">headerAPI</td>
+<td valign="center" class="border">headerPythonAPI</td>
+<td valign="center" class="border">headerCSharpAPI</td>
+<td valign="center" class="border">headerTitleDoxygenAPI</td>
+<td valign="center" class="border">styleClass specifying the style of the title of the API</td>
+</tr>
+<tr>
+<td valign="center" class="border">api</td>
+<td valign="center" class="border">table</td>
+<td valign="center" class="border">headerAPI</td>
+<td valign="center" class="border">headerPythonAPI</td>
+<td valign="center" class="border">headerCSharpAPI</td>
+<td valign="center" class="border">headerTitleDoxygenAPI</td>
+<td valign="center" class="border">styleClass specifying the style of the title of the API</td>
+</tr>
+<tr>
+<td valign="center" class="border">caption</td>
+<td valign="center" class="border">caption</td>
+<td valign="center" class="border">tableAPI</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">styleClass specifying the style of the tables caption</td>
+</tr>
+<tr>
+<td valign="center" class="border">api</td>
+<td valign="center" class="border">table</td>
+<td valign="center" class="border">apidoc</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">CSharpAPI</td>
+<td valign="center" class="border">DoxygenAPI</td>
+<td valign="center" class="border">styleClass specifying the style of the element tables</td>
+</tr>
+<tr>
+<td valign="center" class="border">api</td>
+<td valign="center" class="border">table</td>
+<td valign="center" class="border">apidoc</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">CSharpAPI</td>
+<td valign="center" class="border">DoxygenAPI</td>
+<td valign="center" class="border">styleClass specifying the style of the element tables</td>
+</tr>
+<tr>
+<td valign="center" class="border">row</td>
+<td valign="center" class="border">tr</td>
+<td valign="center" class="border">rowAPI</td>
+<td valign="center" class="border">rowPythonAPI</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">styleClass specifying the style of the rows</td>
+</tr>
+<tr>
+<td valign="center" class="border">rowModifier</td>
+<td valign="center" class="border">th</td>
+<td valign="center" class="border">rowModifierAPI</td>
+<td valign="center" class="border">rowModifierPythonAPI</td>
+<td valign="center" class="border">rowModifierCSharpAPI</td>
+<td valign="center" class="border">rowModifierDoxygenAPI</td>
+<td valign="center" class="border">styleClass specifying the style of the cells specifying the modifier and types of the elements</td>
+</tr>
+<tr>
+<td valign="center" class="border">rowContent</td>
+<td valign="center" class="border">th</td>
+<td valign="center" class="border">rowContentAPI</td>
+<td valign="center" class="border">rowContenPythonAPI</td>
+<td valign="center" class="border">rowContenCSharpAPI</td>
+<td valign="center" class="border">rowContenDoxygenAPI</td>
+<td valign="center" class="border">styleClass specifying the style of the cells specifying the path of the elements</td>
+</tr>
+<tr>
+<td valign="center" class="border">rowContentText</td>
+<td valign="center" class="border">div</td>
+<td valign="center" class="border">rowContentTextAPI</td>
+<td valign="center" class="border">rowContenTextPythonAPI</td>
+<td valign="center" class="border">rowContenTextCSharpAPI</td>
+<td valign="center" class="border">rowContenTextDoxygenAPI</td>
+<td valign="center" class="border">styleClass specifying the style of the div specifying the description of the elements</td>
+</tr>
+<tr>
+<td valign="center" class="border">argName</td>
+<td valign="center" class="border">span</td>
+<td valign="center" class="border">argNameAPI</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">styleClass specifying the style of the arguments names</td>
+</tr>
+<tr>
+<td valign="center" class="border">stateAPI</td>
+<td valign="center" class="border">span</td>
+<td valign="center" class="border">argNameAPI</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">-</td>
+<td valign="center" class="border">stateDoxygenAPI</td>
+<td valign="center" class="border">styleClass specifying the style of the states names</td>
+</tr>
+</tbody>
+</table>
+
+<H2 id="example">Example</H2>
+ Suppose that we want to define a custom "java" API, with the method arguments highlighted in yellow. The original Java  API has the following specification: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;api</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"java"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Java"</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"java"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      ...  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;element</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"method"</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"method"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;children&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;child</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"argument"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>       </span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/children&gt;</span><span>           </span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"modifierAndType"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Modifier and Type"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"description"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Method and Description"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"params"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Parameters"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/element&gt;</span><span>  </span>
+<span>      ...</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/api&gt;</span>
+
+</pre>
+ The default style for arguments  <code>span</code> is  <code>argNameAPI</code>: <br/>
+<br/>
+
+<pre>
+<span style="color:#0d8200;font-weight:bold;">      span</span><span>.argNameAPI {</span>
+<span style="color:blue;font-weight:bold;">        font-family</span><span>: Monospace;</span>
+<span>      }      </span>
+
+</pre>
+ The result is the following:<br/>
+<br/>
+<br/>
+ <img src="../images/apidocparamdefault.png" id="_image_0" onclick="openImage(_image_0)" class="left" />
+<br/>
+<br/>
+<br/>
+ We will define a new API (for example we could call it "java2") and add a custom style for the  <code>argName</code> style id: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;api</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"java2"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"CustomJava"</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"java"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      ...  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;element</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"method"</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"method"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;children&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;child</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"argument"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>       </span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/children&gt;</span><span>           </span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"modifierAndType"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Modifier and Type"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"description"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Method and Description"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;property</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"params"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Parameters"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="background-color:#ffff00;color:blue;font-weight:bold;">&lt;style</span><span style="background-color:#ffff00;color:#0d8200;font-weight:bold;"> id</span><span style="background-color:#ffff00;font-weight:bold;">=</span><span style="background-color:#ffff00;color:#650099;">"argName"</span><span style="background-color:#ffff00;color:#0d8200;font-weight:bold;"> style</span><span style="background-color:#ffff00;font-weight:bold;">=</span><span style="background-color:#ffff00;color:#650099;">"myArgStyle"</span><span style="background-color:#ffff00;color:blue;font-weight:bold;"> &gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/element&gt;</span><span>  </span>
+<span>      ...</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/api&gt;</span>
+
+</pre>
+ and the associated new CSS rules: <br/>
+<br/>
+
+<pre>
+<span style="color:#0d8200;font-weight:bold;">      span</span><span>.argNameAPI {</span>
+<span style="color:blue;font-weight:bold;">        font-family</span><span>: Monospace;</span>
+<span style="color:blue;font-weight:bold;">        background-color</span><span>: yellow;</span>
+<span>      }      </span>
+
+</pre>
+ We could set the new CSS file using the "css" property in the  <a href="article_configFile.html">configuration file</a> or the  <a href="article_commandline.html">command-line</a>.<br/>
+<br/>
+ The result will be:<br/>
+<br/>
+<br/>
+ <img src="../images/apidocparamcustom.png" id="_image_1" onclick="openImage(_image_1)" class="left" />
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_apidocconf.html">API documentation configuration</a>: This article explains how to specify internal APIs documentations languages, used in the apidoc element</li>
+<li> <a href="article_apidoc.html">apidoc</a>: This article explains how the apidoc element can be used</li>
+<li> <a href="article_configFile.html">Configuration file</a>: It is possible to define an optional property / value configuration file when starting the application (using the graphical UI or the command line)</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

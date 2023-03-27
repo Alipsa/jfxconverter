@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!--
+ Copyright (c) 2020, Herve Girod. All rights reserved.
+ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+ If you have any questions about this project, you can visit
+ the project website at the project page on http://sourceforge.net/projects/docjgenerator/
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:simpleType name="apiType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="java"/>
+         <xs:enumeration value="python"/>
+         <xs:enumeration value="csharp"/>
+         <xs:enumeration value="qt"/>
+         <xs:enumeration value="doxygen"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="apiElementType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="module"/>
+         <xs:enumeration value="class"/>
+         <xs:enumeration value="interface"/>              
+         <xs:enumeration value="header"/>
+         <xs:enumeration value="source"/>
+         <xs:enumeration value="enum"/>
+         <xs:enumeration value="field"/>
+         <xs:enumeration value="event"/>
+         <xs:enumeration value="property"/>
+         <xs:enumeration value="method"/>
+         <xs:enumeration value="constructor"/>
+         <xs:enumeration value="destructor"/>   
+         <xs:enumeration value="operator"/>                   
+         <xs:enumeration value="function"/>
+         <xs:enumeration value="argument"/>
+         <xs:enumeration value="return"/>
+         <xs:enumeration value="setter"/>
+         <xs:enumeration value="getter"/>  
+         <xs:enumeration value="constant"/>       
+         <xs:enumeration value="struct"/>         
+         <xs:enumeration value="typedef"/> 
+         <xs:enumeration value="macro"/>              
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="propertyIDType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="modifierAndType"/>
+         <xs:enumeration value="description"/>
+         <xs:enumeration value="topLevelDescription"/>
+         <xs:enumeration value="params"/>
+         <xs:enumeration value="return"/>
+         <xs:enumeration value="constants"/>
+      </xs:restriction>
+   </xs:simpleType>   
+   <xs:element name="APIDocs">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="api" type="api"  />
+         </xs:sequence>
+         <xs:attribute name="version" type="xs:string" />
+         <xs:attribute name="date" type="xs:string" />
+      </xs:complexType>
+      <xs:unique name="APIKey">
+         <xs:selector xpath="api"/>
+         <xs:field xpath="@id"/>
+      </xs:unique>             
+   </xs:element>
+   <xs:complexType name="elementType">
+      <xs:sequence>
+         <xs:element maxOccurs="1" minOccurs="0" name="children" type="childrenType" />
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="property" type="propertyType" />
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="style" type="styleType" />
+      </xs:sequence>         
+      <xs:attribute name="type" type="apiElementType" use="required"/>
+      <xs:attribute name="name" type="xs:string" use="required"/>
+      <xs:attribute name="topElement" type="xs:boolean" />
+   </xs:complexType>
+   <xs:complexType name="api">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="element" type="elementType" />
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="desc" type="xs:string" />
+      <xs:attribute name="type" type="apiType" use="required" />
+   </xs:complexType>
+   <xs:complexType name="propertyType">
+      <xs:attribute name="id" type="propertyIDType" use="required" />
+      <xs:attribute name="desc" type="xs:string" />
+      <xs:attribute name="value" type="xs:string" />
+   </xs:complexType>
+   <xs:complexType name="styleType">
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="style" type="xs:string" use="required"/>
+   </xs:complexType>   
+   <xs:complexType name="childrenType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="child" type="childType" />
+      </xs:sequence>       
+   </xs:complexType>
+   <xs:complexType name="childType">
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="title" type="xs:string" />
+   </xs:complexType>         
+</xs:schema>

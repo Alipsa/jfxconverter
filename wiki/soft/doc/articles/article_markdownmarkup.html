@@ -1,0 +1,262 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_markdownmarkup.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Markdown markup</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#starting_elements">1&nbsp; Starting elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#article_title">1.1&nbsp; Article title</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#index_article">1.2&nbsp; Index article</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#syntax_elements">2&nbsp; Syntax elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#code">2.1&nbsp; code</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example">2.1.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#pre">2.2&nbsp; pre</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#blockquote">2.3&nbsp; blockquote</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_1">2.3.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#article_references">2.4&nbsp; Article references</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#examples">2.4.1&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#external_links">2.5&nbsp; External links</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_2">2.5.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#titles">2.6&nbsp; Titles</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_3">2.6.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#lists">2.7&nbsp; lists</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#examples_1">2.7.1&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#images">2.8&nbsp; Images</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#syntax_justification_elements">3&nbsp; Syntax justification elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#br">3.1&nbsp; br</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#hr">3.2&nbsp; hr</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#formatting_text">3.3&nbsp; Formatting text</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">4&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">5&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ This article explains the supported Markdown markup.  See <a href="https://docsify.js.org" title="https://docsify.js.org">docsify.js.org</a> for more information.  To have a general view of Markdown markup, see for example: <a href="https://www.markdownguide.org/basic-syntax/" title="https://www.markdownguide.org/basic-syntax/">markdownguide.org/basic-syntax</a>.
+<H2 id="starting_elements">Starting elements</H2>
+
+<H3 id="article_title">Article title</H3>
+ The title of the article will use the name of the file without the "md" extension. For example, the following file: <i>myfile.md</i> will create an article with the name <i>MyFile</i>. <br/>
+<br/>
+ If the first element in the article is a title of level 1 (for example "# Guide"), this title will be used for the article name instead.
+<H3 id="index_article">Index article</H3>
+The <i>README.md</i> article is the index article.
+<H2 id="syntax_elements">Syntax elements</H2>
+
+<H3 id="code">code</H3>
+A  <a href="article_syntax.html#code">code</a> will be added by enclosing the code text by "`" characters.
+<H4 id="example">Example</H4>
+
+<pre>
+<span>      the line with `code`</span>
+</pre>
+
+<H3 id="pre">pre</H3>
+A  <a href="article_syntax.html#pre">pre</a> without syntax highlighting will be added by putting a space before the text on the lines.<br/>
+<br/>
+ Another way to add a  <a href="article_syntax.html#pre">pre</a> is by enclosing the pre lines by "```" characters. For example: <br/>
+<br/>
+
+<pre>
+<span>      ```</span>
+<span>      the pre text</span>
+<span>      ```      </span>
+</pre>
+ It is possible to specify the  <a href="article_syntaxhighlighting.html">syntax highlighting</a> by adding the syntax after the "```" characters. For example: <br/>
+<br/>
+
+<pre>
+<span>      ```json</span>
+<span>      {id: "theID"}</span>
+<span>      ```      </span>
+</pre>
+
+<H3 id="blockquote">blockquote</H3>
+A  <a href="article_syntax.html#blockquote">blockquote</a> will be added by beginning a line with "&gt; ". Note that you can have several levels of blockquotes.
+<H4 id="example_1">Example</H4>
+
+<pre>
+<span>      &gt; the first line</span>
+<span>      &gt; the second line</span>
+</pre>
+
+<H3 id="article_references">Article references</H3>
+An  <a href="article_syntax.html#ref">article reference</a> will be added by the following construct:  <code>[&lt;link text&gt;](&lt;link path&gt;)</code> where the path points to the referenced article source file. The path can be relative or absolute<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+Note that the syntax for internal wiki links and external links is the same</div></span>
+.<br/>
+<br/>
+ The link can also point to an XML article source.
+<H4 id="examples">Examples</H4>
+
+<pre>
+<span>      [the reference text](api-world.md)</span>
+<span>      [internal ref](api-world.md#the title)</span>
+<span>      [internal ref in the same file](#the title)</span>
+</pre>
+
+<H3 id="external_links">External links</H3>
+<a href="article_syntax.html#a">External links</a> are added by the following construct:  <code>[&lt;link text&gt;](&lt;link URL&gt;)</code> where the URL points to an http or https site<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_2_">[1]</sup></a>
+<div class="tooltiptext">
+Note that the syntax for internal wiki links and external links is the same</div></span>
+. 
+<H4 id="example_2">Example</H4>
+
+<pre>
+<span>      [the reference text](http://docs.oracle.com/javase/8/docs)</span>
+</pre>
+
+<H3 id="titles">Titles</H3>
+<a href="article_syntax.html#title">Titles</a> can be defined by setting one or more "#" characters <b>at the beginning</b> of a line. The level of the title is specified by the number of "#" characters.<br/>
+<br/>
+ Note that if there is only one title of level 1 at the beginning of the article, this title will be used for the article title, the title will not be used in the article, and all the titles below will have one level less. 
+<H4 id="example_3">Example</H4>
+
+<pre>
+<span>      ##my title</span>
+</pre>
+
+<H3 id="lists">lists</H3>
+ Unordered list items can be defined by putting a "*" at the beginning of a line. Ordered list items can be defined by putting a number followed by a fot at the beginning of a line.
+<H4 id="examples_1">Examples</H4>
+
+<pre>
+<span>      * first unordered item</span>
+<span>      * second unordered item</span>
+<span>  </span>
+<span>      1. first ordered item</span>
+<span>      2. second ordered item</span>
+</pre>
+
+<H3 id="images">Images</H3>
+An  <a href="article_syntax.html#img">image</a> will be added by one of the following constructs: <ul>
+<li> <code>![&lt;image caption&gt;](&lt;image path&gt;)</code> for using the original image size</li>
+<li> <code>![&lt;image caption&gt;](&lt;image path&gt; =&lt;with&gt;x)</code> for setting the destination image width</li>
+<li> <code>![&lt;image caption&gt;](&lt;image path&gt; =&lt;with&gt;x&lt;height&gt;)</code> for setting the destination image width and height</li>
+</ul>
+ Example: <br/>
+<br/>
+
+<pre>
+<span>      ![the image](ball.jpg =30x)</span>
+</pre>
+
+<H2 id="syntax_justification_elements">Syntax justification elements</H2>
+
+<H3 id="br">br</H3>
+A  <a href="article_syntaxJustifElements.html#br">break</a> will be added by ending a line with two or more spaces.
+<H3 id="hr">hr</H3>
+ A thematic break is specified by either: <ul>
+<li>Having 3 stars ("***") at the beginning of a line</li>
+<li>Having 3 minus signs "---" at the beginning of a line</li>
+<li>Having 3 underscores "___" at the beginning of a line</li>
+</ul>
+
+<H3 id="formatting_text">Formatting text</H3>
+ It is possible the style (bold or italic) of the text using one of the following tags: <ul>
+<li>Bold is defined by encoding the text by "**"</li>
+<li>Italic is defined by encoding the text by "_"</li>
+</ul>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1">^ <a href="article_markdownmarkup.html#_note_1_1_" class="noteRefLink">[1]</a> <a href="article_markdownmarkup.html#_note_1_2_" class="noteRefLink">[2]</a> Note that the syntax for internal wiki links and external links is the same</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_markdown.html">Markdown syntax</a>: This article explains the syntax which is supported by the tool</li>
+<li> <a href="article_markdowncomp.html">Comparison with markdown syntax</a>: This article compares the docJGenerator syntax to the Markdown syntax</li>
+<li> <a href="article_syntax.html">XML markup</a>: This article explains the XML tags which can be used to specify the articles syntax</li>
+<li> <a href="article_articles.html">Articles</a>: Article files are XML files which define the articles in the wiki</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_markdown.html">markdown</a> |
+ <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

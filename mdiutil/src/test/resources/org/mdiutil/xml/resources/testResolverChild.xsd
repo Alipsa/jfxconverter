@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Appendix J - Look Medeling - Official W3C Schema
+W3C Schema for the Look witch references LookCapacities and LookDefinition schemas.
+-->
+<xs:schema xmlns:test="http://toto.com/sample" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://toto.com/sample" elementFormDefault="unqualified">
+   <xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+   <xs:complexType name="childType">
+      <xs:attribute name="name" type="xs:token"/>
+   </xs:complexType>
+   <xs:element name="child" type="test:childType" />
+</xs:schema>

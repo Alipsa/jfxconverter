@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ushortEnumLiteralSet>
+	<literal name="A661_ACTIVE_AREA" value="A010"/>
+   <literal name="A661_ANIMATION_GROUP" value="A1E3"/>
+</ushortEnumLiteralSet>

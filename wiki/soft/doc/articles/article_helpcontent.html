@@ -1,0 +1,220 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_helpcontent.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Help content configuration</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#overview">1&nbsp; Overview</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#grammar">2&nbsp; Grammar</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#excluding_categories">3&nbsp; Excluding categories</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#resolving_priorities_for_articles">4&nbsp; Resolving priorities for articles</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#context-sensitive_help">5&nbsp; Context-sensitive help</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#example">6&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">7&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">8&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ The optional "helpContent" file allows to configure how the help content will be generated. It specifies how the articles will be regrouped under chapters in the help tree<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+By default if this file is not present all articles will be added under the root</div></span>
+.<br/>
+<br/>
+ This XML file also allows to configure the  <a href="article_ctxsensitivehelp.html">Context-sensitive Help</a>. Note that even if docJGenerator can generate the Help content  automatically, it is possible to produce the Help content manually. See  <a href="article_helpmanualcontent.html">Using the Help API with manually produced content</a>.
+<H2 id="overview">Overview</H2>
+ The help content file specifies each of the "chapters" and "sub-chapters" in the generated help content. Each "chapter" and "sub-chapter" will be a parent node in the tree. Each chapter can contain: <ul>
+<li>"chapter": Its sub-chapters</li>
+<li>"category": A list of categories for the articles to add in the chapter. If an article is in this category, it will be added in the chapter, except if  is it also in the list of categories of one of its sub-chapters</li>
+<li>"excludeCategory": A list of excluded categories for the articles to not add in the chapter even if they belong to one of the categories in the previous  list<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+For example, if a chapter contain the category "general", and the excluded category "general4", articles which are both in the "general" and "general4" categories will not be added in the chapter</div></span>
+</li>
+</ul>
+The help content can also specify the references for the  <a href="article_helpcontent.html#context-sensitive_help">Context-sensitive help</a>.
+<H2 id="grammar">Grammar</H2>
+See  <a href="resources/helpContent.xsd">The Help content schema</a>. 
+<H2 id="excluding_categories">Excluding categories</H2>
+ It is possible to define a list of categories which will be excluded from a chapter even if they belong to one of the categories  defined for the chapter<br/>
+<br/>
+ For example, in the following content definition, articles which are both in the "general" and "general4" categories will not be  added in the chapter: <br/>
+<br/>
+
+<pre>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;chapter</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first chapter"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"general"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;excludeCategory</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"general4"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>      </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/chapter&gt;</span><span>    </span>
+
+</pre>
+
+<H2 id="resolving_priorities_for_articles">Resolving priorities for articles</H2>
+ The priority of chapters resolving for the articles can be changed by setting the "property" attribute. Note that by default the priority for each chapter is defined as 0.<br/>
+<br/>
+ For example, in the following content definition, articles which are in the "general4" will not be added in the  "first chapter" chapter but the "second chapter" chapter. <br/>
+<br/>
+
+<pre>
+<span>      &gt;helpContent&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;chapters&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;chapter</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first chapter"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>              </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"general"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>              </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"general4"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>      </span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/chapter&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;chapter</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"second chapter"</span><span style="color:#0d8200;font-weight:bold;"> priority</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"1"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>              </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"general4"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/chapter&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/chapters&gt;</span><span>  </span>
+<span>      &gt;/helpContent&gt;    </span>
+
+</pre>
+
+<H2 id="context-sensitive_help">Context-sensitive help</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_ctxsensitivehelp.html">Context-sensitive Help</a></div>
+<br/>
+ The context-sensitive help allows to go to an article in the help system by clicking on a component in the GUI. The Help content allows to specify IDs which will be used to link the elements in the GUI where the user will click and the corresponding articles and titles. Each  <code>ref</code> element have the following attributes: <ul>
+<li> <code>id</code>: the ID which will allow to make the link between the GUI components and the help content</li>
+<li> <code>article</code>: The name of the  <a href="article_articles.html#regular_articles">article</a>. Note that the references to article names have the same rules as in the wiki.  See  <a href="article_namingconstraints.html">naming constraints</a></li>
+<li> <code>articlePackage</code>: optional, specifies the article  <a href="article_roots.html">package</a></li>
+<li> <code>title</code>: Optionally the  <a href="article_chapters.html#title_elements">title</a> or  <a href="article_syntax.html#anchor">anchor</a> in the article</li>
+</ul>
+For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;helpContent&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button1"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button 1"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button2"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button 2"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>      </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button3"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"several components"</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"button 3"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"textfield"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"several components"</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"text field"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"panel"</span><span style="color:#0d8200;font-weight:bold;"> article</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"several components"</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"panel"</span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/helpContent&gt;</span><span>      </span>
+
+</pre>
+
+<H2 id="example">Example</H2>
+Suppose that we have the following content for the file: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;helpContent&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;chapters&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;chapter</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first chapter"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>              </span><span style="color:blue;font-weight:bold;">&lt;chapter</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"child chapter"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>                 </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"general2"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>              </span><span style="color:blue;font-weight:bold;">&lt;/chapter&gt;</span>
+<span>              </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"general"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>              </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"general4"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>      </span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/chapter&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;chapter</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"second chapter"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>              </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"general2"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>              </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"general3"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;/chapter&gt;</span>
+<span>        </span><span style="color:blue;font-weight:bold;">&lt;/chapters&gt;</span><span>  </span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/helpContent&gt;</span><span>     </span>
+
+</pre>
+ Here we have the following specification for the help content: <ul>
+<li>There will be the following tree structure: the "first chapter" parent under the root with a "child chapter" sub-node, and the  "second chapter" also under the root</li>
+<li>The "first chapter" parent will contain all articles in the "general" category, except those which are also in the "general2" category which will be under the "child chapter" sub-node</li>
+<li>The "second chapter" parent will contain all articles in the "general3" categoriey, and also those in the "general2" category which are not in the "general" category</li>
+</ul>
+If we have the following list of articles: <ul>
+<li>"article1" in the "general" category</li>
+<li>"article2" in the "general" category</li>
+<li>"article3" in the "general2" category</li>
+<li>"article4" in the "general2" category</li>
+<li>"article5" in the "general" and "general2" categories</li>
+<li>"article6" in the "general3" category</li>
+<li>"article7" in the "general4" category</li>
+</ul>
+Then the result will be: <ul>
+<li>"first chapter" will contain "article1", "article2", and "article7", and the sub-chapter "child chapter"</li>
+<li>"child chapter" will contain "article5"</li>
+<li>"second chapter" will contain "article3, "article4", and "article6"</li>
+</ul>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_helpcontent.html#_note_1_1_" class="noteRefLink">^</a> By default if this file is not present all articles will be added under the root</li>
+<li id="_note_2"> <a href="article_helpcontent.html#_note_2_1_" class="noteRefLink">^</a> For example, if a chapter contain the category "general", and the excluded category "general4", articles which are both in the "general" and "general4" categories will not be added in the chapter</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_docgenhelp.html">Help system</a>: This article explains how to use the JavaHelp-like feature of the tool</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_javahelp.html">javahelp</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

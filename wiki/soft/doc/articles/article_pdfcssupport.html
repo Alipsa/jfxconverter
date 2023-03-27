@@ -1,0 +1,162 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_pdfcssupport.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>PDF custom CSS support</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#supported_elements">1&nbsp; Supported elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#supported_properties">2&nbsp; Supported properties</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#for_hx_elements">2.1&nbsp; For hx elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#for_column_elements">2.2&nbsp; For column elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#for_cell_elements">2.3&nbsp; For cell elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#for_caption_elements">2.4&nbsp; For caption elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#for_a_elements">2.5&nbsp; For a elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#for_ul_and_ol_elements">2.6&nbsp; For ul and ol elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#for_li_elements">2.7&nbsp; For li elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#example_of_generation_with_ant">3&nbsp; Example of generation with ant</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+There is a limited level of support for  <a href="custom element styles" style="color:red">custom element styles</a> in the docs generation.
+<H2 id="supported_elements">Supported elements</H2>
+ The following elements are supported: <ul>
+<li> <a href="article_syntax.html#title">title</a> elements:  <code>h&lt;x&gt;</code> tag</li>
+<li> <a href="article_syntax.html#box">box</a> elements:  <code>div</code> tag</li>
+<li> <a href="article_syntax.html#table">table</a> elements:  <code>column</code> and  <code>cell</code> tags</li>
+<li> <a href="article_syntax.html#img">image</a> elements:  <code>caption</code> tag</li>
+<li> <a href="article_syntax.html#ref">references</a> elements:  <code>a</code> tag</li>
+<li> <a href="article_syntax.html#a">hyperlink</a> elements:  <code>a</code> tag</li>
+<li> <a href="article_syntax.html#ul">ul</a> elements:  <code>ul</code> tag</li>
+<li> <a href="article_syntax.html#ol">ol</a> elements:  <code>ol</code> tag</li>
+<li>"li" elements:  <code>li</code> tag</li>
+</ul>
+
+<H2 id="supported_properties">Supported properties</H2>
+
+<H3 id="for_hx_elements">For hx elements</H3>
+<ul>
+<li>"color"</li>
+</ul>
+
+<H3 id="for_column_elements">For column elements</H3>
+<ul>
+<li>"background-color"</li>
+<li>"color"</li>
+</ul>
+
+<H3 id="for_cell_elements">For cell elements</H3>
+<ul>
+<li>"width"</li>
+<li>"font-size"</li>
+</ul>
+
+<H3 id="for_caption_elements">For caption elements</H3>
+<ul>
+<li>"caption"</li>
+<li>"text-align"</li>
+</ul>
+
+<H3 id="for_a_elements">For a elements</H3>
+<ul>
+<li>"font-style"</li>
+</ul>
+
+<H3 id="for_ul_and_ol_elements">For ul and ol elements</H3>
+<ul>
+<li>"list-style"</li>
+</ul>
+
+<H3 id="for_li_elements">For li elements</H3>
+<ul>
+<li>"font-size"</li>
+</ul>
+
+<H2 id="example_of_generation_with_ant">Example of generation with ant</H2>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;java</span><span style="color:#0d8200;font-weight:bold;"> classname</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"org.docgene.main.DocGenerator"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-input=wiki/input"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-output=wiki/output"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-fileName=docGeneratorWiki"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-outputType=pdf"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-css=myStyles.css"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;classpath&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"docGenerator.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/classpath&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/java&gt;</span>
+
+</pre>
+</div>
+</P>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_pdf.html">pdf</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

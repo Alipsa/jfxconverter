@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:a661dss="http://www.aviation-ia.com/aeec/SupportFiles/661/dataSpaceProfileSeed.xsd/1" targetNamespace="http://www.aviation-ia.com/aeec/SupportFiles/661/dataSpaceProfileSeed.xsd/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="dataSpaceProfile" type="a661dss:dataSpaceProfileType" />
+	<xs:complexType name="dataSpaceProfileType">
+		<xs:sequence>
+			<xs:element name="dataSpaceNamespace">
+				<xs:complexType>
+					<xs:attribute name="segment" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:minLength value="5"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="version" type="xs:token" use="required">
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

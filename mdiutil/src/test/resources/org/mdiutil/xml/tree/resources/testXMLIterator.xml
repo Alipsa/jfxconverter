@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<TheRoot name="Root">
+   <Title name="Title">The Title</Title>
+   <Content name="Content">The Content</Content>
+   <Content2 name="Content2">The Content2</Content2>
+   <Children name="Children">
+      <Content name="Content3">The Content3</Content>	
+   </Children>
+</TheRoot>

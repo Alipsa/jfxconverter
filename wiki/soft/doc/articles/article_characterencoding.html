@@ -1,0 +1,134 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_characterencoding.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Character encoding</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#decoding_of_the_input_files">1&nbsp; Decoding of the input files</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#guessing_the_files_encoding">1.1&nbsp; Guessing the files encoding</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#encoding_of_the_output_files">2&nbsp; Encoding of the output files</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#before_1.2.7.2_release">3&nbsp; Before 1.2.7.2 release</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">4&nbsp; Notes</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ This article explains what character encoding is used for the input or the output files.
+<H2 id="decoding_of_the_input_files">Decoding of the input files</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_escapeNonUTF8.html">Escaping non UTF8 characters</a></div>
+<br/>
+ docGenerator try to infer the encoding of each XML file to escape correctly the characters in the HTML result. However there is no way other than guessing to get the encoding of a text file. An alternate way to force the encoding is to set explictly the encoding of the file by setting the XML declaration. For example<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+Note that "ISO-8859-1" is the standard encoding for French text</div></span>
+: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span>
+
+</pre>
+
+<H3 id="guessing_the_files_encoding">Guessing the files encoding</H3>
+ The generator will try to guess the encoding of each input file to decode correctly non ASCII characters. Please note that  there is no way other than guessing to get the encoding of a text file, hence it is always better to encode article files directly in UTF-8.<br/>
+<br/>
+ Note that in XML files, it is possible to set explicitly the encoding of the file by setting the XML declaration. For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span>
+
+</pre>
+
+<H2 id="encoding_of_the_output_files">Encoding of the output files</H2>
+You don't need to bother about the platform default character encoding, the generator make sure that all output files are encoded in UTF-8, whatever the encoding of the input files or the platform default character encoding.<br/>
+<br/>
+ This is true for XML files, JSON files, and even HTML files.
+<H2 id="before_1.2.7.2_release">Before 1.2.7.2 release</H2>
+ Prior to release 1.2.7.2, the generator used the default character encoding of the platform, which could lead to problems To avoid problems you might have to specify the default encoding yourself before calling Java. <br/>
+<br/>
+ For example for  <code>ant</code>: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;java</span><span style="color:#0d8200;font-weight:bold;"> classname</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"org.docgene.main.DocGenerator"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      ...</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;jvmarg</span><span style="color:#0d8200;font-weight:bold;"> line</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-Dfile.encoding=UTF-8"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/java&gt;</span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_characterencoding.html#_note_1_1_" class="noteRefLink">^</a> Note that "ISO-8859-1" is the standard encoding for French text</li>
+</ol>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

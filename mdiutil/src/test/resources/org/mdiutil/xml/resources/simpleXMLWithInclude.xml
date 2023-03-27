@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : simpleXML.xml
+    Created on : 25 mai 2008, 15:29
+    Author     : Hervé
+    Description:
+        Purpose of the document follows.
+-->
+<root desc="example" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <element name="first">
+    <xi:include href="included.xml" parse="xml"/>
+    <element name="third"/>
+  </element>
+</root>

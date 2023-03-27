@@ -1,0 +1,183 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_customizingstyle.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Customizing the elements style</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#adding_a_style_attribute">1&nbsp; Adding a style attribute</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example">1.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#adding_custom_styleclasses">2&nbsp; Adding custom StyleClasses</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_1">2.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">3&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+There are two ways to customize the elements style: <ul>
+<li>By specifying a  <a href="article_css.html">Custom StyleSheet</a> and setting custom StyleClasses for some elements</li>
+<li>Or simply by adding a  <code>style</code> attribute for the element for which you want to customize ther style. This way (which work exactly as in HTML) is much more simple but of course you will have to specify the style each time you need to</li>
+</ul>
+ The  <a href="article_cssSelectors.html">Stylable syntax elements</a> article specifies the list of elements which are <i>stylable</i>.
+<H2 id="adding_a_style_attribute">Adding a style attribute</H2>
+Adding a  <code>style</code> attribute for a <i>stylable</i> element allows to add an inlined style. It works exactly as in HTML, which means that the CSS rules are inlined inside the attribute. Note that it will not erase the other CSS attributes on this element in the HTML result. However as it is the case in HTML, it will override any style set globally.
+<H3 id="example">Example</H3>
+Suppose that we want to have a table with a smaller font. A very simple way to do this is by setting a  <code>style</code> attribute with the following content: " <code>font-size:12px;</code>".<br/>
+<br/>
+ For example, we can have the following table specification: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;table</span><span style="color:#0d8200;font-weight:bold;"> style</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"font-size:12px;"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;tableHeader&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>Style ID</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>Apply On</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span><span>     </span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>Comment</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/tableHeader&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>header</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>table</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>styleClass specifying the style of the table</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span><span>         </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span><span>           </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>apiTitle</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>th</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>styleClass specifying the style of the title</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span><span>         </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span><span>   </span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span><span>      </span>
+
+</pre>
+ With the following result: 
+<table style="font-size:12px;" class="border" >
+<thead class="notSortable">
+<tr>
+<th valign="center"  class="column" >Style ID</th>
+<th valign="center"  class="column" >Apply On</th>
+<th valign="center"  class="column" >Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">header</td>
+<td valign="center" class="border">table</td>
+<td valign="center" class="border">styleClass specifying the style of the table</td>
+</tr>
+<tr>
+<td valign="center" class="border">apiTitle</td>
+<td valign="center" class="border">th</td>
+<td valign="center" class="border">styleClass specifying the style of the title</td>
+</tr>
+</tbody>
+</table>
+
+<H2 id="adding_custom_styleclasses">Adding custom StyleClasses</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_css.html">Custom StyleSheet</a></div>
+<br/>
+ Adding custom StyleClasses can be performed on <i>stylable</i> elements by setting the  <code>class</code> attribute. Note that the attribute can refer to more than one class, as iit is the case in HTML.
+<H3 id="example_1">Example</H3>
+ As for the previous example, we want to have a table with a smaller font. This time we will refer to a new StyleClass in  our table. This StyleClass can for example have the following definition: <br/>
+<br/>
+
+<pre>
+<span style="color:#0d8200;font-weight:bold;">      table</span><span>.custom {</span>
+<span style="color:blue;font-weight:bold;">        font-size</span><span>: 12px;</span>
+<span>      }</span>
+
+</pre>
+ And we refer to this StyleClass in our table: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;table</span><span style="color:#0d8200;font-weight:bold;"> class</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"custom"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;tableHeader&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>Style ID</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>Apply On</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span><span>     </span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>Comment</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/tableHeader&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>header</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>table</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>styleClass specifying the style of the table</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span><span>         </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span><span>           </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>apiTitle</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>th</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>styleClass specifying the style of the title</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span><span>         </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span><span>   </span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span><span>      </span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_cssSelectors.html">Stylable syntax elements</a>: This article explains the correspondance from elements to CSS selectors</li>
+<li> <a href="article_css.html">Custom StyleSheet</a>: The "css" property in the configuration file or the command-line allows to specify a custom StyleSheet for the HTML result</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

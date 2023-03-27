@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test:root xmlns:test="http://toto.com/sample" 
+      xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
+      xs:schemaLocation="http://toto.com/sample testResolver.xsd">
+   <test:child name="toto" />
+</test:root>

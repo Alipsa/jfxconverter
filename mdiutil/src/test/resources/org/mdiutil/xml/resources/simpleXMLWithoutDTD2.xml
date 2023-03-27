@@ -1,0 +1,6 @@
+&lt;root desc="example"&gt;
+  &lt;element name="first"&gt;
+    &lt;element name="second"/&gt; 
+    &lt;element name="third"/&gt;
+  &lt;/element&gt;
+&lt;/root&gt;

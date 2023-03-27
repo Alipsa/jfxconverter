@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+   <xs:simpleType name="type">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="type1"/>                                                    
+         <xs:enumeration value="type2"/>          
+      </xs:restriction>        
+   </xs:simpleType>   
+   <xs:complexType name="root" >
+      <xs:sequence minOccurs="1" maxOccurs="unbounded">
+         <xs:element name="child" type="child"/>
+      </xs:sequence> 
+   </xs:complexType>      
+   <xs:complexType name="child" >
+      <xs:sequence minOccurs="1" maxOccurs="unbounded">
+         <xs:element name="child1" type="child1"/>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:string"  use="required"/>
+   </xs:complexType>  
+   <xs:complexType name="child1" >
+      <xs:attribute name="name2" type="xs:string" use="required"/> 
+      <xs:attribute name="type" type="type" default="type1"/>       
+   </xs:complexType>          
+   <xs:element name="root" type="root"/>
+</xs:schema>

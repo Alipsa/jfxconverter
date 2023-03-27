@@ -1,0 +1,233 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_commandline.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Command-line starting</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#arguments">1&nbsp; Arguments</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#inputs_and_output">2&nbsp; Inputs and output</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#default_configuration">3&nbsp; Default configuration</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#examples">4&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">5&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">6&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ It is possible to execute the application by the command-line without showing the UI.
+<H2 id="arguments">Arguments</H2>
+ You can set the following arguments: <ul>
+<li><a name="input">"input"</a>: the input directory or directories where the input XML files and image resources are to be found. If there are more than one directory, the directories paths must be separated by the ";" character. See  <a href="article_roots.html">root files and packages</a> if you want an explanation on how to use the generator with more than one root directory</li>
+<li><a name="output">"output"</a>: the output directory</li>
+<li><a name="isheadless">"isHeadless"</a>: true if the application is used in a headless environment. See also  <a href="article_headless.html">Usage in a headless environment</a></li>
+<li>"outputType": the output type (pdf, docx, help, or html). See  <a href="article_outputtype.html">outputType configuration property</a></li>
+<li>"index": the optional index file (can be useful in the case of multiple directories)</li>
+<li>"cleaned": to clean the output directory before the generation</li>
+<li><a name="search">"search"</a>: allow to add an autocomplete  <a href="article_search.html">Search box</a> which will be added for each article</li>
+
+<ul>
+<li>"false" if there is no Search box</li>
+<li>"true" or "articles" if there is a Search box on the articles descriptions only</li>
+<li>"titles" (the default value) if there is a Search box on the articles descriptions and their titles</li>
+</ul>
+<li><a name="fulltextsearch">"fullTextSearch"</a>: Set if a Full text search in the wiki is available. Note that for a Full text search to be available, the  <a href="article_commandline.html#search">"search"</a> must be set. See also  <a href="article_search.html#full_text_search">Full text search</a> for more information</li>
+<li><a name="fulltextsearchcompressionlevel">"fullTextSearchCompressionLevel"</a>: the compression level of the full text search. See also  <a href="article_search.html#full_text_search">Full text search</a> for more information</li>
+<li><a name="locale">"locale"</a>: The localization for the wiki. See also  <a href="article_localization.html">localization</a> for more information</li>
+<li><a name="lightbox">"lightbox"</a>: true if images have a lightbox<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+A Lightbox effect is a JavaScript mechanism that displays images and videos by filling the screen, and dimming out the rest of the web page, when the image is clicked on</div></span>
+</li>
+<li><a name="wikilinkstooltips">"wikilinksTooltips"</a>: true if there are wiki links tooltips. False by default.</li>
+<li><a name="hasnotestooltips">"hasNotesTooltips"</a>: true if there should be tooltips for notes. True by default. See also  <a href="article_syntax.html#notes_tooltip">notes tooltip</a></li>
+<li>"notesTooltipsLength": the text length in notes tooltips</li>
+<li><a name="allowmediawiki">"allowMediawiki"</a>: true if the Mediawiki format is also accepted for articles (the default is false)<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+ <code>allowMediawiki</code> is incompatible with  <code>allowMarkdown</code>. If the two propeties are set to true, the result will be as if only  <code>allowMediawiki</code> has been set to true</div></span>
+. See  <a href="article_mediawiki.html">mediawiki syntax</a></li>
+<li><a name="allowmarkdown">"allowMarkdown"</a>: true if the Markdown format is also accepted for articles (the default is false)<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_2_">[2]</sup></a>
+<div class="tooltiptext">
+ <code>allowMediawiki</code> is incompatible with  <code>allowMarkdown</code>. If the two propeties are set to true, the result will be as if only  <code>allowMediawiki</code> has been set to true</div></span>
+. See  <a href="article_markdown.html">markdown syntax</a></li>
+<li>"limited": to limit the number of articles per directory</li>
+<li><a name="relaxedsyntax">"relaxedSyntax"</a>: true if the syntax of the articles is relaxed false by default). See  <a href="article_relaxedsyntax.html">Relaxed syntax</a> for more information about how to define this property and how to use it</li>
+<li><a name="iecompatibilityedge">"IECompatibilityEdge"</a>: true if the compatibility mode for Internet Explorer is set to the highest value. This may be necessary to allow jQuery to work correctly with high-level versions of IE (used for the Search field). The value is true by default but can be set to false</li>
+<li><a name="justification">"justification"</a>: specifies if the wiki text is justified by default See  <a href="article_justification.html">justification</a> for more information</li>
+<li><a name="escapenonutf8">"escapeNonUTF8"</a>: true if non UTF8 characters should be escaped in articles (false by default). See also  <a href="article_escapeNonUTF8.html">Escaping non UTF8 characters</a></li>
+<li><a name="allowhtmlentities">"allowHTMLEntities"</a>: true if HTML entities are taken into account (true by default). See also  <a href="article_handlingHTMLEntities.html">Handling HTML entities</a></li>
+<li><a name="dynamicmaps">"dynamicMaps"</a>: false if  <a href="article_syntax.html#map">maps</a> will be processed as images (true by default). The default is true, meaning that the maps will be loaded dynamically by scripts in the HTML articles. Note that  <a href="article_pdf.html">PDF generation</a> will use static images for Maps</li>
+<li><a name="staticmapstimeout">"staticMapsTimeOut"</a>: the timeOut value in milliseconds for  <a href="article_syntax.html#map">maps</a> processed as images. The default is 2000 milliseconds</li>
+<li><a name="checklinks">"checkLinks"</a>: to specify that the presence of external links (in  <a href="article_syntax.html#a">a</a>,  <a href="article_syntax.html#cite">cite</a> and  <a href="article_syntax.html#javadoc">javadoc</a> tags) must be checked (true by default)<span class="tooltip"><a href="#_note_3" class="noteLink"><sup id="_note_3_1_">[3]</sup></a>
+<div class="tooltiptext">
+for html pages, the presence of anchors if the "#" tag is found in the link construction is also checked</div></span>
+</li>
+<li><a name="checkhttplinks">"checkHTTPLinks"</a>: set if the URL links with the "http" protocol are checked. This property will only be used if the "checkLinks" property is set to true (true by default)<span class="tooltip"><a href="#_note_4" class="noteLink"><sup id="_note_4_1_">[4]</sup></a>
+<div class="tooltiptext">
+Note that having true for this property (which is the default) can increase the time for the parsing, see the  <a href="article_faq.html#what_is_the_performance_of_the_wiki_generator?">FAQ</a> for more information</div></span>
+. The possible values for this property are:</li>
+
+<ul>
+<li>"false": do not check the URL links with the "http" protocol</li>
+<li>"true": check the URL links with the "http" protocol</li>
+</ul>
+<li><a name="resolveapilinks">"resolveAPILinks"</a>: to specify if APIs which are defined internal to the wiki output will be resolved (true by default). See also  <a href="article_checklinks.html#resolving_api_links">Resolving API links</a></li>
+<li><a name="checkhttplinkstimeout">"checkHTTPLinksTimeOut"</a>: set the timeout of the Thread pool used for checking URL links with the "http" protocol, if the check is performed in background Threads</li>
+<li><a name="checkhttplinkspool">"checkHTTPLinksPool"</a>: set the number of Threads in the Thread pool used for checking URL links with the "http" protocol, if the check is performed in background Threads</li>
+<li><a name="config">"config"</a>: an optional configuration file (see  <a href="article_configFile.html">configuration file</a>)</li>
+<li><a name="background">"background"</a>: the optional  <a href="article_background.html">background image</a> to use for the article pages</li>
+<li><a name="backgroundcolor">"backgroundColor"</a>: the optional  <a href="article_background.html">background color</a> to use for the article pages</li>
+<li><a name="css">"css"</a>: a  <a href="article_css.html">custom additional CSS StyleSheet</a> that will be added to each article</li>
+<li><a name="apidocs">"apidocs"</a>: the optional file specifying the the custom internal API documentation. See  <a href="article_apidocconf.html">Internal API documentation configuration</a></li>
+<li><a name="wikicontent">"wikiContent"</a> or "chaptersContent": the path of the XML file which filter and configure the content of the wiki output. See also  <a href="article_chapterscontent.html">Document content specification</a></li>
+<li><a name="helpfilename">"helpFileName"</a>: the name of the generated help file, for the  <a href="article_docgenhelp.html">Help</a> generation type</li>
+<li><a name="helpfile">"helpFile"</a>: the generated help file, for the  <a href="article_docgenhelp.html">Help</a> generation type</li>
+<li><a name="helpoptimizedforswing">"helpOptimizedForSwing"</a>: specifies if the help content is optimized for the Swing API</li>
+<li><a name="helpcontent">"helpContent"</a>: the optional file which specifies how the chapters in the help content will be created</li>
+<li><a name="helppagewidth">"helpPageWidth"</a>: the page width used for specifying the images width for the help content</li>
+<li><a name="limit">"limit"</a>: to limit the number of articles per directory. The output directory will therefore be separated in several sub-directories which will contain the articles</li>
+<li><a name="properties">"properties"</a>: specify a file specifying the  <a href="article_properties.html">properties</a></li>
+<li>other arguments beginning with $ will define key/value string replacements in the text (see  <a href="article_properties.html">properties file</a>)</li>
+</ul>
+ If the input and output arguments are specified and correspond to existing directories, the application will generate the wiki in the output directory using the specification in the input directory, and exit.<br/>
+<br/>
+ Note that the majority of the arguments (the key/value argumentsand obviously "config") can also be specified in a  <a href="article_configFile.html">configuration file</a>.
+<H2 id="inputs_and_output">Inputs and output</H2>
+The  <a href="article_commandline.html#input">"input"</a> and  <a href="article_commandline.html#output">"output"</a> properties can be undefined in the command-line arguments if the  <a href="article_commandline.html#config">"config"</a> file is defined and contain associated properties for the inputs and output.
+<H2 id="default_configuration">Default configuration</H2>
+ By default, the following properties are set when using the command-line: <ul>
+<li>The  <a href="article_configFile.html#search">search</a> property is set on "titles" (there is a Search box for the articles titles and their table of content sub-titles)</li>
+<li>The  <a href="article_configFile.html#checklinks">checkLinks</a> property is set to true (the presence of external links is checked)</li>
+<li>The  <a href="article_configFile.html#checkhttplinks">checkHTTPLinks</a> property is set to true (URL links with the "http" protocol are checked)</li>
+</ul>
+ Note that all File paths can be absolute or relative to the main jar file.
+<H2 id="examples">Examples</H2>
+ The most simple generation, with an input directory, and an output directory: <br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output</span>
+</pre>
+<br/>
+<br/>
+Same as the previous one, but uses a  <code>version</code> property<span class="tooltip"><a href="#_note_5" class="noteLink"><sup id="_note_5_1_">[5]</sup></a>
+<div class="tooltiptext">
+It can for example be used to show the version of the documentation on the header or the footer</div></span>
+: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -$version=0.6</span>
+</pre>
+<br/>
+<br/>
+We use a  <a href="article_configFile.html">configuration file</a> which will contain the properties: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar input=wiki/input -output=wiki/output -config=wiki/input/config.properties</span>
+</pre>
+<br/>
+<br/>
+ The output directory is cleaned before generating the wiki, and the number of output articles per directory is limited: <br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -cleaned=true -limit=500</span>
+</pre>
+<br/>
+<br/>
+There are more than one input directories<span class="tooltip"><a href="#_note_6" class="noteLink"><sup id="_note_6_1_">[6]</sup></a>
+<div class="tooltiptext">
+See  <a href="article_roots.html">root files and packages</a></div></span>
+, and we specifically define our index file: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input;wiki2/input -index=myIndex.xml -output=wiki/output</span>
+</pre>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_commandline.html#_note_1_1_" class="noteRefLink">^</a> A Lightbox effect is a JavaScript mechanism that displays images and videos by filling the screen, and dimming out the rest of the web page, when the image is clicked on</li>
+<li id="_note_2">^ <a href="article_commandline.html#_note_2_1_" class="noteRefLink">[1]</a> <a href="article_commandline.html#_note_2_2_" class="noteRefLink">[2]</a>  <code>allowMediawiki</code> is incompatible with  <code>allowMarkdown</code>. If the two propeties are set to true, the result will be as if only  <code>allowMediawiki</code> has been set to true</li>
+<li id="_note_3"> <a href="article_commandline.html#_note_3_1_" class="noteRefLink">^</a> for html pages, the presence of anchors if the "#" tag is found in the link construction is also checked</li>
+<li id="_note_4"> <a href="article_commandline.html#_note_4_1_" class="noteRefLink">^</a> Note that having true for this property (which is the default) can increase the time for the parsing, see the  <a href="article_faq.html#what_is_the_performance_of_the_wiki_generator?">FAQ</a> for more information</li>
+<li id="_note_5"> <a href="article_commandline.html#_note_5_1_" class="noteRefLink">^</a> It can for example be used to show the version of the documentation on the header or the footer</li>
+<li id="_note_6"> <a href="article_commandline.html#_note_6_1_" class="noteRefLink">^</a> See  <a href="article_roots.html">root files and packages</a></li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_ant.html">Ant integration</a>: This article is about how to integrate the wiki generator in ant build files</li>
+<li> <a href="article_configFile.html">Configuration file</a>: It is possible to define an optional property / value configuration file when starting the application (using the graphical UI or the command line)</li>
+<li> <a href="article_pdfdocxconfig.html">PDF and DOCX generation configuration</a>: This article explains how to configure the generation of the PDF or DOCX file</li>
+<li> <a href="article_basicusage.html">Basic usage</a>: This article presents the basic usage and configuration of the tool</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

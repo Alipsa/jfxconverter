@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<types>
+    <simpleType name="bool" baseType="boolean" />
+    <simpleType name="int" baseType="int" />   
+    <enumType name="intEnum" >  
+       <enumValue name="ONE" />
+       <enumValue name="TWO" />       
+    </enumType>  
+    <arrayType name="arrayOfInt" type="int" />  
+    <structType name="struct">
+       <field name="intArray" type="arrayOfInt" />
+       <field name="enum" type="intEnum" />   
+       <field name="int" type="int" />      
+    </structType>      
+</types>

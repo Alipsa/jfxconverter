@@ -1,0 +1,132 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_troubleshooting.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Troubleshooting</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#i_have_a_lot_of_unreachable_url_links_errors,_what's_going_on?">1&nbsp; I have a lot of Unreachable URL Links errors, what's going on?</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#some_characters_are_not_shown_correctly">2&nbsp; Some characters are not shown correctly</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#i_used_the_apidoc_element_to_embed_an_api,_but_it_does_not_dhow_anything_on_my_pdf_or_docx_result">3&nbsp; I used the apidoc element to embed an API, but it does not dhow anything on my PDF or docx result</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#i_linked_to_local_javadoc_in_the_wiki,_but_the_links_are_invalid">4&nbsp; I linked to local javadoc in the wiki, but the links are invalid</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#i_generated_the_help_content_file_for_the_help_system,_but_i_don't_see_any_images">5&nbsp; I generated the help content file for the help system, but I don't see any images</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#the_search_field_does_not_work_on_internet_explorer">6&nbsp; The Search field does not work on Internet Explorer</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#i_have_a_message_saying_that_a_class_was_not_found_when_using_the_tool_through_ant,_what's_going_on?">7&nbsp; I have a message saying that a Class was not found when using the tool through ant, what's going on?</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#i_have_a_message_concerning_a_property_name_not_allowed_in_infobox_definition,_why?">8&nbsp; I have a message concerning a property name not allowed in infobox definition, why?</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">9&nbsp; Notes</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ This article present possible problems and their solution.
+<H2 id="i_have_a_lot_of_unreachable_url_links_errors,_what's_going_on?">I have a lot of Unreachable URL Links errors, what's going on?</H2>
+ Chance is that you don't have access to the internet on your system, but you have a lot of external links. In that case you should configure the wiki to not check external links. This can be done on the command-line by setting to false the  <a href="article_commandline.html#checkhttplinks">checkHTTPLinks</a> property, or in the configuration file by setting to false the  <a href="article_configFile.html#checkhttplinks">checkHTTPLinks</a> property. See also  <a href="article_checklinks.html">checking external links</a>.
+<H2 id="some_characters_are_not_shown_correctly">Some characters are not shown correctly</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_characterencoding.html#decoding_of_the_input_files">decoding of the input files</a></div>
+<br/>
+ docGenerator try to infer the encoding of each XML file to escape correctly the characters in the HTML result. However there is no way other than guessing to get the encoding of a text file. An alternate way to force the encoding is to set explictly the encoding of the file by setting the XML declaration. For example<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+Note that "ISO-8859-1" is the standard encoding for French text</div></span>
+: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span>
+
+</pre>
+
+<H2 id="i_used_the_apidoc_element_to_embed_an_api,_but_it_does_not_dhow_anything_on_my_pdf_or_docx_result">I used the apidoc element to embed an API, but it does not dhow anything on my PDF or docx result</H2>
+Unfortunately, for the moment, the  <a href="article_apidoc.html">apidoc</a> element is only rendered in html.
+<H2 id="i_linked_to_local_javadoc_in_the_wiki,_but_the_links_are_invalid">I linked to local javadoc in the wiki, but the links are invalid</H2>
+ You might have put the javadoc in an incorrect directory. Note that relative APIs are by default relative to the root of the wiki output directory. See  <a href="article_javadocs.html">Javadocs APIs</a> for more information.
+<H2 id="i_generated_the_help_content_file_for_the_help_system,_but_i_don't_see_any_images">I generated the help content file for the help system, but I don't see any images</H2>
+You might have specified the wrong format for the result. See  <a href="article_docgenhelp.html#help_content_optimization">help content optimization</a>. The  <code>README.txt</code> file in the zip file used for the help indicates for which format the Help content has been generated.
+<H2 id="the_search_field_does_not_work_on_internet_explorer">The Search field does not work on Internet Explorer</H2>
+Look if you have set the  <a href="article_commandline.html#iecompatibilityedge">IECompatibilityEdge</a> property to false. In that case, Internet Explorer of versions greater or equal than 11 will try to keep the behavior of older versions, which can throw exceptions in jQuery. Give the property the default value (true).
+<H2 id="i_have_a_message_saying_that_a_class_was_not_found_when_using_the_tool_through_ant,_what's_going_on?">I have a message saying that a Class was not found when using the tool through ant, what's going on?</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_ant.html#classnotfound_problems_when_using_the_tool_through_ant">ant integration</a></div>
+<br/>
+ For example, you can have a message in the error console such as  <code>Can't find the Class for Plugin Factory org.docgene.scripts.ScriptFactory</code>.<br/>
+<br/>
+ The reason is that you can run into problems whith ClassPath when running ant. The way to fix it is to add explictly the relevant libraries to the  <code>classpath</code> in ant.
+<H2 id="i_have_a_message_concerning_a_property_name_not_allowed_in_infobox_definition,_why?">I have a message concerning a property name not allowed in infobox definition, why?</H2>
+ The message should be: "name property is not allowed in infobox definition". It is because it is not allowed to define a property with the key "name", because this property is defined by default for all infoboxes (see  <a href="article_infobox.html">infobox template</a>.</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_troubleshooting.html#_note_1_1_" class="noteRefLink">^</a> Note that "ISO-8859-1" is the standard encoding for French text</li>
+</ol>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

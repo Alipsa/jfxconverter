@@ -1,0 +1,146 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_packagedepend.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Packages dependencies</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#grammar">1&nbsp; Grammar</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#examples">2&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#basic_example">2.1&nbsp; Basic example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#a_more_complex_example">2.2&nbsp; A more complex example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">3&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">4&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+As explained in the  <a href="article_roots.html#usage_with_more_than_one_root_directory">root files and packages</a> article, it is possible to use the generator on more than one root package.  <a href="article_roots.html#defining_a_package_for_a_root">packages</a> can be  defined for each root directory.<br/>
+<br/>
+ It is possible to specify in the configuration file the  <a href="article_configFile.html#dependencies">dependencies</a> property to define the allowed dependencies between packages. Every found dependency which is not allowed in this  dependencies configuration will emit an exception in the tool logger<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+These dependencies cover all the elements which have a "package" attribute, such as the  <a href="article_syntax.html#ref">ref</a> element for example</div></span>
+. Note that the  elements at the origin of the error will still be generated correctly.
+<H2 id="grammar">Grammar</H2>
+See  <a href="resources/packagesDependencies.xsd">the packages dependencies Schema</a>. 
+<H2 id="examples">Examples</H2>
+
+<H3 id="basic_example">Basic example</H3>
+ In the following example, we refuse dependencies from package1 to package2: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;packagesDependencies</span><span style="color:#0d8200;font-weight:bold;"> defaultCheck</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"accept"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;package</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"package1"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;dependency</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"package2"</span><span style="color:#0d8200;font-weight:bold;"> check</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"refuse"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/package&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/packagesDependencies&gt;</span><span>      </span>
+
+</pre>
+  In this example, Dependencies from package1 to package2 are not allowed.  One of the references in the articles in package1 will therefore be refused and lead to an exception during parsing:<br/>
+<img src="../images/packagesKO.png" id="_image_0" onclick="openImage(_image_0)" width="70%" class="left" />
+
+<H3 id="a_more_complex_example">A more complex example</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;packagesDependencies</span><span style="color:#0d8200;font-weight:bold;"> defaultCheck</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"accept"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;package</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"package1"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;dependency</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"package2"</span><span style="color:#0d8200;font-weight:bold;"> check</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"refuse"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/package&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;package</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"package2"</span><span style="color:#0d8200;font-weight:bold;"> defaultCheck</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"refuse"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;dependency</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"package3"</span><span style="color:#0d8200;font-weight:bold;"> check</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"accept"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/package&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/packagesDependencies&gt;</span><span>      </span>
+
+</pre>
+ Here: <ul>
+<li>By default all dependencies are allowed</li>
+<li>Dependencies from package1 to package2 are not allowed</li>
+<li>By default all Dependencies from package2 are not allowed</li>
+<li>Dependencies from package2 to package3 are allowed</li>
+</ul>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_packagedepend.html#_note_1_1_" class="noteRefLink">^</a> These dependencies cover all the elements which have a "package" attribute, such as the  <a href="article_syntax.html#ref">ref</a> element for example</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_roots.html">Root files and packages</a>: This article explains how to use the generator with more than one root directory</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a> |
+ <a href="../categories/cat_structure.html">structure</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

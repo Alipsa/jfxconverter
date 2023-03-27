@@ -1,0 +1,7 @@
+.dropshadow {
+   -fx-effect: dropshadow( gaussian, rgb(7,226,249), 10 , 0.5 , 0 , 0);
+   -fx-fill: linear-gradient(red, yellow);
+   -fx-arc-width: 30;
+   -fx-arc-height: 30;
+}
+

@@ -1,0 +1,188 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" >
+$(document).ready(function() 
+  {
+    $("#table_0").tablesorter(); 
+  }
+);
+</script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_apidocdoxygen.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Doxygen generic API</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#c++_structure">1&nbsp; C++ structure</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#c_structure">2&nbsp; C structure</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#list_of_managed_types">3&nbsp; List of managed types</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">4&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ The Doxygen generic API allows to model a C or C++ structure. Note that: <ul>
+<li>The elements described here are the parent type of the element</li>
+<li>It is not necessary to specify if you are describing a C or C++ API</li>
+</ul>
+See  <a href="article_genericapitypes.html#list_of_all_types">Generic apidocs API types</a> for the list of parent element for each API element.
+<H2 id="c++_structure">C++ structure</H2>
+The structure of the API for the C++ language is the following: <ul>
+<li>Only "class" and "enum" parent elements can be at the root of each API</li>
+<li>A "class" parent element can have "method" or "field" children. note that a "constructor", "destructor", "getter",  and "setter" are "method" elements</li>
+</ul>
+<img src="../images/pyapidoc.png" id="_image_0" onclick="openImage(_image_0)" width="40%" class="left" />
+
+<H2 id="c_structure">C structure</H2>
+The structure of the API for the C language is the following: <ul>
+<li>Only "header"," struct" and "enum" parent elements can be at the root of each API</li>
+<li>A "header" parent element can have "macro", "typedef", "function", and "enum" children</li>
+<li>A "struct" parent element can have "field" children</li>
+<li>An "enum" parent element can have "constant" children. Note that an enum state is a "constant"</li>
+</ul>
+<img src="../images/doxigenapidoc.png" id="_image_1" onclick="openImage(_image_1)" width="70%" class="left" />
+
+<H2 id="list_of_managed_types">List of managed types</H2>
+ The following table presents the list of parent types which are managed by the Doxygen generic API.  
+<table id="table_0" class="tablesorter border" >
+<thead>
+<tr>
+<th valign="center"  width="150" class="column" >Parent Type</th>
+<th valign="center"  width="150" class="column" >Top Element</th>
+<th valign="center"  width="400" class="column" >Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">header</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">Represents a C header</td>
+</tr>
+<tr>
+<td valign="center" class="border">class</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">Represents a class</td>
+</tr>
+<tr>
+<td valign="center" class="border">struct</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">Represents a structure</td>
+</tr>
+<tr>
+<td valign="center" class="border">enum</td>
+<td valign="center" class="border">Yes</td>
+<td valign="center" class="border">Represents an enum</td>
+</tr>
+<tr>
+<td valign="center" class="border">method</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">Represents a method, a constructor, a destructor, a getter, or a setter</td>
+</tr>
+<tr>
+<td valign="center" class="border">field</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">Represents a class field or a structure field</td>
+</tr>
+<tr>
+<td valign="center" class="border">typedef</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">Represents a typedef declaration</td>
+</tr>
+<tr>
+<td valign="center" class="border">macro</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">Represents a macro declaration</td>
+</tr>
+<tr>
+<td valign="center" class="border">constant</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">Represents a constant used for enum states, typedef, or macro</td>
+</tr>
+<tr>
+<td valign="center" class="border">argument</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">Represents an argument</td>
+</tr>
+<tr>
+<td valign="center" class="border">function</td>
+<td valign="center" class="border">No</td>
+<td valign="center" class="border">Represents a C function</td>
+</tr>
+</tbody>
+</table>
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_genericapitypes.html">Generic API types</a>: This article explains which elements are managed by each generic API type</li>
+<li> <a href="article_apidoc.html">apidoc</a>: This article explains how the apidoc element can be used</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

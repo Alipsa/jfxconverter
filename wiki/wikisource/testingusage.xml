@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article desc="Testing the usage of the converter" >
+   It is possible to test the usage of the converter with a script setting the Node structure. 
+   
+   The associated application is available as the <code>org.jfxonverter.app.JFXConverterApp</code>. Note that is is only available
+   in the IDE (the associated code is not distributed in the <code>jfxConverter.jar</code> library).
+   
+   <title title="usage"/>
+   The application allows to execute a Groovy script defining a Node structure and convert the structure to a SVG, EPS, or PPT image. 
+   Starting the application will present the following window:
+   <img id="converterapp" border="true"/>
+   
+   To use this application:
+   <ul>
+      <li>Set the groovy file to use to create the Node structure</li>
+      <li>Check the "Extended Conversion" checkbox if you want to keep the containers as groups in the converted image (if the 
+         output file format support them), and handle the JavaFX effects</li>
+      <li>Click on "Convert" and choose the output file format to execute the conversion</li>   
+   </ul>
+   
+   Note that the "Convert" button is only available after the script file has been chosen:
+   <img id="converterapp2" />
+   
+   <title title="Script definition"/>
+   The script must have a <source syntax="java">public Node getContent()</source> method. 
+   
+   A <code>context</code> object is available giving access to the following methods:
+   <ul>
+      <li>
+         <source syntax="java">getScriptFile()</source>: the script file</li> 
+      <li>
+         <source syntax="java">getPath(String)</source>: the absolute path of a file specified by a path relative to the script file</li>           
+      <li>
+         <source syntax="java">getCSS(String)</source>: the CSS path of a file specified by a path relative to the script file, usable to
+         add a StyleSheet to a Node parent</li>                     
+   </ul>
+   
+   <title title="script example"/>
+   <title level="2" title="simple example"/>
+   The following script creates a rectangle and a line:
+   <pre syntax="java">
+      import javafx.scene.*;
+      import javafx.scene.layout.*;
+      import javafx.scene.shape.*;
+      import javafx.scene.paint.*;
+
+      public Node getContent() {
+      Pane pane = new Pane();
+      Rectangle rect = new Rectangle(0, 0, 200, 200);
+      rect.setFill(Color.YELLOW);
+      rect.setStyle("-fx-fill: green; -fx-rotate: 45;");
+      Line line = new Line(0, 0, 200, 200);
+      line.setStroke(Color.RED);
+      pane.getChildren().add(rect);
+      pane.getChildren().add(line);
+      return pane;
+      }      
+   </pre>
+   
+   <title level="2" title="StyleSheet example"/>
+   The following example returns a Pane and specifies the StyleSheet of the Pane defined in a CSS file in the same directory as
+   the script file:
+   <pre syntax="java">
+      import javafx.scene.*;
+      import javafx.scene.layout.*;
+      import javafx.scene.shape.*;
+      import javafx.scene.paint.*;
+
+      public Node getContent() {
+      Pane pane = new Pane();
+      String path = context.getCSS("pane.css");
+      pane.getStylesheets().add(path);
+      pane.getStyleClass().add("paneStyle");
+      return pane;
+      }      
+   </pre>
+   
+   <cat id="general" />
+</article>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root desc="example">
+  <element name="first">the first element
+     on several lines
+     maybe three not two
+    <element name="second"/>  
+    <element name="third">the third element</element>
+  </element>
+</root>

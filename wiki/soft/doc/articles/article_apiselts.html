@@ -1,0 +1,151 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_apiselts.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>APIs elements</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+ There are two types of elements for APIs: <ul>
+<li>A first type of elements act like external references and link to an existing API</li>
+<li>A second type of elements embed the API in the wiki</li>
+</ul>
+
+<H2 id="link_to_an_existing_api">Link to an existing API</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_apis.html">APIs property</a></div>
+<br/>
+ The elements which link to an existing API are: <ul>
+<li> <a href="article_syntax.html#javadoc">javadoc</a>: link to a Java API</li>
+<li> <a href="article_syntax.html#qtdoc">qtdoc</a>: link to a Qt API</li>
+</ul>
+The location of APIs can be configured by the  <a href="article_apis.html">APIs</a> property in the   <a href="article_configFile.html">configuration file</a>.<br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span>      This is a link to </span><span style="color:blue;font-weight:bold;">&lt;javadoc</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"java.awt.Button"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ Has the following result: This is a link to <a href="http://docs.oracle.com/javase/8/docs/api//java/awt/Button.html" class="apiLink" title="java.awt.Button">Button</a>
+<H2 id="embed_an_api">Embed an API</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_apidoc.html">apidoc</a></div>
+<br/>
+ The elements which embed an existing API are: <ul>
+<li> <a href="article_syntax.html#javaapi">javaAPI</a>: embed a Java API</li>
+<li> <a href="article_syntax.html#pythonapi">pythonAPI</a>: embed a Python API</li>
+<li> <a href="article_apidoc.html">apidoc</a>: embed any language API. The model for the languages can be configured by the  <a href="article_apidocconf.html">API documentation configuration</a></li>
+</ul>
+For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;apidoc</span><span style="color:#0d8200;font-weight:bold;"> lang</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"python"</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"module"</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Class"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>Representation of a class documentation</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;element</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"field"</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"doc"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>A mapping from identifier name to a Doc objects</span><span style="color:blue;font-weight:bold;">&lt;/element&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;element</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"method"</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"class_variables(self, include_inherited=True, sort=True)"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      Returns an optionaly-sorted list of Variable objects that represent this class class variables.</span><span style="color:blue;font-weight:bold;">&lt;/element&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/apidoc&gt;</span><span>       </span>
+
+</pre>
+ Has the following result: <br/>
+<table class="headerTitlePythonAPI">
+<tbody>
+<th valign="center" class="headerPythonAPI">module Class</th>
+</tbody>
+</table>
+Representation of a class documentation<table class="apidoc">
+<tbody>
+<tr class="rowPythonAPI">
+<th valign="left" class="rowModifierPythonAPI">def</th>
+<th valign="center" class="rowContentPythonAPI">doc
+<br/>
+<div class="rowContentPythonTextAPI">
+A mapping from identifier name to a Doc objects</div>
+</th>
+</tr>
+</tbody>
+</table>
+<br/>
+<br/>
+<table class="apidoc">
+<tbody>
+<tr class="rowPythonAPI">
+<th valign="left" class="rowModifierPythonAPI">def</th>
+<th valign="center" class="rowContentPythonAPI">class_variables(self, include_inherited=True, sort=True)
+<br/>
+<div class="rowContentPythonTextAPI">
+ Returns an optionaly-sorted list of Variable objects that represent this class class variables.</div>
+</th>
+</tr>
+</tbody>
+</table><br/>
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntax.html">Syntax</a>: This article explains the XML tags which can be used to specify the articles syntax</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_general.html">general</a> |
+ <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article desc="EPS driver" >
+   <meta desc="This article explains how to use the EPS driver" />
+   The EPS driver allows to serialize JavaFX content as an Encapsulated Postcript file.
+     
+   <title title="dependencies" />
+   You should use the <code>jfxConverter-eps.jar</code> in addition to the <code>jfxConverter.jar</code>. Note that the 
+   PowerPoint driver uses any version of the <code>jlibeps</code> library.
+   <empty/>
+   Note that several versions of the <code>jlibeps</code> library exist:
+   <ul>
+      <li>The <a href="https://sourceforge.net/projects/jlibeps/">sourceforge.net/projects/jlibeps</a> library</li>
+      <li>The <a href="http://jlibeps.sourceforge.net/">jlibeps.sourceforge.net</a> library</li>
+      <li>The Github <a href="https://github.com/arnobl/jlibeps">github.com/arnobl/jlibeps</a> library</li>       
+   </ul>     
+   The last version is the one which is used for the moment, but the EPS converter will work with any of these versions.
+   
+   <title title="EPSDriverUtils Utility class" />
+   The <code>EPSDriverUtils</code> encapsulate the usage of the converter. for example:
+   <pre syntax="java">
+      EPSDriverUtils epsUtils = new PPTDriverUtils();
+      epsUtils.convert(node, file);      
+   </pre>   
+   
+   <title level="2" title="adding a title to the EPS document" />
+   A title will be added to the output EPS file by default, but it is possible to specify it by using:
+   <pre syntax="java">
+      EPSDriverUtils epsUtils = new EPSDriverUtils();
+      epsUtils.convert(node, title, file);      
+   </pre>      
+   
+   <title title="usage example" />
+   <pre syntax="java">
+      // create the Scene graph
+      JFXInvoker invoker = JFXInvoker.getInstance();
+      invoker.invokeBlocking(new Runnable() {
+      _ @Override
+      _ public void run() {
+      _   StackPane root = new StackPane();
+      _   Scene scene = new Scene(root, 300, 250);
+      _   Stage stage = new Stage();
+      _   stage.setScene(scene);
+      _   start(stage);
+      
+      _   Line line = new Line(0, 0, 200, 200);
+      _   line.setStroke(Color.RED);     
+         
+      _   root.getChildren().add(line);
+      _   primaryStage.show();
+      _ }
+      });
+      
+      // perform the conversion
+      EPSDriverUtils epsUtils = new EPSDriverUtils();
+      epsUtils.convert(node, file);
+   </pre>   
+      
+   <cat id="drivers" />
+</article>

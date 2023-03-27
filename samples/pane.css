@@ -1,0 +1,10 @@
+.paneStyle {
+   -fx-background-color: linear-gradient(red, grey);
+   -fx-border-color: white;
+   -fx-border-width: 4;
+   -fx-background-radius: 30;
+   -fx-border-radius: 30;
+   -fx-border-color: green;
+   -fx-border-style: dashed;
+}
+

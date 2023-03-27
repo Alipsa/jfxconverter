@@ -1,0 +1,105 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_tutorials.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Tutorials</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+ This article presents a list of tutorials.
+<H2 id="wiki_generation_tutorials">Wiki generation tutorials</H2>
+The  <a href="article_tutorial1.html">first tutorial</a> explains how to create your first wiki, and explains notions about: <ul>
+<li>The  <a href="article_articles.html#index_definition">index</a></li>
+<li>Creating an  <a href="article_articles.html#regular_articles">article</a>, both in XML or using the  <a href="article_mediawikimarkup.html">Mediawiki markup</a></li>
+<li>Adding an  <a href="article_syntax.html#ref">internal wikilink</a></li>
+<li>Adding  <a href="article_categories.html">categories</a> to an article</li>
+<li>Adding  <a href="article_footerAndHeader.html">footer and header files</a> to the wiki</li>
+<li>Customizing the  <a href="article_custommenus.html#adding_custom_content_to_the_left_menu">left menu</a></li>
+<li>Generating the wiki</li>
+</ul>
+The  <a href="article_tutorial2.html">second tutorial</a> explains how to: <ul>
+<li>Add an  <a href="article_imageFiles.html">image</a> and use this image in articles</li>
+<li>Use a  <a href="article_resourceFiles.html">resource file</a> and link to this file in articles</li>
+</ul>
+
+<H2 id="help_system_tutorials">Help system tutorials</H2>
+The  <a href="article_tutorialJavaHelp.html">Help system Swing tutorial</a> explains how to: <ul>
+<li>Generate a zip file containing the  <a href="article_docgenhelp.html">Help content</a></li>
+<li>Use this content to create a help system for a Swing application</li>
+</ul>
+The  <a href="article_tutorialJavaHelpJFX.html">Help system JavaFX tutorial</a> explains how to: <ul>
+<li>Use the same help content to create a help system for a JavaFX application</li>
+</ul>
+ The  <a href="article_tutorialContextHelp.html">Context-sensitive Help Swing tutorial</a> explains how to: <ul>
+<li>Add context-sensitive help to a Swing application</li>
+</ul>
+ The  <a href="article_tutorialContextHelpJFX.html">Context-sensitive Help JavaFX tutorial</a> explains how to: <ul>
+<li>Add context-sensitive help to a JavaFX application</li>
+</ul>
+
+<H2 id="document_generation_tutorials">Document generation tutorials</H2>
+The  <a href="article_tutorialdoc.html">Document generation tutorial</a> explains how to: <ul>
+<li>generate a  <a href="article_pdf.html">PDF</a> or  <a href="article_docx.html">DOCX</a> document</li>
+</ul>
+</div>
+</P>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_tutorials.html">tutorials</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

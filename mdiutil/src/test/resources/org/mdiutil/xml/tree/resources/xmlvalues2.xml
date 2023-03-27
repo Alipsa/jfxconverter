@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root >
+  <element valueInt="1"/>
+  <element valueLong="8000000"/>
+  <element valueFloat="25.2"/>
+  <element valueBool="true"/>
+  <element valueBool="false"/>
+  <element valueString="name"/>
+  <element valueChar="65000"/>
+  <element valueByte="200"/>
+</root>

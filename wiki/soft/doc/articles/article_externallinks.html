@@ -1,0 +1,199 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_externallinks.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Access to external links</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#checklinks">1&nbsp; checkLinks</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#urlexceptions">2&nbsp; urlExceptions</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#urlexceptions_grammar">2.1&nbsp; UrlExceptions grammar</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#urlexceptions_xml_file_example">2.2&nbsp; UrlExceptions XML file example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#timeouts">3&nbsp; timeouts</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#timeouts_grammar">3.1&nbsp; Timeouts grammar</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#timeouts_xml_file_example">3.2&nbsp; Timeouts XML file example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#useragent">4&nbsp; userAgent</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#proxy">5&nbsp; Proxy</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">6&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">7&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ The following properties can be used to configure the way external links are accessed during the generation: <ul>
+<li>"checkLinks": to specify that the presence of external links must be checked</li>
+<li>"urlExceptions": specifies the XML files for which URLs won't be checked</li>
+<li>"timeouts": specifies the XML file setting specific timeouts for URLs</li>
+<li>"userAgent": specifies the user agent used when accessing external links</li>
+<li>"proxy.host": specifies the host for a proxy when accessing external links</li>
+<li>"proxy.port": specifies the port for a proxy when accessing external links</li>
+<li>"proxy.authentication": specifies that the proxy must be authenticated (default is false)</li>
+</ul>
+
+<H2 id="checklinks">checkLinks</H2>
+The "checkLinks" property specifies that the presence of external links must be checked<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+for html pages, the presence of anchors if the "#" tag is found in the link construction is also checked</div></span>
+: <ul>
+<li>For the  <a href="article_syntax.html#a">a</a> tag</li>
+<li>For the  <a href="article_syntax.html#cite">cite</a> tag</li>
+<li>For the  <a href="article_syntax.html#javadoc">javadoc</a> tag</li>
+<li>For the  <a href="article_syntax.html#qtdoc">qtdoc</a> tag</li>
+<li>For the  <a href="article_syntax.html#doxygen">doxygen</a> tag</li>
+<li>For the  <a href="article_syntax.html#wikipedia">wikipedia</a> tag</li>
+<li>For the  <a href="article_syntax.html#mediawiki">mediawiki</a> tag</li>
+</ul>
+See also  <a href="article_checklinks.html">checking external links</a>.
+<H2 id="urlexceptions">urlExceptions</H2>
+ The "urlExceptions" property specifies the XML file which will define URLs won't be checked (useful only if the "checkLinks" property is set to true).
+<H3 id="urlexceptions_grammar">UrlExceptions grammar</H3>
+See  <a href="resources/urlExceptions.xsd">The URLExceptions Schema</a>.<br/>
+<br/>
+ The format of this XML file is very simple: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;xs:element</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"urlExceptions"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;xs:complexType&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;xs:sequence</span><span style="color:#0d8200;font-weight:bold;"> maxOccurs</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"unbounded"</span><span style="color:#0d8200;font-weight:bold;"> minOccurs</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"0"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;xs:element</span><span style="color:#0d8200;font-weight:bold;"> ref</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"urlException"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/xs:sequence&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/xs:complexType&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/xs:element&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;xs:element</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"urlException"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;xs:complexType&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;xs:attribute</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"url"</span><span style="color:#0d8200;font-weight:bold;"> type</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"xs:anyURI"</span><span style="color:#0d8200;font-weight:bold;"> use</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"required"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/xs:complexType&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/xs:element&gt;</span>
+
+</pre>
+ All the children URLs of the URLs specified in this file won't be checked. It avoid to return warnings in the case where some URLs are not allowed on the Network where the docJGenerator tool is used (black list or white list).
+<H3 id="urlexceptions_xml_file_example">UrlExceptions XML file example</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;urlExceptions&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;urlException</span><span style="color:#0d8200;font-weight:bold;"> url</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"http://docs.oracle.com/javase/8/docs/api/"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/urlExceptions&gt;</span>
+
+</pre>
+
+<H2 id="timeouts">timeouts</H2>
+ The "urlExceptions" property specifies the XML file which will define URLs won't be checked (useful only if the "checkLinks" property is set to true).
+<H3 id="timeouts_grammar">Timeouts grammar</H3>
+See  <a href="resources/timeouts.xsd">The timeouts Schema</a>.<br/>
+<br/>
+ This file specifies specific timeouts in ms for children URLs of specified URLs.
+<H3 id="timeouts_xml_file_example">Timeouts XML file example</H3>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;timeouts</span><span style="color:#0d8200;font-weight:bold;"> timeout</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"300"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;url</span><span style="color:#0d8200;font-weight:bold;"> url</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"http://docs.oracle.com/javase/8/docs/api/"</span><span style="color:#0d8200;font-weight:bold;"> timeout</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"500"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/timeouts&gt;</span>
+
+</pre>
+ Here the default timeout is 300ms, but the timeout for the javadoc API website is 500ms.
+<H2 id="useragent">userAgent</H2>
+ This property specifies which user agent will be send when retrieving the URLs on the Network (for http URLs).: <ul>
+<li>The value "ie9" will set an IE9 user agent</li>
+<li>Other values will specify directly the user agent</li>
+<li>By default if not specified a Firefox 10 user agent will be assumed</li>
+</ul>
+
+<H2 id="proxy">Proxy</H2>
+ A proxy to access external URLs can be specified with the threee following properties: <ul>
+<li>"proxy.host": specifies the host for a proxy when accessing external links</li>
+<li>"proxy.port": specifies the port for a proxy when accessing external links</li>
+<li>"proxy.authentication": specifies that the proxy must be authenticated (default is false)</li>
+</ul>
+<br/>
+<br/>
+ Note that: <ul>
+<li>If the "proxy.authentication" property is set, the docJGenerator will ask for a user name and password at start. These properties will be used to configure the authentication context of the tool, but won't be memorized</li>
+<li>The two "proxy.host" and "proxy.port" must be set to effectively use a Proxy</li>
+</ul>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_externallinks.html#_note_1_1_" class="noteRefLink">^</a> for html pages, the presence of anchors if the "#" tag is found in the link construction is also checked</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_checklinks.html">Checking external links</a>: This article presents how the checking of external links is performed</li>
+<li> <a href="article_configFile.html">Configuration file</a>: It is possible to define an optional property / value configuration file when starting the application (using the graphical UI or the command line)</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

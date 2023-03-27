@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root >
+  <element value="1"/>
+  <element value="80000"/>
+  <element value="2000"/>
+  <element value="25.2"/>
+  <element value="true"/>
+  <element value="false"/>
+  <element value="name"/>
+</root>

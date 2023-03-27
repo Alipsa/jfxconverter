@@ -1,0 +1,393 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" >
+$(document).ready(function() 
+  {
+    $("#table_0").tablesorter(); 
+  }
+);
+</script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_syntaxtable.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>table element</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#sortable_tables">1&nbsp; Sortable tables</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#table_alignment">2&nbsp; Table alignment</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#tables_without_borders">3&nbsp; Tables without borders</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#vertical_headers">4&nbsp; Vertical headers</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#vertical_headers_style">4.1&nbsp; Vertical headers style</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#examples">5&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">6&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+This article explains the XML tags which can be used to specify  <a href="article_syntax.html#table">tables</a>.<br/>
+<br/>
+ The "table" element allows to define a Table. A table must have the following children: <ul>
+<li>"tableHeader" which will define the columns in the table.</li>
+
+<ul>
+<li>The header will have one "column" child for each column</li>
+<li>The header can be defined to be vertical</li>
+</ul>
+<li>several "row" elements which will define the rows in the table</li>
+
+<ul>
+<li>The row will have one "cell" child for each cell in the row. Each cell contains its content, and can have a background color if using the "color" attribute</li>
+</ul>
+</ul>
+
+<H2 id="sortable_tables">Sortable tables</H2>
+ A table has sortable columns if it has the attribute "sortable" with the value true. For example: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;table</span><span style="color:#0d8200;font-weight:bold;"> caption</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"table caption"</span><span style="color:#0d8200;font-weight:bold;"> sortable</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+
+</pre>
+
+<H2 id="table_alignment">Table alignment</H2>
+ Several attributes allow to specify the alignment of the table: <ul>
+<li>"position": specifies the alignment of the table.</li>
+
+<ul>
+<li>"left" (the default) for tables aligned to the left</li>
+<li>"right" for tables aligned to the right</li>
+<li>"center" for centered tables</li>
+</ul>
+<li>float": a boolean attribute indicating that the table is float (on the same column as the text)</li>
+</ul>
+<br/>
+<br/>
+ For example, a table aligned to the right: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;table</span><span style="color:#0d8200;font-weight:bold;"> caption</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"table caption"</span><span style="color:#0d8200;font-weight:bold;"> position</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"right"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;tableHeader&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>first column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>second column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/tableHeader&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span>
+
+</pre>
+ For example, a float table: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;table</span><span style="color:#0d8200;font-weight:bold;"> float</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:#0d8200;font-weight:bold;"> position</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"right"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;tableHeader&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>first column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>second column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/tableHeader&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span>
+
+</pre>
+
+<H2 id="tables_without_borders">Tables without borders</H2>
+ It is possible to have a table without any borders between cells if the table has the attribute "borders" with the value false. This can be useful for example to show several images on the same line.<br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;table</span><span style="color:#0d8200;font-weight:bold;"> borders</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"false"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;&lt;img</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image1"</span><span style="color:blue;font-weight:bold;">/&gt;&lt;/cell&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;&lt;img</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image2"</span><span style="color:blue;font-weight:bold;">/&gt;&lt;/cell&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span>
+
+</pre>
+
+<H2 id="vertical_headers">Vertical headers</H2>
+ A table has a vertical header if the "vertical" attribute of the header is true. For example: <br/>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;table</span><span style="color:#0d8200;font-weight:bold;"> caption</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"table caption"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;tableHeader</span><span style="color:#0d8200;font-weight:bold;"> vertical</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>first row</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>second row</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/tableHeader&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span>
+
+</pre>
+ Result: 
+<table class="border" >
+<caption class="tablecaption" >table caption</caption>
+<tbody>
+<tr>
+<th valign="center"  class="column border" >first row</th>
+<td valign="center" class="border">name</td>
+<td valign="center" class="border">name2</td>
+<tr>
+<th valign="center"  class="column border" >second row</th>
+<td valign="center" class="border">value</td>
+<td valign="center" class="border">value2</td>
+</tr>
+</tbody>
+</table>
+
+<H3 id="vertical_headers_style">Vertical headers style</H3>
+Note that vertical headers are implemented in HTML without a  <code>thead</code> element. This means that if you want to use customized styles for tables with vertical headers, styles which are defined for the  <code>thead</code> element will be applied to the header column  <code>th</code> elements instead.<br/>
+<br/>
+ For example, the following specification: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;table&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;tableHeader</span><span style="color:#0d8200;font-weight:bold;"> vertical</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:#0d8200;font-weight:bold;"> style</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"background: gray; color: white;"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>first row</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>second row</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/tableHeader&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>      ...</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span><span>     </span>
+
+</pre>
+ will have the following HTML result: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;table class="border" &gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;caption class="tablecaption" &gt;</span><span>table caption</span><span style="color:blue;font-weight:bold;">&lt;/caption&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;thead class="notSortable"&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/thead&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;tbody&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;tr&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;th valign="center"  style="background: gray; color: white;" class="column border" &gt;</span><span>first row</span><span style="color:blue;font-weight:bold;">&lt;/th&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;td valign="center" class="border"&gt;</span><span>name</span><span style="color:blue;font-weight:bold;">&lt;/td&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;td valign="center" class="border"&gt;</span><span>value</span><span style="color:blue;font-weight:bold;">&lt;/td&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/tr&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;tr&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;th valign="center"  style="background: gray; color: white;" class="column border" &gt;</span><span>second row</span><span style="color:blue;font-weight:bold;">&lt;/th&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;td valign="center" class="border"&gt;</span><span>name2</span><span style="color:blue;font-weight:bold;">&lt;/td&gt;</span>
+<span>               </span><span style="color:blue;font-weight:bold;">&lt;td valign="center" class="border"&gt;</span><span>value2</span><span style="color:blue;font-weight:bold;">&lt;/td&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/tr&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/tbody&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span><span>      </span>
+
+</pre>
+
+<H2 id="examples">Examples</H2>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;table</span><span style="color:#0d8200;font-weight:bold;"> caption</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"table caption"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;tableHeader&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>first column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;column&gt;</span><span>second column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/tableHeader&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell</span><span style="color:#0d8200;font-weight:bold;"> color</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"#00FF00"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>name2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span><span>       </span>
+
+</pre>
+ Result: 
+<table class="border" >
+<caption class="tablecaption" >table caption</caption>
+<thead class="notSortable">
+<tr>
+<th valign="center"  class="column" >first column</th>
+<th valign="center"  class="column" >second column</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">name</td>
+<td valign="center" class="border">value</td>
+</tr>
+<tr>
+<td valign="center" class="border" style="background-color: #00FF00;">name2</td>
+<td valign="center" class="border">value2</td>
+</tr>
+</tbody>
+</table>
+ Another example (with fixed column width):<br/>
+<br/>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;table&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;tableHeader&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;column</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"200"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>first column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;column</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"300"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>second column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/tableHeader&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span>
+
+</pre>
+ Result: 
+<table class="border" >
+<thead class="notSortable">
+<tr>
+<th valign="center"  width="200" class="column" >first column</th>
+<th valign="center"  width="300" class="column" >second column</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">name</td>
+<td valign="center" class="border">value</td>
+</tr>
+<tr>
+<td valign="center" class="border">name2</td>
+<td valign="center" class="border">value2</td>
+</tr>
+</tbody>
+</table>
+ Another example (with sortable columns):<br/>
+<br/>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;table</span><span style="color:#0d8200;font-weight:bold;"> sortable</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;tableHeader&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;column</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"150"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>first column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;column</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"150"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>second column</span><span style="color:blue;font-weight:bold;">&lt;/column&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/tableHeader&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;row&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>name2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;cell&gt;</span><span>value2</span><span style="color:blue;font-weight:bold;">&lt;/cell&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/row&gt;</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/table&gt;</span>
+
+</pre>
+ Result: 
+<table id="table_0" class="tablesorter border" >
+<caption class="tablecaption" >table caption</caption>
+<thead>
+<tr>
+<th valign="center"  width="150" class="column" >first column</th>
+<th valign="center"  width="150" class="column" >second column</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">name</td>
+<td valign="center" class="border">value</td>
+</tr>
+<tr>
+<td valign="center" class="border">name2</td>
+<td valign="center" class="border">value2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntax.html">Syntax</a>: This article explains the XML tags which can be used to specify the articles syntax</li>
+<li> <a href="article_syntaxoverview.html">Syntax overview</a>: This article presents an overview of the tags supported in the XML syntax</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

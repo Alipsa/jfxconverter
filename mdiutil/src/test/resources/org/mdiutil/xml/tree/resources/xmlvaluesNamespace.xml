@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:h="http://www.test.org/">
+  <h:element value="1"/>
+  <h:element value="80000"/>
+  <h:element value="2000"/>
+  <h:element value="25.2"/>
+  <h:element value="true"/>
+  <h:element value="false"/>
+  <h:element value="name"/>
+</root>

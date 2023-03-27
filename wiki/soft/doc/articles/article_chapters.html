@@ -1,0 +1,199 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_chapters.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Chapters and titles</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#chapters_and_titles_xml_attributes">1&nbsp; Chapters and titles XML attributes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#chapter_elements">2&nbsp; Chapter elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#title_elements">3&nbsp; Title elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#referencing_a_title_or_chapter">4&nbsp; Referencing a title or chapter</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example">4.1&nbsp; Example</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+Chapters and titles allow to define sections in the articles ("&lt;Hi&gt;" html tag). There are two ways of specifying a section: <ul>
+<li>through a "chapter" element</li>
+<li>through a "title" element</li>
+</ul>
+
+<H2 id="chapters_and_titles_xml_attributes">Chapters and titles XML attributes</H2>
+ A chapter or title has the following attributes: <ul>
+<li>"desc": the chapter or title text to be displayed on the HTML output</li>
+<li>"keepCase": (optional) true if the chapter or title text should be kept as is (which means that the first character won't be forced as UpperCase in the HTML output)</li>
+<li>"hr": (optional) true if we should add a thematic break ("hr" element) before the title</li>
+</ul>
+Additionally, a chapter can have a "justify" attribute to specify the justification of the text under the chapter (See the  <a href="article_justification.html">Justification</a> article for more information).
+<H2 id="chapter_elements">Chapter elements</H2>
+ These elements are "chapter" elements in the artile XML file. Nested "chapter" elements will become sub-sections. For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         text before all chapters (article header)</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;chapter</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first chapter"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         text inside the  first chapter</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;chapter</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"sub chapter"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>            text inside the sub-chapter</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;/chapter&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/chapter&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;chapter</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"second chapter"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         text inside the second chapter</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/chapter&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+
+<H2 id="title_elements">Title elements</H2>
+ Title elements aren't nested and define their own level. For example: <br/>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"new article3"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      text before all chapters (article header)</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;title</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first chapter"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      text inside the first chapter</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;title</span><span style="color:#0d8200;font-weight:bold;"> level</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"2"</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"sub chapter"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      text inside the sub-chapter</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;title</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"second chapter"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      text inside the second chapter</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ Note that if you don't define the level, it will be assumed to be 1.
+<H2 id="referencing_a_title_or_chapter">Referencing a title or chapter</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_namingconstraints.html">Naming constraints</a></div>
+<br/>
+ It is possible to specify an inter-wiki link to a chapter or title in an article. The syntax uses the   <a href="article_syntax.html#ref">interwiki link</a> syntax. The "id" element has the following construction: <ul>
+<li>The article reference, which is the id or desc of the article</li>
+<li>The "#" character</li>
+<li>The title of the chapter</li>
+</ul>
+<br/>
+<br/>
+ The article reference can be: <ul>
+<li>The id of the article if it exists</li>
+<li>The description of the article</li>
+<li>The description of the article where white spaces have been replaced by underscore characters</li>
+</ul>
+<br/>
+ The chapter reference can be: <ul>
+<li>The title of the chapter</li>
+<li>The title of the chapter where white spaces have been replaced by underscore characters</li>
+</ul>
+<br/>
+<br/>
+ The case for the name of the article (and for the title of the chapter) is not important. For example for the article "my article", all the following references will correctly link to this article: <ul>
+<li>"my article"</li>
+<li>"my_article"</li>
+<li>"My Article"</li>
+<li>"MY ARTICLE"</li>
+</ul>
+<br/>
+<br/>
+ Not specifying the id of the article will link to a chapter in the current article. For example: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"#first chapter"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the first chapter"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+
+<H3 id="example">Example</H3>
+ Suppose the following article: <br/>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"thisArticle"</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my article"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;title</span><span style="color:#0d8200;font-weight:bold;"> title</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"first chapter"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>   ...</span>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;/article&gt;</span>
+
+</pre>
+ This article can be referenced through any of the following constructions:<br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"thisArticle"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my article"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my_article"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ The article chapter be referenced through any of the following constructions:<br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"thisArticle#first chapter"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"thisArticle#first_chapter"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my article#first chapter"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ref</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"my_article#first_chapter"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+</div>
+</P>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_structure.html">structure</a> |
+ <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

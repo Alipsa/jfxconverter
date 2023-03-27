@@ -1,0 +1,133 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_listbullet.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>List bullet style</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#ul_list">1&nbsp; ul list</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#ol_list">2&nbsp; ol list</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#example">3&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">4&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+It is possible to customize the bullet style of lists with the  <code>bulletStyle</code> attribute for    <a href="article_syntax.html#ul">ul</a> and  <a href="article_syntax.html#ol">ol</a> lists. This attribute will set the  <code>list-style-type</code> CSS property for children items in the list.
+<H2 id="ul_list">ul list</H2>
+The allowed values for the  <code>bulletStyle</code> attribute are: <ul>
+<li>"default": the default style, will have the same result as if the attribute is not present</li>
+<li>"circle": the bullet will be a circle</li>
+<li>"square": the bullet will be a square</li>
+<li>"none": the bullet will be absent</li>
+<li>"inherit": the bullet will have the same value as for the parent list</li>
+</ul>
+
+<H2 id="ol_list">ol list</H2>
+The allowed values for the  <code>bulletStyle</code> attribute are: <ul>
+<li>"default": the default style, will have the same result as if the attribute is not present</li>
+<li>"upper-roman": the bullet will be upper-roman letters</li>
+<li>"lower-roman" or "roman": the bullet will be lower-roman letters</li>
+<li>"upper-alpha": the bullet will be upper-alpha letters</li>
+<li>"lower-alpha" or "alpha": the bullet will be lower-alpha letters</li>
+<li>"upper-greek": the bullet will be upper-greek letters</li>
+<li>"lower-greek" or "greek": the bullet will be lower-greek letters</li>
+<li>"decimal": the bullet will be decimals</li>
+<li>"none": the bullet will be absent</li>
+<li>"inherit": the bullet will have the same value as for the parent list</li>
+</ul>
+
+<H2 id="example">Example</H2>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;ol</span><span style="color:#0d8200;font-weight:bold;"> bulletStyle</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"upper-roman"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>First item</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>Second item</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span><span>      </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;ol</span><span style="color:#0d8200;font-weight:bold;"> bulletStyle</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"lower-alpha"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>First item</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;li&gt;</span><span>Second item</span><span style="color:blue;font-weight:bold;">&lt;/li&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/ol&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/ol&gt;</span><span>          </span>
+
+</pre>
+ Result: <ol>
+<li style="list-style-type: upper-roman;">First item</li>
+<li style="list-style-type: upper-roman;">Second item</li>
+
+<ol>
+<li style="list-style-type: lower-alpha;">First item</li>
+<li style="list-style-type: lower-alpha;">Second item</li>
+</ol>
+</ol>
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_syntax.html#ul">ul</a>: url element</li>
+<li> <a href="article_syntax.html#ol">ol</a>: ol element</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

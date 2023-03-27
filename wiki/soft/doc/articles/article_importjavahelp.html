@@ -1,0 +1,130 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_importjavahelp.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Importing JavaHelp content</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#usage">1&nbsp; Usage</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#features">2&nbsp; Features</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">3&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">4&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+It is possible to convert a  <a href="article_javahelp.html">JavaHelp</a> content (stored in a jar file) to the docJGenerator Help content format to use it in the  <a href="article_docgenhelp.html">Help system</a>.
+<H2 id="usage">Usage</H2>
+The  <code>javaHelpImporter.jar</code> tool allows to convert the JavaHelp content to the docJGenerator Help content: <ul>
+<li>The content file is the Jar file containing the JavaHelp content</li>
+<li>The HelpSet is the HelpSet entry containing the javaHelp master HelpSet<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+Note that if there is only one HelpSet in the  Jar file, this helpSet will be selected automatically</div></span>
+</li>
+<li>The Output Directory is the directory where to generate the docJGenerator Help content</li>
+</ul>
+<table class="imageWrappedLeft">
+<tr>
+<td valign="center" class="borderNone">
+ <img src="../images/importjavaHelp.png" id="_image_0" onclick="openImage(_image_0)" class="center middle" />
+</td>
+</tr>
+<tr>
+<td valign="center" class="borderNone">
+<figure>
+<figcaption id="_image_0_caption" class="imageWrapped">JavaHelp importer</figcaption>
+</figure></td>
+</tr>
+</table>
+<br/>
+ A zip file named  <code>JavaHelp.zip</code> will be automatically generated alongside the Output Directory.
+<H2 id="features">Features</H2>
+<ul>
+<li>The generator will take care of multiple mapIDs files</li>
+<li>The generator will take care of multiple toc files</li>
+<li>The index will be created automatically with the content of the mapIDs files and toc files</li>
+</ul>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_importjavahelp.html#_note_1_1_" class="noteRefLink">^</a> Note that if there is only one HelpSet in the  Jar file, this helpSet will be selected automatically</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_docgenhelp.html">Help system</a>: This article explains how to use the JavaHelp-like feature of the tool</li>
+<li> <a href="article_javahelp.html">Comparison with JavaHelp</a>: This article compares the help feature of docJGenerator with the JavaHelp system</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_javahelp.html">javahelp</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

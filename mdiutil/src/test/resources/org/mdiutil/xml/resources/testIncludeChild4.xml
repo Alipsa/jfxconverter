@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<child name="MyName">
+   <child2 name="toto"/>
+   <child2 name="titi"/>   
+</child>

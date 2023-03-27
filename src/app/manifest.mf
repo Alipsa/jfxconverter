@@ -1,0 +1,2 @@
+Main-Class: org.jfxconverterapp.app.JFXConverterApp
+Class-Path: bcel-6.2.jar

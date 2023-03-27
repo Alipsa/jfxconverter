@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataTypeSet xmlns:xi="http://www.w3.org/2001/XInclude" xmlns="http://www.aviation-ia.com/aeec/SupportFiles/661/Part1/dataScope.xsd/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.aviation-ia.com/aeec/SupportFiles/661/Part1/dataScope.xsd/1 file:///C:/ARINC661_ShortcutToSchemaRoot/Generated/dataScope.xsd">
+  <xi:include href="../IdentifierDataTypes/identifierDataTypes.xml" parse="xml" />
+</dataTypeSet>

@@ -1,0 +1,206 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_scripts.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Scripts</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#use_cases">1&nbsp; Use cases</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#scripting_property">2&nbsp; Scripting property</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#script_implementation">3&nbsp; Script implementation</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#modifying_the_tree_content">4&nbsp; Modifying the tree content</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#creating_an_article_through_a_script">5&nbsp; Creating an article through a script</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#example">6&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">7&nbsp; Notes</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+The Scripting Plugin allows to use <a href="https://groovy-lang.org/" title="https://groovy-lang.org/">Groovy</a> scripts to modify the content of the wiki before the generation.<br/>
+<br/>
+ The script will modify the content of the  <a href="article_sourcetree.html">wiki source tree</a>, which means that it will work with all kinds of inputs or outputs.
+<H2 id="use_cases">Use cases</H2>
+ Some uses cases for using scripts to modify the content of the wiki before the generation include automatically adding requirements to paragraphs for example.
+<H2 id="scripting_property">Scripting property</H2>
+ To specify that you want to apply a script on the wiki source tree, you need to set the following   <a href="article_commandline.html">command-line argument</a> or  <a href="article_configFile.html">configuration property</a>: <ul>
+<li>"scriptHandler" setting the path of the groovy script file specifying the script</li>
+</ul>
+
+<H2 id="script_implementation">Script implementation</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_elementhook.html">ElementHook</a></div>
+<br/>
+ A script is an implementation of the of the <a href="../javadoc/scriptingAPI/org/docgene/plugins/ElementHook.html" class="apiLink" title="org.docgene.plugins.ElementHook">ElementHook</a> interface, which will be used on then elements in the  <a href="article_sourcetree.html">wiki source tree</a>. This interface has the following methods: <br/>
+<table class="borderNone" >
+<tbody>
+<th valign="center" class="headerAPI">public class org.docgene.plugins.ElementHook</th>
+<br/>
+</tbody>
+</table>
+<br/>
+<br/>
+<table class="border" >
+<thead>
+<tr>
+<th valign="center" class="columnAPI">Modifier and Type</th>
+<th valign="center" class="columnAPI">Method and Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="rowAPI">
+<th valign="left" class="rowModifierAPI">public default void</th>
+<th valign="center" class="rowContentAPI">createArticles()
+<br/>
+<div class="rowContentTextAPI">
+Create articles</div>
+</th>
+</tr>
+<tr class="rowAPI">
+<th valign="left" class="rowModifierAPI">public void</th>
+<th valign="center" class="rowContentAPI">handleElement(ParagraphElement element)
+<br/>
+<div class="rowContentTextAPI">
+Handle an element</div>
+</th>
+</tr>
+<tr class="rowAPI">
+<th valign="left" class="rowModifierAPI">public default void</th>
+<th valign="center" class="rowContentAPI">startArticle(XMLArticle article)
+<br/>
+<div class="rowContentTextAPI">
+Start the processing of an existing article</div>
+</th>
+</tr>
+<tr class="rowAPI">
+<th valign="left" class="rowModifierAPI">Set&lt;String&gt;</th>
+<th valign="center" class="rowContentAPI">supportedElements()
+<br/>
+<div class="rowContentTextAPI">
+ Return the set of elements declarations which will be handled by this ElementHook</div>
+</th>
+</tr>
+</tbody>
+</table>
+<br/>
+<ul>
+<li>The <a href="../javadoc/scriptingAPI/org/docgene/plugins/ElementHook.html#supportedElements--" class="apiLink" title="org.docgene.plugins.ElementHook.supportedElements()">supportedElements()</a> method returns the Set of elements in the wiki source tree which will potentially be handled by the hook<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+For example if you return "title", only  <a href="article_syntax.html#title">syntax</a> elements will be handled</div></span>
+. See  <a href="article_elementdecl.html">Elements declarations</a> for more information</li>
+<li>The <a href="../javadoc/scriptingAPI/org/docgene/plugins/ElementHook.html#createArticles--" class="apiLink" title="org.docgene.plugins.ElementHook.createArticles()">createArticles()</a> method will be called after all exixting articles have been processed, and will allow to create new articles by scripting. See  <a href="article_scripts.html#creating_an_article_through_a_script">Creating an article through a script</a> for more information</li>
+<li>The <a href="../javadoc/scriptingAPI/org/docgene/plugins/ElementHook.html#startArticle-org.docgene.model.XMLArticle-" class="apiLink" title="org.docgene.plugins.ElementHook.startArticle(org.docgene.model.XMLArticle)">startArticle(XMLArticle)</a> method will be called for all articles encountered by the script</li>
+<li>The <a href="../javadoc/scriptingAPI/org/docgene/plugins/ElementHook.html#handleElement-org.docgene.model.ParagraphElement-" class="apiLink" title="org.docgene.plugins.ElementHook.handleElement(org.docgene.model.ParagraphElement)">handleElement(ParagraphElement)</a> method will be called for all elements in the wiki source tree whose declaration ID is supported. For example, if  <code>supportedElements()</code> returns a set with only "title", the method will be fired only for  <a href="article_syntax.html#title">syntax</a> elements</li>
+</ul>
+The script will be called exactly as any other  <a href="article_elementhook.html">ElementHook</a>, so the  <a href="article_hooktreevisit.html">tree visit</a> will be performed exactly in the same way.
+<H2 id="modifying_the_tree_content">Modifying the tree content</H2>
+To modify the  <a href="article_sourcetree.html">wiki source tree</a> content, the script have access to an instance of the  <a href="../javadoc/scriptingAPI/org/docgene/scripts/DocJScriptContext.html" class="apiLink" title="org.docgene.scripts.DocJScriptContext">DocJScriptContext</a> (named  <code>context</code>) which offer methods to modify the tree content. The methods include: <ul>
+<li>Inserting a list of elements in the source tree before or after the current element</li>
+<li>Removing the current element</li>
+</ul>
+
+<H2 id="creating_an_article_through_a_script">Creating an article through a script</H2>
+The <a href="../javadoc/scriptingAPI/org/docgene/plugins/ElementHook.html#createArticles--" class="apiLink" title="org.docgene.plugins.ElementHook.createArticles()">createArticles()</a> method will be called after all exixting articles have been processed, and will allow to create new articles by scripting. For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">createArticles</span><span>() {</span>
+<span>         XMLArticle article = context.</span><span style="font-weight:bold;">createArticle</span><span>(</span><span style="color:#650099;">"myArticle"</span><span>);</span>
+<span>         XMLParagraph par = context.</span><span style="font-weight:bold;">addParagraph</span><span>(article);</span>
+<span>         par.</span><span style="font-weight:bold;">addElement</span><span>(</span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">XMLTitle</span><span>(1, </span><span style="color:#650099;">"theTitle"</span><span>, </span><span style="color:#650099;font-weight:bold;">false</span><span>));</span>
+<span>      }</span>
+
+</pre>
+
+<H2 id="example">Example</H2>
+ The following script will add a Requirement tag after each title: <br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">int</span><span> indexReq = 0;</span>
+
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> Set&lt;String&gt; </span><span style="font-weight:bold;">supportedElements</span><span>() {</span>
+<span>         </span><span style="color:blue;font-weight:bold;">return</span><span> context.</span><span style="font-weight:bold;">getSupportedDeclarations</span><span>(</span><span style="color:#650099;">"title"</span><span>);</span>
+<span>      }</span>
+
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">handleElement</span><span>(ParagraphElement element) {</span>
+<span>         XMLTitle title = (XMLTitle)element;</span>
+<span>         context.</span><span style="font-weight:bold;">insertElementsAfter</span><span>(</span><span style="color:blue;font-weight:bold;">new</span><span> </span><span style="font-weight:bold;">XMLSentence</span><span>(</span><span style="color:#650099;">"Requirement: "</span><span> + indexReq));</span>
+<span>         indexReq++;</span>
+<span>      }</span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_scripts.html#_note_1_1_" class="noteRefLink">^</a> For example if you return "title", only  <a href="article_syntax.html#title">syntax</a> elements will be handled</li>
+</ol>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_plugins.html">plugins</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

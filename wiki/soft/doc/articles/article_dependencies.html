@@ -1,0 +1,270 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_dependencies.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Dependencies</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#java_direct_dependencies">1&nbsp; Java Direct dependencies</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#pdf_and_docx_java_dependencies">2&nbsp; PDF and DOCX Java dependencies</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#scripts_plugin_java_dependencies">3&nbsp; Scripts Plugin Java dependencies</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#java_other_dependencies">4&nbsp; Java Other dependencies</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#javascript_dependencies">5&nbsp; Javascript dependencies</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#dependencies_list">6&nbsp; Dependencies list</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#jquery_ui">7&nbsp; jQuery UI</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">8&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">9&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+
+<H2 id="java_direct_dependencies">Java Direct dependencies</H2>
+ docJGenerator depends on the following libraries: <ul>
+<li>The MDIUtilities library: see <a href="http://sourceforge.net/projects/mdiutilities/" title="http://sourceforge.net/projects/mdiutilities/">sourceforge.net/projects/mdiutilities</a></li>
+<li>The jsoup library: see <a href="http://jsoup.org/" title="http://jsoup.org/">jsoup.org</a></li>
+<li>The jEditor library: see <a href="https://sourceforge.net/projects/jeditor/" title="https://sourceforge.net/projects/jeditor/">sourceforge.net/projects/jeditor</a></li>
+<li>The jElasticlunr library: see <a href="http://sourceforge.net/projects/jelasticlunr/" title="http://sourceforge.net/projects/jelasticlunr/">sourceforge.net/projects/jelasticlunr</a>. This library is used for the construction of the  <a href="article_glossary.html">glossary</a> and also for the  <a href="article_search.html#full_text_search">Full text search</a></li>
+</ul>
+
+<H2 id="pdf_and_docx_java_dependencies">PDF and DOCX Java dependencies</H2>
+ The pdfWriter library depends on the following libraries: <ul>
+<li>The iText library: see <a href="http://developers.itextpdf.com/" title="http://developers.itextpdf.com/">developers.itextpdf.com/</a>. Note that this library is used to generate PDF files. The application will continue to work correctly for HTML generation even if this library is not present</li>
+<li>The W3C <a href="https://www.w3.org/Style/CSS/SAC/Overview.en.html" title="https://www.w3.org/Style/CSS/SAC/Overview.en.html">SAC 1.3</a> library</li>
+<li>The <a href="http://cssparser.sourceforge.net/" title="http://cssparser.sourceforge.net/">CSSParser</a> library</li>
+</ul>
+<br/>
+<br/>
+ The docxWriter library depends on the following libraries: <ul>
+<li>The Apache POI library: see <a href="https://poi.apache.org/" title="https://poi.apache.org/">poi.apache.org/</a>. Note that this library is used to generate docx files. The application will continue to work correctly for HTML generation even if this library is not present</li>
+<li>The W3C <a href="https://www.w3.org/Style/CSS/SAC/Overview.en.html" title="https://www.w3.org/Style/CSS/SAC/Overview.en.html">SAC 1.3</a> library</li>
+<li>The <a href="http://cssparser.sourceforge.net/" title="http://cssparser.sourceforge.net/">CSSParser</a> library</li>
+</ul>
+
+<H2 id="scripts_plugin_java_dependencies">Scripts Plugin Java dependencies</H2>
+ The scripts Plugin library depends on the following libraries: <ul>
+<li>The scriptHelper library: see <a href="https://sourceforge.net/projects/scripthelper/" title="https://sourceforge.net/projects/scripthelper/">sourceforge.net/projects/scripthelper/</a></li>
+<li>The Groovy library: see <a href="https://groovy-lang.org/" title="https://groovy-lang.org/">groovy-lang.org</a></li>
+</ul>
+
+<H2 id="java_other_dependencies">Java Other dependencies</H2>
+docJGenerator also uses code from the following library<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+The code is including in docJGenerator</div></span>
+: <ul>
+<li>The jEuclid library: see <a href="http://jeuclid.sourceforge.net/" title="http://jeuclid.sourceforge.net/">jeuclid.sourceforge.net</a>. The library is repackaged as  <code>jEuclid.jar</code> with only the minimal classes allowing to convert MathML expressions as images<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+Note that the last 3.1.9 release of jEuclid dates from 2010</div></span>
+</li>
+<li>The jxMapViewer2 library: see <a href="http://github.com/msteiger/jxmapviewer2/" title="http://github.com/msteiger/jxmapviewer2/">github.com/msteiger/jxmapviewer2</a>. The library is repackaged as  <code>jxMapViewer.jar</code>. The library has been modified to allow to generate an image for the Map rather than showing the Map in a Swing component</li>
+</ul>
+
+<H2 id="javascript_dependencies">Javascript dependencies</H2>
+<ul>
+<li>The <a href="https://jquery.com/" title="https://jquery.com/">jQuery</a>library</li>
+<li>The jQuery <a href="https://mottie.github.io/tablesorter/docs/" title="https://mottie.github.io/tablesorter/docs/">tablesorter Plugin</a></li>
+<li>The <a href="https://openlayers.org/" title="https://openlayers.org/">OpenLayers library</a>. The used version is the 2.11 version at <a href="http://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/OpenLayers.js" title="http://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/OpenLayers.js">cdnjs.cloudflare.com</a>.Note that more recent versions can be downloaded from cdnjs.cloudflare.com but the API has changed and the last 4.1.1 version don't work yet in docJGenerator (see <a href="https://cdnjs.com/libraries/openlayers" title="https://cdnjs.com/libraries/openlayers">cdnjs.com/libraries/openlayers</a>)</li>
+<li>The <a href="http://elasticlunr.com" title="http://elasticlunr.com">elasticlunr.com</a> library, used for the full text search</li>
+</ul>
+
+<H2 id="dependencies_list">Dependencies list</H2>
+ docJGenerator is provided and has been tested with the specified releases of the libraries. 
+<table class="border" >
+<caption class="tablecaption" >Libraries dependencies</caption>
+<thead class="notSortable">
+<tr>
+<th valign="center"  class="column" >Library</th>
+<th valign="center"  class="column" >Type</th>
+<th valign="center"  class="column" >Website</th>
+<th valign="center"  class="column" >Release</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="center" class="border">MDIUtilities</td>
+<td valign="center" class="border">Java</td>
+<td valign="center" class="border"><a href="https://sourceforge.net/projects/mdiutilities/" title="https://sourceforge.net/projects/mdiutilities/">sourceforge.net/projects/mdiutilities</a></td>
+<td valign="center" class="border">1.2.7.1</td>
+</tr>
+<tr>
+<td valign="center" class="border">jEditor</td>
+<td valign="center" class="border">Java</td>
+<td valign="center" class="border"><a href="https://sourceforge.net/projects/jeditor/" title="https://sourceforge.net/projects/jeditor/">sourceforge.net/projects/jeditor</a></td>
+<td valign="center" class="border">1.2.6</td>
+</tr>
+<tr>
+<td valign="center" class="border">jElasticlunr</td>
+<td valign="center" class="border">Java</td>
+<td valign="center" class="border"><a href="https://sourceforge.net/projects/jelasticlunr/" title="https://sourceforge.net/projects/jelasticlunr/">sourceforge.net/projects/jelasticlunr</a></td>
+<td valign="center" class="border">1.6</td>
+</tr>
+<tr>
+<td valign="center" class="border">jsoup</td>
+<td valign="center" class="border">Java</td>
+<td valign="center" class="border"><a href="https://jsoup.org/" title="https://jsoup.org/">jsoup.org</a></td>
+<td valign="center" class="border">1.13.1</td>
+</tr>
+<tr>
+<td valign="center" class="border">scriptHelper</td>
+<td valign="center" class="border">Java</td>
+<td valign="center" class="border"><a href="https://sourceforge.net/projects/scripthelper/" title="https://sourceforge.net/projects/scripthelper/">sourceforge.net/projects/scripthelper</a></td>
+<td valign="center" class="border">1.5.9</td>
+</tr>
+<tr>
+<td valign="center" class="border">Groovy</td>
+<td valign="center" class="border">Java</td>
+<td valign="center" class="border"><a href="https://groovy-lang.org/" title="https://groovy-lang.org/">groovy-lang.org</a><span class="tooltip"><a href="#_note_3" class="noteLink"><sup id="_note_3_1_">[3]</sup></a>
+<div class="tooltiptext">
+Used by the scriptHelper library</div></span>
+</td>
+<td valign="center" class="border">3.0.4</td>
+</tr>
+<tr>
+<td valign="center" class="border">Apache POI</td>
+<td valign="center" class="border">Java</td>
+<td valign="center" class="border"><a href="https://poi.apache.org/" title="https://poi.apache.org/">poi.apache.org/</a><span class="tooltip"><a href="#_note_4" class="noteLink"><sup id="_note_4_1_">[4]</sup></a>
+<div class="tooltiptext">
+Used by the docxWriter library</div></span>
+</td>
+<td valign="center" class="border">4.0.1</td>
+</tr>
+<tr>
+<td valign="center" class="border">iText</td>
+<td valign="center" class="border">Java</td>
+<td valign="center" class="border"><a href="https://itextpdf.com/en" title="https://itextpdf.com/en">itextpdf.com</a><span class="tooltip"><a href="#_note_5" class="noteLink"><sup id="_note_5_1_">[5]</sup></a>
+<div class="tooltiptext">
+Used by the pdfWriter library</div></span>
+</td>
+<td valign="center" class="border">5.5.12</td>
+</tr>
+<tr>
+<td valign="center" class="border">jQuery</td>
+<td valign="center" class="border">Javascript</td>
+<td valign="center" class="border"><a href="https://jquery.com/" title="https://jquery.com/">jquery.com</a></td>
+<td valign="center" class="border">3.2.0<span class="tooltip"><a href="#_note_6" class="noteLink"><sup id="_note_6_1_">[6]</sup></a>
+<div class="tooltiptext">
+docJGenerator is not working correctly on later versions of jQuery for the moment</div></span>
+</td>
+</tr>
+<tr>
+<td valign="center" class="border">jQuery UI</td>
+<td valign="center" class="border">Javascript</td>
+<td valign="center" class="border"><a href="https://github.com/hervegirod/jquery-ui" title="https://github.com/hervegirod/jquery-ui">github.com/hervegirod/jquery-ui</a></td>
+<td valign="center" class="border">1.12.1<span class="tooltip"><a href="#_note_7" class="noteLink"><sup id="_note_7_1_">[7]</sup></a>
+<div class="tooltiptext">
+Uses an implementation with a modification from the main project, see  <a href="article_dependencies.html#jquery_ui">jQuery UI</a></div></span>
+</td>
+</tr>
+<tr>
+<td valign="center" class="border">jQuery tablesorter Plugin</td>
+<td valign="center" class="border">Javascript</td>
+<td valign="center" class="border"><a href="https://plugins.jquery.com/tablesorter" title="https://plugins.jquery.com/tablesorter">plugins.jquery.com/tablesorter</a></td>
+<td valign="center" class="border">2.0.5</td>
+</tr>
+<tr>
+<td valign="center" class="border">Elasticlunr</td>
+<td valign="center" class="border">Javascript</td>
+<td valign="center" class="border"><a href="https://sourceforge.net/projects/jelasticlunr/" title="https://sourceforge.net/projects/jelasticlunr/">sourceforge.net/projects/jelasticlunr</a>. It is the compressed version of the  <code>elasticlunr.js</code> JavaScript library. Note that the regular 2.0.5 version of this library available at <a href="http://elasticlunr.com" title="http://elasticlunr.com">elasticlunr.com</a>) is compatible for compression levels which are less or equal to 1 (normal level)</td>
+<td valign="center" class="border">1.5</td>
+</tr>
+<tr>
+<td valign="center" class="border">OpenLayers</td>
+<td valign="center" class="border">Javascript</td>
+<td valign="center" class="border"><a href="https://openlayers.org" title="https://openlayers.org">openlayers.org</a></td>
+<td valign="center" class="border">2.11</td>
+</tr>
+</tbody>
+</table>
+
+<H2 id="jquery_ui">jQuery UI</H2>
+The <a href="https://jqueryui.com" title="https://jqueryui.com">jQuery UI</a> project proposes several UI Javascripts components, from which this project uses the autocomplete component.<br/>
+<br/>
+ This project uses a modified version of the 1.12.1 version, which is hosted here: <a href="https://github.com/hervegirod/jquery-ui" title="https://github.com/hervegirod/jquery-ui">github.com/hervegirod/jquery-ui</a>. This modified version allows to always show thepopup for the automplete when using the  <a href="article_search.html#full_text_search">Full Text Search</a>.</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_dependencies.html#_note_1_1_" class="noteRefLink">^</a> The code is including in docJGenerator</li>
+<li id="_note_2"> <a href="article_dependencies.html#_note_2_1_" class="noteRefLink">^</a> Note that the last 3.1.9 release of jEuclid dates from 2010</li>
+<li id="_note_3"> <a href="article_dependencies.html#_note_3_1_" class="noteRefLink">^</a> Used by the scriptHelper library</li>
+<li id="_note_4"> <a href="article_dependencies.html#_note_4_1_" class="noteRefLink">^</a> Used by the docxWriter library</li>
+<li id="_note_5"> <a href="article_dependencies.html#_note_5_1_" class="noteRefLink">^</a> Used by the pdfWriter library</li>
+<li id="_note_6"> <a href="article_dependencies.html#_note_6_1_" class="noteRefLink">^</a> docJGenerator is not working correctly on later versions of jQuery for the moment</li>
+<li id="_note_7"> <a href="article_dependencies.html#_note_7_1_" class="noteRefLink">^</a> Uses an implementation with a modification from the main project, see  <a href="article_dependencies.html#jquery_ui">jQuery UI</a></li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_helpdependencies.html">Help system dependencies</a>: This article explains the libraries dependencies of the help system</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_general.html">general</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

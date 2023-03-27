@@ -1,0 +1,148 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_customproperties.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Custom properties</H1>
+
+<hr/>
+<P>
+<div  class="justifiedAuto" >
+The  <code>CustomProperties</code> interface allows to specify custom properties. Custom properties are usable both on  the  <a href="article_commandline.html">command-line</a> and  <a href="article_configFile.html">configuration file</a>.<br/>
+<br/>
+ Note that if you define some of these properties in the command-line, they will be parsed only if you define them <b>after</b> specifying the docx output type. For example, this will not work: <br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -hasTOC=false -outputType=docx</span>
+</pre>
+ But this will work:<br/>
+<br/>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -outputType=docx -hasTOC=false</span>
+</pre>
+
+<H2 id="implementing_custom_properties">Implementing custom properties</H2>
+The <a href="../javadoc/pluginsAPI/org/docgene/plugins/CustomProperties.html" class="apiLink" title="org.docgene.plugins.CustomProperties">CustomProperties</a> interface has the following methods:  <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">interface</span><span> CustomProperties {</span>
+<span>      </span><span style="color:#404040;font-style:italic;">/**</span>
+<span style="color:#404040;font-style:italic;">      * Return true if a specified property key is handled.</span>
+<span style="color:#404040;font-style:italic;">      */</span>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">default</span><span> </span><span style="color:blue;font-weight:bold;">boolean</span><span> </span><span style="font-weight:bold;">hasProperty</span><span>(String key) {</span>
+<span>      </span><span style="color:blue;font-weight:bold;">return</span><span> </span><span style="font-weight:bold;">getPropertiesTypes</span><span>().</span><span style="font-weight:bold;">containsKey</span><span>(key);</span>
+<span>      } </span>
+
+<span>      </span><span style="color:#404040;font-style:italic;">/**</span>
+<span style="color:#404040;font-style:italic;">      * Return the Map of properties types.</span>
+<span style="color:#404040;font-style:italic;">      */</span>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> Map&lt;String, Class&lt;?&gt;&gt; </span><span style="font-weight:bold;">getPropertiesTypes</span><span>();</span>
+
+<span>      </span><span style="color:#404040;font-style:italic;">/**</span>
+<span style="color:#404040;font-style:italic;">      * Set the value of a specified property.</span>
+<span style="color:#404040;font-style:italic;">      */</span>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">setProperty</span><span>(String key, Object value);</span>
+
+<span>      </span><span style="color:#404040;font-style:italic;">/**</span>
+<span style="color:#404040;font-style:italic;">      * Return the value of a specified property.</span>
+<span style="color:#404040;font-style:italic;">      */</span>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> Object </span><span style="font-weight:bold;">getProperty</span><span>(String key);</span>
+
+<span>      </span><span style="color:#404040;font-style:italic;">/**</span>
+<span style="color:#404040;font-style:italic;">      * Reset the properties.</span>
+<span style="color:#404040;font-style:italic;">      */</span>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">reset</span><span>();</span>
+
+<span>      </span><span style="color:#404040;font-style:italic;">/**</span>
+<span style="color:#404040;font-style:italic;">      * Setup the class after all the properties have been set.</span>
+<span style="color:#404040;font-style:italic;">      */</span>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">setup</span><span>();</span>
+
+<span>      </span><span style="color:#404040;font-style:italic;">/**</span>
+<span style="color:#404040;font-style:italic;">      * Set the parent parser which can be notified if an exception is detected while settting the property.</span>
+<span style="color:#404040;font-style:italic;">      */</span>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">setParser</span><span>(ResolverXMLParser parser);</span>
+
+<span>      </span><span style="color:#404040;font-style:italic;">/**</span>
+<span style="color:#404040;font-style:italic;">      * Set the ClassLoader used for the properties.</span>
+<span style="color:#404040;font-style:italic;">      */</span>
+<span>      </span><span style="color:blue;font-weight:bold;">public</span><span> </span><span style="color:blue;font-weight:bold;">void</span><span> </span><span style="font-weight:bold;">setClassLoader</span><span>(ClassLoader loader);      </span>
+
+</pre>
+
+<H3 id="property_types">Property types</H3>
+The <a href="../javadoc/pluginsAPI/org/docgene/plugins/CustomProperties.html#getPropertiesTypes--" class="apiLink" title="org.docgene.plugins.CustomProperties.getPropertiesTypes()">CustomProperties.getPropertiesTypes()</a> method allows to get the  property keys and the class of each property. The supported types are: <ul>
+<li> <code>Boolean.TYPE</code> and  <code>Boolean.class</code> for boolean properties</li>
+<li> <code>Integer.TYPE</code> and  <code>Integer.class</code> for int properties</li>
+<li> <code>Float.TYPE</code> and  <code>Float.class</code> for float properties</li>
+<li> <code>URL.class</code> for File properties</li>
+</ul>
+   Each property detected on the command-line or the configuration file will be parsed according to its specified type.</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_plugins.html">Plugins</a>: This article explains the Plugins framework</li>
+<li> <a href="article_pdfdocxconfig.html">PDF and DOCX generation configuration</a>: This article explains how to configure the generation of the PDF or DOCX file</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_plugins.html">plugins</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

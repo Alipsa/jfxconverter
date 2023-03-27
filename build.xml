@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See commented blocks below for -->
+<!-- some examples of how to customize the build. -->
+<!-- (If you delete it and reopen the project it will be recreated.) -->
+<!-- By default, only the Clean and Build commands use this build script. -->
+<!-- Commands such as Run, Debug, and Test only use this build script if -->
+<!-- the Compile on Save feature is turned off for the project. -->
+<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
+<!-- in the project's Project Properties dialog box.-->
+<project name="JFXConverter" default="default" basedir=".">
+   <description>Builds, tests, and runs the project JFXConverter.</description>
+   <import file="nbproject/build-impl.xml"/>
+   <!-- =================================================================== --> 
+   <!-- USEFUL TARGETS --> 
+   <!-- =================================================================== --> 
+   <!-- =================================================================== --> 
+   <!-- post NB init --> 
+   <!-- =================================================================== --> 
+   <target name="-post-init" depends="-init-project" > 
+      <!-- general properties definition --> 
+      <property name="archiveName" value="jfxConverter"/> 
+      <property name="distrib" value="distrib" /> 
+      <property name="libs.dir" value="lib" />
+      <property name="testlibs.dir" value="testlib" />  
+      <property name="toolslib.dir" value="toolslib" /> 
+      <property name="src.dir" value="${src.converter.dir}/.." /> 
+      <property name="javadocEXE" value="${jdk.home}/bin/javadoc.exe"/>
+      <condition property="javadoc.exists"> 
+         <available file="${dist.javadoc.dir}" type="dir"/> 
+      </condition> 
+      <condition property="tests.exists"> 
+         <available file="${test.src.dir}" type="dir"/> 
+      </condition> 
+      <condition property="distrib.exists"> 
+         <available file="${distrib}" type="dir"/> 
+      </condition> 
+      <property name="javadocIn" value="${dist.javadoc.dir}" />
+      <property name="javadocOut" value="wiki/wiki/javadoc" />
+      <property name="javadocSourceforgeOut" value="wiki/sourceforge/javadoc" />
+      <condition property="distrib.notexists">
+         <not>
+            <available file="distrib" type="dir"/>
+         </not>
+      </condition>
+      <condition property="wikijavadoc.exists">
+         <available file="${javadocOut}" type="dir"/>
+      </condition>                 
+      <condition property="sourceforgejavadoc.exists">
+         <available file="${javadocSourceforgeOut}" type="dir"/>
+      </condition>                  
+   </target> 
+   <!-- =================================================================== --> 
+   <!-- Non NB targets --> 
+   <!-- =================================================================== --> 
+   <target description="fetch version" depends="-post-init" name="version"> 
+      <loadproperties srcFile="${src.dir}/converter/org/jfxconverter/resources/converter.properties"> 
+         <filterchain> 
+            <linecontains> 
+               <contains value="version"/> 
+            </linecontains> 
+         </filterchain> 
+      </loadproperties> 
+   </target> 
+   <!-- =================================================================== --> 
+   <!-- zip files --> 
+   <!-- =================================================================== --> 
+   <!-- zip javadocs Core --> 
+   <target depends="version, -post-init" name="-zipjavadoc-core" if="javadoc.exists"> 
+      <zip compress="true" defaultexcludes="true" zipfile="${dist.dir}/${archiveName}-docs-${version}.zip"> 
+         <fileset description="documentation" dir="${dist.javadoc.dir}"> 
+            <include name="**/*"/> 
+         </fileset> 
+      </zip> 
+   </target> 
+   <!-- zip binaries --> 
+   <target depends="version, -post-init, -zipjavadoc-core" description="create javadoc zip files" name="zipjavadoc"/> 
+   <target depends="version, -post-init" name="-zipbinaries" > 
+      <!-- zip binary files --> 
+      <zip compress="true" defaultexcludes="true" 
+           zipfile="${dist.dir}/${archiveName}-bin-${version}.zip"> 
+         <fileset description="docs" dir="."> 
+            <include name="README.txt"/> 
+            <include name="LICENSE.txt"/> 
+            <include name="CHANGES.txt"/> 
+         </fileset> 
+         <fileset description="docs" dir="."> 
+            <include name="docs/*.*"/> 
+         </fileset> 
+         <fileset description="binaries" dir=".">
+            <include name="distrib/**/*.*"/>
+         </fileset>                             
+      </zip> 
+   </target>     
+   <target depends="version, -post-init" name="-zipsources"> 
+      <!-- zip source files --> 
+      <zip compress="true" defaultexcludes="true" zipfile="${dist.dir}/${archiveName}-src-${version}.zip"> 
+         <fileset description="source directory" dir="${src.dir}/.."> 
+            <include name="src/**/*.java"/> 
+            <include name="src/**/*.html"/> 
+            <include name="src/**/*.properties"/> 
+            <include name="src/**/*.mf"/> 
+            <include name="src/**/*.xsd"/> 
+            <include name="src/**/*.png"/> 
+         </fileset> 
+         <fileset description="binaries" dir=".">
+            <include name="distrib/**/*.*"/>
+         </fileset>   
+         <fileset description="libs" dir="."> 
+            <include name="${libs.dir}/*.jar"/> 
+         </fileset>
+         <fileset description="samples" dir=".">
+            <include name="samples/**/*.*"/>
+         </fileset>       
+         <fileset description="testlibs" dir="."> 
+            <include name="${testlibs.dir}/*.jar"/> 
+         </fileset>                       
+         <fileset description="toolslibs" dir="."> 
+            <include name="${toolslib.dir}/*.jar"/> 
+         </fileset>                       
+         <fileset description="wiki" dir="."> 
+            <include name="wiki/**/*.*"/> 
+         </fileset> 
+         <fileset description="miscellanous" dir="."> 
+            <include name="README.txt"/> 
+            <include name="LICENSE.txt"/> 
+            <include name="CHANGES.txt"/> 
+            <include name="nbproject/**/*.*"/> 
+            <include name="build.xml"/> 
+         </fileset>  
+      </zip> 
+   </target> 
+   <target depends="version, -post-init" name="-ziptestsources"> 
+      <!-- zip tests sources --> 
+      <zip compress="true" defaultexcludes="true" zipfile="${dist.dir}/${archiveName}-tests-${version}.zip"> 
+         <fileset description="test source files" dir="${test.test.dir}/.."> 
+            <include name="test/**/*"/> 
+         </fileset> 
+      </zip> 
+   </target> 
+   <target depends="version, -post-init" description="zip wiki" name="zip wiki"> 
+      <!-- zip tests sources --> 
+      <zip compress="true" defaultexcludes="true" zipfile="${dist.dir}/${archiveName}-wiki-${version}.zip"> 
+         <fileset description="wiki" dir="${dist.dir}/../wiki/wiki"> 
+            <include name="**/*.*"/> 
+         </fileset> 
+      </zip> 
+   </target> 
+   <target description="create zip files" name="zip"
+      depends="version, -post-init, -ziptestsources, -zipsources, -zipbinaries"> 
+   </target> 
+   
+   <!-- =================================================================== -->
+   <!-- NB overwrite targets : javadocs                                     -->
+   <!-- =================================================================== -->
+
+   <target depends="-javadoc-core" name="-javadoc-build" />
+
+   <target depends="init, -post-init" name="-javadoc-core">      
+      <!-- Javadoc -->
+      <javadoc author="${javadoc.author}" charset="UTF-8" destdir="${dist.javadoc.dir}"
+               docencoding="UTF-8" encoding="${javadoc.encoding.used}" failonerror="true"
+               noindex="${javadoc.noindex}" nonavbar="${javadoc.nonavbar}"
+               notree="${javadoc.notree}" private="${javadoc.private}"
+               source="${javac.source}" splitindex="${javadoc.splitindex}"
+               use="${javadoc.use}" useexternalfile="true" version="${javadoc.version}"
+               windowtitle="${javadoc.windowtitle}" executable="${javadocEXE}" 
+               overview="${src.dir}/overview.html" windowTitle="JFXConverter API">
+         <link offline="true" href="${j2seapi}"
+               packagelistLoc="${javadocDir}"/>
+         <classpath>
+            <path path="${javac.classpath}"/>
+            <path path="${dist.dir}/jfxConverter.jar"/>
+         </classpath>
+         <!-- the Xdoclint argument avoid to get javadoc errors when the documentation format is not compliant for HTML 4, which was the case before
+         Java 8. It would also not be a good idea, because empty tags like br are very useful -->
+         <arg line="-Xdoclint:none"/>
+         <fileset dir="${src.converter.dir}" excludes="${excludes}" includes="${includes}">
+            <filename name="**/*.java"/>
+         </fileset>
+         <fileset dir="${src.tools.dir}" excludes="${excludes}" includes="${includes}">
+            <filename name="org/jfxconverter/drivers/**/*.java"/>
+         </fileset>         
+         <doctitle><![CDATA[<h1>jfxConverter</h1>]]></doctitle>
+         <group title="jfxConverter Core" packages="org.jfxconverter*:org.jfxconverter.conf*:org.jfxconverter.converters*:org.jfxconverter.utils*:org.jfxconverter.wrappers*" />
+         <group title="jfxConverter Drivers" packages="org.jfxconverter.drivers*" />         
+         <bottom>
+            <![CDATA[<i>Copyright &#169; 2016 Herve Girod. All Rights Reserved. Documentation and source under the BSD licence</i>]]>
+         </bottom>
+      </javadoc>
+   </target>      
+   
+   <!-- =================================================================== -->
+   <!-- Deploy                                                  -->
+   <!-- =================================================================== -->
+
+   <target name="dist-clean" depends="init, -post-init" if="distrib.exists">
+      <delete dir="${distrib}"/>
+   </target>
+
+   <target name="deploy" description="deploy" depends="init, -post-init, dist-clean, -init-distrib, -deploy-svg, -deploy-ppt, -deploy-eps" >
+      <copy todir="${distrib}">
+         <fileset defaultexcludes="yes" dir="dist" >
+            <include name="jfxConverter.jar"/>       
+         </fileset>
+      </copy>              
+      <copy todir="${distrib}/lib">
+         <fileset defaultexcludes="yes" dir="lib" >
+            <include name="*.jar"/>         
+         </fileset>
+      </copy>                              
+   </target>  
+   
+   <target name="-init-distrib" depends="init, -post-init" > 
+      <mkdir dir="${distrib}"/>
+      <delete>
+         <fileset dir="${distrib}" >
+            <include name="**/*.*"/>
+         </fileset>
+      </delete>      
+   </target>
+   
+   <target name="-deploy-ppt" depends="init, -post-init, dist-clean" > 
+      <mkdir dir="${distrib}/ppt"/>
+      <copy todir="${distrib}/ppt">
+         <fileset defaultexcludes="yes" dir="${dist.dir}" >
+            <include name="jfxConverter-ppt.jar"/>         
+         </fileset>
+         <fileset defaultexcludes="yes" dir="${dist.dir}" >
+            <include name="jfxConverter.jar"/>         
+         </fileset>  
+      </copy>  
+      <copy todir="${distrib}/ppt/lib">
+         <fileset defaultexcludes="yes" dir="lib" >
+            <include name="*.jar"/>         
+         </fileset>
+         <fileset defaultexcludes="yes" dir="toolslib" >
+            <include name="commons*.jar"/> 
+            <include name="ooxml*.jar"/>     
+            <include name="poi*.jar"/>
+            <include name="xmlbeans*.jar"/>         
+         </fileset>         
+      </copy>       
+   </target>      
+   
+   <target name="-deploy-svg" depends="init, -post-init, dist-clean" > 
+      <mkdir dir="${distrib}/svg"/>
+      <copy todir="${distrib}/svg">
+         <fileset defaultexcludes="yes" dir="${dist.dir}" >
+            <include name="jfxConverter-svg.jar"/>         
+         </fileset>
+         <fileset defaultexcludes="yes" dir="${dist.dir}" >
+            <include name="jfxConverter.jar"/>         
+         </fileset>  
+      </copy>  
+      <copy todir="${distrib}/svg/lib">
+         <fileset defaultexcludes="yes" dir="lib" >
+            <include name="*.jar"/>         
+         </fileset>
+         <fileset defaultexcludes="yes" dir="toolslib" >
+            <include name="batik*.jar"/> 
+            <include name="js.jar"/>     
+            <include name="xalan*.jar"/>     
+            <include name="xerces*.jar"/>  
+            <include name="xml-apis*.jar"/> 
+         </fileset>         
+      </copy>       
+   </target>   
+   
+   <target name="-deploy-eps" depends="init, -post-init, dist-clean" > 
+      <mkdir dir="${distrib}/eps"/>
+      <copy todir="${distrib}/eps">
+         <fileset defaultexcludes="yes" dir="${dist.dir}" >
+            <include name="jfxConverter-eps.jar"/>         
+         </fileset>
+         <fileset defaultexcludes="yes" dir="${dist.dir}" >
+            <include name="jfxConverter.jar"/>         
+         </fileset>  
+      </copy>  
+      <copy todir="${distrib}/eps/lib">
+         <fileset defaultexcludes="yes" dir="lib" >
+            <include name="*.jar"/>         
+         </fileset>
+         <fileset defaultexcludes="yes" dir="${dist.dir}" >
+            <include name="jlibeps.jar"/> 
+         </fileset>         
+      </copy>            
+   </target>
+   
+   <!-- =================================================================== --> 
+   <!-- NB overwrite targets : jar --> 
+   <!-- =================================================================== --> 
+   <target depends="init,compile,-pre-jar,-do-jar-without-manifest,-post-jar" description="Build JAR." name="jar"/> 
+   <target name="-do-jar-without-manifest" 
+           depends="-converterCore, -pptDriver, -svgDriver, -epsDriver, -jlibepsLibrary" > 
+   </target> 
+   
+   <target name="-converterCore" depends="init,compile,-pre-pre-jar,-pre-jar" > 
+      <!-- converter Core --> 
+      <jar description="core jar binary file" compress="true" 
+           jarfile="${dist.dir}/jfxConverter.jar" manifest="${src.dir}/converter/manifest.mf"> 
+         <fileset defaultexcludes="yes" dir="${build.classes.dir}" > 
+            <include name="org/jfxconverter/**/*.class"/> 
+            <include name="org/jfxconverter/**/*.properties"/> 
+            <include name="org/jfxconverter/**/*.xsd"/> 
+            <exclude name="org/jfxconverter/drivers/**/*"/> 
+            <exclude name="org/jfxconverter/app/**/*"/> 
+         </fileset> 
+      </jar> 
+   </target>    
+   
+   <target name="-pptDriver" depends="init,compile,-pre-pre-jar,-pre-jar" > 
+      <!-- PPT driver --> 
+      <jar description="ppt driver jar binary file" compress="true" 
+           jarfile="${dist.dir}/jfxConverter-ppt.jar" manifest="${src.dir}/ppt/manifest.mf"> 
+         <fileset defaultexcludes="yes" dir="${build.classes.dir}" > 
+            <include name="org/jfxconverter/drivers/ppt/**/*.class"/> 
+         </fileset> 
+      </jar>    
+   </target>     
+   
+   <target name="-svgDriver" depends="init,compile,-pre-pre-jar,-pre-jar" > 
+      <!-- SVG driver --> 
+      <jar description="ppt driver jar binary file" compress="true" 
+           jarfile="${dist.dir}/jfxConverter-svg.jar" manifest="${src.dir}/svg/manifest.mf"> 
+         <fileset defaultexcludes="yes" dir="${build.classes.dir}" > 
+            <include name="org/jfxconverter/drivers/svg/**/*.class"/> 
+         </fileset> 
+      </jar>   
+   </target>  
+   
+   <target name="-epsDriver" depends="init,compile,-pre-pre-jar,-pre-jar" > 
+      <!-- EPS driver --> 
+      <jar description="EPS driver jar binary file" compress="true" 
+           jarfile="${dist.dir}/jfxConverter-eps.jar" manifest="${src.dir}/eps/manifest.mf"> 
+         <fileset defaultexcludes="yes" dir="${build.classes.dir}"> 
+            <include name="org/jfxconverter/drivers/eps/**/*.class"/> 
+         </fileset> 
+      </jar>   
+   </target>        
+   
+   <target name="-jlibepsLibrary" depends="init,compile,-pre-pre-jar,-pre-jar" > 
+      <!-- jlibeps library --> 
+      <jar description="jlibeps library" compress="true" jarfile="${dist.dir}/jlibeps.jar"> 
+         <fileset defaultexcludes="yes" dir="${build.classes.dir}"> 
+            <include name="org/sourceforge/jlibeps/epsgraphics/**/*.class"/> 
+            <include name="net/sf/epsgraphics/**/*.class"/>
+         </fileset> 
+      </jar>   
+   </target>                         
+   
+   <!-- =================================================================== --> 
+   <!-- NB overwrite targets : generate wiki --> 
+   <!-- =================================================================== -->    
+   <target name="generateWiki" description="generate Wiki" depends="init, version" > 
+      <java classname="org.docgene.main.DocGenerator">
+         <arg value="-input=wiki/wikisource"/>
+         <arg value="-output=wiki/wiki"/>
+         <arg value="-$version=${version}"/>
+         <arg value="-config=wiki/wikisource/config.properties"/>
+         <arg value="-search=titles"/>
+         <classpath>
+            <pathelement path="wiki/soft/docGenerator.jar"/>        
+         </classpath>
+      </java>
+   </target>
+   <target name="generateForSourceForge" description="generate sourceforge Wiki" depends="init, version" > 
+      <java classname="org.docgene.main.DocGenerator">
+         <arg value="-input=wiki/wikisource"/>
+         <arg value="-output=wiki/sourceforge"/>
+         <arg value="-config=wiki/wikisource/sourceforge.properties"/>
+         <arg value="-$version=${version}"/>
+         <arg value="-search=titles"/>
+         <classpath>
+            <pathelement path="wiki/soft/docGenerator.jar"/>    
+            <pathelement path="dist/MDIUtilitiesLGPL.jar"/>            
+         </classpath>
+      </java>
+   </target>   
+   <target name="cleanWiki" description="clean Wiki" depends="init, version" >
+      <delete includeEmptyDirs="true" >
+         <fileset dir="wiki/sourceforge" includes="**/*" />
+         <fileset dir="wiki/wiki" includes="**/*" />
+      </delete>
+   </target>      
+</project>
+

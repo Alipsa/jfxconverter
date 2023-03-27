@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+   <head>
+      <variable name="pizza"/>
+   </head>
+   <results>
+      <result>
+         <binding name="pizza">
+            <uri>http://www.co-ode.org/ontologies/pizza/pizza.owl#FourSeasons</uri>
+         </binding>
+      </result>
+      <result>
+         <binding name="pizza">
+            <uri>http://www.co-ode.org/ontologies/pizza/pizza.owl#AmericanHot</uri>
+         </binding>
+      </result>
+      <result>
+         <binding name="pizza">
+            <uri>http://www.co-ode.org/ontologies/pizza/pizza.owl#American</uri>
+         </binding>
+      </result>
+   </results>
+</sparql>

@@ -1,0 +1,6 @@
+<root desc="example">
+   <element3 name="first">
+      <element2 name="second" />
+      <element1 name="third" />
+   </element3>
+</root>

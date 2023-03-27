@@ -1,0 +1,75 @@
+
+                  MDIUtilities
+
+  What is it?
+  -----------
+
+  MDIutilities is a Java library prodiving various utility classes, mainly useful
+  in Swing or JavaFX development 
+
+  Where is it?
+  ------------
+
+  The home page for the MDIUtilities project can be found in the sourceforge Project web site
+  (http://java.net/projects/MDIUtilities). There you also find 
+  information on how to download the latest release as well as all the other 
+  information you might need regarding this project.
+
+  History
+  -------
+  This project is a copy of the java.net project of the same name (http://java.net/projects/MDIUtilities). 
+  I own the two projects, and I ported the java.net project infrastructure to sourceforge because java.net hosting 
+  infrastructure will close soon (April 2017).
+
+  The associated java.net project exists since 2006.
+
+  Requirements
+  ------------
+
+  A Java 1.8 or later compatible virtual machine for your operating system.
+
+  Installation
+  ------------
+
+  The MDIUtilities.jar file is the library of the application.
+
+  Licensing and legal issues
+  --------------------------
+
+The MDIUtilities Library uses a dual license strategy for the source code. 
+
+MDIUtilities comes in two different packages:
+
+== MDIUtilities-APACHE ==
+MDIUtilities-APACHE is distributed under * BOTH * the GNU Lesser General Public License (LGPL) 
+and the Apache License (Version 2.0). Users can choose the license they wish to distribute
+their software under. This means that you do not need to abide by *both*
+licenses, but rather than you can choose the license which most suits your needs.
+To rephrase this and to make it perfectly clear:
+MDIUtilities is distributed under the GNU Lesser General Public License (LGPL) 
+	*or*
+the Apache License, Version 2.0
+
+== MDIUtilities-LGPL ==
+MDIUtilities-LGPL is distributed * ONLY * under the GNU Lesser General Public License (LGPL).
+The only differences between the two distributions is that the MDIUtilities-LGPL source code 
+contain the org.mdiutil.prefs.XMLParser class that borrow code from Oracle's OpenJDK code.
+
+As the two licenses allow you to use the binary code in non open-source projects,
+the only real difference for you is if you want to modify the source code of these classes, you
+* MUST * use the MDIUtilities-APACHE distribution.
+
+However, we are an open source project, and we encourage users to use the LGPL 
+license and participate fully in the free software community. Dual licensing
+of the MDIUtilites source code provides open and free access to the technology both
+for the GPL community and for other developers or companies that cannot use the
+GPL.
+
+You can freely modify, extend, and improve the MDIUtilities source code. The only
+question is whether or not you must provide the source code and contribute
+modifications to the community. The GNU and Apache licenses allow different
+ranges of flexibility in this regard, but in the end, regardless of the license
+used, we highly recommend that you submit any bugs, incompatibilities or
+added features.
+
+Note that the org.mdiutil.swing.autocomplete package comes with a BSD license.

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article desc="distribution" >
+   <meta desc="This article is about the distribution of the library" />
+   <ul>
+      <li> 
+         <code>jfxConverter.jar</code>: jar file containing the core jfxConverter code</li>      
+      <li> 
+         <code>jfxConverter-ppt.jar</code> and associated lib directory: the PowerPoint driver and the POI library</li>      
+      <li> 
+         <code>jfxConverter-svg.jar</code> and associated lib directory: the SVG driver and the Batik library</li>     
+      <li> 
+         <code>jfxConverter-eps.jar</code> and associated lib directory: the EPS driver and the jlibeps library</li>          
+   </ul>   
+   <cat id="general" />
+</article>

@@ -1,0 +1,142 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_footerAndHeader.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Footer and header files</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#header">1&nbsp; Header</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#header_content">1.1&nbsp; Header content</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#footer">2&nbsp; Footer</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#footer_content">2.1&nbsp; Footer content</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+
+<H2 id="header">Header</H2>
+ It is possible to add a header on every article and category HTML file. To do this, you have to define a header file with the following structure: <br/>
+<br/>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;header</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"text to show on the header"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ The generator will add it automatically to all the processed HTML files. it is also possible to have some text at the left <b>and</b> right of the header. For example: <br/>
+<br/>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;header</span><span style="color:#0d8200;font-weight:bold;"> left</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"text to show on the left"</span><span style="color:#0d8200;font-weight:bold;"> right</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"text to show on the right"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+
+<H3 id="header_content">Header content</H3>
+ It is possible to add complex content for the left part of the header left rather than a basic text.<br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;header</span><span style="color:#0d8200;font-weight:bold;"> right</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"Generated on ${date}"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>      This a a test header with an image: </span><span style="color:blue;font-weight:bold;">&lt;img</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"image"</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"50px"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/header&gt;</span>
+
+</pre>
+ The elements allowed in the Header are: <ul>
+<li>images</li>
+<li>article references</li>
+<li>external links</li>
+</ul>
+ Note that if you add a lot of content in the header, you may need to increase the header height.  See  <a href="article_css.html#increasing_the_header_height">css</a> for more information.
+<H2 id="footer">Footer</H2>
+ It is possible to add a footer on every article and category HTML file. To do this, you have to define a footer file with the following structure: <br/>
+<br/>
+
+<pre>
+<span>   </span><span style="color:blue;font-weight:bold;">&lt;footer</span><span style="color:#0d8200;font-weight:bold;"> desc</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"text to show on the footer"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+
+</pre>
+ The generator will add it automatically to all the processed HTML files.
+<H3 id="footer_content">Footer content</H3>
+ It is possible to add complex content in the footer rather than a basic text.<br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;footer&gt;</span>
+<span>      This a a test footer with an image: </span><span style="color:blue;font-weight:bold;">&lt;img</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"myImage"</span><span style="color:#0d8200;font-weight:bold;"> width</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"50px"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/footer&gt;</span>
+
+</pre>
+ The elements allowed in the Footer are: <ul>
+<li>images</li>
+<li>article references</li>
+<li>external links</li>
+</ul>
+</div>
+</P>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_structure.html">structure</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

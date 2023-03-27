@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ushortEnum name="A661_WidgetParameterTypes" identifiesVariant="true" xmlns:xi="http://www.w3.org/2001/XInclude">
+   <description>ParameterIdent used in the ParameterStructure</description>
+   <reservedRange minValue="B000" maxValue="B7FF" description="Specification range"/>
+   <xi:include href="widgetParamTypesConstants.xml" parse="xml"/>
+</ushortEnum>

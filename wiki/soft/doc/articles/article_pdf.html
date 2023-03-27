@@ -1,0 +1,155 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_pdf.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>PDF generation</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#configuration">1&nbsp; Configuration</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#custom_css_support">2&nbsp; Custom CSS support</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#generation_algorithm">3&nbsp; Generation algorithm</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#configuration_1">4&nbsp; Configuration</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#limitations">5&nbsp; Limitations</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#example">6&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#example_of_generation_with_ant">7&nbsp; Example of generation with ant</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">8&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ It is possible to generate a PDF document rather than an HTML site. You need to set the following   <a href="article_commandline.html">command-line argument</a> or  <a href="article_configFile.html">configuration property</a>: <ul>
+<li>"outputType" set to "pdf"</li>
+</ul>
+
+<H2 id="configuration">Configuration</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_pdfdocxconfig.html">PDF generation configuration</a></div>
+<br/>
+ There are specific properties used for the document generation.
+<H2 id="custom_css_support">Custom CSS support</H2>
+<div class="moreInfo" >
+Main Article: <a href="article_pdfcssupport.html">PDF custom CSS support</a></div>
+<br/>
+ There is a limited level of support for the  <a href="article_css.html">Custom StyleSheet</a> in the docs generation.
+<H2 id="generation_algorithm">Generation algorithm</H2>
+ By default the generator will generate: <ul>
+<li>One introduction chapter with only the content of the  <a href="article_articles.html#index_definition">index file</a></li>
+<li>One chapter for each  <a href="article_categories.html">category</a></li>
+<li>For each category, one sub-chapter for each article in the category. Each article will however be only in one chapter, even if it is in more than one category</li>
+</ul>
+It is possible to configure the structure of the PDF file by specifying the "chaptersContent" property. See  <a href="article_chapterscontent.html">PDF content specification</a>.
+<H2 id="configuration_1">Configuration</H2>
+ A few specific properties or arguments allow to specifically configure the generation for the PDF format: <ul>
+<li>"fileName": The PDF file will be generated in the  <a href="article_configFile.html#output">output</a> directory. By default the name of the file will be "wiki.pdf", but this property allows to change the name of the file</li>
+<li>"docFile": the path of the PDF file. In that case the output directory will be the parent directory of this file</li>
+<li>"defaultChapter": the name of the default chapter, used for articles which belong in no category</li>
+<li><a name="chapterscontent">"chaptersContent"</a>: the path of an XML file allowing to configure much more precisely the structure of the PDF document. See  <a href="article_chapterscontent.html">PDF content specification</a>.</li>
+</ul>
+
+<H2 id="limitations">Limitations</H2>
+ There are a few limitations compared to the HTML result: <ul>
+<li> <a href="article_syntax.html#pre">pre</a> elements can't have colored background</li>
+<li>The font size of sentences can't be set</li>
+<li> <a href="article_syntax.html#resource">resource</a> elements don't link to their associated resource content</li>
+<li>Internal wikilinks on  <a href="article_syntax.html#img">img</a> elements are not taken into account</li>
+<li>Each article is only present in one category</li>
+</ul>
+
+<H2 id="example">Example</H2>
+
+<pre>
+<span>      java -jar docGenerator.jar -input=wiki/input -output=wiki/output -outputType=pdf</span>
+</pre>
+
+<H2 id="example_of_generation_with_ant">Example of generation with ant</H2>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;java</span><span style="color:#0d8200;font-weight:bold;"> classname</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"org.docgene.main.DocGenerator"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-input=wiki/input"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-output=wiki/output"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-fileName=docGeneratorWiki"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-chaptersContent=docContent.xml"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;arg</span><span style="color:#0d8200;font-weight:bold;"> value</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"-outputType=pdf"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;classpath&gt;</span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;pathelement</span><span style="color:#0d8200;font-weight:bold;"> path</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"docGenerator.jar"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/classpath&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/java&gt;</span>
+
+</pre>
+</div>
+</P>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_tutorialdoc.html">Document generation tutorial</a>: This article is a tutorial which explains how to generate a PDF or DOCX document</li>
+</ul>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a> |
+ <a href="../categories/cat_pdf.html">pdf</a> |
+ <a href="../categories/cat_plugins.html">plugins</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

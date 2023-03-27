@@ -1,0 +1,114 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Pages that link to Syntax</H1>
+
+<hr/>
+ <a href="article_externallinks.html">Access to external links</a> : Configure how to access external links<br/>
+ <a href="article_algorithm.html">Algorithm</a> : This article presents the way the tool works<br/>
+ <a href="article_apidoc.html">apidoc</a> : This article explains how the apidoc element can be used<br/>
+ <a href="article_apiselts.html">APIs elements</a> : This article presents the elements which link to APIs or embed APIs in the wiki<br/>
+ <a href="article_apis.html">APIs property</a> : Configure how to access external APIs and wikis<br/>
+ <a href="article_articles.html">Articles</a> : Article files are XML files which define the articles in the wiki<br/>
+ <a href="article_chapters.html">Chapters and titles</a> : Chapters and titles allow to define sections in the articles ("&lt;Hi&gt;" html tag)<br/>
+ <a href="article_checklinks.html">Checking external links</a> : This article presents how the checking of external links is performed<br/>
+ <a href="article_commandline.html">Command-line starting</a> : This article is about how to execute the application by the command-line without showing the UI<br/>
+ <a href="article_markdowncomp.html">Comparison with Markdown syntax</a> : This article compares the docJGenerator syntax to the Markdown syntax<br/>
+ <a href="article_wikipedia.html">Comparison with wikipedia syntax</a> : This article compares the docJGenerator syntax to the wikipedia syntax<br/>
+ <a href="article_syntaxcondition.html">condition element</a> : This article explains the XML tags which can be used to specify a condition<br/>
+ <a href="article_configFile.html">Configuration file</a> : It is possible to define an optional property / value configuration file when starting the application (using the graphical UI or the command line)<br/>
+ <a href="article_ctxsensitivehelp.html">Context-sensitive Help</a> : This article explains how to use the context-sensitive Help<br/>
+ <a href="article_custommenus.html">Custom menus</a> : It is possible to add a custom content to the left menu, and also add a custom right menu to the index file<br/>
+ <a href="article_css.html">Custom StyleSheet</a> : The "css" property in the configuration file or the command-line allows to specify a custom StyleSheet for the HTML result<br/>
+ <a href="article_docxcssupport.html">DOCX custom CSS support</a> : This article explains the level of support for the custom CSS styles by the docx generation<br/>
+ <a href="article_docx.html">DOCX generation</a> : This article explains how to generate a Word file rather than an HTML site<br/>
+ <a href="article_hooktreevisit.html">ElementHook tree visit</a> : This article explains how the ElementHook is called to modify the wiki source tree content<br/>
+ <a href="article_elementdecl.html">Elements declarations</a> : This article explains how to handle element declarations in the Scripts<br/>
+ <a href="article_cssSelectors.html">Elements to CSS selectors</a> : This article explains the correspondance from elements to CSS selectors<br/>
+ <a href="article_escapingCharacters.html">Escaping characters</a> : This article explains how to escape characters in the articles content<br/>
+ <a href="article_faq.html">FAQ</a> : Frequently Asked Questions<br/>
+ <a href="article_tutorial1.html">First tutorial</a> : This article is a tutorial to create your first wiki<br/>
+ <a href="article_helpcontent.html">Help content configuration</a> : This article explains how to configure the help content<br/>
+ <a href="article_imageFiles.html">Image files</a> : These files define the images ids and their associated files<br/>
+ <a href="article_javadocs.html">Javadocs APIs</a> : Configure how to access external Javadocs APIs<br/>
+ <a href="article_justification.html">Justification</a> : This article explains how to justify articles content<br/>
+ <a href="article_linktoresources.html">Linking to local resources</a> : This article explains how to link to local resources (which can be images, files, or APIs)<br/>
+ <a href="article_listbullet.html">List bullet style</a> : This article explains how to customize the bullet style of lists<br/>
+ <a href="article_localization.html">Localization</a> : This article explains how to customize the localization of the wiki article pages<br/>
+ <a href="article_markdownmarkup.html">Markdown markup</a> : This article explains the supported Markdown markup<br/>
+ <a href="article_math.html">Mathematical formulas</a> : This article is about the syntax for mathematical formulas<br/>
+ <a href="article_mediawikimarkup.html">Mediawiki markup</a> : This article explains the supported Mediawiki markup<br/>
+ <a href="article_wikis.html">Mediawikis</a> : Configure how to access external Mediawikis<br/>
+ <a href="article_packagedepend.html">Packages dependencies</a> : This article explains how to enforce package dependencies<br/>
+ <a href="article_pdfcssupport.html">PDF custom CSS support</a> : This article explains the level of support for the custom CSS styles by the PDF generation<br/>
+ <a href="article_pdf.html">PDF generation</a> : This article explains how to generate a PDF file rather than an HTML site<br/>
+ <a href="article_elementhook.html">Plugin ElementHook</a> : This article explains how to implements the ElementHook to modify the wiki source tree content before the generation<br/>
+ <a href="article_properties.html">Properties</a> : This article presents the general properties which can be used in the wiki<br/>
+ <a href="article_qtdocs.html">Qt APIs</a> : Configure how to access external Qt APIs<br/>
+ <a href="article_redirectarticles.html">Redirect articles</a> : Redirect articles allow to create an article with a redirection to another article or even a title or anchor in another article<br/>
+ <a href="article_references.html">References</a> : This article explains the concept of inter-wiki links<br/>
+ <a href="article_relaxedsyntax.html">Relaxed Syntax</a> : This article is about the relaxed syntax which can be used on the articles<br/>
+ <a href="article_resourceFiles.html">Resource files</a> : This article is about specifying and using resource files<br/>
+ <a href="article_roots.html">Root files and packages</a> : This article explains how to use the generator with more than one root directory<br/>
+ <a href="article_scripts.html">Scripts</a> : This article explains how to use the Scripting Plugin<br/>
+ <a href="article_tutorial2.html">Second tutorial</a> : This article is a tutorial which explains the concepts of images and resources<br/>
+ <a href="article_syntaxEndElements.html">Syntax end elements</a> : This article explains the XML tags which can be used at the beginning of articles<br/>
+ <a href="article_syntaxhighlighting.html">Syntax highlighting</a> : This article explains how the syntax highlighting in the pre element works<br/>
+ <a href="article_syntaxJustifElements.html">Syntax justification elements</a> : This article explains the XML tags which can be used to specify the articles justification<br/>
+ <a href="article_syntaxoverview.html">Syntax overview</a> : This article presents an overview of the tags supported in the XML syntax<br/>
+ <a href="article_syntaxStartingElements.html">Syntax starting elements</a> : This article explains the XML tags which can be used at the beginning of articles<br/>
+ <a href="article_syntaxtable.html">table element</a> : This article explains the XML tags which can be used to specify tables<br/>
+ <a href="article_tutorials.html">Tutorials</a> : This article presents a list of tutorials<br/>
+ <a href="article_sourcetree.html">Wiki source tree</a> : This article presents the concept of the wiki source tree<br/>
+ <a href="article_showstatus.html">Wiki status</a> : This article explains how to show the wiki status in the wiki<br/>
+
+<hr/>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

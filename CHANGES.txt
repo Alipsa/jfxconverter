@@ -1,0 +1,107 @@
+Version 0.6 :
+- support the a (arc) command in the SVGPath format
+- fix the RadialGradient conversion
+- fix cases where the size of a Background image was 0, now don't use these Backgrounds anymore in the conversion
+- allow to use listeners in the conversion process, which can interfere in the conversion at the beginning or end of a Node
+- fix the positioning of scaled paths in Regions
+- fix a case of possible NPE in the filling of Shapes in the PPT converter
+- fix the horizontal or vertical lines not being absolutely horizontal or vertical in the PPT converter
+- fix the rendering of proportional Radial gradients
+- fix another possible exception in the converting
+- support part of the border specification, both directly in Regions and as CSS properties
+- support proportional width and height for Region backgrounds
+- support disabled states for Nodes
+- fix rotations angles which were incorrectly not converted from degrees to radians (from JavaFX to Awt)
+- support the -fx-opacity CSS property
+- Add a class to manage the conversion configuration, for the moment allowing to control the showing of the disabled 
+ states for Nodes. It is possible to set directly the parameters of this class, or by parsing an XML configuration File
+- Start some examples of an SVG conversion implementation
+
+Version 0.7 :
+ - use MDIUtilities 0.8.6
+ - add a complete and simple PPT example in the tools directory
+ - fix cases where a Node with opacity 0 had an opacity put to 1 if its CSS property sets its opacity to 1
+
+Version 0.8 :
+ - fix cases where the library could try to set a negative opacity to a Node
+
+Version 0.9 :
+- fix gradients which were not handled in the SVG driver output
+- fallback to Batik 1.7 rather than 1.8 because 1.8 is still a bit unstable
+
+Version 0.10 :
+- fix background radii which were too big after conversion
+- support translations and scales in the CSS properties
+- support the Background position in the Nodes and the CSS properties
+- fix the size of the ImageViews in some cases, especially when using fitting on width or height
+- fix some cases where the Regions backgrounds had a wrong size after the conversion
+- fix cases where the border of a Region had a 0 width and was still painted
+
+Version 0.11 :
+- fix completely (or so I think) -fx-shape used for Regions 
+- fix the positioning of Region textures in some cases
+- fix the startAngle for SVGPaths arcs which was incorrect
+
+Version 0.12 :
+- remove a unused System.out (which could trigger a NPE in some cases)
+- use the MDIUtilities library 0.8.7
+
+Version 0.13 :
+- Use MDIUtilities 0.8.8
+- support the -fx-arc-width and -fx-arc-height properties for Rectangles
+- fix some cases where clipping a Polygon in PowerPoint would lead to an incorrect resulting Shape
+- fix the immediate children of the top-most container visible in the conversion even if they are not visible
+- fix the angles of rotation not being correctly converted from degrees to radians
+- changed the name of the GroupGraphics2D interface to ExtendedGraphics2D and add a method in the interface which allows to
+  process Effects on Nodes in the conversion process
+
+Version 0.14 :
+- Partial fix to the problem of rotated Images in PPT
+- Support Shadows in PPT conversion
+
+Version 0.15 :
+- Fix of a problem which prevented the use of the ConverterConfigParser when used through a dynamically loaded library
+
+Version 0.16 :
+- Fix the angles of the rotation transforms which were wrong (minus the right value) in some cases
+
+Version 0.17 :
+ - Fix some cases where the PPT driver could throw a NPE for small clipped Images
+ - Add the support for converting SubScenes and Shape3D Nodes
+
+Version 0.18 :
+ - Support GradientPaint for the PPT converter (the color will be the brightest of the two colors)
+ - Fix the clipping of some horizontal or vertical lines in the PPT converter which was incorrect
+
+Version 0.19 :
+ - Fix of a cut/paste error leading to zero scaling along the y-axis, courtesy of Meyer-sound laboratory. Also thanks to
+   Mark Schmieder
+
+Version 0.20 :
+ - Move the ppt and svg drivers in two separate jars
+ - Add an EPS driver, for the moment the driver uses the https://github.com/arnobl/jlibeps version of jlibeps
+ - Add a wiki
+ - Document the supported CSS properties
+ - Support the -visibility propety
+ - Support the -fx-image property for the ImageView Node
+ - Fix the way the -fx-rotate property worked for which the center of rotation was incorrect
+ - Add an application which allows to convert a Node structure create through a groovy Script
+
+Version 0.21 :
+ - Improve the application which allows to convert a Node structure create through a groovy Script
+ - Add a DefaultConverterListener which handles groups and effects by default
+ - Allow the application scripts to access an external CSS file
+ - Support the -fx-border-style property
+
+Version 0.22 :
+ - Use docJGenerator 1.4.17.6
+ - Use MDIUtilities 1.2.7.2
+ - Allow to add a background to the exported image, both with an Awt and JavaFX color
+
+Version 0.23 :
+ - Allow to specify a title in the SVG Document conversion. There is a default title
+ - Allow to specify a title in the EPS conversion
+ - Improve the SVG eol positions in the output compared to the original Batik behavior
+
+Version 0.24 :
+ - Fix the parser of the XML configuration file which did not correctly validate the file

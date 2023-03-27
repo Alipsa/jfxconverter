@@ -1,0 +1,530 @@
+<HEAD>
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY>
+<div class="top">
+<div class="ui-widget">
+
+<label for="tags">Search: </label>
+<input id="tags" class="searchField" />
+</div>
+</div>
+<div class="left">
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_mdmarkup.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div class="middle">
+<H1>Mediawiki markup</H1>
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#starting_elements">1&nbsp; Starting elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#article_title">1.1&nbsp; Article title</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example">1.1.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#adding_an_alternate_title">1.2&nbsp; Adding an alternate title</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_1">1.2.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#setting_the_article_meta">1.3&nbsp; Setting the article Meta</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_2">1.3.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#keeping_the_article_name_case">1.4&nbsp; Keeping the article name case</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_3">1.4.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#setting_that_the_article_is_the_index">1.5&nbsp; Setting that the article is the index</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#setting_that_the_article_is_a_template">1.6&nbsp; Setting that the article is a template</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_4">1.6.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#setting_that_the_article_is_a_redirect">1.7&nbsp; Setting that the article is a redirect</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#syntax_elements">2&nbsp; Syntax elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#note">2.1&nbsp; note</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_5">2.1.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#br">2.2&nbsp; br</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_6">2.2.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#code">2.3&nbsp; code</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_7">2.3.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#pre">2.4&nbsp; pre</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_8">2.4.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#source">2.5&nbsp; source</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_9">2.5.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#term">2.6&nbsp; term</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_10">2.6.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#images">2.7&nbsp; Images</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#examples">2.7.1&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#resources">2.8&nbsp; Resources</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#examples_1">2.8.1&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#article_references">2.9&nbsp; Article references</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#examples_2">2.9.1&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#including_another_article">2.10&nbsp; Including another article</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_11">2.10.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#external_links">2.11&nbsp; External links</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#examples_3">2.11.1&nbsp; Examples</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#titles">2.12&nbsp; Titles</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_12">2.12.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#lists">2.13&nbsp; Lists</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_13">2.13.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#more_information">2.14&nbsp; More information</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_14">2.14.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#li">2.15&nbsp; li</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#infobox">2.16&nbsp; Infobox</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_15">2.16.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#tables">2.17&nbsp; Tables</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#table_header">2.17.1&nbsp; Table header</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#table_columns">2.17.2&nbsp; Table columns</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#table_rows">2.17.3&nbsp; Table rows</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#table_footer">2.17.4&nbsp; Table footer</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_16">2.17.5&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#ending_elements">3&nbsp; Ending elements</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#setting_categories">3.1&nbsp; Setting categories</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#example_17">3.1.1&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#see_also">3.2&nbsp; See Also</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#example_18">4&nbsp; Example</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">5&nbsp; Notes</a>
+<br/>
+</div>
+<br/>
+<P>
+This article explains the supported Mediawiki markup (See also <a href="http://www.mediawiki.org/wiki/Help:Formatting">Help:Formatting</a> on Wikipedia).
+<H2 id="starting_elements">Starting elements</H2>
+
+<H3 id="article_title">Article title</H3>
+ By default, the title of the article will use the name of the file without the "md" extension. For example, the  following file: <i>myfile.md</i> will create an article with the name <i>MyFile</i>.<br/>
+ However it is possible to specify the title of the article by using the following markup at the beginning of a line (and at the beginning of the file):  <code>{{name:&lt;article name&gt;}}</code>
+<H4 id="example">Example</H4>
+
+<pre>
+<span>      {{name:my article name}}</span>
+</pre>
+
+<H3 id="adding_an_alternate_title">Adding an alternate title</H3>
+ It is possible to add an alternate title to the article by using the following markup at the beginning of a line:   <code>{{altTitle:&lt;alternate title&gt;}}</code>
+<H4 id="example_1">Example</H4>
+
+<pre>
+<span>      {{name:my article name}}</span>
+<span>      {{altTitle:an other title}}</span>
+<span>      {{altTitle:yet another title}}</span>
+</pre>
+
+<H3 id="setting_the_article_meta">Setting the article Meta</H3>
+It is possible to set the the article  <a href="article_syntax.html#meta">meta</a>:  <code>{{meta:the meta text}}</code>
+<H4 id="example_2">Example</H4>
+
+<pre>
+<span>      {{name:my article name}}</span>
+<span>      {{meta:the text for the article}}</span>
+</pre>
+
+<H3 id="keeping_the_article_name_case">Keeping the article name case</H3>
+It is possible to specify that the title of an article will keep its character case:  <code>{{lowercase}}</code>
+<H4 id="example_3">Example</H4>
+
+<pre>
+<span>      {{name:my article name}}</span>
+<span>      {{lowercase}}</span>
+</pre>
+
+<H3 id="setting_that_the_article_is_the_index">Setting that the article is the index</H3>
+It is possible to set that the article is an  <a href="article_articles.html#index_definition">index</a>:  <code>{{index}}</code><br/>
+<br/>
+
+<pre>
+<span>      {{index}}</span>
+</pre>
+
+<H3 id="setting_that_the_article_is_a_template">Setting that the article is a template</H3>
+It is possible to set that the article is a  <a href="article_articles.html#templates">template</a>:  <code>{{template}}</code>
+<H4 id="example_4">Example</H4>
+
+<pre>
+<span>      {{name:my article name}}</span>
+<span>      {{template}}</span>
+</pre>
+
+<H3 id="setting_that_the_article_is_a_redirect">Setting that the article is a redirect</H3>
+It is possible to set that the article is a  <a href="article_articles.html#redirect_articles">redirect article</a>:   <code>#REDIRECT [[redirected article ID]]</code><br/>
+<br/>
+
+<pre>
+<span>      {{name:my article name}}</span>
+<span>      #REDIRECT [[redirected article ID]]</span>
+</pre>
+
+<H2 id="syntax_elements">Syntax elements</H2>
+
+<H3 id="note">note</H3>
+A  <a href="article_syntax.html#note">note</a> will be added by the "&lt;ref&gt;" element.
+<H4 id="example_5">Example</H4>
+
+<pre>
+<span>      the text</span><span style="color:blue;font-weight:bold;">&lt;ref&gt;</span><span>with a note</span><span style="color:blue;font-weight:bold;">&lt;/ref&gt;</span><span>  </span>
+
+</pre>
+
+<H3 id="br">br</H3>
+A  <a href="article_syntax.html#br">break</a> will be added by the "&lt;br/&gt;" element, or by adding an empty line.
+<H4 id="example_6">Example</H4>
+
+<pre>
+<span>      the first line</span><span>  </span>
+<span>     </span><span style="color:blue;font-weight:bold;">&lt;br/&gt;</span><span>  </span>
+<span>      the second line</span><span>  </span>
+<span>     </span><span>  </span>
+<span>      the third line after a break</span><span>  </span>
+
+</pre>
+
+<H3 id="code">code</H3>
+A  <a href="article_syntax.html#code">code</a> will be added by the "&lt;code&gt;" element.
+<H4 id="example_7">Example</H4>
+
+<pre>
+<span>      the first line with &lt;code&gt;code&lt;/code&gt;</span>
+</pre>
+
+<H3 id="pre">pre</H3>
+A  <a href="article_syntax.html#pre">pre</a> without syntax highlighting will be added by the "&lt;pre&gt;" element.
+<H4 id="example_8">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;pre&gt;</span><span>  </span>
+<span>      first line</span><span>  </span>
+<span>      second line</span><span>  </span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/pre&gt;</span><span>  </span>
+
+</pre>
+
+<H3 id="source">source</H3>
+A  <a href="article_syntax.html#source">source</a> with syntax highlighting will be added by the "&lt;source&gt;" element.  It is identical to the  <a href="article_mdmarkup.html#pre">pre</a> element, except that: <ul>
+<li>the content will not begin on a new line</li>
+<li>the "boxed" attribute is not supported</li>
+</ul>
+This element main usage is to add highlighted syntax inline (rather tha that "pre" element which will being a new line). As for the "pre" element, The possible values for the "lang" attribute are specified in  the  <a href="article_syntaxhighlighting.html#supported_syntaxes">syntax highlighting</a> article.
+<H4 id="example_9">Example</H4>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;source</span><span style="color:#0d8200;font-weight:bold;"> lang</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"xml"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>  </span>
+<span>      first line</span><span>  </span>
+<span>      second line</span><span>  </span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/source&gt;</span><span>  </span>
+
+</pre>
+
+<H3 id="term">term</H3>
+A  <a href="article_syntax.html#term">term</a> element adds a term and its definition (useful to define glossaries).
+<H4 id="example_10">Example</H4>
+
+<pre>
+<span>      {{term:term1|the definition}}</span><span>  </span>
+<span>      {{term:term2|the second definition}}</span><span>  </span>
+
+</pre>
+
+<H3 id="images">Images</H3>
+An  <a href="article_syntax.html#img">image</a> will be added by the following construct<a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+:   <code>[[image:&lt;image ID&gt;|position|border|size]]</code><br/>
+ The attributes are separated by "|" characters: <ul>
+<li>position: "left", "center", or "right"</li>
+<li>"border": present if the image should have a border</li>
+<li>size: the width in pixels or in % of the page width</li>
+</ul>
+
+<H4 id="examples">Examples</H4>
+
+<pre>
+<span>      [[image:myImageID|right|border|40%]]</span>
+<span>      [[Image:myImageID|50px]]      </span>
+</pre>
+
+<H3 id="resources">Resources</H3>
+A  <a href="article_syntax.html#resource">resource File</a> reference will be added by one of the following constructs<a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+:  <ul>
+<li> <code>[[resource:&lt;resource ID]]</code>: for a resource identified by its ID</li>
+<li> <code>[[resource:&lt;resource path]]</code>: for a resource identified by its path</li>
+</ul>
+ Paths declarations are separated by resource IDs because the path part has a file extension.  See  <a href="article_resourceFiles.html#using_resources">Resource files</a>.
+<H4 id="examples_1">Examples</H4>
+
+<pre>
+<span>      [[file:myResourceID]]</span>
+<span>      [[File:file.xml]]      </span>
+</pre>
+
+<H3 id="article_references">Article references</H3>
+An  <a href="article_syntax.html#ref">article reference</a> will be added by the following construct:  <code>[[&lt;ref ID&gt;|&lt;text&gt;]]</code>
+<H4 id="examples_2">Examples</H4>
+
+<pre>
+<span>      [[articleID|the reference text]]</span>
+<span>      [[articleID]]   </span>
+</pre>
+
+<H3 id="including_another_article">Including another article</H3>
+Including the content of another article in an article is called <i>transclusion</i> on wikipedia. The syntax is: <ul>
+<li> <code>{{:&lt;article id&gt;}</code>: to include another article in the same package</li>
+<li> <code>{{&lt;package id&gt;:&lt;article id&gt;}</code>: to include another article in another package</li>
+</ul>
+
+<H4 id="example_11">Example</H4>
+
+<pre>
+<span>      {{:articleID}}</span>
+</pre>
+
+<H3 id="external_links">External links</H3>
+<a href="article_syntax.html#a">External links</a> are added by the following construct:  <code>[&lt;link URL&gt; &lt;text&gt;]</code>
+<H4 id="examples_3">Examples</H4>
+
+<pre>
+<span>      [http://docs.oracle.com/javase/8/docs the reference text]</span>
+<span>      [http://docs.oracle.com/javase/8/docs]</span>
+</pre>
+
+<H3 id="titles">Titles</H3>
+<a href="article_syntax.html#title">Titles</a> can be defined by setting two or more "=" characters <b>at the beginning</b> of a line.  The level of the title is specified by the number of "=" characters. 
+<H4 id="example_12">Example</H4>
+
+<pre>
+<span>      == my title ==</span>
+</pre>
+
+<H3 id="lists">Lists</H3>
+<a href="article_syntax.html#ul">Lists</a> can be defined by setting one or more "*" (for unordered lists) or "#" characters  (for ordered lists) <b>at the beginning</b> of a line. The level of each list item is specified by the number of "*" or "#"  characters.
+<H4 id="example_13">Example</H4>
+
+<pre>
+<span>      * level 1 item</span>
+<span>      ** level 2 item      </span>
+</pre>
+
+<H3 id="more_information">More information</H3>
+The  <a href="article_syntax.html#moreinfo">See also</a> element allows to add a "Main Article" link at the start of a paragraph. The syntax is: <ul>
+<li> <code>{{See also:&lt;article id&gt;}</code>: to add a "Main Article" link to another article in the same package</li>
+<li> <code>{{See also:&lt;article id&gt;|text}</code>: to add a "Main Article" link to another article in the same package and set the description text</li>
+</ul>
+
+<H4 id="example_14">Example</H4>
+
+<pre>
+<span>      {{See also::&lt;article id&gt;}}</span>
+</pre>
+
+<H3 id="li">li</H3>
+ The "li" element defines a list item under an ordered or unordered list. 
+<H3 id="infobox">Infobox</H3>
+<a href="article_syntax.html#infobox">infobox</a> allows to add an  <a href="article_infobox.html">infobox</a> at the beginning of an article. The syntax is the same as in <a href="http://en.wikipedia.org/wiki/Help:infobox">Wikipedia</a>.
+<H4 id="example_15">Example</H4>
+
+<pre>
+<span>      {{infobox infobox1</span>
+<span>      | name = theName</span>
+<span>      | prop1 = theProp1</span>
+<span>      | prop2 = theProp2</span>
+<span>      | prop3 = http://docs.oracle.com/javase/8/docs/api/index.html</span>
+<span>      | prop4 = image1</span>
+<span>      }}</span>
+</pre>
+
+<H3 id="tables">Tables</H3>
+<a href="article_syntax.html#table">Tables</a> can be defined using the Mediawiki markup. Tables contain: <ul>
+<li>A header</li>
+<li>The definition for the columns</li>
+<li>The content of the table rows</li>
+<li>A footer</li>
+</ul>
+
+<H4 id="table_header">Table header</H4>
+ The table header has the following markup: <br/>
+
+<pre>
+<span>      {| class="wikitable"</span>
+</pre>
+ To define a table with sortable columns, you should specify: <br/>
+<br/>
+
+<pre>
+<span>      {| class="wikitable sortable"</span>
+</pre>
+
+<H4 id="table_columns">Table columns</H4>
+ The table columns has the following markup: <br/>
+
+<pre>
+<span>      |&minus;</span>
+<span>      !Column 1</span>
+<span>      !width=50|Column 2</span>
+<span>      !width=50|colspan=2|Column 3   </span>
+</pre>
+ Each column begins with the "!" character. It can have the following attributes, separated by "|" characters: <ul>
+<li>"width": the width of the column</li>
+<li>"colspan": the column span of the column</li>
+</ul>
+
+<H4 id="table_rows">Table rows</H4>
+ Each row has the following markup: <br/>
+
+<pre>
+<span>      |&minus;</span>
+<span>      |cell 1||cell 2||cell 3</span>
+</pre>
+ Each cell is separated by a "||" markup. The rowspan or colspan of the row can be specified using the following markup: <br/>
+<br/>
+
+<pre>
+<span>      |&minus;</span>
+<span>      |rowspan="2"|cell 1||cell 2||cell 3</span>
+<span>      |&minus;</span>
+<span>      |colspan="3"|cell 1||cell 2||cell 3</span>
+</pre>
+
+<H4 id="table_footer">Table footer</H4>
+ The table footer has the following markup: <br/>
+
+<pre>
+<span>      |}</span>
+</pre>
+
+<H4 id="example_16">Example</H4>
+
+<pre>
+<span>      {| class="wikitable"</span>
+<span>      |&minus;</span>
+<span>      !width=60| Column 1</span>
+<span>      !width=110| Column 2</span>
+<span>      |&minus;</span>
+<span>      |cell 1||cell 2||cell 3</span>
+<span>      |&minus;</span>
+<span>      |cell 4||cell 5||cell 6</span>
+<span>      |}  </span>
+</pre>
+
+<H2 id="ending_elements">Ending elements</H2>
+
+<H3 id="setting_categories">Setting categories</H3>
+The  <a href="article_syntax.html#cat">categories</a> on which belong the article can be set by the following construct:  <code>[[Category:&lt;category name&gt;]]</code>
+<H4 id="example_17">Example</H4>
+
+<pre>
+<span>      [[Category:&lt;theCategory&gt;]]</span>
+<span>      [[Category:&lt;theOtherCategory&gt;]] </span>
+</pre>
+
+<H3 id="see_also">See Also</H3>
+The "see" elements allows to add a  <a href="article_syntax.html#see">See Also</a> chapter at the end of the article with wiki links to  other articles. They can be set by one of the following constructs: <ul>
+<li> <code>{{See:&lt;article ID&gt;}}</code></li>
+<li> <code>{{See:&lt;article ID&gt;|&lt;text&gt;}}</code></li>
+<li> <code>{{See:&lt;article ID&gt;|&lt;text&gt;|&lt;description&gt;}}</code></li>
+</ul>
+
+<H2 id="example_18">Example</H2>
+
+<pre>
+<span>      {{name=article 1}}</span>
+<span>      {{lowercase}}</span>
+<span>      {{meta:the first article}}</span>
+<span>  </span>
+<span>      This is the '''first article''' with an [http://docs.oracle.com/javase/8/docs/api/index.html external link] and an</span>
+<span>      [[article 2|internal link]]</span>
+<span>  </span>
+<span>      [[Category:general]]</span>
+</pre>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_mdmarkup.html#_note_1_1_" class="noteRefLink">^</a> The "image" tag is not case sensitive</li>
+<li id="_note_2"> <a href="article_mdmarkup.html#_note_2_1_" class="noteRefLink">^</a> The "resource"  tag is not case sensitive</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_mediawiki.html">Mediawiki syntax</a>: This article explains the Mediawiki syntax which is supported by the tool</li>
+<li> <a href="article_syntax.html">XML markup</a>: This article explains the XML tags which can be used to specify the articles syntax</li>
+<li> <a href="article_wikipedia.html">Comparison with wikipedia syntax</a>: This article compares the docJGenerator syntax to the wikipedia syntax</li>
+<li> <a href="article_articles.html">Articles</a>: Article files are XML files which define the articles in the wiki</li>
+</ul>
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_syntax.html">syntax</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016, 2017 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : simpleXML.xml
+    Created on : 25 mai 2008, 15:29
+    Author     : Hervé
+    Description:
+        Purpose of the document follows.
+-->
+<!DOCTYPE root PUBLIC "publicDTD" "publicDTD">
+<root desc="example">
+  <element name="first">
+    <element name="second" ko="notGood" />  
+    <element name="third"/>
+  </element>
+</root>

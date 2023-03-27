@@ -1,0 +1,109 @@
+<HEAD>
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY>
+<div class="top">
+<div class="ui-widget">
+
+<label for="tags">Search: </label>
+<input id="tags" class="searchField" />
+</div>
+</div>
+<div class="left">
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_pdfcontent.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div class="middle">
+<H1>PDF content specification</H1>
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#grammar">1&nbsp; Grammar</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#file_structure">2&nbsp; File structure</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#generation_algorithm">3&nbsp; Generation algorithm</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#example">4&nbsp; Example</a>
+<br/>
+</div>
+<br/>
+<P>
+It is possible to configure the structure of the PDF document by specifying the  <a href="article_pdf.html#chapterscontent">chaptersContent</a> property. This XML file specifies: <ul>
+<li>The chapters which will be included in the PDF file, and their order</li>
+<li>The  <a href="article_categories.html">categories</a> which will be included in each chapter</li>
+<li>Optionally, the articles which will be included in each chapter (appart from those specified in the chapter categories defined above)</li>
+</ul>
+
+<H2 id="grammar">Grammar</H2>
+See  <a href="resources/pdfContent.xsd">The PDF content schema</a>.
+<H2 id="file_structure">File structure</H2>
+ The PDF content XML file contains: <ul>
+<li>A list of categories, which will help to define which category to consider if one article belong to more than one category. This list specifies the order in which several categories of the same article should be considered</li>
+<li>A list of chapter names, and for each chapter:</li>
+
+<ul>
+<li>The list of categories for which the articles willl be added in this chapter</li>
+<li>An optional list of specific articles to add for this chapter</li>
+</ul>
+</ul>
+
+<H2 id="generation_algorithm">Generation algorithm</H2>
+ By default the generator will generate: <ul>
+<li>One introduction chapter with only the content of the  <a href="article_articles.html#index_definition">index file</a></li>
+<li>One chapter for each chapter defined oin the XML file</li>
+<li>For each chapter, one sub&minus;chapter for each article beloging in one of the categories defined in this chapter</li>
+</ul>
+
+<H2 id="example">Example</H2>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;pdfContent&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"category3"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"category1"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"category4"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"category2"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;chapter</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"chapter1"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>  </span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"category1"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"category2"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;article</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"article 5"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/chapter&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;chapter</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"chapter2"</span><span style="color:blue;font-weight:bold;">&gt;</span><span>  </span>
+<span>            </span><span style="color:blue;font-weight:bold;">&lt;category</span><span style="color:#0d8200;font-weight:bold;"> name</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"category3"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span><span>  </span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/chapter&gt;</span><span>  </span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/pdfContent&gt;</span><span>  </span>
+
+</pre>
+</P>
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_configuration.html">configuration</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016, 2017 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

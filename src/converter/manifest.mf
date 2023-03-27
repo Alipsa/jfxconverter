@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: lib/MDIUtilities-ui-LGPL.jar \
+            lib/MDIUtilities-core-LGPL.jar
+

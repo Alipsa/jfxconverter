@@ -1,0 +1,173 @@
+<HEAD>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="../resources/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="../resources/jquery/jquery-ui.css">
+<script type="text/javascript" src="../resources/jquery/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../resources/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../resources/articles.js"></script>
+<script type="text/javascript" src="../resources/searchOnTitles.js"></script>
+<script type="text/javascript" src="../resources/highlight.js"></script>
+<script>
+function initHighlight() {
+var match = RegExp('[?&]search=([^&]*)').exec(window.location.search);
+value = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+if (value != null) {
+highlight(document.body, value);
+}
+}
+</script>
+<script type="text/javascript" src="../resources/lightbox.js"></script>
+</HEAD>
+<HTML>
+<HEADER>
+<iframe class="header" src="../header.html" frameBorder="0" scrolling="no"></iframe> 
+</HEADER>
+<BODY onload="initHighlight()">
+<div class="top">
+<div class="ui-widget">
+
+<input id="tags" placeholder="Search..." class="searchField" />
+</div>
+</div>
+<div class="left" >
+ <a href="../index.html">Home</a> 
+<br/>
+ <a href="../categories.html">Categories</a> 
+<br/>
+ <a href="../dictionnary.html">Dictionnary</a> 
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/files/">Download</a>
+<br/>
+<a href="http://sourceforge.net/projects/docjgenerator/">Project Details</a>
+<br/>
+<a href="http://sourceforge.net/p/docjgenerator/blog/">Changes Log</a>
+<br/>
+<a href="article_linksFrom_glossary.html">What Links Here</a>
+<br/>
+<a href="article_faq.html">FAQ</a>
+<br/>
+<a href="article_license.html">License</a>
+<br/>
+<br/>
+</div>
+<div id="middle" class="middle">
+<H1>Glossary</H1>
+
+<hr/>
+<div class="toc">
+&nbsp;&nbsp;&nbsp; <a href="#defining_a_glossary">1&nbsp; Defining a glossary</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#word_alternate_terms">1.1&nbsp; Word alternate terms</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#word_case">1.2&nbsp; Word case</a>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#word_description">1.3&nbsp; Word description</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#usage">2&nbsp; Usage</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#notes">3&nbsp; Notes</a>
+<br/>
+&nbsp;&nbsp;&nbsp; <a href="#see_also">4&nbsp; See Also</a>
+<br/>
+</div>
+<br/>
+<P>
+<div  class="justifiedAuto" >
+ It is possible to add a glossary to the wiki. Defining a glossary will add a new menu options which will open a glossary of terms, and the articles were this term is used. The corresponding page will present each word defined in the glossary, and all the articles which contain this word.<br/>
+<br/>
+ For example:<br/>
+<br/>
+<br/>
+<img src="../images/glossary.png" id="_image_0" onclick="openImage(_image_0)" width="60%" class="left" />
+
+<H2 id="defining_a_glossary">Defining a glossary</H2>
+A glossary is an xml file which can be defined wherever in the wiki source, with the root element "glossary"<span class="tooltip"><a href="#_note_1" class="noteLink"><sup id="_note_1_1_">[1]</sup></a>
+<div class="tooltiptext">
+It is perfectly valild to have more than one glossary file in the wiki source. In that case they will be merged</div></span>
+.<br/>
+<br/>
+ For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;glossary&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;word</span><span style="color:#0d8200;font-weight:bold;"> word</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"text"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;description&gt;</span><span>The text description</span><span style="color:blue;font-weight:bold;">&lt;/description&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/word&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;word</span><span style="color:#0d8200;font-weight:bold;"> word</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"paragraph"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;altTerm</span><span style="color:#0d8200;font-weight:bold;"> term</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"par"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/word&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;word</span><span style="color:#0d8200;font-weight:bold;"> word</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"red"</span><span style="color:#0d8200;font-weight:bold;"> id</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"the red"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/glossary&gt;</span>
+
+</pre>
+ The glossary contain  <code>word</code> elements. Words have a name and can optionally have an id to another article  or anchor.<br/>
+<br/>
+ The generator will detect automatically which articles contain the word<span class="tooltip"><a href="#_note_2" class="noteLink"><sup id="_note_2_1_">[2]</sup></a>
+<div class="tooltiptext">
+The search is not case-sensitive</div></span>
+, there is no need to define them yourself.
+<H3 id="word_alternate_terms">Word alternate terms</H3>
+ It is possible to define alternate terms for the word.
+<H3 id="word_case">Word case</H3>
+ By default the first character of the word and the alternate terms will be on upper case and the other characters on lower case.<br/>
+<br/>
+ However it is possible to keep the case of the word and the alternate terms with the "keepCase" attribute. For example: <br/>
+<br/>
+
+<pre>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;glossary&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;word</span><span style="color:#0d8200;font-weight:bold;"> word</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"UA"</span><span style="color:#0d8200;font-weight:bold;"> keepCase</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:blue;font-weight:bold;">&gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;description&gt;</span><span>The Description</span><span style="color:blue;font-weight:bold;">&lt;/description&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/word&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;word</span><span style="color:#0d8200;font-weight:bold;"> word</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"paragraph"</span><span style="color:blue;font-weight:bold;"> &gt;</span>
+<span>           </span><span style="color:blue;font-weight:bold;">&lt;altTerm</span><span style="color:#0d8200;font-weight:bold;"> term</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"par"</span><span style="color:#0d8200;font-weight:bold;"> keepCase</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"true"</span><span style="color:#0d8200;font-weight:bold;"> </span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;/word&gt;</span>
+<span>         </span><span style="color:blue;font-weight:bold;">&lt;word</span><span style="color:#0d8200;font-weight:bold;"> word</span><span style="font-weight:bold;">=</span><span style="color:#650099;">"red"</span><span style="color:blue;font-weight:bold;">/&gt;</span>
+<span>      </span><span style="color:blue;font-weight:bold;">&lt;/glossary&gt;</span>
+
+</pre>
+
+<H3 id="word_description">Word description</H3>
+<ul>
+<li>If the word does not contains a  <code>description</code>, the glossary will only present the word and all the articles which contain this word</li>
+<li>If the word contains a  <code>description</code>, the glossary will present the word with its description</li>
+</ul>
+
+<H2 id="usage">Usage</H2>
+ When clicking on an article referenced in the glossary, the text which contain the word or its alternate term will be highlighted in the html page.<br/>
+<br/>
+ For example:<br/>
+<br/>
+<br/>
+<img src="../images/glossaryUsage.png" id="_image_1" onclick="openImage(_image_1)" width="40%" class="left" />
+</div>
+</P>
+
+<H2 id="notes">Notes</H2>
+<div class="note">
+<ol>
+<li id="_note_1"> <a href="article_glossary.html#_note_1_1_" class="noteRefLink">^</a> It is perfectly valild to have more than one glossary file in the wiki source. In that case they will be merged</li>
+<li id="_note_2"> <a href="article_glossary.html#_note_2_1_" class="noteRefLink">^</a> The search is not case-sensitive</li>
+</ol>
+</div>
+
+<H2 id="see_also">See Also</H2>
+<ul>
+<li> <a href="article_typesoffiles.html">Types of files</a>: This article explains the types of files which can be found in the wiki input</li>
+</ul>
+<div id="__lightbox__" class="modal">
+  <span class="modal-close" id="__lightboxClose__" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="__lightboxContent__">
+  <div class="modal-caption" id="__lightboxCaption__"></div>
+</div>
+
+<hr/>
+ <a href="../categories.html">Categories</a>:  <a href="../categories/cat_structure.html">structure</a>
+</div>
+<div class="bottom">
+<P><i>docJGenerator Copyright (c) 2016-2020 Herve Girod. All rights reserved.</i></P></div>
+</BODY>
+</HTML>

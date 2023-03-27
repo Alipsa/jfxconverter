@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article desc="usage" >
+   <meta desc="This article explains how to use the library" />
+   The following code serialize the content of a Node (including its children) in a <code>Graphics2D</code> context:
+   <pre syntax="java">
+      JFXConverter converter = new JFXConverter();
+      converter.convert(node, graphics2D);
+   </pre>   
+   
+   The <code>Graphics2D</code> does not need to be the Swing <code>Graphics2D</code> implementation. It can be any class which
+   implements its interface (though <code>Graphics2D</code> is an abstract class). 
+   
+   <title title="Setting a background color" />
+   It is possible to set a background color to the converted result by calling one of the following methods on the 
+   <code>JFXConverter</code> instance:
+   <ul>
+      <li>
+         <source syntax="java">setBackground(java.awt.Color)</source>
+      </li>
+      <li>
+         <source syntax="java">setBackground(javafx.scene.paint.Color)</source>
+      </li>      
+      <li>
+         <source syntax="java">setBackground(javafx.scene.paint.Color, double opacity)</source>
+      </li>            
+   </ul>
+   
+   <title title="Adding additional processing to Nodes" />
+   It is possible to add custom processing to Nodes and handle Node effects. To do that, you must implement the 
+   <code>ConverterListener</code> interface, and set the listener to the converter. 
+   
+   The default <code>DefaultConverterListener</code> class is a particular <code>ConverterListener</code> which:
+   <ul>
+      <li>Handle containers as groups, if the output format support groups</li>
+      <li>Handle JavaFX effects, if the output format support effects</li>
+   </ul>
+   
+   For example:
+   <pre syntax="java">
+      JFXConverter converter = new JFXConverter();
+      converter.setListener(new DefaultConverterListener());
+      converter.convert(node, graphics2D);
+   </pre> 
+   
+   <title title="drivers" />
+   Several specific drivers are provided with the project. See <ref id="drivers" /> for more information.
+   
+   <title title="supported Nodes and CSS properties"/>
+   <moreInfo id="supported Nodes and CSS properties" />
+      
+   <cat id="general" />
+</article>
