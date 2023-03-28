@@ -48,12 +48,12 @@
         </dependency>
         <dependency>
             <groupId>se.alipsa</groupId>
-            <artifactId>ppt</artifactId>
+            <artifactId>jfxconverter-ppt</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>se.alipsa</groupId>
-            <artifactId>svg</artifactId>
+            <artifactId>jfxconverter-svg</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

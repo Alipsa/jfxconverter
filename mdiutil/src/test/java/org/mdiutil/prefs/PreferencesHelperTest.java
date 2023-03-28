@@ -62,7 +62,9 @@ public class PreferencesHelperTest {
       // creation of Color key
       try {
          File userDir = new File(System.getProperty("user.home"));
-         NetworkPreferencesFactory fac = NetworkPreferencesFactory.newFactory(userDir, null, null, appli);
+         NetworkPreferencesFactory fac = NetworkPreferencesFactory.getFactory();
+         if (fac == null)
+            fac = NetworkPreferencesFactory.newFactory(userDir, null, null, appli);
          Preferences user = fac.userRoot();
          Color color = new Color(10, 20, 30, 40);
          PreferencesUIHelper.putColor(user, "colorRoot", color);
